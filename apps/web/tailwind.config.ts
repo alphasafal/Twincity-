@@ -43,6 +43,7 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-sans)", "ui-sans-serif", "system-ui"],
         mono: ["var(--font-mono)", "ui-monospace", "monospace"],
+        display: ["var(--font-display)", "var(--font-sans)", "ui-sans-serif"],
       },
       boxShadow: {
         panel: "0 1px 0 rgba(255,255,255,0.04), 0 12px 40px rgba(0,0,0,0.35)",
@@ -66,11 +67,21 @@ const config: Config = {
           from: { strokeDashoffset: "100" },
           to: { strokeDashoffset: "0" },
         },
+        "hero-drift": {
+          "0%, 100%": { transform: "translate3d(0,0,0) scale(1)" },
+          "50%": { transform: "translate3d(1.5%, -1%, 0) scale(1.03)" },
+        },
+        "rise-in": {
+          from: { opacity: "0", transform: "translateY(18px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
       },
       animation: {
         "pulse-live": "pulse-live 2s ease-in-out infinite",
         "fade-up": "fade-up 0.45s ease-out both",
         "draw-in": "draw-in 1.2s ease-out both",
+        "hero-drift": "hero-drift 18s ease-in-out infinite",
+        "rise-in": "rise-in 0.7s cubic-bezier(0.22,1,0.36,1) both",
       },
     },
   },

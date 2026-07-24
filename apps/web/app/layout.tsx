@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, Source_Sans_3 } from "next/font/google";
+import { IBM_Plex_Mono, Source_Sans_3, Syne } from "next/font/google";
 import { AppShell } from "@/components/AppShell";
 import { AppProviders } from "@/lib/providers";
 import "./globals.css";
@@ -17,9 +17,24 @@ const ibmPlexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
+const syne = Syne({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "TwinPilot",
-  description: "Autonomous optimization you can verify.",
+  title: {
+    default: "TwinPilot — Autonomous building optimization you can verify",
+    template: "%s · TwinPilot",
+  },
+  description:
+    "Sellable B2B SaaS for safe building energy optimization. AI proposes, Safety Shield validates, operators approve. BACnet, Modbus, and Honeywell-ready.",
+  openGraph: {
+    title: "TwinPilot",
+    description: "Autonomous optimization you can verify.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -30,7 +45,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <body
-        className={`${sourceSans.variable} ${ibmPlexMono.variable} font-sans antialiased`}
+        className={`${sourceSans.variable} ${ibmPlexMono.variable} ${syne.variable} font-sans antialiased`}
       >
         <AppProviders>
           <AppShell>{children}</AppShell>

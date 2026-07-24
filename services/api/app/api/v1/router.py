@@ -4,7 +4,8 @@ from __future__ import annotations
 
 import csv
 import io
-from datetime import UTC, datetime
+import re
+from datetime import UTC, datetime, timedelta
 from typing import Any
 
 from fastapi import APIRouter, Depends, HTTPException, Query, Request
@@ -51,7 +52,10 @@ from app.models import (
     ControlPlan,
     Decision,
     GoalProfile,
+    Membership,
+    Organization,
     PredictionLedgerEntry,
+    Subscription,
     TelemetryPoint,
     User,
     Zone,
@@ -72,6 +76,9 @@ from app.schemas.common import (
     OverrideRequest,
     RefreshRequest,
     RollbackRequest,
+    OrganizationOut,
+    SignupRequest,
+    SignupResponse,
     TelemetryIngestRequest,
     TokenResponse,
     UserCreateRequest,
@@ -80,6 +87,7 @@ from app.schemas.common import (
     WhatIfRequest,
     ZoneOut,
 )
+from app.services.entitlements import entitlements_for_plan
 from app.services.actuation import apply_plan_actions_with_ack
 from app.services.runtime import hub
 
@@ -116,7 +124,97 @@ def _audit(
     )
 
 
+def _slugify(value: str) -> str:
+    slug = re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
+    return slug[:70] or "org"
+
+
 # ── Auth ──────────────────────────────────────────────────────────────
+@router.post("/auth/signup", response_model=SignupResponse, status_code=201)
+def signup(payload: SignupRequest, db: DbSession, request: Request) -> SignupResponse:
+    """Self-serve organization trial signup — sellable entry point."""
+    enforce_auth_rate_limit(request)
+    existing = db.scalar(select(User).where(User.email == payload.email.lower()))
+    if existing:
+        raise HTTPException(409, "Email already registered")
+    slug = payload.slug or _slugify(payload.organization_name)
+    if db.scalar(select(Organization).where(Organization.slug == slug)):
+        slug = f"{slug}-{datetime.now(UTC).strftime('%H%M%S')}"
+    plan = payload.plan_code if payload.plan_code in {"starter", "optimize", "autonomy"} else "starter"
+    org = Organization(
+        name=payload.organization_name,
+        slug=slug,
+        plan_code=plan,
+        is_demo=False,
+    )
+    db.add(org)
+    db.flush()
+    user = User(
+        name=payload.name,
+        email=payload.email.lower(),
+        password_hash=hash_password(payload.password),
+        role=UserRole.ADMINISTRATOR.value,
+        is_active=True,
+        default_organization_id=org.id,
+        last_login_at=datetime.now(UTC),
+    )
+    db.add(user)
+    db.flush()
+    db.add(
+        Membership(
+            organization_id=org.id,
+            user_id=user.id,
+            org_role=UserRole.ADMINISTRATOR.value,
+            is_active=True,
+        )
+    )
+    entitlements = entitlements_for_plan(plan)
+    db.add(
+        Subscription(
+            organization_id=org.id,
+            plan_code=plan,
+            status="trialing",
+            current_period_end=datetime.now(UTC) + timedelta(days=14),
+            entitlements_json=entitlements,
+        )
+    )
+    building = Building(
+        organization_id=org.id,
+        name=payload.building_name,
+        location=payload.location,
+        timezone=settings.default_building_timezone,
+        is_demo=False,
+        shadow_mode=True,
+        site_certified=False,
+        write_enabled=False,
+        onboarding_stage="connect",
+        current_mode="ADVISORY",
+        confidence=0.7,
+    )
+    db.add(building)
+    _audit(
+        db,
+        user_id=None,
+        building_id=None,
+        event_type="signup",
+        entity_type="organization",
+        entity_id=org.id,
+        new={"email": user.email, "plan": plan, "slug": slug},
+        request_id=getattr(request.state, "request_id", None),
+    )
+    db.commit()
+    db.refresh(user)
+    db.refresh(org)
+    db.refresh(building)
+    return SignupResponse(
+        access_token=create_access_token(user.id, org_id=org.id, org_role=user.role),
+        refresh_token=create_refresh_token(user.id, org_id=org.id),
+        user=UserOut.model_validate(user),
+        organization=OrganizationOut.model_validate(org),
+        building=BuildingOut.model_validate(building),
+    )
+
+
 @router.post("/auth/login", response_model=TokenResponse)
 def login(payload: LoginRequest, db: DbSession, request: Request) -> TokenResponse:
     enforce_auth_rate_limit(request)

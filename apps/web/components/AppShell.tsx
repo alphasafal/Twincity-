@@ -9,6 +9,7 @@ import {
   Bot,
   Building2,
   ChartLine,
+  CheckCircle2,
   CircuitBoard,
   ClipboardList,
   CreditCard,
@@ -43,16 +44,33 @@ const NAV = [
   { href: "/audit", label: "Audit", icon: Shield },
 ];
 
+const PUBLIC_ROUTES = new Set([
+  "/",
+  "/login",
+  "/signup",
+  "/pricing",
+  "/terms",
+  "/privacy",
+  "/status",
+]);
+
+function isPublicPath(pathname: string | null): boolean {
+  if (!pathname) return false;
+  if (PUBLIC_ROUTES.has(pathname)) return true;
+  return false;
+}
+
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const { hydrated, accessToken, user, building, organization, setBuilding, logout } =
     useAuthStore();
   const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const publicPage = isPublicPath(pathname);
   const buildingsQuery = useQuery({
     queryKey: ["buildings"],
     queryFn: () => api.listBuildings(),
-    enabled: Boolean(hydrated && accessToken),
+    enabled: Boolean(hydrated && accessToken && !publicPage),
   });
 
   useEffect(() => {
@@ -64,11 +82,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => {
-    if (!hydrated) return;
-    if (!accessToken && pathname !== "/login") {
+    if (!hydrated || publicPage) return;
+    if (!accessToken) {
       router.replace("/login");
     }
-  }, [hydrated, accessToken, pathname, router]);
+  }, [hydrated, accessToken, pathname, router, publicPage]);
 
   const toggleTheme = () => {
     const next = theme === "dark" ? "light" : "dark";
@@ -78,7 +96,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     document.documentElement.classList.toggle("light", next === "light");
   };
 
-  if (pathname === "/login") {
+  if (publicPage) {
     return <>{children}</>;
   }
 
@@ -249,6 +267,7 @@ export function SettingsSubnav() {
     { href: "/settings/building", label: "Building", icon: Building2 },
     { href: "/settings/connectors", label: "Connectors", icon: Plug },
     { href: "/settings/onboarding", label: "Onboarding", icon: Route },
+    { href: "/settings/readiness", label: "Readiness", icon: CheckCircle2 },
     { href: "/settings/billing", label: "Billing", icon: CreditCard },
     { href: "/settings/organization", label: "Organization", icon: Users },
     { href: "/settings/constraints", label: "Constraints", icon: Shield },

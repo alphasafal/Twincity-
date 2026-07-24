@@ -135,6 +135,28 @@ export const api = {
       body: JSON.stringify({ email, password }),
     });
   },
+  signup(body: {
+    organization_name: string;
+    name: string;
+    email: string;
+    password: string;
+    building_name?: string;
+    location?: string;
+    plan_code?: string;
+  }) {
+    return apiFetch<{
+      access_token: string;
+      refresh_token: string;
+      token_type: string;
+      user: User;
+      organization: Organization;
+      building: Building;
+    }>("/api/v1/auth/signup", {
+      method: "POST",
+      auth: false,
+      body: JSON.stringify(body),
+    });
+  },
   logout() {
     return apiFetch<{ status: string }>("/api/v1/auth/logout", {
       method: "POST",
@@ -436,7 +458,23 @@ export const api = {
   listBillingPlans() {
     return apiFetch<{ plans: Record<string, Record<string, unknown>> }>(
       "/api/v1/billing/plans",
+      { auth: false },
     );
+  },
+  getProductionReadiness(buildingId: string) {
+    return apiFetch<{
+      building_id: string;
+      score: number;
+      sellable_guarded: boolean;
+      sellable_autonomy: boolean;
+      summary: string;
+      checks: Array<{
+        id: string;
+        label: string;
+        passed: boolean;
+        detail: string;
+      }>;
+    }>(`/api/v1/buildings/${buildingId}/production-readiness`);
   },
   checkout(organizationId: string, plan_code: string) {
     return apiFetch<{ mode: string; checkout_url?: string; message?: string }>(

@@ -126,7 +126,9 @@ make replay   # headless end-to-end scenario walkthrough (starts API if needed)
 make demo     # API :8000 + Web :3000
 ```
 
-Open **http://localhost:3000** and log in with a demo account below.
+Open **http://localhost:3000** for the marketing site (trial + pricing), or **http://localhost:3000/login** for the operator console.
+
+Self-serve trial: **http://localhost:3000/signup** · Sales guide: [docs/SELLING.md](docs/SELLING.md)
 
 `make replay` exercises: login → hot-day scenario → plan simulate/approve/apply →
 sensor-fault (Guarded) → infeasible target → assistant → rollback → ledger/audit.

@@ -19,6 +19,26 @@ class LoginRequest(BaseModel):
     password: str = Field(min_length=8, max_length=128)
 
 
+class SignupRequest(BaseModel):
+    organization_name: str = Field(min_length=2, max_length=200)
+    name: str = Field(min_length=2, max_length=120)
+    email: EmailStr
+    password: str = Field(min_length=8, max_length=128)
+    building_name: str = Field(default="Headquarters", min_length=2, max_length=200)
+    location: str = Field(default="Unspecified", min_length=2, max_length=200)
+    plan_code: str = Field(default="starter", pattern="^(starter|optimize|autonomy|demo)$")
+    slug: str | None = Field(default=None, max_length=80)
+
+
+class SignupResponse(BaseModel):
+    access_token: str
+    refresh_token: str
+    token_type: str = "bearer"
+    user: UserOut
+    organization: OrganizationOut
+    building: BuildingOut
+
+
 class RefreshRequest(BaseModel):
     refresh_token: str
 
@@ -346,3 +366,7 @@ class GoalUpdateRequest(BaseModel):
     peak_weight: float | None = None
     equipment_weight: float | None = None
     reason: str = Field(min_length=3, max_length=500)
+
+
+# Resolve forward refs used by SignupResponse
+SignupResponse.model_rebuild()

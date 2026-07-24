@@ -686,6 +686,97 @@ def mv_report(building_id: str, db: DbSession, user: CurrentUser) -> MvReportOut
     )
 
 
+@router.get("/buildings/{building_id}/production-readiness")
+def production_readiness(building_id: str, db: DbSession, user: CurrentUser) -> dict[str, Any]:
+    """Go-live checklist used by sales/CS and the Readiness settings page."""
+    building = get_building_for_user(building_id, db, user)
+    org = db.get(Organization, building.organization_id) if building.organization_id else None
+    ent = get_org_entitlements(db, org) if org else {}
+    connectors = list(
+        db.scalars(select(ConnectorProfile).where(ConnectorProfile.building_id == building.id)).all()
+    )
+    mappings = list(
+        db.scalars(select(PointMapping).where(PointMapping.building_id == building.id)).all()
+    )
+    cert = db.scalar(select(SiteCertification).where(SiteCertification.building_id == building.id))
+    recent_telemetry = db.scalar(
+        select(func.count())
+        .select_from(TelemetryPoint)
+        .where(TelemetryPoint.building_id == building.id)
+    ) or 0
+
+    checks = [
+        {
+            "id": "org_plan",
+            "label": "Organization plan active/trialing",
+            "passed": bool(org) and str(ent.get("status", "")).lower() in {"active", "trialing"},
+            "detail": f"Plan={ent.get('plan_code', 'none')} status={ent.get('status', 'none')}",
+        },
+        {
+            "id": "connector",
+            "label": "BMS connector provisioned",
+            "passed": len(connectors) > 0,
+            "detail": f"{len(connectors)} connector(s)",
+        },
+        {
+            "id": "point_map",
+            "label": "Point mappings configured",
+            "passed": len(mappings) >= 3,
+            "detail": f"{len(mappings)} mappings",
+        },
+        {
+            "id": "telemetry",
+            "label": "Telemetry flowing",
+            "passed": int(recent_telemetry) > 0 or building.is_demo,
+            "detail": f"{recent_telemetry} samples stored",
+        },
+        {
+            "id": "shadow",
+            "label": "Shadow / onboarding stage advanced",
+            "passed": building.onboarding_stage
+            in {"shadow", "guarded_pilot", "autonomy_review", "autonomy", "demo"},
+            "detail": f"stage={building.onboarding_stage}",
+        },
+        {
+            "id": "certification",
+            "label": "Site certification checklist",
+            "passed": bool(building.site_certified),
+            "detail": "required before Autonomous write on live sites",
+        },
+        {
+            "id": "write_entitlement",
+            "label": "Plan allows guarded or autonomous write",
+            "passed": bool(ent.get("guarded_write") or ent.get("autonomous_write") or building.is_demo),
+            "detail": f"guarded={ent.get('guarded_write')} autonomy={ent.get('autonomous_write')}",
+        },
+        {
+            "id": "failsafe",
+            "label": "Failsafe tested (cert checklist)",
+            "passed": bool(cert and (cert.checklist_json or {}).get("failsafe_tested"))
+            or building.is_demo,
+            "detail": "Documented in site certification",
+        },
+    ]
+    passed = sum(1 for c in checks if c["passed"])
+    score = int(round(100 * passed / len(checks))) if checks else 0
+    sellable = score >= 75 and (
+        building.is_demo
+        or (building.site_certified and bool(ent.get("guarded_write")))
+    )
+    return {
+        "building_id": building.id,
+        "score": score,
+        "sellable_guarded": sellable,
+        "sellable_autonomy": bool(building.site_certified and ent.get("autonomous_write")),
+        "summary": (
+            "Ready for guarded commercial pilot"
+            if sellable
+            else "Complete connector, mapping, and certification before selling write control"
+        ),
+        "checks": checks,
+    }
+
+
 @router.get("/organizations/{organization_id}/audit/export")
 def export_org_audit(
     organization_id: str,

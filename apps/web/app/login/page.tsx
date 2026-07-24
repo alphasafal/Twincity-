@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Leaf, ShieldCheck, Thermometer, Zap } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -116,7 +117,14 @@ export default function LoginPage() {
         <section className="animate-fade-up rounded-xl border border-border bg-graphite-900/85 p-6 shadow-panel backdrop-blur sm:p-8">
           <h2 className="text-xl font-semibold">Sign in</h2>
           <p className="mt-1 text-sm text-muted">
-            Demo credentials are for local development only.
+            Operator console. New customers:{" "}
+            <Link href="/signup" className="text-live hover:underline">
+              start a free trial
+            </Link>
+            .{" "}
+            <Link href="/" className="text-muted hover:text-foreground">
+              Marketing site
+            </Link>
           </p>
 
           <form onSubmit={onSubmit} className="mt-6 space-y-4">
