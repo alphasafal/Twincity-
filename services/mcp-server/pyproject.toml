@@ -1,0 +1,25 @@
+[project]
+name = "twinpilot-mcp"
+version = "0.1.0"
+description = "TwinPilot Model Context Protocol server — safe, narrowly scoped building optimization tools"
+requires-python = ">=3.11"
+dependencies = [
+  "mcp>=1.6,<2",
+  "httpx>=0.28",
+  "pydantic>=2.10",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+]
+
+[project.scripts]
+twinpilot-mcp = "twinpilot_mcp.server:main"
+
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["twinpilot_mcp*"]
