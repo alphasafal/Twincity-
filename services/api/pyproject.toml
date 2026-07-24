@@ -19,18 +19,12 @@ dependencies = [
   "scikit-learn>=1.5",
   "httpx>=0.28",
   "email-validator>=2.2",
-  "twinpilot-optimizer",
-  "twinpilot-simulator",
-  "twinpilot-agent",
 ]
 
 [project.optional-dependencies]
 dev = ["pytest>=8.0", "pytest-asyncio>=0.25", "ruff>=0.9", "mypy>=1.14"]
-
-[tool.uv.sources]
-twinpilot-optimizer = { path = "../optimizer", editable = true }
-twinpilot-simulator = { path = "../simulator", editable = true }
-twinpilot-agent = { path = "../agent", editable = true }
+# Install sibling packages separately:
+#   pip install -e ../optimizer -e ../simulator -e ../agent
 
 [build-system]
 requires = ["setuptools>=75"]

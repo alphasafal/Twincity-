@@ -5,13 +5,11 @@ from __future__ import annotations
 import asyncio
 import hashlib
 import json
-from copy import deepcopy
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from typing import Any
 from uuid import uuid4
 
 from sqlalchemy.orm import Session
-
 from twinpilot_optimizer.anomaly import SensorSeries, detect_temperature_anomalies
 from twinpilot_optimizer.confidence import ConfidenceInputs, compute_confidence
 from twinpilot_optimizer.modes import OperatingMode, recommend_mode, transition_mode
@@ -50,7 +48,7 @@ from app.models import (
 
 
 def _now() -> datetime:
-    return datetime.now(timezone.utc)
+    return datetime.now(UTC)
 
 
 class RuntimeHub:
@@ -184,7 +182,7 @@ class RuntimeHub:
         db = SessionLocal()
         try:
             if isinstance(self.simulator, MockBuildingSimulator):
-                if not self.simulator._paused:  # noqa: SLF001 — intentional runtime control
+                if not self.simulator._paused:
                     speed = getattr(self.simulator, "_speed", 1)
                     state_obj = self.simulator.step(max(1, speed // 5) if speed > 1 else 1)
                 else:
@@ -617,7 +615,7 @@ class RuntimeHub:
                 self.simulator.set_scenario_modifiers(
                     {"scenario_id": scenario_id, "carbon_intensity": 920.0}
                 )
-                self.simulator._state.grid_carbon_intensity = 920.0  # noqa: SLF001
+                self.simulator._state.grid_carbon_intensity = 920.0
         elif scenario_id == "faulty_sensor":
             if isinstance(self.simulator, MockBuildingSimulator):
                 self.simulator.inject_fault("north", "temperature_spike", 55.0)
