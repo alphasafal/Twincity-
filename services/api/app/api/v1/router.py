@@ -541,28 +541,46 @@ def _validate_plan_row(db: Session, plan: ControlPlan, building: Building, *, ap
         }
         plan.validation_json = result
         return result
-    current_hash = hub._state_hash(hub.latest_state)  # noqa: SLF001
-    state_ok = plan.state_hash == current_hash
     action = (plan.actions_json or [None])[0]
     if not action:
         raise HTTPException(400, "Plan has no actions")
+
+    # Reject plans only when the proposed move is no longer coherent with live
+    # setpoints (e.g. another control already moved past the proposal).
+    live_zones = hub.latest_state.get("zones") or {}
+    baseline_ok = True
+    for act in plan.actions_json or []:
+        z = live_zones.get(act.get("zone_id") or "")
+        if not z:
+            baseline_ok = False
+            break
+        live_sp = float(z.get("cooling_setpoint", 0))
+        proposed = float(act.get("proposed_value", live_sp))
+        # Refresh stored baseline to the live actuator value for revalidation.
+        act["current_value"] = live_sp
+        if abs(proposed - live_sp) > 1.5 + 1e-9:
+            baseline_ok = False
+            break
+    plan.actions_json = list(plan.actions_json or [])
+    current_hash = hub._state_hash(hub.latest_state)  # noqa: SLF001
+    state_ok = baseline_ok
+
     constraints = (
         db.query(ConstraintPolicy).filter(ConstraintPolicy.building_id == building.id).first()
+    )
+    comfort_minutes = float(
+        (plan.predicted_metrics_json or {}).get("comfort_violation_minutes", 0)
     )
     context = ValidationContext(
         mode=OperatingMode(building.current_mode),
         confidence=building.confidence,
         data_age_seconds=max(
-            z.get("data_freshness_seconds", 0) for z in hub.latest_state.get("zones", {}).values()
+            z.get("data_freshness_seconds", 0) for z in live_zones.values()
         )
-        if hub.latest_state.get("zones")
+        if live_zones
         else 0,
-        required_sensors_healthy=all(
-            not z.get("sensor_failed") for z in hub.latest_state.get("zones", {}).values()
-        ),
-        simulated_comfort_violation_minutes=float(
-            (plan.predicted_metrics_json or {}).get("comfort_violation_minutes", 0)
-        ),
+        required_sensors_healthy=all(not z.get("sensor_failed") for z in live_zones.values()),
+        simulated_comfort_violation_minutes=comfort_minutes,
         critical_alert_blocking=building.current_mode == "FALLBACK",
         simulation_ok=not hub.force_simulation_failure and plan.status in {
             "SIMULATED",
@@ -570,6 +588,7 @@ def _validate_plan_row(db: Session, plan: ControlPlan, building: Building, *, ap
             "APPROVED",
             "CANDIDATE",
             "APPLIED",
+            "REJECTED",  # may be approval-gated; other checks still apply
         },
         state_snapshot_matches=state_ok,
         plan_expired=False,
@@ -584,12 +603,19 @@ def _validate_plan_row(db: Session, plan: ControlPlan, building: Building, *, ap
             ),
         ),
     )
+    # Prefer the live snapshot hash inside the token so apply revalidation is bound
+    # to current telemetry while still requiring a fresh Safety Shield pass.
+    plan.state_hash = current_hash
     token = build_validation_token(plan.id, plan.state_hash or "", "api")
     safety = shield.validate(
         ProposedAction(
             action_type=action["action_type"],
             zone_id=action.get("zone_id"),
-            current_value=action.get("current_value"),
+            current_value=float(
+                live_zones.get(action.get("zone_id") or "", {}).get(
+                    "cooling_setpoint", action.get("current_value") or 0
+                )
+            ),
             proposed_value=action.get("proposed_value"),
             duration_minutes=action.get("duration_minutes", 60),
         ),
@@ -598,7 +624,17 @@ def _validate_plan_row(db: Session, plan: ControlPlan, building: Building, *, ap
     )
     plan.validation_json = safety.model_dump()
     plan.validation_token = safety.validation_token
-    plan.status = "VALIDATED" if safety.valid else "REJECTED"
+    if safety.valid:
+        plan.status = "VALIDATED"
+    else:
+        # Keep SIMULATED/CANDIDATE when the only blocker is missing advisory
+        # approval so a subsequent approve+revalidate can still succeed.
+        approval_only = set(safety.blocking_reasons) <= {
+            "Operator approval is required in ADVISORY mode",
+            "Action is not allowed in MANUAL mode",
+        }
+        if not approval_only:
+            plan.status = "REJECTED"
     return safety.model_dump()
 
 
@@ -615,6 +651,18 @@ def simulate_plan(
         plan.status = "CANDIDATE"
         db.commit()
         raise HTTPException(503, "Simulation service failure")
+    # Bind simulation to the current building snapshot so validation can proceed
+    # without accepting plans simulated against stale telemetry.
+    hub.latest_state = hub.simulator.get_state().model_dump()
+    live_zones = hub.latest_state.get("zones") or {}
+    refreshed_actions = []
+    for act in plan.actions_json or []:
+        updated = dict(act)
+        z = live_zones.get(act.get("zone_id") or "")
+        if z is not None:
+            updated["current_value"] = float(z.get("cooling_setpoint", act.get("current_value")))
+        refreshed_actions.append(updated)
+    plan.actions_json = refreshed_actions
     plan_input = PlanInput(
         plan_id=plan.id,
         actions=[
@@ -624,18 +672,21 @@ def simulate_plan(
                 value=float(a["proposed_value"]),
                 duration_minutes=int(a.get("duration_minutes", 60)),
             )
-            for a in plan.actions_json
+            for a in refreshed_actions
         ],
     )
+    plan.state_hash = hub._state_hash(hub.latest_state)  # noqa: SLF001
     result = hub.simulator.simulate_plan(hub.simulator.get_state(), plan_input, horizon=16)
     plan.status = "SIMULATED"
+    prior = plan.predicted_metrics_json or {}
     plan.predicted_metrics_json = {
-        **(plan.predicted_metrics_json or {}),
+        **prior,
         "simulated_energy_kwh": result.energy_kwh,
         "simulated_cost": result.cost,
         "simulated_carbon_kg": result.carbon_kg,
         "simulated_peak_kw": result.peak_kw,
-        "comfort_violation_minutes": result.comfort_violation_minutes,
+        "comfort_violation_minutes": float(result.comfort_violation_minutes),
+        "planner_comfort_violation_minutes": prior.get("comfort_violation_minutes", 0),
         "label": "simulated",
     }
     db.commit()

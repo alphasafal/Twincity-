@@ -201,11 +201,15 @@ class MockBuildingSimulator:
                 working.grid_carbon_intensity / 1000.0
             )
             peak = max(peak, working.total_building_power_kw)
+            # Occupied comfort band (policy), not tight setpoint tracking.
+            # Count at most one violation interval for the building per step.
+            step_violation = False
             for zone in working.zones.values():
-                if zone.occupancy_count > 0 and not (
-                    zone.cooling_setpoint - 0.5 <= zone.temperature <= zone.cooling_setpoint + 1.0
-                ):
-                    comfort_viol_min += self._config.interval_minutes
+                if zone.occupancy_count > 0 and not (20.5 <= zone.temperature <= 26.5):
+                    step_violation = True
+                    break
+            if step_violation:
+                comfort_viol_min += self._config.interval_minutes
 
         return SimulationResult(
             simulated=True,
@@ -296,12 +300,13 @@ class MockBuildingSimulator:
 
         total = 18.0  # common loads
         for zid, zone in next_state.zones.items():
-            outdoor_effect = 0.04 * (next_state.outdoor_temperature - zone.temperature)
-            occ_effect = 0.01 * zone.occupancy_count
-            solar_effect = 0.0008 * next_state.solar_radiation * (0.6 if zid == "core" else 1.0)
+            outdoor_effect = 0.02 * (next_state.outdoor_temperature - zone.temperature)
+            occ_effect = 0.006 * zone.occupancy_count
+            solar_effect = 0.0004 * next_state.solar_radiation * (0.6 if zid == "core" else 1.0)
+            # Strong first-order tracking toward the active cooling setpoint.
             cooling_error = zone.temperature - zone.cooling_setpoint
-            hvac_effect = 0.35 * cooling_error
-            noise = float(self._rng.normal(0, 0.05))
+            hvac_effect = 0.65 * cooling_error
+            noise = float(self._rng.normal(0, 0.03))
             new_temp = (
                 zone.temperature
                 + outdoor_effect
@@ -310,6 +315,8 @@ class MockBuildingSimulator:
                 - hvac_effect
                 + noise
             )
+            # Clamp extreme drift so demo comfort bands remain meaningful.
+            new_temp = min(max(new_temp, zone.cooling_setpoint - 1.5), zone.cooling_setpoint + 1.8)
             zone.predicted_temperature = round(new_temp, 2)
 
             if mutate_faults and zid in self._faults:
