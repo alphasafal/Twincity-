@@ -361,11 +361,61 @@ export const api = {
   getConstraints(buildingId: string) {
     return apiFetch<ConstraintPolicy>(`/api/v1/buildings/${buildingId}/constraints`);
   },
+  updateConstraints(
+    buildingId: string,
+    body: Partial<ConstraintPolicy> & { reason: string },
+  ) {
+    return apiFetch<ConstraintPolicy>(`/api/v1/buildings/${buildingId}/constraints`, {
+      method: "PATCH",
+      body: JSON.stringify(body),
+    });
+  },
+  updateBuilding(
+    buildingId: string,
+    body: Partial<
+      Pick<Building, "name" | "location" | "timezone" | "area_m2" | "building_type">
+    > & { reason: string },
+  ) {
+    return apiFetch<Building>(`/api/v1/buildings/${buildingId}`, {
+      method: "PATCH",
+      body: JSON.stringify(body),
+    });
+  },
   getGoals(buildingId: string) {
     return apiFetch<GoalProfile>(`/api/v1/buildings/${buildingId}/goals`);
   },
+  updateGoals(
+    buildingId: string,
+    body: Partial<GoalProfile> & { reason: string },
+  ) {
+    return apiFetch<GoalProfile>(`/api/v1/buildings/${buildingId}/goals`, {
+      method: "PATCH",
+      body: JSON.stringify(body),
+    });
+  },
   listUsers() {
     return apiFetch<User[]>("/api/v1/users");
+  },
+  createUser(body: {
+    name: string;
+    email: string;
+    password: string;
+    role: string;
+    reason: string;
+  }) {
+    return apiFetch<User>("/api/v1/users", {
+      method: "POST",
+      body: JSON.stringify(body),
+    });
+  },
+  updateUser(
+    userId: string,
+    body: { name?: string; role?: string; is_active?: boolean; reason: string },
+  ) {
+    return apiFetch<User>(`/api/v1/users/${userId}`, {
+      method: "PATCH",
+      body: JSON.stringify(body),
+    });
   },
   health() {
     return apiFetch<Record<string, unknown>>("/health", { auth: false });

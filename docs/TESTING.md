@@ -72,6 +72,9 @@ Follow [DEMO_SCRIPT.md](DEMO_SCRIPT.md). Confirm scenario endpoints under `/api/
 
 ## Gaps (honest)
 
-- Playwright critical login flow: `apps/web/e2e` (`pnpm --filter @twinpilot/web test:e2e:install && pnpm --filter @twinpilot/web test:e2e`, API must be running)
+- Playwright critical flows: `apps/web/e2e` (login, simulator scenario, decisions/alerts, digital twin)
+  - `make demo` in one terminal, then:
+  - `pnpm --filter @twinpilot/web test:e2e:install && pnpm --filter @twinpilot/web test:e2e`
+- Headless API walkthrough: `make replay`
 - EnergyPlus path is smoke-checked via `make energyplus-check`, not full co-sim CI
 - Mobile is typechecked optionally, not in default CI
