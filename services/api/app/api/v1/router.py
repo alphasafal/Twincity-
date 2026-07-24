@@ -31,10 +31,12 @@ from app.core.deps import (
     require_permission,
     require_roles,
 )
+from app.core.rate_limit import enforce_assistant_rate_limit, enforce_auth_rate_limit
 from app.core.security import (
     create_access_token,
     create_refresh_token,
     decode_token,
+    hash_password,
     verify_password,
 )
 from app.models import (
@@ -42,6 +44,7 @@ from app.models import (
     AssistantConversation,
     AuditEvent,
     Building,
+    ComfortPolicy,
     ConstraintPolicy,
     ControlPlan,
     Decision,
@@ -57,7 +60,10 @@ from app.schemas.common import (
     ApproveRejectRequest,
     AssistantChatRequest,
     BuildingOut,
+    BuildingUpdateRequest,
+    ConstraintUpdateRequest,
     DemoSpeedRequest,
+    GoalUpdateRequest,
     GoalWeightsRequest,
     LoginRequest,
     ModeUpdateRequest,
@@ -66,7 +72,9 @@ from app.schemas.common import (
     RollbackRequest,
     TelemetryIngestRequest,
     TokenResponse,
+    UserCreateRequest,
     UserOut,
+    UserUpdateRequest,
     WhatIfRequest,
     ZoneOut,
 )
@@ -108,6 +116,7 @@ def _audit(
 # ── Auth ──────────────────────────────────────────────────────────────
 @router.post("/auth/login", response_model=TokenResponse)
 def login(payload: LoginRequest, db: DbSession, request: Request) -> TokenResponse:
+    enforce_auth_rate_limit(request)
     user = db.scalar(select(User).where(User.email == payload.email))
     if not user or not verify_password(payload.password, user.password_hash):
         raise HTTPException(status_code=401, detail="Invalid credentials")
@@ -129,7 +138,8 @@ def login(payload: LoginRequest, db: DbSession, request: Request) -> TokenRespon
 
 
 @router.post("/auth/refresh", response_model=TokenResponse)
-def refresh(payload: RefreshRequest) -> TokenResponse:
+def refresh(payload: RefreshRequest, request: Request) -> TokenResponse:
+    enforce_auth_rate_limit(request)
     try:
         data = decode_token(payload.refresh_token, refresh=True)
     except ValueError as exc:
@@ -1245,7 +1255,9 @@ async def assistant_chat(
     payload: AssistantChatRequest,
     db: DbSession,
     user: CurrentUser,
+    request: Request,
 ) -> dict[str, Any]:
+    enforce_assistant_rate_limit(request)
     building = db.get(Building, payload.building_id)
     if not building:
         raise HTTPException(404, "Building not found")
@@ -1348,11 +1360,7 @@ def get_conversation(conversation_id: str, db: DbSession, user: CurrentUser) -> 
 
 
 # ── Settings helpers ──────────────────────────────────────────────────
-@router.get("/buildings/{building_id}/constraints")
-def get_constraints(building_id: str, db: DbSession, user: CurrentUser) -> dict[str, Any]:
-    row = db.query(ConstraintPolicy).filter(ConstraintPolicy.building_id == building_id).first()
-    if not row:
-        raise HTTPException(404, "Constraints not found")
+def _constraints_dict(row: ConstraintPolicy) -> dict[str, Any]:
     return {
         "id": row.id,
         "min_cooling_setpoint": row.min_cooling_setpoint,
@@ -1364,6 +1372,120 @@ def get_constraints(building_id: str, db: DbSession, user: CurrentUser) -> dict[
         "maximum_control_duration": row.maximum_control_duration,
         "minimum_confidence_for_autonomy": row.minimum_confidence_for_autonomy,
         "maximum_data_age_seconds": row.maximum_data_age_seconds,
+    }
+
+
+@router.get("/buildings/{building_id}/constraints")
+def get_constraints(building_id: str, db: DbSession, user: CurrentUser) -> dict[str, Any]:
+    row = db.query(ConstraintPolicy).filter(ConstraintPolicy.building_id == building_id).first()
+    if not row:
+        raise HTTPException(404, "Constraints not found")
+    return _constraints_dict(row)
+
+
+@router.patch("/buildings/{building_id}/constraints")
+def patch_constraints(
+    building_id: str,
+    payload: ConstraintUpdateRequest,
+    db: DbSession,
+    user: User = Depends(require_permission("constraint_modify")),
+) -> dict[str, Any]:
+    row = db.query(ConstraintPolicy).filter(ConstraintPolicy.building_id == building_id).first()
+    if not row:
+        raise HTTPException(404, "Constraints not found")
+    previous = _constraints_dict(row)
+    for field in (
+        "min_cooling_setpoint",
+        "max_cooling_setpoint",
+        "min_heating_setpoint",
+        "max_heating_setpoint",
+        "max_setpoint_change_per_interval",
+        "minimum_ventilation",
+        "maximum_control_duration",
+        "minimum_confidence_for_autonomy",
+        "maximum_data_age_seconds",
+    ):
+        value = getattr(payload, field)
+        if value is not None:
+            setattr(row, field, value)
+    if row.min_cooling_setpoint >= row.max_cooling_setpoint:
+        raise HTTPException(400, "min_cooling_setpoint must be below max_cooling_setpoint")
+    if row.min_heating_setpoint >= row.max_heating_setpoint:
+        raise HTTPException(400, "min_heating_setpoint must be below max_heating_setpoint")
+    _audit(
+        db,
+        user_id=user.id,
+        building_id=building_id,
+        event_type="constraints_updated",
+        entity_type="constraint_policy",
+        entity_id=row.id,
+        reason=payload.reason,
+        previous=previous,
+        new=_constraints_dict(row),
+    )
+    db.commit()
+    db.refresh(row)
+    return _constraints_dict(row)
+
+
+@router.patch("/buildings/{building_id}", response_model=BuildingOut)
+def patch_building(
+    building_id: str,
+    payload: BuildingUpdateRequest,
+    db: DbSession,
+    user: User = Depends(require_roles(UserRole.ADMINISTRATOR)),
+) -> Building:
+    building = db.get(Building, building_id)
+    if not building:
+        raise HTTPException(404, "Building not found")
+    previous = {
+        "name": building.name,
+        "location": building.location,
+        "timezone": building.timezone,
+        "area_m2": building.area_m2,
+        "building_type": building.building_type,
+    }
+    for field in ("name", "location", "timezone", "area_m2", "building_type"):
+        value = getattr(payload, field)
+        if value is not None:
+            setattr(building, field, value)
+    _audit(
+        db,
+        user_id=user.id,
+        building_id=building_id,
+        event_type="building_updated",
+        entity_type="building",
+        entity_id=building_id,
+        reason=payload.reason,
+        previous=previous,
+        new={
+            "name": building.name,
+            "location": building.location,
+            "timezone": building.timezone,
+            "area_m2": building.area_m2,
+            "building_type": building.building_type,
+        },
+    )
+    db.commit()
+    db.refresh(building)
+    return building
+
+
+@router.get("/buildings/{building_id}/comfort-policy")
+def get_comfort_policy(building_id: str, db: DbSession, user: CurrentUser) -> dict[str, Any]:
+    row = db.query(ComfortPolicy).filter(ComfortPolicy.building_id == building_id).first()
+    if not row:
+        raise HTTPException(404, "Comfort policy not found")
+    return {
+        "id": row.id,
+        "occupied_min_temperature": row.occupied_min_temperature,
+        "occupied_max_temperature": row.occupied_max_temperature,
+        "unoccupied_min_temperature": row.unoccupied_min_temperature,
+        "unoccupied_max_temperature": row.unoccupied_max_temperature,
+        "max_violation_minutes": row.max_violation_minutes,
+        "humidity_min": row.humidity_min,
+        "humidity_max": row.humidity_max,
+        "co2_max_ppm": row.co2_max_ppm,
     }
 
 
@@ -1388,9 +1510,168 @@ def get_goals(building_id: str, db: DbSession, user: CurrentUser) -> dict[str, A
     }
 
 
+@router.patch("/buildings/{building_id}/goals")
+def patch_goals(
+    building_id: str,
+    payload: GoalUpdateRequest,
+    db: DbSession,
+    user: User = Depends(require_roles(UserRole.ADMINISTRATOR, UserRole.FACILITY_MANAGER)),
+) -> dict[str, Any]:
+    row = (
+        db.query(GoalProfile)
+        .filter(GoalProfile.building_id == building_id, GoalProfile.active.is_(True))
+        .first()
+    )
+    if not row:
+        raise HTTPException(404, "Goals not found")
+    previous = {
+        "name": row.name,
+        "energy_weight": row.energy_weight,
+        "cost_weight": row.cost_weight,
+        "carbon_weight": row.carbon_weight,
+        "comfort_weight": row.comfort_weight,
+        "peak_weight": row.peak_weight,
+        "equipment_weight": row.equipment_weight,
+    }
+    if payload.name is not None:
+        row.name = payload.name
+    for field in (
+        "energy_weight",
+        "cost_weight",
+        "carbon_weight",
+        "comfort_weight",
+        "peak_weight",
+        "equipment_weight",
+    ):
+        value = getattr(payload, field)
+        if value is not None:
+            setattr(row, field, value)
+    # Normalize via ObjectiveWeights
+    weights = ObjectiveWeights(
+        energy_weight=row.energy_weight,
+        cost_weight=row.cost_weight,
+        carbon_weight=row.carbon_weight,
+        comfort_weight=row.comfort_weight,
+        peak_weight=row.peak_weight,
+        equipment_weight=row.equipment_weight,
+    )
+    row.energy_weight = weights.energy_weight
+    row.cost_weight = weights.cost_weight
+    row.carbon_weight = weights.carbon_weight
+    row.comfort_weight = weights.comfort_weight
+    row.peak_weight = weights.peak_weight
+    row.equipment_weight = weights.equipment_weight
+    _audit(
+        db,
+        user_id=user.id,
+        building_id=building_id,
+        event_type="goals_updated",
+        entity_type="goal_profile",
+        entity_id=row.id,
+        reason=payload.reason,
+        previous=previous,
+        new={
+            "name": row.name,
+            "energy_weight": row.energy_weight,
+            "cost_weight": row.cost_weight,
+            "carbon_weight": row.carbon_weight,
+            "comfort_weight": row.comfort_weight,
+            "peak_weight": row.peak_weight,
+            "equipment_weight": row.equipment_weight,
+        },
+    )
+    db.commit()
+    return {
+        "id": row.id,
+        "name": row.name,
+        "energy_weight": row.energy_weight,
+        "cost_weight": row.cost_weight,
+        "carbon_weight": row.carbon_weight,
+        "comfort_weight": row.comfort_weight,
+        "peak_weight": row.peak_weight,
+        "equipment_weight": row.equipment_weight,
+    }
+
+
 @router.get("/users", response_model=list[UserOut])
 def list_users(
     db: DbSession,
     user: User = Depends(require_roles(UserRole.ADMINISTRATOR)),
 ) -> list[User]:
     return list(db.scalars(select(User)).all())
+
+
+@router.post("/users", response_model=UserOut, status_code=201)
+def create_user(
+    payload: UserCreateRequest,
+    db: DbSession,
+    user: User = Depends(require_permission("user_manage")),
+) -> User:
+    try:
+        role = UserRole(payload.role)
+    except ValueError as exc:
+        raise HTTPException(400, f"Invalid role: {payload.role}") from exc
+    existing = db.scalar(select(User).where(User.email == payload.email))
+    if existing:
+        raise HTTPException(409, "User with this email already exists")
+    created = User(
+        name=payload.name,
+        email=payload.email,
+        password_hash=hash_password(payload.password),
+        role=role.value,
+        is_active=True,
+    )
+    db.add(created)
+    db.flush()
+    _audit(
+        db,
+        user_id=user.id,
+        building_id=hub.building_id,
+        event_type="user_created",
+        entity_type="user",
+        entity_id=created.id,
+        reason=payload.reason,
+        new={"email": created.email, "role": created.role, "name": created.name},
+    )
+    db.commit()
+    db.refresh(created)
+    return created
+
+
+@router.patch("/users/{user_id}", response_model=UserOut)
+def update_user(
+    user_id: str,
+    payload: UserUpdateRequest,
+    db: DbSession,
+    user: User = Depends(require_permission("user_manage")),
+) -> User:
+    target = db.get(User, user_id)
+    if not target:
+        raise HTTPException(404, "User not found")
+    previous = {"name": target.name, "role": target.role, "is_active": target.is_active}
+    if payload.name is not None:
+        target.name = payload.name
+    if payload.role is not None:
+        try:
+            target.role = UserRole(payload.role).value
+        except ValueError as exc:
+            raise HTTPException(400, f"Invalid role: {payload.role}") from exc
+    if payload.is_active is not None:
+        if target.id == user.id and payload.is_active is False:
+            raise HTTPException(400, "Administrators cannot deactivate themselves")
+        target.is_active = payload.is_active
+    _audit(
+        db,
+        user_id=user.id,
+        building_id=hub.building_id,
+        event_type="user_updated",
+        entity_type="user",
+        entity_id=target.id,
+        reason=payload.reason,
+        previous=previous,
+        new={"name": target.name, "role": target.role, "is_active": target.is_active},
+    )
+    db.commit()
+    db.refresh(target)
+    return target
+

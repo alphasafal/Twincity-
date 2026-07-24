@@ -115,10 +115,22 @@ tests/integration        Cross-service API flow tests
 
 ```bash
 make setup    # venv, editable Python packages, pnpm install, .env
+make replay   # headless end-to-end scenario walkthrough (starts API if needed)
 make demo     # API :8000 + Web :3000
 ```
 
 Open **http://localhost:3000** and log in with a demo account below.
+
+`make replay` exercises: login → hot-day scenario → plan simulate/approve/apply →
+sensor-fault (Guarded) → infeasible target → assistant → rollback → ledger/audit.
+
+Optional open-source LLM (not required — deterministic agent is default):
+
+```bash
+make ollama                 # install Ollama + pull llama3.2:1b
+# then in .env: AGENT_PROVIDER=ollama
+make demo
+```
 
 Alternative:
 

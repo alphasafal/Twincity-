@@ -1,5 +1,5 @@
 # TwinPilot developer Makefile
-.PHONY: setup dev seed demo test energyplus-check lint web api mobile help
+.PHONY: setup dev seed demo test energyplus-check lint web api mobile replay ollama help
 
 ROOT := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
 VENV := $(ROOT)/.venv
@@ -19,6 +19,8 @@ help:
 	@echo "  make test             Run API pytest + web typecheck/lint"
 	@echo "  make lint             Ruff (API) + web lint"
 	@echo "  make energyplus-check Check EnergyPlus env / adapter readiness"
+	@echo "  make replay           API end-to-end scenario replay (no UI required)"
+	@echo "  make ollama           Optional: install Ollama + pull small model"
 
 setup:
 	@bash $(ROOT)/infrastructure/scripts/setup.sh
@@ -52,3 +54,9 @@ lint:
 
 energyplus-check:
 	@bash $(ROOT)/infrastructure/scripts/energyplus-check.sh
+
+replay:
+	@bash $(ROOT)/infrastructure/scripts/replay.sh
+
+ollama:
+	@bash $(ROOT)/infrastructure/scripts/setup-ollama.sh

@@ -126,3 +126,51 @@ class DemoSpeedRequest(BaseModel):
 class TelemetryIngestRequest(BaseModel):
     building_id: str
     points: list[dict[str, Any]]
+
+
+class BuildingUpdateRequest(BaseModel):
+    name: str | None = Field(default=None, min_length=2, max_length=200)
+    location: str | None = Field(default=None, min_length=2, max_length=200)
+    timezone: str | None = Field(default=None, min_length=2, max_length=64)
+    area_m2: float | None = Field(default=None, gt=0)
+    building_type: str | None = Field(default=None, min_length=2, max_length=64)
+    reason: str = Field(min_length=3, max_length=500)
+
+
+class ConstraintUpdateRequest(BaseModel):
+    min_cooling_setpoint: float | None = None
+    max_cooling_setpoint: float | None = None
+    min_heating_setpoint: float | None = None
+    max_heating_setpoint: float | None = None
+    max_setpoint_change_per_interval: float | None = Field(default=None, gt=0)
+    minimum_ventilation: float | None = Field(default=None, ge=0, le=1)
+    maximum_control_duration: int | None = Field(default=None, ge=5, le=1440)
+    minimum_confidence_for_autonomy: float | None = Field(default=None, ge=0, le=1)
+    maximum_data_age_seconds: int | None = Field(default=None, ge=30, le=3600)
+    reason: str = Field(min_length=3, max_length=500)
+
+
+class UserCreateRequest(BaseModel):
+    name: str = Field(min_length=2, max_length=120)
+    email: EmailStr
+    password: str = Field(min_length=8, max_length=128)
+    role: str
+    reason: str = Field(min_length=3, max_length=500)
+
+
+class UserUpdateRequest(BaseModel):
+    name: str | None = Field(default=None, min_length=2, max_length=120)
+    role: str | None = None
+    is_active: bool | None = None
+    reason: str = Field(min_length=3, max_length=500)
+
+
+class GoalUpdateRequest(BaseModel):
+    name: str | None = Field(default=None, min_length=2, max_length=120)
+    energy_weight: float | None = None
+    cost_weight: float | None = None
+    carbon_weight: float | None = None
+    comfort_weight: float | None = None
+    peak_weight: float | None = None
+    equipment_weight: float | None = None
+    reason: str = Field(min_length=3, max_length=500)

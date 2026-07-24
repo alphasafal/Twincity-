@@ -131,6 +131,19 @@ Legend: ✅ done · ⚠️ partial / simulated · ❌ not in scope for this demo
 | 25 | Critical safety tests pass | ✅ (`pytest` 18+) |
 | 26 | README clean-checkout path | ✅ (`make setup` / `make demo`) |
 
+### Latest hardening
+
+| Item | Status |
+|------|--------|
+| Constraint / building / goals PATCH APIs | ✅ |
+| User invite + activate/deactivate APIs | ✅ |
+| Settings UI wired to write APIs | ✅ |
+| Auth + assistant rate limiting | ✅ |
+| `make replay` end-to-end walkthrough | ✅ |
+| Optional `make ollama` (llama3.2:1b pulled in env) | ✅ (falls back if JSON invalid) |
+| Playwright critical flows expanded | ✅ (local run; not required in CI) |
+
 ## Acceptance summary
 
 The repository meets the **demo acceptance bar**: end-to-end simulated autonomous optimization with verifiable safety gates, operator UIs, MCP, and optional EnergyPlus/Ollama. It does **not** meet a production BMS deployment bar.
+
