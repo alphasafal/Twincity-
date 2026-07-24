@@ -30,20 +30,29 @@ jobs:
           pip install -e services/optimizer
           pip install -e services/simulator
           pip install -e services/agent
+          pip install -r services/api/requirements.txt
           pip install -e services/api
           pip install pytest pytest-asyncio ruff
 
       - name: Ruff
+        working-directory: ${{ github.workspace }}/services/api
         run: ruff check app tests
 
       - name: Pytest (unit)
+        working-directory: ${{ github.workspace }}/services/api
+        env:
+          PYTHONPATH: ${{ github.workspace }}/services/api
         run: pytest -q
 
       - name: Pytest (integration)
         working-directory: ${{ github.workspace }}/tests/integration
         env:
-          PYTHONPATH: ${{ github.workspace }}/services/api:${{ github.workspace }}/services/optimizer:${{ github.workspace }}/services/simulator:${{ github.workspace }}/services/agent
+          PYTHONPATH: ${{ github.workspace }}/services/api
         run: pytest -q
+
+      - name: Safety regression (optimizer package)
+        working-directory: ${{ github.workspace }}
+        run: pytest -q services/api/tests/test_safety.py
 
   web:
     name: Web typecheck & lint

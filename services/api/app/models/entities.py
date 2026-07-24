@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Any, Optional
+from typing import Any
 from uuid import uuid4
 
 from sqlalchemy import (
@@ -37,7 +37,7 @@ class User(Base):
     role: Mapped[str] = mapped_column(String(64), index=True)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
-    last_login_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
+    last_login_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
 
 class Building(Base):
@@ -53,7 +53,7 @@ class Building(Base):
     is_demo: Mapped[bool] = mapped_column(Boolean, default=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     confidence: Mapped[float] = mapped_column(Float, default=0.91)
-    autonomy_confidence_json: Mapped[Optional[dict[str, Any]]] = mapped_column(JSON, nullable=True)
+    autonomy_confidence_json: Mapped[dict[str, Any] | None] = mapped_column(JSON, nullable=True)
 
     zones: Mapped[list[Zone]] = relationship(back_populates="building")
 
@@ -86,7 +86,7 @@ class Sensor(Base):
     unit: Mapped[str] = mapped_column(String(32))
     health_status: Mapped[str] = mapped_column(String(32), default="HEALTHY")
     confidence: Mapped[float] = mapped_column(Float, default=0.95)
-    last_seen_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
+    last_seen_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
     zone: Mapped[Zone] = relationship(back_populates="sensors")
 
@@ -100,8 +100,8 @@ class TelemetryPoint(Base):
 
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=_uuid)
     building_id: Mapped[str] = mapped_column(String(36), index=True)
-    zone_id: Mapped[Optional[str]] = mapped_column(String(36), nullable=True, index=True)
-    sensor_id: Mapped[Optional[str]] = mapped_column(String(36), nullable=True)
+    zone_id: Mapped[str | None] = mapped_column(String(36), nullable=True, index=True)
+    sensor_id: Mapped[str | None] = mapped_column(String(36), nullable=True)
     metric: Mapped[str] = mapped_column(String(64), index=True)
     value: Mapped[float] = mapped_column(Float)
     unit: Mapped[str] = mapped_column(String(32))
@@ -161,7 +161,7 @@ class Forecast(Base):
 
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=_uuid)
     building_id: Mapped[str] = mapped_column(String(36), index=True)
-    zone_id: Mapped[Optional[str]] = mapped_column(String(36), nullable=True)
+    zone_id: Mapped[str | None] = mapped_column(String(36), nullable=True)
     forecast_type: Mapped[str] = mapped_column(String(64))
     horizon: Mapped[int] = mapped_column(Integer)
     values_json: Mapped[dict[str, Any]] = mapped_column(JSON)
@@ -183,10 +183,10 @@ class ControlPlan(Base):
     feasibility: Mapped[bool] = mapped_column(Boolean, default=True)
     actions_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
     score_breakdown_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
-    validation_json: Mapped[Optional[dict[str, Any]]] = mapped_column(JSON, nullable=True)
-    validation_token: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
-    state_hash: Mapped[Optional[str]] = mapped_column(String(64), nullable=True)
-    expires_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
+    validation_json: Mapped[dict[str, Any] | None] = mapped_column(JSON, nullable=True)
+    validation_token: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    state_hash: Mapped[str | None] = mapped_column(String(64), nullable=True)
+    expires_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
 
@@ -195,12 +195,12 @@ class ControlAction(Base):
 
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=_uuid)
     plan_id: Mapped[str] = mapped_column(ForeignKey("control_plans.id"), index=True)
-    zone_id: Mapped[Optional[str]] = mapped_column(String(36), nullable=True)
+    zone_id: Mapped[str | None] = mapped_column(String(36), nullable=True)
     action_type: Mapped[str] = mapped_column(String(64))
-    current_value: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
-    proposed_value: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
+    current_value: Mapped[float | None] = mapped_column(Float, nullable=True)
+    proposed_value: Mapped[float | None] = mapped_column(Float, nullable=True)
     unit: Mapped[str] = mapped_column(String(32), default="°C")
-    start_time: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
+    start_time: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     duration_minutes: Mapped[int] = mapped_column(Integer, default=60)
     status: Mapped[str] = mapped_column(String(32), default="PENDING")
     risk_level: Mapped[str] = mapped_column(String(32), default="LOW")
@@ -211,14 +211,14 @@ class SimulationRun(Base):
 
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=_uuid)
     building_id: Mapped[str] = mapped_column(String(36), index=True)
-    plan_id: Mapped[Optional[str]] = mapped_column(String(36), nullable=True)
+    plan_id: Mapped[str | None] = mapped_column(String(36), nullable=True)
     simulator_type: Mapped[str] = mapped_column(String(64))
     status: Mapped[str] = mapped_column(String(32), default="PENDING", index=True)
-    started_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
-    completed_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
+    started_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     input_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
-    result_json: Mapped[Optional[dict[str, Any]]] = mapped_column(JSON, nullable=True)
-    error_message: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    result_json: Mapped[dict[str, Any] | None] = mapped_column(JSON, nullable=True)
+    error_message: Mapped[str | None] = mapped_column(Text, nullable=True)
 
 
 class Decision(Base):
@@ -227,7 +227,7 @@ class Decision(Base):
 
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=_uuid)
     building_id: Mapped[str] = mapped_column(String(36), index=True)
-    selected_plan_id: Mapped[Optional[str]] = mapped_column(String(36), nullable=True)
+    selected_plan_id: Mapped[str | None] = mapped_column(String(36), nullable=True)
     mode: Mapped[str] = mapped_column(String(32))
     trigger: Mapped[str] = mapped_column(String(120))
     explanation: Mapped[str] = mapped_column(Text, default="")
@@ -235,16 +235,16 @@ class Decision(Base):
     validation_status: Mapped[str] = mapped_column(String(32), default="PENDING")
     execution_status: Mapped[str] = mapped_column(String(32), default="PENDING", index=True)
     predicted_metrics_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
-    realized_metrics_json: Mapped[Optional[dict[str, Any]]] = mapped_column(JSON, nullable=True)
-    prediction_error_json: Mapped[Optional[dict[str, Any]]] = mapped_column(JSON, nullable=True)
+    realized_metrics_json: Mapped[dict[str, Any] | None] = mapped_column(JSON, nullable=True)
+    prediction_error_json: Mapped[dict[str, Any] | None] = mapped_column(JSON, nullable=True)
     candidate_plan_ids_json: Mapped[list[str]] = mapped_column(JSON, default=list)
     rejected_plan_ids_json: Mapped[list[str]] = mapped_column(JSON, default=list)
     observed_state_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
     goal_profile_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
-    applied_action_json: Mapped[Optional[dict[str, Any]]] = mapped_column(JSON, nullable=True)
+    applied_action_json: Mapped[dict[str, Any] | None] = mapped_column(JSON, nullable=True)
     rollback_status: Mapped[str] = mapped_column(String(32), default="NONE")
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
-    executed_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
+    executed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
 
 class Alert(Base):
@@ -256,19 +256,19 @@ class Alert(Base):
 
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=_uuid)
     building_id: Mapped[str] = mapped_column(String(36), index=True)
-    zone_id: Mapped[Optional[str]] = mapped_column(String(36), nullable=True)
-    decision_id: Mapped[Optional[str]] = mapped_column(String(36), nullable=True)
+    zone_id: Mapped[str | None] = mapped_column(String(36), nullable=True)
+    decision_id: Mapped[str | None] = mapped_column(String(36), nullable=True)
     severity: Mapped[str] = mapped_column(String(32), index=True)
     alert_type: Mapped[str] = mapped_column(String(64), index=True)
     title: Mapped[str] = mapped_column(String(200))
     message: Mapped[str] = mapped_column(Text)
     status: Mapped[str] = mapped_column(String(32), default="OPEN")
     notes_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
-    assigned_to: Mapped[Optional[str]] = mapped_column(String(36), nullable=True)
+    assigned_to: Mapped[str | None] = mapped_column(String(36), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
-    acknowledged_by: Mapped[Optional[str]] = mapped_column(String(36), nullable=True)
-    acknowledged_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
-    resolved_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
+    acknowledged_by: Mapped[str | None] = mapped_column(String(36), nullable=True)
+    acknowledged_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    resolved_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
 
 class AuditEvent(Base):
@@ -276,16 +276,16 @@ class AuditEvent(Base):
     __table_args__ = (Index("ix_audit_building_ts", "building_id", "timestamp"),)
 
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=_uuid)
-    user_id: Mapped[Optional[str]] = mapped_column(String(36), nullable=True)
-    building_id: Mapped[Optional[str]] = mapped_column(String(36), nullable=True, index=True)
+    user_id: Mapped[str | None] = mapped_column(String(36), nullable=True)
+    building_id: Mapped[str | None] = mapped_column(String(36), nullable=True, index=True)
     event_type: Mapped[str] = mapped_column(String(64), index=True)
     entity_type: Mapped[str] = mapped_column(String(64))
-    entity_id: Mapped[Optional[str]] = mapped_column(String(36), nullable=True)
-    previous_value_json: Mapped[Optional[dict[str, Any]]] = mapped_column(JSON, nullable=True)
-    new_value_json: Mapped[Optional[dict[str, Any]]] = mapped_column(JSON, nullable=True)
-    reason: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    entity_id: Mapped[str | None] = mapped_column(String(36), nullable=True)
+    previous_value_json: Mapped[dict[str, Any] | None] = mapped_column(JSON, nullable=True)
+    new_value_json: Mapped[dict[str, Any] | None] = mapped_column(JSON, nullable=True)
+    reason: Mapped[str | None] = mapped_column(Text, nullable=True)
     timestamp: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
-    request_id: Mapped[Optional[str]] = mapped_column(String(64), nullable=True)
+    request_id: Mapped[str | None] = mapped_column(String(64), nullable=True)
 
 
 class AssistantConversation(Base):
@@ -306,12 +306,12 @@ class PredictionLedgerEntry(Base):
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=_uuid)
     building_id: Mapped[str] = mapped_column(String(36), index=True)
     decision_id: Mapped[str] = mapped_column(String(36), index=True)
-    plan_id: Mapped[Optional[str]] = mapped_column(String(36), nullable=True)
+    plan_id: Mapped[str | None] = mapped_column(String(36), nullable=True)
     predicted_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
-    realized_json: Mapped[Optional[dict[str, Any]]] = mapped_column(JSON, nullable=True)
-    error_json: Mapped[Optional[dict[str, Any]]] = mapped_column(JSON, nullable=True)
+    realized_json: Mapped[dict[str, Any] | None] = mapped_column(JSON, nullable=True)
+    error_json: Mapped[dict[str, Any] | None] = mapped_column(JSON, nullable=True)
     confidence_before: Mapped[float] = mapped_column(Float, default=0.0)
-    confidence_after: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
+    confidence_after: Mapped[float | None] = mapped_column(Float, nullable=True)
     rollback_required: Mapped[bool] = mapped_column(Boolean, default=False)
     explanation: Mapped[str] = mapped_column(Text, default="")
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())

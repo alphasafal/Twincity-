@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Any, Optional
+from typing import Any
 
 from pydantic import BaseModel, EmailStr, Field
 
@@ -29,7 +29,7 @@ class UserOut(BaseModel):
     email: EmailStr
     role: str
     is_active: bool
-    last_login_at: Optional[datetime] = None
+    last_login_at: datetime | None = None
 
     model_config = {"from_attributes": True}
 
@@ -44,7 +44,7 @@ class BuildingOut(BaseModel):
     current_mode: str
     is_demo: bool
     confidence: float
-    autonomy_confidence_json: Optional[dict[str, Any]] = None
+    autonomy_confidence_json: dict[str, Any] | None = None
 
     model_config = {"from_attributes": True}
 
@@ -87,7 +87,7 @@ class RollbackRequest(BaseModel):
 
 class AlertNoteRequest(BaseModel):
     note: str = Field(min_length=1, max_length=1000)
-    assign_to: Optional[str] = None
+    assign_to: str | None = None
 
 
 class GoalWeightsRequest(BaseModel):
@@ -97,18 +97,18 @@ class GoalWeightsRequest(BaseModel):
     comfort_weight: float = 0.20
     peak_weight: float = 0.10
     equipment_weight: float = 0.05
-    energy_target_pct: Optional[float] = None
+    energy_target_pct: float | None = None
     zero_comfort_deviation: bool = False
     allow_schedule_changes: bool = True
 
 
 class WhatIfRequest(BaseModel):
-    outdoor_temperature: Optional[float] = None
-    occupancy_level: Optional[float] = Field(default=None, ge=0, le=2)
-    electricity_price: Optional[float] = None
-    grid_carbon_intensity: Optional[float] = None
-    comfort_band_width: Optional[float] = None
-    energy_saving_target: Optional[float] = None
+    outdoor_temperature: float | None = None
+    occupancy_level: float | None = Field(default=None, ge=0, le=2)
+    electricity_price: float | None = None
+    grid_carbon_intensity: float | None = None
+    comfort_band_width: float | None = None
+    energy_saving_target: float | None = None
     time_horizon_steps: int = 16
     sensor_failures: list[str] = Field(default_factory=list)
 
@@ -116,7 +116,7 @@ class WhatIfRequest(BaseModel):
 class AssistantChatRequest(BaseModel):
     building_id: str
     message: str = Field(min_length=1, max_length=2000)
-    conversation_id: Optional[str] = None
+    conversation_id: str | None = None
 
 
 class DemoSpeedRequest(BaseModel):

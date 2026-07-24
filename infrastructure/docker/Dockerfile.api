@@ -23,12 +23,8 @@ RUN pip install --upgrade pip \
  && pip install -e /app/services/optimizer \
  && pip install -e /app/services/simulator \
  && pip install -e /app/services/agent \
- && pip install -e "/app/services/api[dev]" \
- || pip install -r /app/services/api/requirements.txt \
-    && pip install -e /app/services/optimizer \
-    && pip install -e /app/services/simulator \
-    && pip install -e /app/services/agent \
-    && pip install -e /app/services/api
+ && pip install -r /app/services/api/requirements.txt \
+ && pip install -e /app/services/api
 
 WORKDIR /app/services/api
 

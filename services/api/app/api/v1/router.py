@@ -4,14 +4,14 @@ from __future__ import annotations
 
 import csv
 import io
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
-from uuid import uuid4
 
-from fastapi import APIRouter, Depends, HTTPException, Query, Request, status
+from fastapi import APIRouter, Depends, HTTPException, Query, Request
 from sqlalchemy import select
 from sqlalchemy.orm import Session
-
+from twinpilot_agent import get_agent_provider
+from twinpilot_optimizer.modes import OperatingMode
 from twinpilot_optimizer.objective import ObjectiveWeights
 from twinpilot_optimizer.planner import BuildingObservation, generate_candidate_plans
 from twinpilot_optimizer.safety import (
@@ -22,7 +22,6 @@ from twinpilot_optimizer.safety import (
     build_validation_token,
     parse_validation_token,
 )
-from twinpilot_optimizer.modes import OperatingMode
 from twinpilot_simulator.base import ControlActionInput, PlanInput
 
 from app.core.config import get_settings
@@ -72,7 +71,6 @@ from app.schemas.common import (
     ZoneOut,
 )
 from app.services.runtime import hub
-from twinpilot_agent import get_agent_provider
 
 router = APIRouter(prefix="/api/v1")
 shield = SafetyShield()
@@ -113,7 +111,7 @@ def login(payload: LoginRequest, db: DbSession, request: Request) -> TokenRespon
     user = db.scalar(select(User).where(User.email == payload.email))
     if not user or not verify_password(payload.password, user.password_hash):
         raise HTTPException(status_code=401, detail="Invalid credentials")
-    user.last_login_at = datetime.now(timezone.utc)
+    user.last_login_at = datetime.now(UTC)
     _audit(
         db,
         user_id=user.id,
@@ -414,7 +412,7 @@ def telemetry_ingest(
                 metric=str(point.get("metric", "unknown"))[:64],
                 value=float(point.get("value", 0)),
                 unit=str(point.get("unit", "")),
-                timestamp=datetime.now(timezone.utc),
+                timestamp=datetime.now(UTC),
                 quality=str(point.get("quality", "GOOD")),
                 source=str(point.get("source", "ingest")),
             )
@@ -444,7 +442,7 @@ def generate_optimization(
         equipment_weight=payload.equipment_weight,
     )
     state = hub.latest_state
-    obs = hub._to_observation(state)  # noqa: SLF001
+    obs = hub._to_observation(state)
     if hub.active_scenario == "infeasible_target" or (
         payload.energy_target_pct and payload.energy_target_pct >= 40 and payload.zero_comfort_deviation
     ):
@@ -463,7 +461,7 @@ def generate_optimization(
             allow_schedule_changes=payload.allow_schedule_changes,
             zero_comfort_deviation=payload.zero_comfort_deviation,
         )
-    state_hash = hub._state_hash(state)  # noqa: SLF001
+    state_hash = hub._state_hash(state)
     saved = []
     for plan in plans:
         row = ControlPlan(
@@ -478,7 +476,7 @@ def generate_optimization(
             actions_json=[a.model_dump() for a in plan.actions],
             score_breakdown_json=plan.score.model_dump(),
             state_hash=state_hash,
-            expires_at=datetime.now(timezone.utc).replace(microsecond=0)
+            expires_at=datetime.now(UTC).replace(microsecond=0)
             + __import__("datetime").timedelta(minutes=30),
         )
         db.add(row)
@@ -526,11 +524,11 @@ def get_plan(plan_id: str, db: DbSession, user: CurrentUser) -> dict[str, Any]:
 
 
 def _validate_plan_row(db: Session, plan: ControlPlan, building: Building, *, approved: bool = False) -> dict:
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     expires_at = plan.expires_at
     if expires_at is not None and expires_at.tzinfo is None:
         # SQLite often returns naive datetimes; treat as UTC
-        expires_at = expires_at.replace(tzinfo=timezone.utc)
+        expires_at = expires_at.replace(tzinfo=UTC)
     if expires_at and expires_at < now:
         plan.status = "EXPIRED"
         result = {
@@ -562,7 +560,7 @@ def _validate_plan_row(db: Session, plan: ControlPlan, building: Building, *, ap
             baseline_ok = False
             break
     plan.actions_json = list(plan.actions_json or [])
-    current_hash = hub._state_hash(hub.latest_state)  # noqa: SLF001
+    current_hash = hub._state_hash(hub.latest_state)
     state_ok = baseline_ok
 
     constraints = (
@@ -675,7 +673,7 @@ def simulate_plan(
             for a in refreshed_actions
         ],
     )
-    plan.state_hash = hub._state_hash(hub.latest_state)  # noqa: SLF001
+    plan.state_hash = hub._state_hash(hub.latest_state)
     result = hub.simulator.simulate_plan(hub.simulator.get_state(), plan_input, horizon=16)
     plan.status = "SIMULATED"
     prior = plan.predicted_metrics_json or {}
@@ -822,7 +820,7 @@ def apply_plan(
         execution_status="APPLIED",
         predicted_metrics_json=plan.predicted_metrics_json,
         applied_action_json=action,
-        executed_at=datetime.now(timezone.utc),
+        executed_at=datetime.now(UTC),
         observed_state_json={"power": hub.latest_state.get("total_building_power_kw")},
         goal_profile_json=plan.score_breakdown_json,
     )
@@ -990,7 +988,7 @@ def ack_alert(alert_id: str, db: DbSession, user: CurrentUser) -> dict[str, Any]
         raise HTTPException(404, "Alert not found")
     alert.status = "ACKNOWLEDGED"
     alert.acknowledged_by = user.id
-    alert.acknowledged_at = datetime.now(timezone.utc)
+    alert.acknowledged_at = datetime.now(UTC)
     db.commit()
     return {"status": "ACKNOWLEDGED"}
 
@@ -1001,7 +999,7 @@ def resolve_alert(alert_id: str, db: DbSession, user: CurrentUser) -> dict[str, 
     if not alert:
         raise HTTPException(404, "Alert not found")
     alert.status = "RESOLVED"
-    alert.resolved_at = datetime.now(timezone.utc)
+    alert.resolved_at = datetime.now(UTC)
     db.commit()
     return {"status": "RESOLVED"}
 
@@ -1016,7 +1014,7 @@ def alert_notes(alert_id: str, payload: AlertNoteRequest, db: DbSession, user: C
         {
             "note": payload.note,
             "by": user.id,
-            "at": datetime.now(timezone.utc).isoformat(),
+            "at": datetime.now(UTC).isoformat(),
         }
     )
     alert.notes_json = notes

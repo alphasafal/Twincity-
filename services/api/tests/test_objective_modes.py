@@ -3,12 +3,11 @@
 from __future__ import annotations
 
 import pytest
-
+from twinpilot_agent.providers import AgentPlanOutput, DeterministicAgentProvider
+from twinpilot_optimizer.anomaly import SensorSeries, detect_temperature_anomalies
 from twinpilot_optimizer.confidence import ConfidenceInputs, compute_confidence
 from twinpilot_optimizer.modes import OperatingMode, recommend_mode, transition_mode
 from twinpilot_optimizer.objective import ObjectiveWeights, PlanMetrics, score_plan
-from twinpilot_optimizer.anomaly import SensorSeries, detect_temperature_anomalies
-from twinpilot_agent.providers import DeterministicAgentProvider, AgentPlanOutput
 
 
 def test_weights_normalize():

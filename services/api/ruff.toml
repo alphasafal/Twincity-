@@ -1,0 +1,21 @@
+# TwinPilot API lint configuration — practical for FastAPI demos.
+target-version = "py312"
+line-length = 120
+
+[lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+ignore = [
+  # FastAPI idiom: Depends(...) in defaults
+  "B008",
+  # Control-loop and adapter boundaries intentionally catch broad errors
+  "BLE001",
+  # Long OpenAPI/demo strings and JSON payloads
+  "E501",
+  # Keep classic str Enum for broader serialization compatibility
+  "UP042",
+  # Explicit CancelledError handling is clearer in async shutdown
+  "SIM105",
+]
+
+[lint.per-file-ignores]
+"tests/*" = ["S101"]

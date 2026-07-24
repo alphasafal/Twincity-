@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -124,7 +124,7 @@ def seed_database(db: Session) -> Building:
                     unit=unit,
                     health_status="HEALTHY",
                     confidence=0.95,
-                    last_seen_at=datetime.now(timezone.utc),
+                    last_seen_at=datetime.now(UTC),
                 )
             )
 
