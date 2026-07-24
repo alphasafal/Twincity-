@@ -100,6 +100,37 @@ Legend: ✅ done · ⚠️ partial / simulated · ❌ not in scope for this demo
 
 ---
 
+## Acceptance criteria (hackathon demo)
+
+| # | Criterion | Status |
+|---|-----------|--------|
+| 1 | Web login | ✅ |
+| 2 | Mobile login | ✅ |
+| 3 | Five live zones | ✅ |
+| 4 | Real-time telemetry | ✅ (WS + poll fallback) |
+| 5 | Seeded scenarios startable | ✅ |
+| 6 | Multiple candidate plans | ✅ |
+| 7 | Predicted energy/cost/carbon/peak/comfort | ✅ |
+| 8 | Plan simulation | ✅ |
+| 9 | Safety Shield approve/reject | ✅ |
+| 10 | Validated plan apply | ✅ |
+| 11 | Expired/stale plan rejection | ✅ |
+| 12 | Decision + audit on apply | ✅ |
+| 13 | Baseline vs TwinPilot dashboard | ✅ |
+| 14 | Sensor fault → Guarded Mode | ✅ |
+| 15 | Simulation failure blocks autonomy | ✅ |
+| 16 | Infeasible target → max feasible | ✅ |
+| 17 | Mobile critical alerts | ✅ (local/demo notifications) |
+| 18 | Advisory plan approval | ✅ |
+| 19 | Authorized rollback | ✅ |
+| 20 | Prediction ledger updates | ✅ |
+| 21 | Assistant explains decisions | ✅ (deterministic agent) |
+| 22 | Works without LLM | ✅ |
+| 23 | Works with mock simulator | ✅ |
+| 24 | Docker Compose demo profile | ✅ |
+| 25 | Critical safety tests pass | ✅ (`pytest` 18+) |
+| 26 | README clean-checkout path | ✅ (`make setup` / `make demo`) |
+
 ## Acceptance summary
 
 The repository meets the **demo acceptance bar**: end-to-end simulated autonomous optimization with verifiable safety gates, operator UIs, MCP, and optional EnergyPlus/Ollama. It does **not** meet a production BMS deployment bar.

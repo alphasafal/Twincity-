@@ -265,7 +265,7 @@ def generate_candidate_plans(
             ZoneSetpointAction(
                 zone_id=zid,
                 current_value=current,
-                proposed_value=round(min(max(proposed, 21.5), 26.5), 1),
+                proposed_value=round(min(max(proposed, 21.5), 25.5), 1),
                 duration_minutes=60,
             )
         )

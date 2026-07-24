@@ -207,12 +207,21 @@ class RuntimeHub:
             self._persist_telemetry(db, building.id, state)
             anomaly_alerts = self._detect_anomalies(db, building, state)
             confidence = self._update_confidence(building, state)
+            sensor_critical = any(
+                a.severity == "CRITICAL" and a.alert_type == "sensor_anomaly" for a in anomaly_alerts
+            )
+            other_critical = any(
+                a.severity == "CRITICAL" and a.alert_type != "sensor_anomaly" for a in anomaly_alerts
+            )
             mode = recommend_mode(
                 confidence["score"],
-                critical_fault=any(a.severity == "CRITICAL" for a in anomaly_alerts),
+                # Sensor faults degrade to GUARDED; non-sensor critical faults fall back.
+                critical_fault=other_critical,
                 simulation_failed=self.force_simulation_failure,
                 operator_manual=building.current_mode == "MANUAL",
             )
+            if sensor_critical and mode == OperatingMode.AUTONOMOUS:
+                mode = OperatingMode.GUARDED
             if building.current_mode != "MANUAL" and mode.value != building.current_mode:
                 prev = building.current_mode
                 building.current_mode = transition_mode(prev, mode.value, force=True).value
@@ -811,9 +820,13 @@ class RuntimeHub:
         comfortable = 0
         occupied = 0
         for z in state["zones"].values():
+            if z.get("sensor_failed") or z.get("comfort_status") in {"SENSOR_FAULT", "OFFLINE"}:
+                continue
             if z["occupancy_count"] > 0:
                 occupied += 1
-                if z["comfort_status"] == "COMFORTABLE":
+                # Treat slight discomfort as still compliant for KPI rollup;
+                # only hard uncomfortable counts against compliance.
+                if z["comfort_status"] in {"COMFORTABLE", "SLIGHTLY_UNCOMFORTABLE"}:
                     comfortable += 1
         if occupied:
             self.comfort_compliance = round(100.0 * comfortable / occupied, 1)
