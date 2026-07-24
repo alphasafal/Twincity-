@@ -164,6 +164,40 @@ importers:
         specifier: ^5.8.3
         version: 5.9.3
 
+  packages/api-client:
+    dependencies:
+      '@twinpilot/contracts':
+        specifier: workspace:*
+        version: link:../contracts
+    devDependencies:
+      typescript:
+        specifier: ^5.8.3
+        version: 5.9.3
+
+  packages/config:
+    devDependencies:
+      typescript:
+        specifier: ^5.8.3
+        version: 5.9.3
+
+  packages/contracts:
+    dependencies:
+      zod:
+        specifier: ^3.24.3
+        version: 3.25.76
+    devDependencies:
+      typescript:
+        specifier: ^5.8.3
+        version: 5.9.3
+
+  packages/design-tokens:
+    devDependencies:
+      typescript:
+        specifier: ^5.8.3
+        version: 5.9.3
+
+  packages/eslint-config: {}
+
 packages:
 
   '@0no-co/graphql.web@1.3.2':
