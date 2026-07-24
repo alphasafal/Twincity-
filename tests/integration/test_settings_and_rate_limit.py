@@ -55,13 +55,16 @@ def test_admin_can_update_constraints_and_building(client: TestClient):
 
 
 def test_admin_can_invite_user(client: TestClient):
+    import uuid
+
     admin = _login(client, "admin@twinpilot.demo", "TwinPilot-Admin-Demo!")
+    email = f"replay.tester.{uuid.uuid4().hex[:8]}@twinpilot.demo"
     created = client.post(
         "/api/v1/users",
         headers=admin,
         json={
             "name": "Replay Tester",
-            "email": "replay.tester@twinpilot.demo",
+            "email": email,
             "password": "TwinPilot-Replay-Demo!",
             "role": "OPERATOR",
             "reason": "Integration invite",
@@ -69,6 +72,7 @@ def test_admin_can_invite_user(client: TestClient):
     )
     assert created.status_code == 201, created.text
     assert created.json()["role"] == "OPERATOR"
+    assert created.json()["email"] == email
 
     # Viewer cannot invite
     viewer = _login(client, "viewer@twinpilot.demo", "TwinPilot-Viewer-Demo!")
