@@ -72,6 +72,6 @@ Follow [DEMO_SCRIPT.md](DEMO_SCRIPT.md). Confirm scenario endpoints under `/api/
 
 ## Gaps (honest)
 
-- No end-to-end Playwright suite yet
+- Playwright critical login flow: `apps/web/e2e` (`pnpm --filter @twinpilot/web test:e2e:install && pnpm --filter @twinpilot/web test:e2e`, API must be running)
 - EnergyPlus path is smoke-checked via `make energyplus-check`, not full co-sim CI
 - Mobile is typechecked optionally, not in default CI
