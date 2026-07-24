@@ -20,7 +20,7 @@ from twinpilot_optimizer.safety import (
     SafetyShield,
     ValidationContext,
     build_validation_token,
-    parse_validation_token,
+    verify_validation_token,
 )
 from twinpilot_simulator.base import ControlActionInput, PlanInput
 
@@ -28,6 +28,8 @@ from app.core.config import get_settings
 from app.core.deps import (
     CurrentUser,
     DbSession,
+    get_building_for_user,
+    list_accessible_buildings,
     require_permission,
     require_roles,
 )
@@ -78,6 +80,7 @@ from app.schemas.common import (
     WhatIfRequest,
     ZoneOut,
 )
+from app.services.actuation import apply_plan_actions_with_ack
 from app.services.runtime import hub
 
 router = APIRouter(prefix="/api/v1")
@@ -121,6 +124,7 @@ def login(payload: LoginRequest, db: DbSession, request: Request) -> TokenRespon
     if not user or not verify_password(payload.password, user.password_hash):
         raise HTTPException(status_code=401, detail="Invalid credentials")
     user.last_login_at = datetime.now(UTC)
+    org_id = user.default_organization_id
     _audit(
         db,
         user_id=user.id,
@@ -132,8 +136,8 @@ def login(payload: LoginRequest, db: DbSession, request: Request) -> TokenRespon
     )
     db.commit()
     return TokenResponse(
-        access_token=create_access_token(user.id),
-        refresh_token=create_refresh_token(user.id),
+        access_token=create_access_token(user.id, org_id=org_id, org_role=user.role),
+        refresh_token=create_refresh_token(user.id, org_id=org_id),
     )
 
 
@@ -144,9 +148,10 @@ def refresh(payload: RefreshRequest, request: Request) -> TokenResponse:
         data = decode_token(payload.refresh_token, refresh=True)
     except ValueError as exc:
         raise HTTPException(status_code=401, detail=str(exc)) from exc
+    org_id = data.get("org_id")
     return TokenResponse(
-        access_token=create_access_token(data["sub"]),
-        refresh_token=create_refresh_token(data["sub"]),
+        access_token=create_access_token(data["sub"], org_id=org_id),
+        refresh_token=create_refresh_token(data["sub"], org_id=org_id),
     )
 
 
@@ -163,15 +168,12 @@ def me(user: CurrentUser) -> User:
 # ── Buildings ─────────────────────────────────────────────────────────
 @router.get("/buildings", response_model=list[BuildingOut])
 def list_buildings(db: DbSession, user: CurrentUser) -> list[Building]:
-    return list(db.scalars(select(Building)).all())
+    return list_accessible_buildings(db, user)
 
 
 @router.get("/buildings/{building_id}", response_model=BuildingOut)
 def get_building(building_id: str, db: DbSession, user: CurrentUser) -> Building:
-    building = db.get(Building, building_id)
-    if not building:
-        raise HTTPException(404, "Building not found")
-    return building
+    return get_building_for_user(building_id, db, user)
 
 
 @router.patch("/buildings/{building_id}/mode", response_model=BuildingOut)
@@ -181,9 +183,7 @@ def patch_mode(
     db: DbSession,
     user: User = Depends(require_permission("mode_change")),
 ) -> Building:
-    building = db.get(Building, building_id)
-    if not building:
-        raise HTTPException(404, "Building not found")
+    building = get_building_for_user(building_id, db, user)
     prev = building.current_mode
     building.current_mode = OperatingMode(payload.mode).value
     _audit(
@@ -614,7 +614,13 @@ def _validate_plan_row(db: Session, plan: ControlPlan, building: Building, *, ap
     # Prefer the live snapshot hash inside the token so apply revalidation is bound
     # to current telemetry while still requiring a fresh Safety Shield pass.
     plan.state_hash = current_hash
-    token = build_validation_token(plan.id, plan.state_hash or "", "api")
+    token = build_validation_token(
+        plan.id,
+        plan.state_hash or "",
+        "api",
+        secret=settings.validation_token_secret,
+        ttl_seconds=settings.validation_token_ttl_seconds,
+    )
     safety = shield.validate(
         ProposedAction(
             action_type=action["action_type"],
@@ -794,9 +800,14 @@ def apply_plan(
     plan = db.get(ControlPlan, plan_id)
     if not plan:
         raise HTTPException(404, "Plan not found")
-    building = db.get(Building, plan.building_id)
-    if not building:
-        raise HTTPException(404, "Building not found")
+    building = get_building_for_user(plan.building_id, db, user)
+    # Certified autonomy gate for non-demo sites
+    if (
+        building.current_mode == "AUTONOMOUS"
+        and not building.is_demo
+        and not building.site_certified
+    ):
+        raise HTTPException(400, "Autonomous write requires site certification")
     # Independently re-run validation
     approved = plan.status == "APPROVED" or building.current_mode in {"AUTONOMOUS", "GUARDED"}
     result = _validate_plan_row(db, plan, building, approved=approved)
@@ -805,19 +816,30 @@ def apply_plan(
     if not plan.validation_token:
         raise HTTPException(400, "Missing validation token")
     try:
-        parse_validation_token(plan.validation_token)
+        verify_validation_token(
+            plan.validation_token,
+            plan_id=plan.id,
+            state_hash=plan.state_hash,
+            secret=settings.validation_token_secret,
+        )
     except ValueError as exc:
         raise HTTPException(400, str(exc)) from exc
 
     action = plan.actions_json[0]
-    hub.simulator.apply_action(
-        ControlActionInput(
-            zone_id=action["zone_id"],
-            action_type=action["action_type"],
-            value=float(action["proposed_value"]),
-            duration_minutes=int(action.get("duration_minutes", 60)),
-        )
+    actuation = apply_plan_actions_with_ack(
+        db,
+        building=building,
+        plan_id=plan.id,
+        decision_id=None,
+        actions=plan.actions_json,
+        zone_key=hub.zone_key,
+        simulator_apply=hub.simulator.apply_action,
     )
+    if actuation.get("shadow_mode"):
+        raise HTTPException(400, "Building is in shadow mode — writes disabled")
+    if not actuation.get("applied") and not building.is_demo:
+        db.commit()
+        raise HTTPException(409, {"message": "Write acknowledgement failed", "result": actuation})
     plan.status = "APPLIED"
     decision = Decision(
         building_id=plan.building_id,

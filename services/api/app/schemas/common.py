@@ -45,8 +45,180 @@ class BuildingOut(BaseModel):
     is_demo: bool
     confidence: float
     autonomy_confidence_json: dict[str, Any] | None = None
+    organization_id: str | None = None
+    connector_profile_id: str | None = None
+    shadow_mode: bool = False
+    site_certified: bool = False
+    write_enabled: bool = False
+    onboarding_stage: str = "demo"
 
     model_config = {"from_attributes": True}
+
+
+class OrganizationOut(BaseModel):
+    id: str
+    name: str
+    slug: str
+    plan_code: str
+    is_demo: bool
+    stripe_customer_id: str | None = None
+
+    model_config = {"from_attributes": True}
+
+
+class MembershipOut(BaseModel):
+    id: str
+    organization_id: str
+    user_id: str
+    org_role: str
+    is_active: bool
+    user: UserOut | None = None
+
+    model_config = {"from_attributes": True}
+
+
+class InvitationCreateRequest(BaseModel):
+    email: EmailStr
+    org_role: str = "VIEWER"
+    reason: str = Field(min_length=3, max_length=500)
+
+
+class InvitationOut(BaseModel):
+    id: str
+    organization_id: str
+    email: EmailStr
+    org_role: str
+    status: str
+    expires_at: datetime
+    token: str | None = None
+
+    model_config = {"from_attributes": True}
+
+
+class InvitationAcceptRequest(BaseModel):
+    token: str
+    name: str = Field(min_length=2, max_length=120)
+    password: str = Field(min_length=8, max_length=128)
+
+
+class SubscriptionOut(BaseModel):
+    organization_id: str
+    plan_code: str
+    status: str
+    entitlements: dict[str, Any]
+    current_period_end: datetime | None = None
+
+
+class CheckoutRequest(BaseModel):
+    plan_code: str = Field(pattern="^(starter|optimize|autonomy|enterprise)$")
+
+
+class ConnectorProfileOut(BaseModel):
+    id: str
+    organization_id: str
+    building_id: str | None
+    adapter_type: str
+    name: str
+    config_json: dict[str, Any]
+    status: str
+    last_health_json: dict[str, Any] | None = None
+    last_seen_at: datetime | None = None
+    secret_ref: str | None = None
+
+    model_config = {"from_attributes": True}
+
+
+class ConnectorCreateRequest(BaseModel):
+    building_id: str
+    adapter_type: str = Field(pattern="^(mock|bacnet_ip|modbus_tcp|honeywell_niagara)$")
+    name: str = Field(min_length=2, max_length=160)
+    config_json: dict[str, Any] = Field(default_factory=dict)
+    secret: str | None = None
+
+
+class PointMappingOut(BaseModel):
+    id: str
+    building_id: str
+    connector_profile_id: str
+    external_point_id: str
+    external_point_name: str
+    zone_id: str | None
+    twinpilot_metric: str
+    direction: str
+    unit: str
+    scale: float
+    offset: float
+    deadband: float
+    enabled: bool
+
+    model_config = {"from_attributes": True}
+
+
+class PointMappingUpsertRequest(BaseModel):
+    external_point_id: str
+    external_point_name: str = ""
+    zone_id: str | None = None
+    twinpilot_metric: str
+    direction: str = "read"
+    unit: str = ""
+    scale: float = 1.0
+    offset: float = 0.0
+    deadband: float = 0.1
+    enabled: bool = True
+
+
+class OnboardingStageRequest(BaseModel):
+    stage: str = Field(pattern="^(connect|map_points|shadow|guarded_pilot|autonomy_review|autonomy)$")
+    reason: str = Field(min_length=3, max_length=500)
+
+
+class SiteCertificationUpdateRequest(BaseModel):
+    checklist_json: dict[str, Any] = Field(default_factory=dict)
+    shadow_mode_complete: bool | None = None
+    guarded_pilot_complete: bool | None = None
+    autonomy_approved: bool | None = None
+    notes: str | None = None
+    reason: str = Field(min_length=3, max_length=500)
+
+
+class MvBaselineOut(BaseModel):
+    id: str
+    building_id: str
+    name: str
+    start_at: datetime
+    end_at: datetime
+    baseline_energy_kwh: float
+    baseline_cost: float
+    baseline_carbon_kg: float
+    weather_normalized: bool
+    methodology: str
+
+    model_config = {"from_attributes": True}
+
+
+class MvBaselineCreateRequest(BaseModel):
+    name: str = "Default baseline"
+    start_at: datetime
+    end_at: datetime
+    baseline_energy_kwh: float
+    baseline_cost: float
+    baseline_carbon_kg: float
+    weather_normalized: bool = True
+    methodology: str = "IPMVP_Option_C"
+
+
+class MvReportOut(BaseModel):
+    building_id: str
+    baseline: MvBaselineOut | None
+    period_energy_kwh: float
+    period_cost: float
+    period_carbon_kg: float
+    savings_energy_kwh: float
+    savings_cost: float
+    savings_carbon_kg: float
+    labeled_estimate: bool
+    methodology: str
+    notes: str
 
 
 class ModeUpdateRequest(BaseModel):

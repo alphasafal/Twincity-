@@ -394,7 +394,13 @@ class RuntimeHub:
             approval_required=building.current_mode in {"ADVISORY", "MANUAL"},
             approved=False,
         )
-        token = build_validation_token(selected_row.id, selected_row.state_hash or "", "system")
+        token = build_validation_token(
+            selected_row.id,
+            selected_row.state_hash or "",
+            "system",
+            secret=self.settings.validation_token_secret,
+            ttl_seconds=self.settings.validation_token_ttl_seconds,
+        )
         safety = self.shield.validate(
             ProposedAction(
                 action_type=first.action_type,

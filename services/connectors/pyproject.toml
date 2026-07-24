@@ -1,0 +1,21 @@
+[project]
+name = "twinpilot-connectors"
+version = "0.1.0"
+description = "Vendor-agnostic BMS connector framework for TwinPilot"
+requires-python = ">=3.11"
+dependencies = [
+  "pydantic>=2.10",
+  "httpx>=0.28",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+bacnet = []  # BACnet uses built-in simulated transport; real BAC0 optional later
+modbus = []
+
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["twinpilot_connectors*"]

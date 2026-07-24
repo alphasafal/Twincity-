@@ -1,18 +1,19 @@
 # TwinPilot Docker Compose
 #
 # Profiles:
-#   demo       — api + web (SQLite, no Redis required)
-#   full       — api + web + optional postgres
-#   energyplus — same as demo with EnergyPlus env wired (host mounts)
+#   demo       — api + web (SQLite, control loop in API)
+#   full       — api + web + postgres
+#   production — api + worker + web + postgres + redis
+#   energyplus — same as demo with EnergyPlus env wired
 #
 # Examples:
 #   docker compose --profile demo up --build
 #   docker compose --profile full up --build
-#   docker compose --profile energyplus up --build
+#   docker compose --profile production up --build
 
 services:
   api:
-    profiles: ["demo", "full", "energyplus"]
+    profiles: ["demo", "full", "energyplus", "production"]
     build:
       context: .
       dockerfile: infrastructure/docker/Dockerfile.api
@@ -22,8 +23,12 @@ services:
       APP_ENV: ${APP_ENV:-development}
       DEMO_MODE: ${DEMO_MODE:-true}
       DATABASE_URL: ${DATABASE_URL:-sqlite:////data/twinpilot.db}
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379/0}
+      RUN_CONTROL_LOOP_IN_API: ${RUN_CONTROL_LOOP_IN_API:-true}
+      WORKER_MODE: "false"
       JWT_SECRET: ${JWT_SECRET:-twinpilot-dev-access-secret-change-me}
       JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET:-twinpilot-dev-refresh-secret-change-me}
+      VALIDATION_TOKEN_SECRET: ${VALIDATION_TOKEN_SECRET:-twinpilot-validation-token-secret-change-me}
       WEB_ORIGIN: ${WEB_ORIGIN:-http://localhost:3000}
       CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000,http://127.0.0.1:3000}
       AGENT_PROVIDER: ${AGENT_PROVIDER:-deterministic}
@@ -36,17 +41,53 @@ services:
       ENERGYPLUS_MODEL_PATH: ${ENERGYPLUS_MODEL_PATH:-}
       ENERGYPLUS_WEATHER_PATH: ${ENERGYPLUS_WEATHER_PATH:-}
       TELEMETRY_INGEST_TOKEN: ${TELEMETRY_INGEST_TOKEN:-demo-telemetry-token}
+      REQUIRE_WS_AUTH: ${REQUIRE_WS_AUTH:-true}
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY:-}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET:-}
+      METRICS_ENABLED: ${METRICS_ENABLED:-true}
     volumes:
       - twinpilot-data:/data
       - ./building-models:/building-models:ro
+    depends_on:
+      redis:
+        condition: service_started
+        required: false
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health')"]
       interval: 10s
       timeout: 5s
       retries: 6
 
+  worker:
+    profiles: ["production"]
+    build:
+      context: .
+      dockerfile: infrastructure/docker/Dockerfile.api
+    command: ["python", "-m", "app.worker"]
+    environment:
+      APP_ENV: ${APP_ENV:-production}
+      DEMO_MODE: ${DEMO_MODE:-false}
+      DATABASE_URL: ${DATABASE_URL:-postgresql+psycopg://twinpilot:twinpilot@postgres:5432/twinpilot}
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379/0}
+      RUN_CONTROL_LOOP_IN_API: "false"
+      WORKER_MODE: "true"
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET}
+      VALIDATION_TOKEN_SECRET: ${VALIDATION_TOKEN_SECRET}
+      CONTROL_LOOP_ENABLED: "true"
+      CONTROL_INTERVAL_SECONDS: ${CONTROL_INTERVAL_SECONDS:-5}
+      SIMULATOR_PROVIDER: ${SIMULATOR_PROVIDER:-mock}
+      SEED_ON_STARTUP: ${SEED_ON_STARTUP:-false}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      api:
+        condition: service_healthy
+
   web:
-    profiles: ["demo", "full", "energyplus"]
+    profiles: ["demo", "full", "energyplus", "production"]
     build:
       context: .
       dockerfile: infrastructure/docker/Dockerfile.web
@@ -60,9 +101,8 @@ services:
       api:
         condition: service_healthy
 
-  # Optional Postgres for the "full" profile (API still defaults to SQLite unless DATABASE_URL is overridden)
   postgres:
-    profiles: ["full"]
+    profiles: ["full", "production"]
     image: postgres:16-alpine
     environment:
       POSTGRES_USER: twinpilot
@@ -76,6 +116,17 @@ services:
       test: ["CMD-SHELL", "pg_isready -U twinpilot"]
       interval: 5s
       timeout: 5s
+      retries: 10
+
+  redis:
+    profiles: ["full", "production", "demo"]
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
       retries: 10
 
 volumes:

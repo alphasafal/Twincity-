@@ -4,9 +4,16 @@
 
 > Autonomous optimization you can verify.
 
-TwinPilot is a demo platform for **safe, explainable building control**: a digital twin + optimizer proposes actions, an independent **Safety Shield** validates them, and operators can approve, override, or roll back — with a prediction ledger so claims stay auditable.
+TwinPilot is a **multi-tenant B2B platform** for **safe, explainable building control**: a digital twin + optimizer proposes actions, an independent **Safety Shield** validates them, and operators can approve, override, or roll back — with a prediction ledger so claims stay auditable.
 
-This repository ships a working **simulated** demo (mock building simulator by default). EnergyPlus and Ollama are optional. TwinPilot is **not production-certified** and does **not** integrate with real BMS vendors (no Honeywell/BACnet production connectors in this repo).
+This repository ships:
+
+- A working **simulated** demo (mock twin by default)
+- **Production SaaS foundation** — orgs, RBAC, Stripe entitlements, Postgres/Redis workers
+- **Vendor-agnostic BMS connectors** — BACnet/IP, Modbus TCP, and a **Honeywell Niagara/Forge** certified adapter path
+- Site onboarding: connect → map points → shadow → guarded pilot → certified autonomy
+
+See [docs/PRODUCTION_PLATFORM.md](docs/PRODUCTION_PLATFORM.md). EnergyPlus and Ollama remain optional. Unsupervised Autonomous write on uncertified live sites is intentionally blocked.
 
 ---
 

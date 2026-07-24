@@ -2,7 +2,7 @@
 
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { Building, User } from "./types";
+import type { Building, Organization, User } from "./types";
 
 const ACCESS_KEY = "twinpilot_access_token";
 const REFRESH_KEY = "twinpilot_refresh_token";
@@ -24,10 +24,13 @@ interface AuthState {
   user: User | null;
   buildingId: string | null;
   building: Building | null;
+  organization: Organization | null;
+  organizationId: string | null;
   hydrated: boolean;
   setTokens: (access: string, refresh: string) => void;
   setUser: (user: User | null) => void;
   setBuilding: (building: Building | null) => void;
+  setOrganization: (organization: Organization | null) => void;
   setHydrated: (value: boolean) => void;
   logout: () => void;
   getAccessToken: () => string | null;
@@ -42,6 +45,8 @@ export const useAuthStore = create<AuthState>()(
       user: null,
       buildingId: null,
       building: null,
+      organization: null,
+      organizationId: null,
       hydrated: false,
       setTokens: (access, refresh) => {
         writeToken(ACCESS_KEY, access);
@@ -50,7 +55,16 @@ export const useAuthStore = create<AuthState>()(
       },
       setUser: (user) => set({ user }),
       setBuilding: (building) =>
-        set({ building, buildingId: building?.id ?? null }),
+        set({
+          building,
+          buildingId: building?.id ?? null,
+          organizationId: building?.organization_id ?? get().organizationId,
+        }),
+      setOrganization: (organization) =>
+        set({
+          organization,
+          organizationId: organization?.id ?? null,
+        }),
       setHydrated: (value) => set({ hydrated: value }),
       logout: () => {
         writeToken(ACCESS_KEY, null);
@@ -61,6 +75,8 @@ export const useAuthStore = create<AuthState>()(
           user: null,
           building: null,
           buildingId: null,
+          organization: null,
+          organizationId: null,
         });
       },
       getAccessToken: () => get().accessToken ?? readToken(ACCESS_KEY),
@@ -74,6 +90,8 @@ export const useAuthStore = create<AuthState>()(
         user: state.user,
         buildingId: state.buildingId,
         building: state.building,
+        organization: state.organization,
+        organizationId: state.organizationId,
       }),
       onRehydrateStorage: () => (state) => {
         state?.setHydrated(true);

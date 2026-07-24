@@ -11,12 +11,17 @@ import type {
   AuditEvent,
   Building,
   BuildingStatus,
+  ConnectorProfile,
   ConstraintPolicy,
   ControlPlan,
   Decision,
   DemoScenario,
   GoalProfile,
   LedgerEntry,
+  MvReport,
+  Organization,
+  PointMapping,
+  SubscriptionInfo,
   TokenResponse,
   User,
   Zone,
@@ -419,5 +424,147 @@ export const api = {
   },
   health() {
     return apiFetch<Record<string, unknown>>("/health", { auth: false });
+  },
+  listOrganizations() {
+    return apiFetch<Organization[]>("/api/v1/organizations");
+  },
+  getSubscription(organizationId: string) {
+    return apiFetch<SubscriptionInfo>(
+      `/api/v1/organizations/${organizationId}/subscription`,
+    );
+  },
+  listBillingPlans() {
+    return apiFetch<{ plans: Record<string, Record<string, unknown>> }>(
+      "/api/v1/billing/plans",
+    );
+  },
+  checkout(organizationId: string, plan_code: string) {
+    return apiFetch<{ mode: string; checkout_url?: string; message?: string }>(
+      `/api/v1/organizations/${organizationId}/billing/checkout`,
+      { method: "POST", body: JSON.stringify({ plan_code }) },
+    );
+  },
+  billingPortal(organizationId: string) {
+    return apiFetch<{ mode: string; portal_url?: string }>(
+      `/api/v1/organizations/${organizationId}/billing/portal`,
+      { method: "POST" },
+    );
+  },
+  listOrgMembers(organizationId: string) {
+    return apiFetch<
+      Array<{
+        id: string;
+        organization_id: string;
+        user_id: string;
+        org_role: string;
+        is_active: boolean;
+        user?: User | null;
+      }>
+    >(`/api/v1/organizations/${organizationId}/members`);
+  },
+  inviteMember(
+    organizationId: string,
+    body: { email: string; org_role: string; reason: string },
+  ) {
+    return apiFetch<{ id: string; token?: string; email: string; status: string }>(
+      `/api/v1/organizations/${organizationId}/invitations`,
+      { method: "POST", body: JSON.stringify(body) },
+    );
+  },
+  listConnectors(buildingId: string) {
+    return apiFetch<ConnectorProfile[]>(
+      `/api/v1/buildings/${buildingId}/connectors`,
+    );
+  },
+  createConnector(
+    buildingId: string,
+    body: {
+      building_id: string;
+      adapter_type: string;
+      name: string;
+      config_json?: Record<string, unknown>;
+      secret?: string;
+    },
+  ) {
+    return apiFetch<ConnectorProfile>(
+      `/api/v1/buildings/${buildingId}/connectors`,
+      { method: "POST", body: JSON.stringify(body) },
+    );
+  },
+  discoverPoints(buildingId: string, connectorId: string) {
+    return apiFetch<{
+      adapter_type: string;
+      points: Array<Record<string, unknown>>;
+      health: Record<string, unknown>;
+    }>(`/api/v1/buildings/${buildingId}/connectors/${connectorId}/discover`, {
+      method: "POST",
+    });
+  },
+  listPointMappings(buildingId: string) {
+    return apiFetch<PointMapping[]>(
+      `/api/v1/buildings/${buildingId}/point-mappings`,
+    );
+  },
+  upsertPointMappings(
+    buildingId: string,
+    mappings: Array<{
+      external_point_id: string;
+      external_point_name?: string;
+      zone_id?: string | null;
+      twinpilot_metric: string;
+      direction?: string;
+      unit?: string;
+      enabled?: boolean;
+    }>,
+  ) {
+    return apiFetch<PointMapping[]>(
+      `/api/v1/buildings/${buildingId}/point-mappings`,
+      { method: "PUT", body: JSON.stringify(mappings) },
+    );
+  },
+  pollConnector(buildingId: string) {
+    return apiFetch<Record<string, unknown>>(
+      `/api/v1/buildings/${buildingId}/connectors/poll`,
+      { method: "POST" },
+    );
+  },
+  getCertification(buildingId: string) {
+    return apiFetch<Record<string, unknown>>(
+      `/api/v1/buildings/${buildingId}/certification`,
+    );
+  },
+  updateCertification(
+    buildingId: string,
+    body: {
+      checklist_json?: Record<string, unknown>;
+      shadow_mode_complete?: boolean;
+      guarded_pilot_complete?: boolean;
+      autonomy_approved?: boolean;
+      notes?: string;
+      reason: string;
+    },
+  ) {
+    return apiFetch<Record<string, unknown>>(
+      `/api/v1/buildings/${buildingId}/certification`,
+      { method: "PUT", body: JSON.stringify(body) },
+    );
+  },
+  setOnboardingStage(
+    buildingId: string,
+    stage: string,
+    reason: string,
+  ) {
+    return apiFetch<Record<string, unknown>>(
+      `/api/v1/buildings/${buildingId}/onboarding`,
+      { method: "PATCH", body: JSON.stringify({ stage, reason }) },
+    );
+  },
+  getMvReport(buildingId: string) {
+    return apiFetch<MvReport>(`/api/v1/buildings/${buildingId}/mv/report`);
+  },
+  exportOrgAudit(organizationId: string) {
+    return apiFetch<{ count: number; events: unknown[] }>(
+      `/api/v1/organizations/${organizationId}/audit/export`,
+    );
   },
 };

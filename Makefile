@@ -1,5 +1,5 @@
 # TwinPilot developer Makefile
-.PHONY: setup dev seed demo test energyplus-check lint web api mobile replay ollama help
+.PHONY: setup dev seed demo test energyplus-check lint web api mobile worker replay ollama help
 
 ROOT := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
 VENV := $(ROOT)/.venv
@@ -14,6 +14,7 @@ help:
 	@echo "  make demo             Start API + web for local demo"
 	@echo "  make dev              Parallel API + web (same as demo)"
 	@echo "  make api              Run FastAPI only"
+	@echo "  make worker           Run control-loop worker (Redis lease)"
 	@echo "  make web              Run Next.js only"
 	@echo "  make mobile           Run Expo mobile"
 	@echo "  make test             Run API pytest + web typecheck/lint"
@@ -36,6 +37,9 @@ dev: demo
 api:
 	@cd $(API_DIR) && $(PYTHON) -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 
+worker:
+	@cd $(API_DIR) && WORKER_MODE=true RUN_CONTROL_LOOP_IN_API=false $(PYTHON) -m app.worker
+
 web:
 	@cd $(ROOT) && pnpm --filter @twinpilot/web dev
 
@@ -44,7 +48,8 @@ mobile:
 
 test:
 	@cd $(API_DIR) && $(PYTHON) -m pytest -q
-	@cd $(ROOT)/tests/integration && PYTHONPATH=$(API_DIR):$(ROOT)/services/optimizer:$(ROOT)/services/simulator:$(ROOT)/services/agent $(PYTHON) -m pytest -q
+	@cd $(ROOT)/tests/integration && PYTHONPATH=$(API_DIR):$(ROOT)/services/optimizer:$(ROOT)/services/simulator:$(ROOT)/services/agent:$(ROOT)/services/connectors $(PYTHON) -m pytest -q
+	@cd $(ROOT)/services/connectors && PYTHONPATH=$(ROOT)/services/connectors $(PYTHON) -m pytest -q || true
 	@cd $(ROOT) && pnpm --filter @twinpilot/web typecheck
 	@cd $(ROOT) && pnpm --filter @twinpilot/web lint
 

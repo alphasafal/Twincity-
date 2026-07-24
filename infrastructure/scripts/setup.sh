@@ -16,10 +16,11 @@ fi
 source "$ROOT/.venv/bin/activate"
 python -m pip install --upgrade pip
 
-echo "Installing Python packages (optimizer, simulator, agent, api, mcp-server)"
+echo "Installing Python packages (optimizer, simulator, agent, connectors, api, mcp-server)"
 pip install -e "$ROOT/services/optimizer"
 pip install -e "$ROOT/services/simulator"
 pip install -e "$ROOT/services/agent"
+pip install -e "$ROOT/services/connectors"
 pip install -e "$ROOT/services/api"
 pip install -e "$ROOT/services/api[dev]" 2>/dev/null || pip install pytest pytest-asyncio ruff
 pip install -e "$ROOT/services/mcp-server" 2>/dev/null || true

@@ -48,6 +48,71 @@ export interface Building {
   is_demo: boolean;
   confidence: number;
   autonomy_confidence_json?: ConfidenceBreakdown | null;
+  organization_id?: string | null;
+  connector_profile_id?: string | null;
+  shadow_mode?: boolean;
+  site_certified?: boolean;
+  write_enabled?: boolean;
+  onboarding_stage?: string;
+}
+
+export interface Organization {
+  id: string;
+  name: string;
+  slug: string;
+  plan_code: string;
+  is_demo: boolean;
+  stripe_customer_id?: string | null;
+}
+
+export interface SubscriptionInfo {
+  organization_id: string;
+  plan_code: string;
+  status: string;
+  entitlements: Record<string, unknown>;
+  current_period_end?: string | null;
+}
+
+export interface ConnectorProfile {
+  id: string;
+  organization_id: string;
+  building_id?: string | null;
+  adapter_type: string;
+  name: string;
+  config_json: Record<string, unknown>;
+  status: string;
+  last_health_json?: Record<string, unknown> | null;
+  last_seen_at?: string | null;
+  secret_ref?: string | null;
+}
+
+export interface PointMapping {
+  id: string;
+  building_id: string;
+  connector_profile_id: string;
+  external_point_id: string;
+  external_point_name: string;
+  zone_id?: string | null;
+  twinpilot_metric: string;
+  direction: string;
+  unit: string;
+  scale: number;
+  offset: number;
+  deadband: number;
+  enabled: boolean;
+}
+
+export interface MvReport {
+  building_id: string;
+  period_energy_kwh: number;
+  period_cost: number;
+  period_carbon_kg: number;
+  savings_energy_kwh: number;
+  savings_cost: number;
+  savings_carbon_kg: number;
+  labeled_estimate: boolean;
+  methodology: string;
+  notes: string;
 }
 
 export interface Zone {

@@ -335,19 +335,97 @@ def build_validation_token(
     state_hash: str,
     actor: str,
     timestamp: datetime | None = None,
+    *,
+    secret: str | None = None,
+    nonce: str | None = None,
+    ttl_seconds: int = 900,
 ) -> str:
-    ts = (timestamp or datetime.now(timezone.utc)).isoformat()
-    return f"v1:{plan_id}:{state_hash}:{actor}:{ts}"
+    """Build a validation token.
+
+    v2 (HMAC): ``v2:plan_id:state_hash:actor:ts:nonce:exp:sig``
+    v1 (legacy/demo): ``v1:plan_id:state_hash:actor:ts`` when secret is None.
+    """
+    import hashlib
+    import hmac
+    import secrets as _secrets
+
+    ts_dt = timestamp or datetime.now(timezone.utc)
+    ts = ts_dt.isoformat()
+    if secret is None:
+        return f"v1:{plan_id}:{state_hash}:{actor}:{ts}"
+    nonce_val = nonce or _secrets.token_hex(8)
+    exp = int(ts_dt.timestamp()) + int(ttl_seconds)
+    payload = f"{plan_id}:{state_hash}:{actor}:{ts}:{nonce_val}:{exp}"
+    sig = hmac.new(secret.encode("utf-8"), payload.encode("utf-8"), hashlib.sha256).hexdigest()
+    return f"v2:{plan_id}:{state_hash}:{actor}:{ts}:{nonce_val}:{exp}:{sig}"
 
 
-def parse_validation_token(token: str) -> dict[str, Any]:
+def parse_validation_token(token: str, *, secret: str | None = None) -> dict[str, Any]:
+    import hashlib
+    import hmac
+
     parts = token.split(":")
-    if len(parts) < 5 or parts[0] != "v1":
+    if not parts:
         raise ValueError("Invalid validation token")
-    return {
-        "version": parts[0],
-        "plan_id": parts[1],
-        "state_hash": parts[2],
-        "actor": parts[3],
-        "timestamp": ":".join(parts[4:]),
-    }
+    version = parts[0]
+    if version == "v1":
+        if len(parts) < 5:
+            raise ValueError("Invalid validation token")
+        return {
+            "version": version,
+            "plan_id": parts[1],
+            "state_hash": parts[2],
+            "actor": parts[3],
+            "timestamp": ":".join(parts[4:]),
+            "nonce": None,
+            "exp": None,
+            "signed": False,
+        }
+    if version == "v2":
+        # v2:plan_id:state_hash:actor:ts:nonce:exp:sig
+        # timestamp may contain colons (ISO), so parse from the right
+        if len(parts) < 8:
+            raise ValueError("Invalid validation token")
+        sig = parts[-1]
+        exp_s = parts[-2]
+        nonce = parts[-3]
+        plan_id = parts[1]
+        state_hash = parts[2]
+        actor = parts[3]
+        ts = ":".join(parts[4:-3])
+        payload = f"{plan_id}:{state_hash}:{actor}:{ts}:{nonce}:{exp_s}"
+        if secret:
+            expected = hmac.new(
+                secret.encode("utf-8"), payload.encode("utf-8"), hashlib.sha256
+            ).hexdigest()
+            if not hmac.compare_digest(expected, sig):
+                raise ValueError("Invalid validation token signature")
+            if int(exp_s) < int(datetime.now(timezone.utc).timestamp()):
+                raise ValueError("Validation token expired")
+        return {
+            "version": version,
+            "plan_id": plan_id,
+            "state_hash": state_hash,
+            "actor": actor,
+            "timestamp": ts,
+            "nonce": nonce,
+            "exp": int(exp_s),
+            "signed": True,
+            "signature": sig,
+        }
+    raise ValueError("Invalid validation token")
+
+
+def verify_validation_token(
+    token: str,
+    *,
+    plan_id: str,
+    state_hash: str | None = None,
+    secret: str | None = None,
+) -> dict[str, Any]:
+    parsed = parse_validation_token(token, secret=secret)
+    if parsed["plan_id"] != plan_id:
+        raise ValueError("Token plan_id mismatch")
+    if state_hash is not None and parsed["state_hash"] != state_hash:
+        raise ValueError("Token state_hash mismatch")
+    return parsed

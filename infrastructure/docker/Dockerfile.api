@@ -17,12 +17,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY services/optimizer /app/services/optimizer
 COPY services/simulator /app/services/simulator
 COPY services/agent /app/services/agent
+COPY services/connectors /app/services/connectors
 COPY services/api /app/services/api
 
 RUN pip install --upgrade pip \
  && pip install -e /app/services/optimizer \
  && pip install -e /app/services/simulator \
  && pip install -e /app/services/agent \
+ && pip install -e /app/services/connectors \
  && pip install -r /app/services/api/requirements.txt \
  && pip install -e /app/services/api
 

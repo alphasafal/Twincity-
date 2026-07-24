@@ -10,8 +10,10 @@ function AuthBootstrap({ children }: { children: ReactNode }) {
   const accessToken = useAuthStore((s) => s.accessToken);
   const setUser = useAuthStore((s) => s.setUser);
   const setBuilding = useAuthStore((s) => s.setBuilding);
+  const setOrganization = useAuthStore((s) => s.setOrganization);
   const logout = useAuthStore((s) => s.logout);
   const building = useAuthStore((s) => s.building);
+  const organization = useAuthStore((s) => s.organization);
 
   useEffect(() => {
     if (!hydrated || !accessToken) return;
@@ -21,6 +23,8 @@ function AuthBootstrap({ children }: { children: ReactNode }) {
         const me = await api.me();
         if (cancelled) return;
         setUser(me);
+        const orgs = await api.listOrganizations();
+        if (!cancelled && orgs[0] && !organization) setOrganization(orgs[0]);
         if (!building) {
           const buildings = await api.listBuildings();
           if (!cancelled && buildings[0]) setBuilding(buildings[0]);
@@ -32,7 +36,16 @@ function AuthBootstrap({ children }: { children: ReactNode }) {
     return () => {
       cancelled = true;
     };
-  }, [hydrated, accessToken, setUser, setBuilding, logout, building]);
+  }, [
+    hydrated,
+    accessToken,
+    setUser,
+    setBuilding,
+    setOrganization,
+    logout,
+    building,
+    organization,
+  ]);
 
   return <>{children}</>;
 }

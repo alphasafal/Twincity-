@@ -143,7 +143,22 @@ Legend: ✅ done · ⚠️ partial / simulated · ❌ not in scope for this demo
 | Optional `make ollama` (llama3.2:1b pulled in env) | ✅ (falls back if JSON invalid) |
 | Playwright critical flows expanded | ✅ (local run; not required in CI) |
 
+## Phase 8 — Production platform (1C + 2C)
+
+| Criterion | Status | Notes |
+|-----------|--------|-------|
+| Multi-tenant orgs / memberships / invites | ✅ | `Organization`, `Membership`, `Invitation` |
+| Org-scoped building access + authenticated WS | ✅ | |
+| Stripe subscriptions + entitlements | ✅ | Mock checkout when Stripe unset |
+| Postgres + Redis production Compose profile | ✅ | `docker compose --profile production` |
+| API vs worker control-loop split | ✅ | `python -m app.worker` + Redis lease |
+| Connector framework + PointMapping | ✅ | `services/connectors` |
+| BACnet/IP + Modbus TCP read/write adapters | ✅ | Simulated transport + live probe |
+| Honeywell Niagara certified adapter | ✅ | Sandbox + live REST path |
+| HMAC validation tokens + write-ack | ✅ | `v2` tokens; FALLBACK on failure |
+| Onboarding wizard + M&V ROI + compliance docs | ✅ | Settings UI + `docs/COMPLIANCE.md` |
+
 ## Acceptance summary
 
-The repository meets the **demo acceptance bar**: end-to-end simulated autonomous optimization with verifiable safety gates, operator UIs, MCP, and optional EnergyPlus/Ollama. It does **not** meet a production BMS deployment bar.
+The repository meets the **demo acceptance bar** and ships a **production platform foundation**: multi-tenant SaaS, billing entitlements, vendor-agnostic connectors (BACnet/Modbus/Honeywell), HMAC safety tokens, write acknowledgements, and site certification gates. Live BMS certification per customer site remains an operational process (see `docs/HONEYWELL_CERTIFICATION.md`).
 

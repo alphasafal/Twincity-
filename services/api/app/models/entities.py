@@ -15,6 +15,7 @@ from sqlalchemy import (
     Integer,
     String,
     Text,
+    UniqueConstraint,
     func,
 )
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -25,6 +26,24 @@ from app.db.session import Base
 
 def _uuid() -> str:
     return str(uuid4())
+
+
+class Organization(Base):
+    __tablename__ = "organizations"
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=_uuid)
+    name: Mapped[str] = mapped_column(String(200))
+    slug: Mapped[str] = mapped_column(String(80), unique=True, index=True)
+    plan_code: Mapped[str] = mapped_column(String(64), default="starter", index=True)
+    stripe_customer_id: Mapped[str | None] = mapped_column(String(120), nullable=True, index=True)
+    is_demo: Mapped[bool] = mapped_column(Boolean, default=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+    memberships: Mapped[list[Membership]] = relationship(back_populates="organization")
+    buildings: Mapped[list[Building]] = relationship(back_populates="organization")
+    subscription: Mapped[Subscription | None] = relationship(
+        back_populates="organization", uselist=False
+    )
 
 
 class User(Base):
@@ -38,12 +57,183 @@ class User(Base):
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     last_login_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    default_organization_id: Mapped[str | None] = mapped_column(
+        ForeignKey("organizations.id"), nullable=True, index=True
+    )
+
+    memberships: Mapped[list[Membership]] = relationship(back_populates="user")
+
+
+class Membership(Base):
+    __tablename__ = "memberships"
+    __table_args__ = (UniqueConstraint("organization_id", "user_id", name="uq_membership_org_user"),)
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=_uuid)
+    organization_id: Mapped[str] = mapped_column(ForeignKey("organizations.id"), index=True)
+    user_id: Mapped[str] = mapped_column(ForeignKey("users.id"), index=True)
+    org_role: Mapped[str] = mapped_column(String(64), index=True)
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+    organization: Mapped[Organization] = relationship(back_populates="memberships")
+    user: Mapped[User] = relationship(back_populates="memberships")
+
+
+class Invitation(Base):
+    __tablename__ = "invitations"
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=_uuid)
+    organization_id: Mapped[str] = mapped_column(ForeignKey("organizations.id"), index=True)
+    email: Mapped[str] = mapped_column(String(255), index=True)
+    org_role: Mapped[str] = mapped_column(String(64))
+    token: Mapped[str] = mapped_column(String(64), unique=True, index=True)
+    invited_by_user_id: Mapped[str | None] = mapped_column(String(36), nullable=True)
+    status: Mapped[str] = mapped_column(String(32), default="PENDING", index=True)
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    accepted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+
+
+class Subscription(Base):
+    __tablename__ = "subscriptions"
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=_uuid)
+    organization_id: Mapped[str] = mapped_column(
+        ForeignKey("organizations.id"), unique=True, index=True
+    )
+    stripe_subscription_id: Mapped[str | None] = mapped_column(String(120), nullable=True, index=True)
+    plan_code: Mapped[str] = mapped_column(String(64), default="starter")
+    status: Mapped[str] = mapped_column(String(32), default="active", index=True)
+    current_period_end: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    entitlements_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
+    )
+
+    organization: Mapped[Organization] = relationship(back_populates="subscription")
+
+
+class EntitlementSnapshot(Base):
+    __tablename__ = "entitlement_snapshots"
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=_uuid)
+    organization_id: Mapped[str] = mapped_column(ForeignKey("organizations.id"), index=True)
+    plan_code: Mapped[str] = mapped_column(String(64))
+    entitlements_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    source: Mapped[str] = mapped_column(String(64), default="stripe_webhook")
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+
+class ConnectorProfile(Base):
+    __tablename__ = "connector_profiles"
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=_uuid)
+    organization_id: Mapped[str] = mapped_column(ForeignKey("organizations.id"), index=True)
+    building_id: Mapped[str | None] = mapped_column(String(36), nullable=True, index=True)
+    adapter_type: Mapped[str] = mapped_column(String(64), index=True)  # mock|bacnet_ip|modbus_tcp|honeywell_niagara
+    name: Mapped[str] = mapped_column(String(160))
+    config_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    # Encrypted/ref only — never store raw BMS passwords in plaintext in production
+    secret_ref: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    site_token_hash: Mapped[str | None] = mapped_column(String(128), nullable=True)
+    status: Mapped[str] = mapped_column(String(32), default="DISCONNECTED", index=True)
+    last_health_json: Mapped[dict[str, Any] | None] = mapped_column(JSON, nullable=True)
+    last_seen_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+
+class PointMapping(Base):
+    __tablename__ = "point_mappings"
+    __table_args__ = (
+        UniqueConstraint("building_id", "external_point_id", name="uq_point_building_external"),
+        Index("ix_point_mapping_building_metric", "building_id", "twinpilot_metric"),
+    )
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=_uuid)
+    building_id: Mapped[str] = mapped_column(ForeignKey("buildings.id"), index=True)
+    connector_profile_id: Mapped[str] = mapped_column(ForeignKey("connector_profiles.id"), index=True)
+    external_point_id: Mapped[str] = mapped_column(String(255))
+    external_point_name: Mapped[str] = mapped_column(String(255), default="")
+    zone_id: Mapped[str | None] = mapped_column(String(36), nullable=True, index=True)
+    twinpilot_metric: Mapped[str] = mapped_column(String(64))  # temperature|cooling_setpoint|power|...
+    direction: Mapped[str] = mapped_column(String(16), default="read")  # read|write|readwrite
+    unit: Mapped[str] = mapped_column(String(32), default="")
+    scale: Mapped[float] = mapped_column(Float, default=1.0)
+    offset: Mapped[float] = mapped_column(Float, default=0.0)
+    deadband: Mapped[float] = mapped_column(Float, default=0.1)
+    enabled: Mapped[bool] = mapped_column(Boolean, default=True)
+    meta_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+
+
+class SiteCertification(Base):
+    __tablename__ = "site_certifications"
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=_uuid)
+    building_id: Mapped[str] = mapped_column(ForeignKey("buildings.id"), unique=True, index=True)
+    checklist_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    shadow_mode_complete: Mapped[bool] = mapped_column(Boolean, default=False)
+    guarded_pilot_complete: Mapped[bool] = mapped_column(Boolean, default=False)
+    autonomy_approved: Mapped[bool] = mapped_column(Boolean, default=False)
+    certified_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    certified_by_user_id: Mapped[str | None] = mapped_column(String(36), nullable=True)
+    notes: Mapped[str | None] = mapped_column(Text, nullable=True)
+
+
+class ValidationNonce(Base):
+    __tablename__ = "validation_nonces"
+    __table_args__ = (UniqueConstraint("nonce", name="uq_validation_nonce"),)
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=_uuid)
+    nonce: Mapped[str] = mapped_column(String(64), index=True)
+    plan_id: Mapped[str] = mapped_column(String(36), index=True)
+    building_id: Mapped[str] = mapped_column(String(36), index=True)
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), index=True)
+    consumed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+
+class WriteAcknowledgement(Base):
+    __tablename__ = "write_acknowledgements"
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=_uuid)
+    building_id: Mapped[str] = mapped_column(String(36), index=True)
+    plan_id: Mapped[str | None] = mapped_column(String(36), nullable=True, index=True)
+    decision_id: Mapped[str | None] = mapped_column(String(36), nullable=True, index=True)
+    point_mapping_id: Mapped[str | None] = mapped_column(String(36), nullable=True)
+    requested_value: Mapped[float] = mapped_column(Float)
+    readback_value: Mapped[float | None] = mapped_column(Float, nullable=True)
+    success: Mapped[bool] = mapped_column(Boolean, default=False)
+    detail_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+
+class MvBaseline(Base):
+    """Measurement & Verification baseline for ROI reporting."""
+
+    __tablename__ = "mv_baselines"
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=_uuid)
+    building_id: Mapped[str] = mapped_column(ForeignKey("buildings.id"), index=True)
+    name: Mapped[str] = mapped_column(String(160), default="Default baseline")
+    start_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    end_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    baseline_energy_kwh: Mapped[float] = mapped_column(Float, default=0.0)
+    baseline_cost: Mapped[float] = mapped_column(Float, default=0.0)
+    baseline_carbon_kg: Mapped[float] = mapped_column(Float, default=0.0)
+    weather_normalized: Mapped[bool] = mapped_column(Boolean, default=True)
+    methodology: Mapped[str] = mapped_column(String(64), default="IPMVP_Option_C")
+    meta_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
 
 class Building(Base):
     __tablename__ = "buildings"
 
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=_uuid)
+    organization_id: Mapped[str | None] = mapped_column(
+        ForeignKey("organizations.id"), nullable=True, index=True
+    )
+    connector_profile_id: Mapped[str | None] = mapped_column(String(36), nullable=True, index=True)
     name: Mapped[str] = mapped_column(String(200))
     location: Mapped[str] = mapped_column(String(200))
     timezone: Mapped[str] = mapped_column(String(64), default="Asia/Kolkata")
@@ -51,10 +241,15 @@ class Building(Base):
     building_type: Mapped[str] = mapped_column(String(64), default="commercial_office")
     current_mode: Mapped[str] = mapped_column(String(32), default="AUTONOMOUS", index=True)
     is_demo: Mapped[bool] = mapped_column(Boolean, default=True)
+    shadow_mode: Mapped[bool] = mapped_column(Boolean, default=False)
+    site_certified: Mapped[bool] = mapped_column(Boolean, default=False)
+    write_enabled: Mapped[bool] = mapped_column(Boolean, default=False)
+    onboarding_stage: Mapped[str] = mapped_column(String(64), default="demo", index=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     confidence: Mapped[float] = mapped_column(Float, default=0.91)
     autonomy_confidence_json: Mapped[dict[str, Any] | None] = mapped_column(JSON, nullable=True)
 
+    organization: Mapped[Organization | None] = relationship(back_populates="buildings")
     zones: Mapped[list[Zone]] = relationship(back_populates="building")
 
 
@@ -184,7 +379,7 @@ class ControlPlan(Base):
     actions_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
     score_breakdown_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
     validation_json: Mapped[dict[str, Any] | None] = mapped_column(JSON, nullable=True)
-    validation_token: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    validation_token: Mapped[str | None] = mapped_column(Text, nullable=True)
     state_hash: Mapped[str | None] = mapped_column(String(64), nullable=True)
     expires_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
@@ -273,9 +468,13 @@ class Alert(Base):
 
 class AuditEvent(Base):
     __tablename__ = "audit_events"
-    __table_args__ = (Index("ix_audit_building_ts", "building_id", "timestamp"),)
+    __table_args__ = (
+        Index("ix_audit_building_ts", "building_id", "timestamp"),
+        Index("ix_audit_org_ts", "organization_id", "timestamp"),
+    )
 
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=_uuid)
+    organization_id: Mapped[str | None] = mapped_column(String(36), nullable=True, index=True)
     user_id: Mapped[str | None] = mapped_column(String(36), nullable=True)
     building_id: Mapped[str | None] = mapped_column(String(36), nullable=True, index=True)
     event_type: Mapped[str] = mapped_column(String(64), index=True)
@@ -286,6 +485,7 @@ class AuditEvent(Base):
     reason: Mapped[str | None] = mapped_column(Text, nullable=True)
     timestamp: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     request_id: Mapped[str | None] = mapped_column(String(64), nullable=True)
+    immutable: Mapped[bool] = mapped_column(Boolean, default=True)
 
 
 class AssistantConversation(Base):

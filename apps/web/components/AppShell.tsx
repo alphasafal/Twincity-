@@ -11,16 +11,20 @@ import {
   ChartLine,
   CircuitBoard,
   ClipboardList,
+  CreditCard,
   Gauge,
   LayoutDashboard,
   Map,
   Moon,
+  Plug,
+  Route,
   Settings,
   Shield,
   Sun,
   Target,
   Users,
 } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
 import { api } from "@/lib/api";
 import { useAuthStore } from "@/lib/auth-store";
 import { cn } from "@/lib/utils";
@@ -42,8 +46,14 @@ const NAV = [
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
-  const { hydrated, accessToken, user, building, logout } = useAuthStore();
+  const { hydrated, accessToken, user, building, organization, setBuilding, logout } =
+    useAuthStore();
   const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const buildingsQuery = useQuery({
+    queryKey: ["buildings"],
+    queryFn: () => api.listBuildings(),
+    enabled: Boolean(hydrated && accessToken),
+  });
 
   useEffect(() => {
     const saved = localStorage.getItem("twinpilot-theme") as "dark" | "light" | null;
@@ -89,10 +99,27 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-live">
                 TwinPilot
               </div>
-              <div className="mt-1 text-sm text-muted">
-                {building?.name || "No building"}
+              <div className="mt-1 text-xs text-muted">
+                {organization?.name || "Organization"}
               </div>
             </Link>
+            <label className="mt-3 block text-[10px] uppercase tracking-wider text-muted">
+              Building
+              <select
+                className="mt-1 w-full rounded-md border border-border bg-surface px-2 py-1.5 text-sm text-foreground"
+                value={building?.id || ""}
+                onChange={(e) => {
+                  const next = buildingsQuery.data?.find((b) => b.id === e.target.value);
+                  if (next) setBuilding(next);
+                }}
+              >
+                {(buildingsQuery.data || (building ? [building] : [])).map((b) => (
+                  <option key={b.id} value={b.id}>
+                    {b.name}
+                  </option>
+                ))}
+              </select>
+            </label>
           </div>
           <nav className="flex-1 space-y-0.5 overflow-y-auto px-2 py-3">
             {NAV.map((item) => {
@@ -220,6 +247,10 @@ export function SettingsSubnav() {
   const items = [
     { href: "/settings", label: "Overview", icon: Settings },
     { href: "/settings/building", label: "Building", icon: Building2 },
+    { href: "/settings/connectors", label: "Connectors", icon: Plug },
+    { href: "/settings/onboarding", label: "Onboarding", icon: Route },
+    { href: "/settings/billing", label: "Billing", icon: CreditCard },
+    { href: "/settings/organization", label: "Organization", icon: Users },
     { href: "/settings/constraints", label: "Constraints", icon: Shield },
     { href: "/settings/users", label: "Users", icon: Users },
   ];
