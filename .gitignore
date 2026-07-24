@@ -21,5 +21,6 @@ playwright-report
 test-results
 *.egg-info
 .python-version
+*.tsbuildinfo
 apps/mobile/.expo
 apps/web/.next
