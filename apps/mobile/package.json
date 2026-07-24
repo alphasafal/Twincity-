@@ -1,0 +1,42 @@
+{
+  "name": "@twinpilot/mobile",
+  "version": "0.1.0",
+  "private": true,
+  "main": "expo-router/entry",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "lint": "expo lint",
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types --test src/lib/login-schema.test.ts"
+  },
+  "dependencies": {
+    "@expo/vector-icons": "^14.0.4",
+    "@hookform/resolvers": "^5.0.1",
+    "@react-native-community/netinfo": "11.4.1",
+    "@tanstack/react-query": "^5.74.4",
+    "expo": "~52.0.46",
+    "expo-constants": "~17.0.8",
+    "expo-linking": "~7.0.5",
+    "expo-notifications": "~0.29.14",
+    "expo-router": "~4.0.20",
+    "expo-secure-store": "~14.0.1",
+    "expo-status-bar": "~2.0.1",
+    "expo-system-ui": "~4.0.9",
+    "react": "18.3.1",
+    "react-hook-form": "^7.56.1",
+    "react-native": "0.76.9",
+    "react-native-gifted-charts": "^1.4.58",
+    "react-native-safe-area-context": "4.12.0",
+    "react-native-screens": "~4.4.0",
+    "react-native-svg": "15.8.0",
+    "zod": "^3.24.3",
+    "zustand": "^5.0.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.26.0",
+    "@types/react": "~18.3.12",
+    "typescript": "^5.8.3"
+  }
+}
