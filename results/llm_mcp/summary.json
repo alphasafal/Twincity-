@@ -1,0 +1,24 @@
+{
+  "path": "EnergyPlus \u2192 MCP tool/resource \u2192 LLM structured proposal \u2192 SafetyShield \u2192 EnergyPlus actuator",
+  "baseline": {
+    "total_energy_kwh": 421.5057,
+    "status": "completed"
+  },
+  "agent": {
+    "total_energy_kwh": 396.2547,
+    "status": "completed",
+    "action_counts": {
+      "approved": 16,
+      "rejected": 32,
+      "fallback": 0,
+      "total_decisions": 48
+    },
+    "controller": "llm_mcp+safety_shield"
+  },
+  "llm_bypass_possible": false,
+  "stage_log": "/workspace/results/llm_mcp/stage_log.jsonl",
+  "notes": [
+    "If Ollama is down, deterministic_fallback is used and logged.",
+    "Unsafe 35C proposal is always rejected by SafetyShield."
+  ]
+}

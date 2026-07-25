@@ -9,11 +9,11 @@
 
 | Surface | Real? | Notes |
 |---------|-------|-------|
-| Live zone temperatures / power (default demo) | **Mock twin** | `MockBuildingSimulator` dynamics |
-| Energy saved % on status cards (default demo) | **Synthetic derived** | `baseline_power = power * 1.12` heuristic — labeled |
-| Measured EnergyPlus baseline vs agent | **Real** | Not plotted live; use `results/comparison/` |
+| Hackathon default (`DATA_MODE=energyplus`) KPIs | **Real experiment JSON** | `results/{baseline,agent,comparison}` via `experiment_store` |
+| Mock mode (`DATA_MODE=mock`) live load | **Mock twin** | No invented savings (×1.12 **removed**) |
+| Live demo stream | **Real E+ interval frames** | `results/agent/stream.json` → `/live-demo` |
 | Alerts / decisions / audit | **Real DB rows** | SQLite/Postgres via API |
-| Comfort compliance | **Derived from mock zone status** | Or EnergyPlus violation hours in experiment JSON |
+| Carbon | **Derived estimate** | Documented factor — see `docs/carbon.md` |
 
 ---
 

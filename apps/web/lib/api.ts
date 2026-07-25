@@ -297,6 +297,26 @@ export const api = {
       `/api/v1/buildings/${buildingId}/analytics/export`,
     );
   },
+  experimentComparison(scenario = "default") {
+    return apiFetch<Record<string, unknown>>(
+      `/api/v1/experiments/comparison?scenario=${encodeURIComponent(scenario)}`,
+    );
+  },
+  experimentStream(scenario = "default", limit = 500) {
+    return apiFetch<{ frames: Array<Record<string, unknown>>; frame_count: number }>(
+      `/api/v1/experiments/stream?scenario=${encodeURIComponent(scenario)}&limit=${limit}`,
+    );
+  },
+  safetyDemo() {
+    return apiFetch<Record<string, unknown>>("/api/v1/experiments/safety-demo", {
+      method: "POST",
+    });
+  },
+  llmFallbackDemo() {
+    return apiFetch<Record<string, unknown>>("/api/v1/experiments/llm-fallback-demo", {
+      method: "POST",
+    });
+  },
   ledger(buildingId: string) {
     return apiFetch<LedgerEntry[]>(`/api/v1/buildings/${buildingId}/ledger`);
   },

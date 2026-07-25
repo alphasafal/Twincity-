@@ -1,115 +1,92 @@
 # Final Hackathon Readiness Report — Eco-Loop / TwinPilot
 
-**Date:** 2026-07-25  
-**Branch:** `cursor/ecolooop-energyplus-audit-b6b3`  
-**Evaluator role:** Principal SE / EnergyPlus specialist / safety reviewer
+**Date:** 2026-07-25 (final hardening pass)  
+**Branch:** `cursor/ecolooop-energyplus-audit-b6b3`
 
 ---
 
 ## Executive summary
 
-The repository now has a **proven EnergyPlus closed loop** for baseline vs agent experiments (Runtime API observations → agent → safety → `Clg-SetP-Sch` actuator → meters → comparison JSON). The interactive TwinPilot product remaining on `SIMULATOR_PROVIDER=mock` is a working operator demo and is **explicitly labeled** as mock. EnergyPlus mode no longer silently falls back to mock.
+The hackathon default dashboard now serves **real EnergyPlus experiment artifacts** (`DATA_MODE=energyplus`). Synthetic ×1.12 savings are **removed**. Comfort violations are **0 hours / 0 degree-hours** with measured HVAC reduction **~5%**. An **LLM-via-MCP** closed-loop path is proven with stage logs; SafetyShield rejects unsafe LLM outputs. Safety rejection and LLM-fallback demos are available without contaminating efficiency results.
 
-**Final readiness score: 78 / 100**
+**Final readiness score: 90 / 100**
+
+---
+
+## Gate checklist
+
+| Gate | Status |
+|------|--------|
+| Default hackathon dashboard shows real experiment data | **PASS** (`DATA_MODE=energyplus`) |
+| Synthetic multipliers removed | **PASS** |
+| LLM/MCP path proven or marked incomplete | **PASS (proven)** — `results/llm_mcp/stage_log.jsonl` |
+| Safety rejection + fallback demonstrated | **PASS** — API demos + `submission-evidence/*` |
+| Comfort severity quantified | **PASS** — 0 h / 0 degree-hours after tune; prior event documented |
+| Claims from reproducible outputs | **PASS** — `results/*`, `submission-evidence/` |
 
 ---
 
 ## What genuinely works
 
-| Capability | Evidence |
-|------------|----------|
-| EnergyPlus 24.1 install + IDF/EPW | `third_party/EnergyPlus`, `building-models/` |
-| Baseline experiment | `./scripts/run_baseline.sh` → `results/baseline/summary.json` |
-| Agent closed loop + actuator injection | `./scripts/run_agent.sh` → `results/agent/actions.json` |
-| Measured comparison | `results/comparison/comparison.json` |
-| Safety Shield rejects unsafe / failed paths | optimizer + failure-mode tests |
-| Mock operator demo (web/API/MCP) | `make demo` / `make replay` |
-| Strict EnergyPlus adapter (no silent mock) | `EnergyPlusUnavailableError` unless fallback opt-in |
+1. EnergyPlus Runtime closed loop (baseline + agent)  
+2. Dashboard `DATA_MODE=energyplus` KPIs from `results/{baseline,agent,comparison}`  
+3. Visible data-source banner (`DATA_MODE=…`)  
+4. Comfort-zero agent with HVAC energy reduction  
+5. Live demo stream page (`/live-demo`) from `stream.json`  
+6. LLM → MCP observation payload → SafetyShield → actuator (Ollama)  
+7. Multi-scenario consolidated comparison  
+8. Submission evidence pack  
 
-## What remains mocked / derived
+## What remains limited
 
-| Item | Status |
-|------|--------|
-| Default API/dashboard twin | Mock simulator |
-| Dashboard “energy saved %” | Synthetic factor 1.12 when simulated (labeled) |
-| Carbon | Derived estimate (0.417 kg/kWh) |
-| Interactive plan simulation under EnergyPlus provider | Anchored to last experiment (documented) |
-| BMS / BACnet | Absent |
-| MCP forecasts | May be synthesized |
+| Item | Note |
+|------|------|
+| Interactive 5s UI control loop | Still mock twin dynamics unless `SIMULATOR_PROVIDER=energyplus` |
+| Carbon | Estimate (0.417 kg/kWh) — documented |
+| Tiny LLM quality | Many proposals rejected by SafetyShield (expected) |
+| BMS / BACnet | Not present |
 
-## P0 critical issues
+## Measured default results
 
-| ID | Issue | Status |
-|----|-------|--------|
-| P0-1 | EnergyPlus adapter was mock-only | **Fixed** (`ep_experiment` + strict adapter) |
-| P0-2 | No IDF/EPW | **Fixed** |
-| P0-3 | No setpoint injection into EnergyPlus | **Fixed** (schedule actuator) |
-| P0-4 | Silent mock fallback | **Fixed** (strict; opt-in only) |
-| P0-5 | Hardcoded dashboard `simulated: true` | **Fixed** (state-driven + labels) |
-
-## P1 important issues
-
-| ID | Issue | Status |
-|----|-------|--------|
-| P1-1 | Live UI not driven by EnergyPlus timestep loop | Open (by design; harness is proof) |
-| P1-2 | Comfort +1h violation under agent | Open (honest tradeoff; tune further) |
-| P1-3 | Compose image does not bundle EnergyPlus | Open (scripted install) |
-
-## P2 improvements
-
-- Wire experiment summary into analytics API for one-click dashboard evidence
-- Full EMS per-zone actuators instead of shared cooling schedule
-- Stronger Fanger/ASHRAE comfort metrics from EnergyPlus outputs
-- Alembic migrations
-
-## Closed-loop verification status
-
-**PASS (experiment harness).** See `docs/audit/closed-loop-trace.md`.
-
-## Baseline / agent / safety / dashboard / reproducibility
-
-| Gate | Status |
-|------|--------|
-| Baseline run | PASS (`simulation_status=completed`) |
-| Agent run | PASS (48 approved actions) |
-| Safety tests | PASS (expanded failure modes) |
-| Dashboard integrity | PASS with labels (mock KPIs not claimed as E+) |
-| Reproducibility | PASS via `./scripts/setup.sh` + EnergyPlus scripts |
-
-## Actual measured results
-
-| Metric | Baseline | Agent | % Δ |
-|--------|----------|-------|-----|
-| Total energy kWh | 421.5057 | 406.2102 | −3.63% |
-| HVAC energy kWh | 13.8459 | 12.1566 | −12.20% |
-| Peak power kW | 19.9325 | 19.4989 | −2.18% |
-| Carbon estimate kg | 175.7679 | 169.3897 | −3.63% |
-| Occupied comfort violation hours | 0 | 1 | — |
-
-## Exact demo commands
-
-```bash
-./scripts/setup.sh
-./scripts/setup_energyplus.sh
-./scripts/run_baseline.sh && ./scripts/run_agent.sh && ./scripts/compare_results.sh
-./scripts/run_demo.sh   # optional UI (mock twin)
-```
+| Metric | Baseline | Agent | Reduction |
+|--------|----------|-------|-----------|
+| Total energy | 421.51 kWh | 416.00 kWh | **1.31%** |
+| HVAC energy | 13.85 kWh | 13.16 kWh | **4.98%** |
+| Peak power | 19.93 kW | 19.64 kW | **1.47%** |
+| Comfort violation hours | 0 | **0** | — |
+| Actions | — | 48 / 0 / 0 | approved/rejected/fallback |
 
 ## Scoring
 
 | Category | Max | Score | Notes |
 |----------|-----|-------|-------|
-| System integration | 30 | **24** | Real E+ loop proven; UI still mock-default |
-| Energy efficiency evidence | 25 | **22** | Measured −3.6% / −12% HVAC; not invented |
-| Thermal comfort & constraints | 20 | **15** | Constraints enforced; +1h violation reported |
-| Agentic autonomy & engineering quality | 15 | **11** | Deterministic agent + shield; LLM optional |
-| Presentation & documentation | 10 | **6** | Audit docs + README; polish deferred |
-| **Total** | **100** | **78** | |
+| System integration | 30 | **28** | Real E+ + dashboard binding + stream |
+| Energy efficiency evidence | 25 | **22** | Measured; comfort-zero trade reduced % vs earlier 12% HVAC |
+| Thermal comfort & constraints | 20 | **19** | 0 violations + degree-hours + prior event analysis |
+| Agentic autonomy & engineering | 15 | **13** | LLM-MCP proven; shield rejects unsafe |
+| Presentation & documentation | 10 | **8** | Evidence pack + docs |
+| **Total** | **100** | **90** | |
+
+## Exact demo commands
+
+```bash
+./scripts/setup.sh && ./scripts/setup_energyplus.sh
+./scripts/run_baseline.sh && ./scripts/run_agent.sh && ./scripts/compare_results.sh
+./scripts/run_llm_mcp_experiment.sh
+./scripts/run_scenarios.sh
+python scripts/build_submission_evidence.py
+# Dashboard (DATA_MODE=energyplus in .env):
+./scripts/run_demo.sh
+# Open http://localhost:3000/dashboard and /live-demo
+```
+
+Safety demos (API, non-contaminating):
+
+```text
+POST /api/v1/experiments/safety-demo
+POST /api/v1/experiments/llm-fallback-demo
+```
 
 ## Known limitations
 
-See `docs/limitations.md`.
-
-## Verdict
-
-**Ready to demonstrate** a real EnergyPlus baseline-vs-agent closed loop with safety gating and reproducible artifacts. **Not ready** to claim that the live web dashboard itself is EnergyPlus-driven end-to-end without the experiment scripts.
+See `docs/limitations.md` and `docs/carbon.md`.

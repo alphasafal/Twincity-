@@ -115,7 +115,7 @@ export interface BuildingStatus {
   confidence: ConfidenceBreakdown | number | null;
   live_total_load_kw?: number | null;
   energy_saved_today_pct?: number;
-  cost_saved_today?: number;
+  cost_saved_today?: number | null;
   carbon_avoided_today_kg?: number;
   peak_demand_reduction_pct?: number;
   comfort_compliance_pct?: number;
@@ -127,6 +127,11 @@ export interface BuildingStatus {
   kpi_history?: KpiHistoryPoint[];
   simulated?: boolean;
   active_scenario?: string | null;
+  data_mode?: "energyplus" | "mock" | string;
+  data_label?: string;
+  data_source_visible?: string;
+  synthetic_multiplier_applied?: boolean;
+  experiment?: Record<string, unknown> | null;
 }
 
 export interface ControlPlan {

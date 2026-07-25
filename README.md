@@ -98,20 +98,21 @@ Full walkthrough: [docs/demo-script.md](docs/demo-script.md)
 
 ## Actual measured results
 
-From a successful local run (`results/comparison/comparison.json`):
+Default hackathon dashboard uses `DATA_MODE=energyplus` and reads `results/*` (no ×1.12).
 
-| Metric | Baseline | Agent | % Δ |
-|--------|----------|-------|-----|
-| Total energy (kWh) | 421.51 | 406.21 | **−3.63%** |
-| HVAC energy (kWh) | 13.85 | 12.16 | **−12.20%** |
-| Peak power (kW) | 19.93 | 19.50 | **−2.18%** |
-| Carbon estimate (kg) | 175.77 | 169.39 | −3.63% |
-| Occupied comfort violation hours | 0 | 1 | — |
+From `results/comparison/comparison.json` (comfort-zero tuned controller):
 
-Carbon uses a documented factor (0.417 kg/kWh), not live grid intensity.  
-Do **not** quote the mock dashboard “energy saved %” as EnergyPlus evidence.
+| Metric | Baseline | Agent | Reduction |
+|--------|----------|-------|-----------|
+| Total energy (kWh) | 421.51 | 416.00 | **1.31%** |
+| HVAC energy (kWh) | 13.85 | 13.16 | **4.98%** |
+| Peak power (kW) | 19.93 | 19.64 | **1.47%** |
+| Occupied comfort violation hours | 0 | **0** | — |
+| Comfort degree-hours | 0 | **0** | — |
+| Actions (approved / rejected / fallback) | — | **48 / 0 / 0** | — |
 
-See [docs/results.md](docs/results.md).
+Carbon is an **estimate** (kWh × 0.417) — see [docs/carbon.md](docs/carbon.md).  
+Full methodology and multi-scenario / LLM-MCP results: [docs/results.md](docs/results.md).
 
 ## Safety design
 

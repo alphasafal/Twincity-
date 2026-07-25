@@ -24,6 +24,12 @@ class Settings(BaseSettings):
     telemetry_ingest_token: str = "demo-telemetry-token"
     agent_provider: str = "deterministic"
     simulator_provider: str = "mock"
+    # Hackathon default: show real EnergyPlus experiment artifacts on the dashboard.
+    # mock = legacy synthetic twin KPIs (never selected silently in hackathon .env).
+    data_mode: str = "energyplus"
+    hackathon_mode: bool = True
+    results_dir: str | None = None
+    experiment_scenario: str = "default"
     control_loop_enabled: bool = True
     control_interval_seconds: int = 5
     default_building_timezone: str = "Asia/Kolkata"

@@ -56,10 +56,13 @@ class SafetyLimits:
     max_cooling_setpoint: float = 28.0
     min_heating_setpoint: float = 16.0
     max_heating_setpoint: float = 24.0
-    max_setpoint_change_per_interval: float = 1.5
+    max_setpoint_change_per_interval: float = 1.0
     heating_cooling_deadband_c: float = 1.5
     comfort_occupied_min_c: float = 21.0
     comfort_occupied_max_c: float = 26.0
+    comfort_warning_c: float = 25.3
+    max_occupied_cooling_setpoint: float = 24.8
+    max_unoccupied_cooling_setpoint: float = 25.8
     max_sensor_temperature_c: float = 50.0
     min_sensor_temperature_c: float = 0.0
     max_data_age_seconds: float = 900.0
@@ -75,7 +78,11 @@ class ExperimentConfig:
     manual_override: bool = False
     force_llm_timeout: bool = False
     force_mcp_failure: bool = False
-    agent_provider: str = "deterministic"
+    agent_provider: str = "deterministic"  # deterministic | llm_mcp
+    scenario: str = "default"
+    inject_unsafe_proposal: bool = False  # safety demo only — not for efficiency runs
+    record_stream: bool = True
+    proposal_fn: Any | None = None  # optional external proposer (LLM/MCP)
 
 
 def resolve_paths_from_env(output_dir: Path | str) -> ExperimentPaths:
@@ -161,8 +168,12 @@ def propose_agent_cooling_setpoint(
     occupancy: dict[str, float],
     current_cooling_setpoint: float,
     limits: SafetyLimits,
+    hour: int | None = None,
 ) -> tuple[float, str, float]:
     """Deterministic Eco-Loop agent proposal (no direct actuation).
+
+    Comfort-first policy with warning threshold, pre-emptive recovery,
+    occupied-zone priority, rate limit, and morning pre-cooling.
 
     Returns (proposed_setpoint, reason, confidence).
     """
@@ -177,27 +188,53 @@ def propose_agent_cooling_setpoint(
         return current_cooling_setpoint, "impossible_temperature", 0.0
 
     avg_temp = sum(zone_temps.values()) / len(zone_temps)
+    max_temp = max(zone_temps.values())
+    hottest_zone = max(zone_temps.items(), key=lambda kv: kv[1])[0]
     total_occ = sum(max(0.0, o) for o in occupancy.values())
     occupied = total_occ > 0.05
+    office_hours = hour is not None and 6 <= hour < 20
+    # Comfort protection uses office-hours; energy setbacks use measured occupancy.
+    comfort_guard = occupied or office_hours
 
-    # Comfort-first: never setback occupied spaces that are already near the
-    # upper comfort bound. Prefer unoccupied / mild-condition savings.
-    if occupied and avg_temp >= (limits.comfort_occupied_max_c - 0.7):
-        target = max(limits.min_cooling_setpoint, min(current_cooling_setpoint, 23.9))
-        reason = "occupied_comfort_protect"
-        confidence = 0.93
-    elif occupied and avg_temp <= 23.2 and outdoor_c < 27.0:
-        target = min(limits.max_cooling_setpoint, current_cooling_setpoint + 0.5)
+    # Respect heating/cooling deadband in proposals (heating schedule ~22.2 °C).
+    min_cool_vs_heat = 22.2 + limits.heating_cooling_deadband_c  # 23.7
+
+    # Pre-cooling just before busy morning to avoid 10:00 overshoot seen previously.
+    if hour is not None and hour in {8, 9} and outdoor_c >= 24.0 and max_temp >= 24.5:
+        target = max(min_cool_vs_heat, 23.9)
+        reason = "pre_cooling_morning"
+        confidence = 0.92
+    # Pre-emptive recovery when approaching comfort warning
+    elif comfort_guard and max_temp >= limits.comfort_warning_c:
+        target = max(min_cool_vs_heat, 23.9)
+        reason = f"preemptive_recovery_{hottest_zone}"
+        confidence = 0.95
+    # Occupied-zone priority when warming under load
+    elif comfort_guard and max_temp >= 25.0:
+        target = max(min_cool_vs_heat, 23.9)
+        reason = "occupied_zone_priority"
+        confidence = 0.94
+    elif comfort_guard and avg_temp <= 23.5 and outdoor_c < 28.0 and max_temp < 25.0:
+        # Daytime mild setback — primary HVAC saver vs fixed 23.9 °C occupied schedule
+        target = min(25.0, max(current_cooling_setpoint, 24.4))
         reason = "occupied_mild_setback"
         confidence = 0.9
-    elif not occupied:
-        target = min(limits.max_cooling_setpoint, max(current_cooling_setpoint, 26.0))
+    elif not comfort_guard:
+        # Night/vacant: step toward high setback (rate-limited below)
+        target = min(limits.max_cooling_setpoint, current_cooling_setpoint + 1.0)
+        if target < 27.0:
+            target = min(limits.max_cooling_setpoint, max(target, current_cooling_setpoint + 1.0))
         reason = "unoccupied_setback"
         confidence = 0.88
     else:
-        target = current_cooling_setpoint
-        reason = "hold"
-        confidence = 0.8
+        target = 24.2
+        reason = "hold_occupied_cap"
+        confidence = 0.82
+
+    if comfort_guard:
+        # Hard cap during occupied/office hours to protect comfort band
+        target = min(target, 25.0)
+    target = max(target, min_cool_vs_heat)
 
     # Clamp proposal step to max change (agent-side pre-clip; SafetyShield rechecks).
     delta = target - current_cooling_setpoint
@@ -340,21 +377,16 @@ def _parse_results_from_csv(
                     except ValueError:
                         pass
 
-    # Occupied comfort violations: hours where any zone temp outside band
-    # while OCCUPY schedule would typically be >0 on weekdays 6-20.
-    # We use agent action log occupancy samples when available; else hour heuristic.
+    # Occupied comfort violations + degree-hours (office-hours proxy 06:00–20:00).
     violation_hours = 0.0
+    degree_hours = 0.0
     hourly_occ_proxy = 0
+    violation_events: list[dict[str, Any]] = []
     if csv_path.is_file():
         with csv_path.open(newline="") as f:
             reader = csv.DictReader(f)
             for row in reader:
-                # Date/Time column varies; EnergyPlus CSV uses "Date/Time"
                 dt = row.get("Date/Time") or row.get("Date/Time ") or ""
-                occupied = False
-                # Prefer logged occupancy if matching; else weekday office hours heuristic
-                # Sample from actions_log by hour string if present
-                occupied = False
                 hour = None
                 try:
                     part = (dt or "").strip().split()[-1]
@@ -362,23 +394,48 @@ def _parse_results_from_csv(
                 except Exception:
                     hour = None
                 occupied = hour is not None and 6 <= hour < 20
-                if occupied:
-                    hourly_occ_proxy += 1
-                    for z in ZONES:
-                        key = f"{z}:Zone Air Temperature [C](Hourly)"
-                        raw = row.get(key)
-                        if raw in ("", None):
-                            continue
-                        try:
-                            t = float(raw)
-                        except (TypeError, ValueError):
-                            continue
-                        if (
-                            t < limits.comfort_occupied_min_c
-                            or t > limits.comfort_occupied_max_c
-                        ):
-                            violation_hours += 1.0
-                            break
+                if not occupied:
+                    continue
+                hourly_occ_proxy += 1
+                hour_violated = False
+                worst: dict[str, Any] | None = None
+                for z in ZONES:
+                    key = f"{z}:Zone Air Temperature [C](Hourly)"
+                    raw = row.get(key)
+                    if raw in ("", None):
+                        continue
+                    try:
+                        t = float(raw)
+                    except (TypeError, ValueError):
+                        continue
+                    low = limits.comfort_occupied_min_c
+                    high = limits.comfort_occupied_max_c
+                    if t < low or t > high:
+                        hour_violated = True
+                        if t > high:
+                            dev = t - high
+                            bound = "max"
+                        else:
+                            dev = low - t
+                            bound = "min"
+                        degree_hours += dev
+                        cand = {
+                            "timestamp": (dt or "").strip(),
+                            "zone": z,
+                            "occupancy_proxy": "office_hours_06_20",
+                            "boundary": bound,
+                            "boundary_c": high if bound == "max" else low,
+                            "actual_temperature_c": round(t, 4),
+                            "maximum_deviation_c": round(dev, 4),
+                            "duration_hours": 1.0,
+                            "degree_hours": round(dev, 4),
+                        }
+                        if worst is None or cand["maximum_deviation_c"] > worst["maximum_deviation_c"]:
+                            worst = cand
+                if hour_violated:
+                    violation_hours += 1.0
+                    if worst:
+                        violation_events.append(worst)
 
     total_kwh = (facility_j or 0.0) * J_TO_KWH
     hvac_kwh = (hvac_j or 0.0) * J_TO_KWH
@@ -396,6 +453,20 @@ def _parse_results_from_csv(
         for z, vals in temps.items()
     }
 
+    comfort_analysis = {
+        "occupied_comfort_violation_hours": violation_hours,
+        "occupied_comfort_degree_hours": round(degree_hours, 4),
+        "comfort_band_c": {
+            "min": limits.comfort_occupied_min_c,
+            "max": limits.comfort_occupied_max_c,
+            "warning": limits.comfort_warning_c,
+        },
+        "events": violation_events,
+        "severity_note": (
+            "degree-hours = sum of |T - band| over occupied hours with violations"
+        ),
+    }
+
     return {
         "total_energy_kwh": round(total_kwh, 4),
         "hvac_energy_kwh": round(hvac_kwh, 4),
@@ -408,7 +479,9 @@ def _parse_results_from_csv(
         "carbon_note": "estimate = total_energy_kwh * documented factor; not live grid intensity",
         "zone_temperatures": zone_summary,
         "occupied_comfort_violation_hours": violation_hours,
+        "occupied_comfort_degree_hours": round(degree_hours, 4),
         "occupied_hour_samples_proxy": hourly_occ_proxy,
+        "comfort_analysis": comfort_analysis,
         "agent_actions": approved,
         "rejected_actions": rejected,
         "fallback_actions": fallback,
@@ -444,12 +517,15 @@ def run_experiment(config: ExperimentConfig) -> dict[str, Any]:
     handles: dict[str, int] = {}
     actions_log: list[dict[str, Any]] = []
     observations: list[dict[str, Any]] = []
+    stream_frames: list[dict[str, Any]] = []
     current_cooling = 23.9  # IDF weekday occupied default
     current_heating = 22.2
     last_decision_minute_key: str | None = None
+    unsafe_injected = False
     started = time.time()
     status = "running"
     error_message: str | None = None
+    controller_mode = config.agent_provider if config.mode == "agent" else "none"
 
     def _ensure_handles(state_arg: Any) -> bool:
         if handles.get("ready"):
@@ -528,9 +604,8 @@ def run_experiment(config: ExperimentConfig) -> dict[str, Any]:
                 sensors_healthy = sensors_healthy and False
 
         missing_occ = any(not _finite(v) for v in occupancy.values())
-        if missing_occ:
-            # Occupancy missing → treat as unhealthy for agent decisions
-            sensors_healthy = False
+        # Temperature is required; occupancy may fall back to office-hours proxy.
+        temp_ok = sensors_healthy and bool(zone_temps)
 
         obs = {
             "sim_time": minute_key,
@@ -545,6 +620,24 @@ def run_experiment(config: ExperimentConfig) -> dict[str, Any]:
             observations.append(obs)
 
         if config.mode != "agent":
+            if config.record_stream and int(minute) in (0, 60) and len(stream_frames) < 2000:
+                stream_frames.append(
+                    {
+                        "timestamp": minute_key,
+                        "zone_temperatures_c": zone_temps,
+                        "occupancy": {
+                            k: (None if not _finite(v) else v) for k, v in occupancy.items()
+                        },
+                        "weather_outdoor_c": outdoor,
+                        "energy_power_kw": None,
+                        "current_setpoint_c": current_cooling,
+                        "proposed_setpoint_c": None,
+                        "controller_mode": "baseline_fixed_schedule",
+                        "safety_shield_result": "n/a",
+                        "executed_action": "none",
+                        "next_simulation_state": "energyplus_advances",
+                    }
+                )
             return
 
         # Control once per control interval (default: once per hour).
@@ -563,14 +656,35 @@ def run_experiment(config: ExperimentConfig) -> dict[str, Any]:
         mcp_failed = config.force_mcp_failure
         data_age = 0.0  # live within the simulation callback
         previous = current_cooling
+        proposal_source = controller_mode
 
-        proposed, reason, confidence = propose_agent_cooling_setpoint(
-            outdoor_c=float(outdoor),
-            zone_temps=zone_temps,
-            occupancy={k: (0.0 if not _finite(v) else v) for k, v in occupancy.items()},
-            current_cooling_setpoint=current_cooling,
-            limits=config.limits,
-        )
+        occ_clean = {k: (0.0 if not _finite(v) else v) for k, v in occupancy.items()}
+        if config.proposal_fn is not None:
+            proposed, reason, confidence, proposal_source = config.proposal_fn(
+                outdoor_c=float(outdoor),
+                zone_temps=zone_temps,
+                occupancy=occ_clean,
+                current_cooling_setpoint=current_cooling,
+                limits=config.limits,
+                hour=int(hour),
+            )
+        else:
+            proposed, reason, confidence = propose_agent_cooling_setpoint(
+                outdoor_c=float(outdoor),
+                zone_temps=zone_temps,
+                occupancy=occ_clean,
+                current_cooling_setpoint=current_cooling,
+                limits=config.limits,
+                hour=int(hour),
+            )
+
+        # Optional one-shot unsafe proposal for safety demonstration runs only.
+        if config.inject_unsafe_proposal and not unsafe_injected:
+            proposed = 35.0
+            reason = "intentional_unsafe_demo_proposal"
+            confidence = 0.99
+            unsafe_injected = True
+            proposal_source = "safety_demo"
 
         approved, blocking, disposition = validate_setpoint_action(
             proposed=proposed,
@@ -578,7 +692,7 @@ def run_experiment(config: ExperimentConfig) -> dict[str, Any]:
             heating_setpoint=current_heating,
             limits=config.limits,
             confidence=confidence,
-            sensors_healthy=sensors_healthy and not missing_occ and bool(zone_temps),
+            sensors_healthy=temp_ok,
             data_age_seconds=data_age,
             manual_override=config.manual_override,
             llm_timed_out=llm_timed_out,
@@ -590,36 +704,65 @@ def run_experiment(config: ExperimentConfig) -> dict[str, Any]:
             current_cooling = proposed
             applied_value = proposed
             energyplus_accepted = True
+            executed = f"set_clg_setpoint={proposed}"
         else:
             # Hold last safe value explicitly (fallback / reject)
             api.exchange.set_actuator_value(state_arg, handles["clg"], current_cooling)
             applied_value = current_cooling
             energyplus_accepted = False
+            executed = f"hold_safe_setpoint={current_cooling}"
 
-        actions_log.append(
-            {
-                "sim_time": minute_key,
-                "proposal_reason": reason,
-                "proposed_cooling_setpoint_c": proposed,
-                "previous_cooling_setpoint_c": previous,
-                "applied_cooling_setpoint_c": applied_value,
-                "disposition": disposition,
-                "blocking_reasons": blocking,
-                "confidence": confidence,
-                "energyplus_actuator_written": True,
-                "energyplus_action_accepted": energyplus_accepted,
-                "observation": {
-                    "outdoor_c": outdoor,
-                    "avg_zone_temp_c": sum(zone_temps.values()) / len(zone_temps)
-                    if zone_temps
-                    else None,
-                    "total_occupancy": sum(
-                        0.0 if not _finite(v) else v for v in occupancy.values()
-                    ),
-                },
-                "safety": "SafetyShield-equivalent deterministic gate in ep_experiment",
-            }
-        )
+        action_record = {
+            "sim_time": minute_key,
+            "proposal_reason": reason,
+            "proposal_source": proposal_source,
+            "proposed_cooling_setpoint_c": proposed,
+            "previous_cooling_setpoint_c": previous,
+            "applied_cooling_setpoint_c": applied_value,
+            "disposition": disposition,
+            "blocking_reasons": blocking,
+            "confidence": confidence,
+            "controller_mode": controller_mode,
+            "energyplus_actuator_written": True,
+            "energyplus_action_accepted": energyplus_accepted,
+            "observation": {
+                "outdoor_c": outdoor,
+                "avg_zone_temp_c": sum(zone_temps.values()) / len(zone_temps)
+                if zone_temps
+                else None,
+                "max_zone_temp_c": max(zone_temps.values()) if zone_temps else None,
+                "total_occupancy": sum(occ_clean.values()),
+                "missing_occupancy": missing_occ,
+            },
+            "safety": "SafetyShield-equivalent deterministic gate in ep_experiment",
+        }
+        actions_log.append(action_record)
+
+        if config.record_stream and len(stream_frames) < 2000:
+            stream_frames.append(
+                {
+                    "timestamp": minute_key,
+                    "zone_temperatures_c": zone_temps,
+                    "occupancy": {
+                        k: (None if not _finite(v) else v) for k, v in occupancy.items()
+                    },
+                    "weather_outdoor_c": outdoor,
+                    "energy_power_kw": None,
+                    "current_setpoint_c": previous,
+                    "proposed_setpoint_c": proposed,
+                    "controller_mode": controller_mode,
+                    "safety_shield_result": {
+                        "disposition": disposition,
+                        "blocking_reasons": blocking,
+                        "approved": approved,
+                    },
+                    "executed_action": executed,
+                    "next_simulation_state": {
+                        "cooling_setpoint_c": applied_value,
+                        "energyplus_action_accepted": energyplus_accepted,
+                    },
+                }
+            )
 
     api.runtime.callback_end_zone_timestep_after_zone_reporting(state, on_timestep)
     # Quiet EnergyPlus stdout noise optionally
@@ -659,7 +802,12 @@ def run_experiment(config: ExperimentConfig) -> dict[str, Any]:
         "schema_version": "1.0",
         "experiment": config.mode,
         "simulation_status": status,
-        "controller": "none" if config.mode == "baseline" else "deterministic_agent+safety_shield",
+        "scenario": config.scenario,
+        "controller": (
+            "none"
+            if config.mode == "baseline"
+            else f"{controller_mode}+safety_shield"
+        ),
         "identical_inputs": {
             "idf": str(paths.idf_path.resolve()),
             "epw": str(paths.epw_path.resolve()),
@@ -685,22 +833,49 @@ def run_experiment(config: ExperimentConfig) -> dict[str, Any]:
         **metrics,
         "observations_sample": observations[:24],
         "observations_count": len(observations),
+        "stream_frame_count": len(stream_frames),
         "error_message": error_message,
     }
 
     out_json = paths.output_dir / "summary.json"
     out_json.write_text(json.dumps(summary, indent=2))
     (paths.output_dir / "actions.json").write_text(json.dumps(actions_log, indent=2))
+    if metrics.get("comfort_analysis") is not None:
+        (paths.output_dir / "comfort_analysis.json").write_text(
+            json.dumps(metrics["comfort_analysis"], indent=2)
+        )
+    if config.record_stream:
+        (paths.output_dir / "stream.json").write_text(
+            json.dumps(
+                {
+                    "schema_version": "1.0",
+                    "mode": config.mode,
+                    "scenario": config.scenario,
+                    "frames": stream_frames,
+                },
+                indent=2,
+            )
+        )
     (paths.output_dir / "run.log").write_text(
-        f"status={status} rc={rc} mode={config.mode} elapsed_s={elapsed:.3f}\n"
-        f"actions={len(actions_log)} observations={len(observations)}\n"
+        f"status={status} rc={rc} mode={config.mode} scenario={config.scenario} "
+        f"elapsed_s={elapsed:.3f}\n"
+        f"actions={len(actions_log)} observations={len(observations)} "
+        f"stream_frames={len(stream_frames)}\n"
         f"total_energy_kwh={summary['total_energy_kwh']}\n"
+        f"comfort_violation_hours={summary.get('occupied_comfort_violation_hours')}\n"
+        f"comfort_degree_hours={summary.get('occupied_comfort_degree_hours')}\n"
     )
+    # Persist a compact EnergyPlus runtime log excerpt for evidence packs.
+    if err_file.exists():
+        (paths.output_dir / "energyplus-runtime.log").write_text(
+            err_file.read_text(errors="ignore")
+        )
     logger.info(
-        "Experiment %s completed: total_energy_kwh=%s actions=%s",
+        "Experiment %s completed: total_energy_kwh=%s actions=%s comfort_h=%s",
         config.mode,
         summary["total_energy_kwh"],
         len(actions_log),
+        summary.get("occupied_comfort_violation_hours"),
     )
     return summary
 
@@ -717,15 +892,19 @@ def compare_summaries(baseline: dict[str, Any], agent: dict[str, Any]) -> dict[s
     a_c = float(agent.get("carbon_estimate_kg") or 0.0)
     b_v = float(baseline.get("occupied_comfort_violation_hours") or 0.0)
     a_v = float(agent.get("occupied_comfort_violation_hours") or 0.0)
+    b_dh = float(baseline.get("occupied_comfort_degree_hours") or 0.0)
+    a_dh = float(agent.get("occupied_comfort_degree_hours") or 0.0)
 
     def delta(b: float, a: float) -> dict[str, float | None]:
         d = a - b
-        pct = (d / b * 100.0) if b else None
+        pct = ((b - a) / b * 100.0) if b else None  # reduction % (positive = improvement)
         return {
             "baseline": b,
             "agent": a,
             "absolute_delta_agent_minus_baseline": round(d, 4),
-            "percent_delta": None if pct is None else round(pct, 4),
+            "percent_reduction": None if pct is None else round(pct, 4),
+            # keep legacy key for compatibility
+            "percent_delta": None if b == 0 else round(d / b * 100.0, 4),
         }
 
     identical = (
@@ -739,8 +918,9 @@ def compare_summaries(baseline: dict[str, Any], agent: dict[str, Any]) -> dict[s
     )
 
     return {
-        "schema_version": "1.0",
+        "schema_version": "1.1",
         "timestamp_utc": datetime.now(timezone.utc).isoformat(),
+        "scenario": agent.get("scenario") or baseline.get("scenario") or "default",
         "inputs_identical": bool(identical),
         "baseline_status": baseline.get("simulation_status"),
         "agent_status": agent.get("simulation_status"),
@@ -749,10 +929,19 @@ def compare_summaries(baseline: dict[str, Any], agent: dict[str, Any]) -> dict[s
         "peak_power_kw": delta(b_p, a_p),
         "carbon_estimate_kg": delta(b_c, a_c),
         "occupied_comfort_violation_hours": delta(b_v, a_v),
+        "occupied_comfort_degree_hours": delta(b_dh, a_dh),
         "agent_action_counts": agent.get("action_counts"),
+        "carbon_accounting": {
+            "label": "estimate",
+            "formula": "total_energy_kwh * emission_factor_kg_per_kwh",
+            "emission_factor_kg_per_kwh": agent.get("carbon_factor_kg_per_kwh")
+            or baseline.get("carbon_factor_kg_per_kwh"),
+            "units": "kg CO2e (estimate)",
+        },
         "notes": [
-            "Negative absolute_delta means agent used less than baseline.",
+            "percent_reduction = (baseline - agent) / baseline * 100 (positive means agent used less).",
             "Carbon values are estimates using a documented kg/kWh factor.",
             "Only controller differs: baseline has no setpoint overrides; agent uses SafetyShield-gated overrides.",
+            "Synthetic multipliers (e.g. ×1.12) are not used.",
         ],
     }
