@@ -1,0 +1,8 @@
+.....................                                                    [100%]
+=============================== warnings summary ===============================
+services/simulator/tests/test_ep_experiment_safety.py:119
+  /workspace/services/simulator/tests/test_ep_experiment_safety.py:119: PytestUnknownMarkWarning: Unknown pytest.mark.integration - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.integration
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+21 passed, 1 warning in 0.69s

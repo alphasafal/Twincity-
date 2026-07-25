@@ -271,7 +271,42 @@ def building_status(building_id: str, db: DbSession, user: CurrentUser) -> dict[
             "active_scenario": hub.active_scenario or cfg.experiment_scenario,
         }
 
-    # Mock mode — no synthetic ×1.12 savings
+    # EnergyPlus mode without usable artifacts must NOT silently become mock.
+    if data_mode == "energyplus":
+        return {
+            "building": BuildingOut.model_validate(building).model_dump(),
+            "mode": building.current_mode,
+            "confidence": building.autonomy_confidence_json,
+            "live_total_load_kw": None,
+            "energy_saved_today_pct": None,
+            "cost_saved_today": None,
+            "carbon_avoided_today_kg": None,
+            "peak_demand_reduction_pct": None,
+            "comfort_compliance_pct": None,
+            "healthy_sensors_pct": None,
+            "active_alerts": open_alerts,
+            "pending_decisions": pending,
+            "state": state,
+            "service_health": hub.service_health,
+            "kpi_history": hub.kpi_history[-96:],
+            "simulated": False,
+            "data_mode": "energyplus",
+            "data_label": "energyplus_results_unavailable",
+            "data_source_visible": "EnergyPlus mode requested but results/* artifacts are missing or incomplete",
+            "synthetic_multiplier_applied": False,
+            "experiment": experiment,
+            "experiment_available": False,
+            "missing_artifacts": experiment.get("missing_artifacts") or [],
+            "simulator_health": hub.simulator.health(),
+            "active_scenario": hub.active_scenario or cfg.experiment_scenario,
+            "note": (
+                "DATA_MODE=energyplus is active, but measured experiment results are unavailable. "
+                "Refusing to fall back to mock KPIs. Run ./scripts/run_baseline.sh and "
+                "./scripts/run_agent.sh, or set DATA_MODE=mock explicitly for the mock twin."
+            ),
+        }
+
+    # Explicit mock mode only — no synthetic ×1.12 savings
     return {
         "building": BuildingOut.model_validate(building).model_dump(),
         "mode": building.current_mode,
@@ -1144,6 +1179,32 @@ def analytics_summary(building_id: str, user: CurrentUser) -> dict[str, Any]:
             "simulated": False,
             "synthetic_multiplier_applied": False,
             "experiment": experiment,
+        }
+    if data_mode == "energyplus":
+        return {
+            "building_id": building_id,
+            "data_mode": "energyplus",
+            "energy_usage_kwh": None,
+            "baseline_energy_kwh": None,
+            "estimated_savings_pct": None,
+            "hvac_energy_kwh": None,
+            "baseline_hvac_energy_kwh": None,
+            "hvac_savings_pct": None,
+            "cost_saved": None,
+            "carbon_avoided_kg": None,
+            "peak_demand_reduction_pct": None,
+            "comfort_compliance_pct": None,
+            "label": "energyplus_results_unavailable",
+            "simulated": False,
+            "synthetic_multiplier_applied": False,
+            "experiment": experiment,
+            "experiment_available": False,
+            "missing_artifacts": experiment.get("missing_artifacts") or [],
+            "evidence_note": (
+                "DATA_MODE=energyplus is active, but measured experiment results are unavailable. "
+                "Refusing to fall back to mock analytics. Run the baseline/agent scripts or set "
+                "DATA_MODE=mock explicitly."
+            ),
         }
     return {
         "building_id": building_id,

@@ -1,0 +1,7 @@
+{
+  "DATA_MODE": "energyplus",
+  "experiment_available": false,
+  "router_falls_through_to_mock_block": true,
+  "mock_block_sets_data_mode": "mock",
+  "verdict": "SILENT_DEGRADATION_TO_MOCK_LABEL"
+}

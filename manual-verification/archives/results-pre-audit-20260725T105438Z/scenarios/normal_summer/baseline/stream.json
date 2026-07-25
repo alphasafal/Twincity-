@@ -1,0 +1,1057 @@
+{
+  "schema_version": "1.0",
+  "mode": "baseline",
+  "scenario": "normal_summer",
+  "frames": [
+    {
+      "timestamp": "07-15T00:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 21.80557945736184,
+        "SPACE2-1": 21.825878460384708,
+        "SPACE3-1": 21.78702569470489,
+        "SPACE4-1": 21.835125233049023,
+        "SPACE5-1": 21.694957280103267
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "weather_outdoor_c": 20.0,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-15T01:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 21.50814971023442,
+        "SPACE2-1": 21.55560006347068,
+        "SPACE3-1": 21.496660223160806,
+        "SPACE4-1": 21.560753851480506,
+        "SPACE5-1": 21.558118146942434
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "weather_outdoor_c": 20.0,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-15T02:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 21.26585446549109,
+        "SPACE2-1": 21.310185308954363,
+        "SPACE3-1": 21.247075748548344,
+        "SPACE4-1": 21.31318576088261,
+        "SPACE5-1": 21.42500121235753
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "weather_outdoor_c": 19.4,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-15T03:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 21.05672236223844,
+        "SPACE2-1": 21.09578760572722,
+        "SPACE3-1": 21.029966617022556,
+        "SPACE4-1": 21.0975035860628,
+        "SPACE5-1": 21.30159265631832
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "weather_outdoor_c": 18.9,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-15T04:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 20.955841439022688,
+        "SPACE2-1": 21.233361818804777,
+        "SPACE3-1": 21.329052958540196,
+        "SPACE4-1": 21.00593746178433,
+        "SPACE5-1": 21.197731482814937
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "weather_outdoor_c": 18.9,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-15T06:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 22.201080310389642,
+        "SPACE2-1": 22.255628363435044,
+        "SPACE3-1": 22.794406334170404,
+        "SPACE4-1": 22.199161537185383,
+        "SPACE5-1": 22.200281071444866
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "weather_outdoor_c": 22.2,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-15T07:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 22.20088783979791,
+        "SPACE2-1": 22.499370246355895,
+        "SPACE3-1": 22.86963178381389,
+        "SPACE4-1": 22.198945808616763,
+        "SPACE5-1": 22.200341850396136
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "weather_outdoor_c": 24.4,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-15T09:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 23.89799697043287,
+        "SPACE2-1": 23.898473173695546,
+        "SPACE3-1": 23.89818151832613,
+        "SPACE4-1": 23.896715887316486,
+        "SPACE5-1": 23.897846159609408
+      },
+      "occupancy": {
+        "SPACE1-1": 11.0,
+        "SPACE2-1": 5.0,
+        "SPACE3-1": 11.0,
+        "SPACE4-1": 5.0,
+        "SPACE5-1": 20.0
+      },
+      "weather_outdoor_c": 27.8,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-15T10:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 23.8980533205856,
+        "SPACE2-1": 23.89858096097631,
+        "SPACE3-1": 23.898158601532582,
+        "SPACE4-1": 23.898134335693005,
+        "SPACE5-1": 23.897727144368517
+      },
+      "occupancy": {
+        "SPACE1-1": 11.0,
+        "SPACE2-1": 5.0,
+        "SPACE3-1": 11.0,
+        "SPACE4-1": 5.0,
+        "SPACE5-1": 20.0
+      },
+      "weather_outdoor_c": 28.9,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-15T11:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 23.89846966450599,
+        "SPACE2-1": 23.898954060040822,
+        "SPACE3-1": 23.898514492527717,
+        "SPACE4-1": 23.898536508380623,
+        "SPACE5-1": 23.898151433972373
+      },
+      "occupancy": {
+        "SPACE1-1": 8.8,
+        "SPACE2-1": 4.0,
+        "SPACE3-1": 8.8,
+        "SPACE4-1": 4.0,
+        "SPACE5-1": 16.0
+      },
+      "weather_outdoor_c": 30.6,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-15T12:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 23.899162241235754,
+        "SPACE2-1": 23.899307090999624,
+        "SPACE3-1": 23.899179821640434,
+        "SPACE4-1": 23.89919450693164,
+        "SPACE5-1": 23.898894557974444
+      },
+      "occupancy": {
+        "SPACE1-1": 4.4,
+        "SPACE2-1": 2.0,
+        "SPACE3-1": 4.4,
+        "SPACE4-1": 2.0,
+        "SPACE5-1": 8.0
+      },
+      "weather_outdoor_c": 31.7,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-15T13:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 23.898686204436856,
+        "SPACE2-1": 23.898746999523993,
+        "SPACE3-1": 23.89868545869779,
+        "SPACE4-1": 23.898613526795852,
+        "SPACE5-1": 23.898469599705738
+      },
+      "occupancy": {
+        "SPACE1-1": 8.8,
+        "SPACE2-1": 4.0,
+        "SPACE3-1": 8.8,
+        "SPACE4-1": 4.0,
+        "SPACE5-1": 16.0
+      },
+      "weather_outdoor_c": 31.7,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-15T14:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 23.89833931906233,
+        "SPACE2-1": 23.89841968135322,
+        "SPACE3-1": 23.8983541588189,
+        "SPACE4-1": 23.89824290014138,
+        "SPACE5-1": 23.89807848150817
+      },
+      "occupancy": {
+        "SPACE1-1": 11.0,
+        "SPACE2-1": 5.0,
+        "SPACE3-1": 11.0,
+        "SPACE4-1": 5.0,
+        "SPACE5-1": 20.0
+      },
+      "weather_outdoor_c": 31.7,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-15T15:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 23.898390676158275,
+        "SPACE2-1": 23.898455089096718,
+        "SPACE3-1": 23.898393068435468,
+        "SPACE4-1": 23.898695265045244,
+        "SPACE5-1": 23.898061449518664
+      },
+      "occupancy": {
+        "SPACE1-1": 11.0,
+        "SPACE2-1": 5.0,
+        "SPACE3-1": 11.0,
+        "SPACE4-1": 5.0,
+        "SPACE5-1": 20.0
+      },
+      "weather_outdoor_c": 32.2,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-15T16:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 23.8985434925643,
+        "SPACE2-1": 23.898563336020644,
+        "SPACE3-1": 23.89851487199647,
+        "SPACE4-1": 23.898704794148074,
+        "SPACE5-1": 23.898215427349147
+      },
+      "occupancy": {
+        "SPACE1-1": 11.0,
+        "SPACE2-1": 5.0,
+        "SPACE3-1": 11.0,
+        "SPACE4-1": 5.0,
+        "SPACE5-1": 20.0
+      },
+      "weather_outdoor_c": 32.2,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-15T17:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 23.898572463128755,
+        "SPACE2-1": 23.898592845904655,
+        "SPACE3-1": 23.898553615574517,
+        "SPACE4-1": 23.89867607961883,
+        "SPACE5-1": 23.898155276984944
+      },
+      "occupancy": {
+        "SPACE1-1": 11.0,
+        "SPACE2-1": 5.0,
+        "SPACE3-1": 11.0,
+        "SPACE4-1": 5.0,
+        "SPACE5-1": 20.0
+      },
+      "weather_outdoor_c": 29.4,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-15T18:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 23.879563182959284,
+        "SPACE2-1": 22.907755768114797,
+        "SPACE3-1": 23.89928324396597,
+        "SPACE4-1": 22.91889861320895,
+        "SPACE5-1": 23.86796627692923
+      },
+      "occupancy": {
+        "SPACE1-1": 5.5,
+        "SPACE2-1": 2.5,
+        "SPACE3-1": 5.5,
+        "SPACE4-1": 2.5,
+        "SPACE5-1": 10.0
+      },
+      "weather_outdoor_c": 28.9,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-15T19:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 22.423158279073803,
+        "SPACE2-1": 22.20044579346759,
+        "SPACE3-1": 22.512967933785557,
+        "SPACE4-1": 22.20133453168094,
+        "SPACE5-1": 22.59822537047423
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "weather_outdoor_c": 22.2,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-15T20:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 22.863240851832757,
+        "SPACE2-1": 22.804792404489923,
+        "SPACE3-1": 22.894010929648825,
+        "SPACE4-1": 22.872316785577528,
+        "SPACE5-1": 22.743348467472664
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "weather_outdoor_c": 22.8,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-15T21:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 22.46766710987485,
+        "SPACE2-1": 22.446464000864793,
+        "SPACE3-1": 22.464297838846086,
+        "SPACE4-1": 22.49124508595379,
+        "SPACE5-1": 22.28051390195043
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "weather_outdoor_c": 23.9,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-15T22:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 22.315896149519045,
+        "SPACE2-1": 22.265999321923694,
+        "SPACE3-1": 22.2829404853024,
+        "SPACE4-1": 22.293262626050897,
+        "SPACE5-1": 22.011393792982403
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "weather_outdoor_c": 25.6,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-15T23:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 22.211885806198023,
+        "SPACE2-1": 22.15259336987376,
+        "SPACE3-1": 22.174642733391973,
+        "SPACE4-1": 22.168600130497698,
+        "SPACE5-1": 21.82866550432522
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "weather_outdoor_c": 25.6,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-16T00:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 21.948713151461867,
+        "SPACE2-1": 21.923243296799484,
+        "SPACE3-1": 21.909167988019025,
+        "SPACE4-1": 21.932489417533017,
+        "SPACE5-1": 21.69848830317697
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "weather_outdoor_c": 22.8,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-16T01:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 21.711159734441082,
+        "SPACE2-1": 21.698363628391753,
+        "SPACE3-1": 21.661546195775337,
+        "SPACE4-1": 21.70367535760706,
+        "SPACE5-1": 21.580504246838558
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "weather_outdoor_c": 22.2,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-16T02:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 21.653104439057973,
+        "SPACE2-1": 21.611389137948827,
+        "SPACE3-1": 21.594542787154822,
+        "SPACE4-1": 21.61442872198213,
+        "SPACE5-1": 21.473840943798557
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "weather_outdoor_c": 23.9,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-16T03:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 21.61415265712272,
+        "SPACE2-1": 21.55585557367275,
+        "SPACE3-1": 21.552111901892143,
+        "SPACE4-1": 21.5575955653921,
+        "SPACE5-1": 21.39504670894721
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "weather_outdoor_c": 23.9,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-16T07:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 22.200095661184235,
+        "SPACE2-1": 23.89991995400181,
+        "SPACE3-1": 23.899892958805925,
+        "SPACE4-1": 22.199692469172163,
+        "SPACE5-1": 22.199869441456016
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "weather_outdoor_c": 28.3,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-16T08:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 23.8989092939241,
+        "SPACE2-1": 23.89863885002603,
+        "SPACE3-1": 23.898636342618133,
+        "SPACE4-1": 23.08342206942508,
+        "SPACE5-1": 23.89683633674979
+      },
+      "occupancy": {
+        "SPACE1-1": 11.0,
+        "SPACE2-1": 5.0,
+        "SPACE3-1": 11.0,
+        "SPACE4-1": 5.0,
+        "SPACE5-1": 20.0
+      },
+      "weather_outdoor_c": 30.0,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-16T09:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 23.898050453529937,
+        "SPACE2-1": 23.898634470468835,
+        "SPACE3-1": 23.898279499695107,
+        "SPACE4-1": 23.898204962577474,
+        "SPACE5-1": 23.89781002519554
+      },
+      "occupancy": {
+        "SPACE1-1": 11.0,
+        "SPACE2-1": 5.0,
+        "SPACE3-1": 11.0,
+        "SPACE4-1": 5.0,
+        "SPACE5-1": 20.0
+      },
+      "weather_outdoor_c": 31.1,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-16T10:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 23.898152393978034,
+        "SPACE2-1": 23.89868602905622,
+        "SPACE3-1": 23.898254799033975,
+        "SPACE4-1": 23.89820331803837,
+        "SPACE5-1": 23.897791392509056
+      },
+      "occupancy": {
+        "SPACE1-1": 11.0,
+        "SPACE2-1": 5.0,
+        "SPACE3-1": 11.0,
+        "SPACE4-1": 5.0,
+        "SPACE5-1": 20.0
+      },
+      "weather_outdoor_c": 31.7,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-16T11:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 23.89852499785638,
+        "SPACE2-1": 23.89900407416503,
+        "SPACE3-1": 23.89856076721587,
+        "SPACE4-1": 23.898565478825592,
+        "SPACE5-1": 23.898200255847485
+      },
+      "occupancy": {
+        "SPACE1-1": 8.8,
+        "SPACE2-1": 4.0,
+        "SPACE3-1": 8.8,
+        "SPACE4-1": 4.0,
+        "SPACE5-1": 16.0
+      },
+      "weather_outdoor_c": 32.2,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-16T12:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 23.899168323842055,
+        "SPACE2-1": 23.899322074708742,
+        "SPACE3-1": 23.899181253660846,
+        "SPACE4-1": 23.899188305194404,
+        "SPACE5-1": 23.89891562938345
+      },
+      "occupancy": {
+        "SPACE1-1": 4.4,
+        "SPACE2-1": 2.0,
+        "SPACE3-1": 4.4,
+        "SPACE4-1": 2.0,
+        "SPACE5-1": 8.0
+      },
+      "weather_outdoor_c": 32.8,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-16T13:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 23.89867127217962,
+        "SPACE2-1": 23.8987426292748,
+        "SPACE3-1": 23.898674837840996,
+        "SPACE4-1": 23.898583432683576,
+        "SPACE5-1": 23.89847674367638
+      },
+      "occupancy": {
+        "SPACE1-1": 8.8,
+        "SPACE2-1": 4.0,
+        "SPACE3-1": 8.8,
+        "SPACE4-1": 4.0,
+        "SPACE5-1": 16.0
+      },
+      "weather_outdoor_c": 33.3,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-16T14:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 23.898317273903693,
+        "SPACE2-1": 23.89840932594833,
+        "SPACE3-1": 23.89833980869322,
+        "SPACE4-1": 23.89844709803023,
+        "SPACE5-1": 23.89807029343092
+      },
+      "occupancy": {
+        "SPACE1-1": 11.0,
+        "SPACE2-1": 5.0,
+        "SPACE3-1": 11.0,
+        "SPACE4-1": 5.0,
+        "SPACE5-1": 20.0
+      },
+      "weather_outdoor_c": 33.3,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-16T15:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 23.898343898413483,
+        "SPACE2-1": 23.89843836587426,
+        "SPACE3-1": 23.898376169757707,
+        "SPACE4-1": 23.89856357121689,
+        "SPACE5-1": 23.898042553954774
+      },
+      "occupancy": {
+        "SPACE1-1": 11.0,
+        "SPACE2-1": 5.0,
+        "SPACE3-1": 11.0,
+        "SPACE4-1": 5.0,
+        "SPACE5-1": 20.0
+      },
+      "weather_outdoor_c": 32.8,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-16T16:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 23.898427939157482,
+        "SPACE2-1": 23.898490528666972,
+        "SPACE3-1": 23.898435858934672,
+        "SPACE4-1": 23.898670924999866,
+        "SPACE5-1": 23.898150006973474
+      },
+      "occupancy": {
+        "SPACE1-1": 11.0,
+        "SPACE2-1": 5.0,
+        "SPACE3-1": 11.0,
+        "SPACE4-1": 5.0,
+        "SPACE5-1": 20.0
+      },
+      "weather_outdoor_c": 32.8,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-16T17:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 23.89850379773378,
+        "SPACE2-1": 23.898531063195442,
+        "SPACE3-1": 23.89847973858366,
+        "SPACE4-1": 23.898814910204482,
+        "SPACE5-1": 23.898099376827016
+      },
+      "occupancy": {
+        "SPACE1-1": 11.0,
+        "SPACE2-1": 5.0,
+        "SPACE3-1": 11.0,
+        "SPACE4-1": 5.0,
+        "SPACE5-1": 20.0
+      },
+      "weather_outdoor_c": 31.7,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-16T18:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 23.89928763394287,
+        "SPACE2-1": 23.135900751969377,
+        "SPACE3-1": 23.899279799240905,
+        "SPACE4-1": 23.899490281532962,
+        "SPACE5-1": 23.899183472589332
+      },
+      "occupancy": {
+        "SPACE1-1": 5.5,
+        "SPACE2-1": 2.5,
+        "SPACE3-1": 5.5,
+        "SPACE4-1": 2.5,
+        "SPACE5-1": 10.0
+      },
+      "weather_outdoor_c": 30.6,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-16T20:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 23.771815591686092,
+        "SPACE2-1": 23.440470627732726,
+        "SPACE3-1": 23.67051197992261,
+        "SPACE4-1": 24.185607333319666,
+        "SPACE5-1": 22.994498042582748
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "weather_outdoor_c": 28.9,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-16T21:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 23.334885054719546,
+        "SPACE2-1": 23.153062505305428,
+        "SPACE3-1": 23.250135066938448,
+        "SPACE4-1": 23.615912808729476,
+        "SPACE5-1": 22.587115760970434
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "weather_outdoor_c": 27.8,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-16T22:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 23.01890867258834,
+        "SPACE2-1": 22.901015638793172,
+        "SPACE3-1": 22.945217292329037,
+        "SPACE4-1": 23.17356412063073,
+        "SPACE5-1": 22.344495219320024
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "weather_outdoor_c": 27.2,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    },
+    {
+      "timestamp": "07-16T23:60",
+      "zone_temperatures_c": {
+        "SPACE1-1": 22.7244923643871,
+        "SPACE2-1": 22.64532437648748,
+        "SPACE3-1": 22.658451874340976,
+        "SPACE4-1": 22.801973362792996,
+        "SPACE5-1": 22.151925978225268
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "weather_outdoor_c": 26.1,
+      "energy_power_kw": null,
+      "current_setpoint_c": 23.9,
+      "proposed_setpoint_c": null,
+      "controller_mode": "baseline_fixed_schedule",
+      "safety_shield_result": "n/a",
+      "executed_action": "none",
+      "next_simulation_state": "energyplus_advances"
+    }
+  ]
+}

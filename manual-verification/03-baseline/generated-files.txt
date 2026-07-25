@@ -1,0 +1,53 @@
+exit_code=0
+results/baseline/actions.json size=2 mtime=2026-07-25 10:57:23.830652401 +0000
+4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945  results/baseline/actions.json
+results/baseline/comfort_analysis.json size=273 mtime=2026-07-25 10:57:23.830652401 +0000
+a9720f033f26486b2acfca8668ba85a026b162cffca0ed91055067cd70a00115  results/baseline/comfort_analysis.json
+results/baseline/energyplus_run/eplusmtr.csv size=4656 mtime=2026-07-25 10:57:23.822652563 +0000
+2e288f300aea511bed67772837cd40b128d5471c3137bb9e5ae6dc712c8d7c11  results/baseline/energyplus_run/eplusmtr.csv
+results/baseline/energyplus_run/eplusout.audit size=1525 mtime=2026-07-25 10:57:23.822652563 +0000
+cf1f124afffc90a005b924c2fb5c7a0270fd0b97ac36acbfb6bedd544e797932  results/baseline/energyplus_run/eplusout.audit
+results/baseline/energyplus_run/eplusout.bnd size=62316 mtime=2026-07-25 10:57:23.822652563 +0000
+7b4c21baff920241edb70f2f2ce912479d54308ea19512dd3d88a5f01b459b8d  results/baseline/energyplus_run/eplusout.bnd
+results/baseline/energyplus_run/eplusout.csv size=61839 mtime=2026-07-25 10:57:23.822652563 +0000
+10487362fcb84f32e47248f1cedbf7a7feb3df616d74977c73882635e05a5b70  results/baseline/energyplus_run/eplusout.csv
+results/baseline/energyplus_run/eplusout.eio size=129326 mtime=2026-07-25 10:57:23.818652643 +0000
+d66e4a8dd7081d0f3f52d8b8f6492e7819a7e5ec6af86ee20558e4acf2663da8  results/baseline/energyplus_run/eplusout.eio
+results/baseline/energyplus_run/eplusout.end size=97 mtime=2026-07-25 10:57:23.822652563 +0000
+21c6d2a995bfa40ac3a339e0cc6855abd896f5e5c68ea6c9fb551857b7edc8ee  results/baseline/energyplus_run/eplusout.end
+results/baseline/energyplus_run/eplusout.err size=1043 mtime=2026-07-25 10:57:23.822652563 +0000
+92b4090ec532ae48ec73acf993e4bb78ef582af9a7a4d763d383c48b4b24ea02  results/baseline/energyplus_run/eplusout.err
+results/baseline/energyplus_run/eplusout.eso size=91138 mtime=2026-07-25 10:57:23.818652643 +0000
+f2b7aa537c346080d88d07029b7e5b31cc1da535399f7fb3fbb58f6c96ae2b1b  results/baseline/energyplus_run/eplusout.eso
+results/baseline/energyplus_run/eplusout.mdd size=5988 mtime=2026-07-25 10:57:23.710654823 +0000
+b0374b171f6807d7f4d1187e70ab47e7dfa9337ddf1a3a5f9daef59368ca9f50  results/baseline/energyplus_run/eplusout.mdd
+results/baseline/energyplus_run/eplusout.mtd size=48402 mtime=2026-07-25 10:57:23.822652563 +0000
+b2ffa0340ebe23d122890765305068b0fc71d6ec0c14b56115411e7944ad7328  results/baseline/energyplus_run/eplusout.mtd
+results/baseline/energyplus_run/eplusout.mtr size=9662 mtime=2026-07-25 10:57:23.818652643 +0000
+9630feba86a4e88e90b11fdd98aa3e7556c1d0bb14f0d1df03730a46a75905e3  results/baseline/energyplus_run/eplusout.mtr
+results/baseline/energyplus_run/eplusout.rdd size=36836 mtime=2026-07-25 10:57:23.710654823 +0000
+c042669e89aad1381f3d80d3625f70ef6d40e33301e0feeb5d727791e1069219  results/baseline/energyplus_run/eplusout.rdd
+results/baseline/energyplus_run/eplusout.shd size=10523 mtime=2026-07-25 10:57:23.618656680 +0000
+ea2cbd28cf337135e317096a72c49ced46565438e37c252c43cdc190ee3f6542  results/baseline/energyplus_run/eplusout.shd
+results/baseline/energyplus_run/eplusout.sql size=1171456 mtime=2026-07-25 10:57:23.818652643 +0000
+5ec602dccc55734a9128c76051c49c058d21853d1ebfa0029aca6de1f4dd212a  results/baseline/energyplus_run/eplusout.sql
+results/baseline/energyplus_run/eplusout.wrl size=19863 mtime=2026-07-25 10:57:23.706654904 +0000
+e74962bf07fe160e046d137142d8c65006a32a7e0998773b194303646b0ad22f  results/baseline/energyplus_run/eplusout.wrl
+results/baseline/energyplus_run/eplusssz.csv size=13895 mtime=2026-07-25 10:57:23.822652563 +0000
+66eb7e9bebe8780f5fbc4a15b7276174d623c07ac4bd0b6da8acf9ded182f30a  results/baseline/energyplus_run/eplusssz.csv
+results/baseline/energyplus_run/eplustbl.htm size=988434 mtime=2026-07-25 10:57:23.818652643 +0000
+debf8e687c308b0b617aa7857d25efc8ff55331f8d9bccaf06eff0111c78e5a0  results/baseline/energyplus_run/eplustbl.htm
+results/baseline/energyplus_run/epluszsz.csv size=107196 mtime=2026-07-25 10:57:23.698655065 +0000
+250103540b081d74720499e2ac4012566275113c307e33832409aad9e4f244b7  results/baseline/energyplus_run/epluszsz.csv
+results/baseline/energyplus_run/sqlite.err size=92 mtime=2026-07-25 10:57:23.582657406 +0000
+248b65a1245a0c54157ba5ccc366238919a7b550d1413b5de6790a0148dad397  results/baseline/energyplus_run/sqlite.err
+results/baseline/energyplus-runtime.log size=1043 mtime=2026-07-25 10:57:23.830652401 +0000
+92b4090ec532ae48ec73acf993e4bb78ef582af9a7a4d763d383c48b4b24ea02  results/baseline/energyplus-runtime.log
+results/baseline/.gitkeep size=0 mtime=2026-07-25 10:27:23.192012837 +0000
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  results/baseline/.gitkeep
+results/baseline/run.log size=192 mtime=2026-07-25 10:57:23.830652401 +0000
+09137ac512e76f22eab555e1f407d7a5afcb6e0c528ae561aeac5c0c3f2f3c47  results/baseline/run.log
+results/baseline/stream.json size=31469 mtime=2026-07-25 10:57:23.830652401 +0000
+d102170065c07be0c02d6505dd4da6617ee72aafcb05112a407e98a84795cf3e  results/baseline/stream.json
+results/baseline/summary.json size=16853 mtime=2026-07-25 10:57:23.830652401 +0000
+34907262bccd14c45b84ecff2bd69ab8a7d9dc0432c1a65e778315768c5704c1  results/baseline/summary.json

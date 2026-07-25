@@ -1,0 +1,70 @@
+=== pytest unit/integration (selected) ===
+2026-07-25T11:03:32Z
+
+==================================== ERRORS ====================================
+________________________ ERROR collecting test session _________________________
+ImportError while importing test module '/workspace/tests/integration/test_experiment_dashboard.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/integration/test_experiment_dashboard.py:5: in <module>
+    from app.services.experiment_store import experiment_dashboard_payload
+E   ModuleNotFoundError: No module named 'app'
+=============================== warnings summary ===============================
+services/simulator/tests/test_ep_experiment_safety.py:119
+  /workspace/services/simulator/tests/test_ep_experiment_safety.py:119: PytestUnknownMarkWarning: Unknown pytest.mark.integration - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.integration
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+ERROR services/simulator
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 warning, 1 error in 0.23s
+PYTEST_EXIT:0
+=== ruff (if configured) ===
+[1m[94m681 |[0m         # Optional one-shot unsafe proposal for safety demonstration runs only.
+[1m[94m682 |[0m         if config.inject_unsafe_proposal and not unsafe_injected:
+    [1m[94m|[0m                                                  [1m[91m^^^^^^^^^^^^^^^[0m
+[1m[94m683 |[0m             proposed = 35.0
+[1m[94m684 |[0m             reason = "intentional_unsafe_demo_proposal"
+    [1m[94m|[0m
+
+[1m[91mF841 [0m[1mLocal variable `unsafe_injected` is assigned to but never used[0m
+   [1m[94m-->[0m services/simulator/twinpilot_simulator/ep_experiment.py:686:13
+    [1m[94m|[0m
+[1m[94m684 |[0m             reason = "intentional_unsafe_demo_proposal"
+[1m[94m685 |[0m             confidence = 0.99
+[1m[94m686 |[0m             unsafe_injected = True
+    [1m[94m|[0m             [1m[91m^^^^^^^^^^^^^^^[0m
+[1m[94m687 |[0m             proposal_source = "safety_demo"
+    [1m[94m|[0m
+[1m[96mhelp[0m: [1mRemove assignment to unused variable `unsafe_injected`[0m
+
+Found 39 errors.
+[[36m*[0m] 19 fixable with the `--fix` option (5 hidden fixes can be enabled with the `--unsafe-fixes` option).
+=== web lint/typecheck ===
+
+> @twinpilot/web@0.1.0 lint /workspace/apps/web
+> next lint
+
+`next lint` is deprecated and will be removed in Next.js 16.
+For new projects, use create-next-app to choose your preferred linter.
+For existing projects, migrate to the ESLint CLI:
+npx @next/codemod@canary next-lint-to-eslint-cli .
+
+✔ No ESLint warnings or errors
+=== shellcheck syntax bash -n ===
+OK scripts/compare_results.sh
+OK scripts/run_agent.sh
+OK scripts/run_baseline.sh
+OK scripts/run_demo.sh
+OK scripts/run_llm_mcp_experiment.sh
+OK scripts/run_scenarios.sh
+OK scripts/setup_energyplus.sh
+OK scripts/setup.sh
+=== secret scan (basic) ===
+=== pip audit if available ===
+--: line 19: pip-audit: command not found
+No broken requirements found.

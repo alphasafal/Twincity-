@@ -1,4 +1,4 @@
-status=completed rc=0 mode=baseline scenario=llm_mcp elapsed_s=0.261
+status=completed rc=0 mode=baseline scenario=llm_mcp elapsed_s=0.287
 actions=0 observations=192 stream_frames=42
 total_energy_kwh=421.5057
 comfort_violation_hours=0.0

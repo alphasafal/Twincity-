@@ -49,12 +49,33 @@ def log_stage(stage: str, payload: dict[str, Any]) -> None:
     print(f"[{stage}] {json.dumps(payload)[:240]}")
 
 
-def mcp_observation_from_energyplus(obs: dict[str, Any]) -> dict[str, Any]:
-    """Simulate MCP resource/tool payload built from EnergyPlus observations.
+class _EnergyPlusMcpClient:
+    """In-process client satisfying twinpilot_mcp.handlers.call_tool for get_building_state.
 
-    Uses the same JSON shape as twinpilot_mcp building://current-state style tools.
+    Serves the live EnergyPlus Runtime observation to the real MCP tool dispatcher
+    without requiring a separate HTTP TwinPilot API round-trip inside the co-sim loop.
     """
-    resource = {
+
+    def __init__(self, state: dict[str, Any]) -> None:
+        self._state = state
+
+    def get_building_state(self) -> dict[str, Any]:
+        return self._state
+
+
+def mcp_observation_from_energyplus(obs: dict[str, Any]) -> dict[str, Any]:
+    """Dispatch EnergyPlus observations through twinpilot_mcp tool handler.
+
+    Uses `twinpilot_mcp.handlers.call_tool("get_building_state", ...)` — the same
+    dispatcher as the MCP server — with an observation-backed client.
+    """
+    mcp_root = ROOT / "services" / "mcp-server"
+    if str(mcp_root) not in sys.path:
+        sys.path.insert(0, str(mcp_root))
+
+    from twinpilot_mcp.handlers import call_tool  # noqa: WPS433
+
+    state = {
         "resource": "building://current-state",
         "tool": "get_building_state",
         "source": "energyplus_runtime_observation",
@@ -68,8 +89,31 @@ def mcp_observation_from_energyplus(obs: dict[str, Any]) -> dict[str, Any]:
         },
         "cooling_setpoint_c": obs.get("cooling_setpoint_c"),
     }
-    log_stage("mcp_resource_tool", {"ok": True, "payload_keys": list(resource.keys())})
-    return resource
+    try:
+        raw = call_tool(_EnergyPlusMcpClient(state), "get_building_state", {})
+        payload = json.loads(raw) if isinstance(raw, str) else raw
+        log_stage(
+            "mcp_resource_tool",
+            {
+                "ok": True,
+                "dispatch": "twinpilot_mcp.handlers.call_tool",
+                "tool": "get_building_state",
+                "transport": "in_process",
+                "payload_keys": list(payload.keys()) if isinstance(payload, dict) else [],
+            },
+        )
+        return payload if isinstance(payload, dict) else state
+    except Exception as exc:  # noqa: BLE001 — log and surface failure to fallback path
+        log_stage(
+            "mcp_resource_tool",
+            {
+                "ok": False,
+                "dispatch": "twinpilot_mcp.handlers.call_tool",
+                "tool": "get_building_state",
+                "error": str(exc),
+            },
+        )
+        raise
 
 
 def call_ollama_structured(mcp_payload: dict[str, Any]) -> tuple[float | None, dict[str, Any]]:
@@ -134,7 +178,28 @@ def make_proposal_fn():
             "cooling_setpoint_c": current_cooling_setpoint,
         }
         log_stage("energyplus_observation", {"hour": hour, "outdoor_c": outdoor_c, "zones": zone_temps})
-        mcp_payload = mcp_observation_from_energyplus(obs)
+        try:
+            mcp_payload = mcp_observation_from_energyplus(obs)
+        except Exception as exc:  # noqa: BLE001
+            det_sp, reason, conf = propose_agent_cooling_setpoint(
+                outdoor_c=outdoor_c,
+                zone_temps=zone_temps,
+                occupancy=occupancy,
+                current_cooling_setpoint=current_cooling_setpoint,
+                limits=limits,
+                hour=hour,
+            )
+            log_stage(
+                "deterministic_fallback",
+                {
+                    "proposed": det_sp,
+                    "reason": reason,
+                    "confidence": conf,
+                    "cause": f"mcp_failure:{exc}",
+                },
+            )
+            return det_sp, f"deterministic_fallback:mcp_failure:{reason}", conf, "deterministic_fallback"
+
         llm_sp, meta = call_ollama_structured(mcp_payload)
         if llm_sp is None:
             det_sp, reason, conf = propose_agent_cooling_setpoint(
@@ -206,7 +271,10 @@ def main() -> int:
     )
 
     summary = {
-        "path": "EnergyPlus → MCP tool/resource → LLM structured proposal → SafetyShield → EnergyPlus actuator",
+        "path": (
+            "EnergyPlus → twinpilot_mcp.handlers.call_tool(get_building_state, in-process) "
+            "→ Ollama structured proposal → SafetyShield → EnergyPlus actuator"
+        ),
         "baseline": {
             "total_energy_kwh": baseline.get("total_energy_kwh"),
             "status": baseline.get("simulation_status"),

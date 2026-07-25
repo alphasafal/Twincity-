@@ -15,9 +15,9 @@
     "version_probe": "EnergyPlus Runtime API via pyenergyplus",
     "return_code": 0,
     "run_directory": "/workspace/results/llm_mcp/baseline/energyplus_run",
-    "wall_time_seconds": 0.261
+    "wall_time_seconds": 0.287
   },
-  "timestamp_utc": "2026-07-25T10:43:34.995003+00:00",
+  "timestamp_utc": "2026-07-25T10:58:30.955205+00:00",
   "mocked_components": [],
   "data_provenance": {
     "zone_temperature": "EnergyPlus variable Zone Air Temperature",
