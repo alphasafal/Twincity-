@@ -1,0 +1,8 @@
+manual-verification/MCP_TRANSPORT_REMEDIATION_REPORT.md:9:- Original in-process MCP findings copied to `mcp-transport/preserved-09-llm-mcp-original/`.
+manual-verification/FINAL_INDEPENDENT_VERIFICATION_REPORT.md:37:- `mcp_observation_from_energyplus` simulated MCP packaging
+manual-verification/FINAL_INDEPENDENT_VERIFICATION_REPORT.md:195:Phase 9 original FAILED (simulated MCP) and later PARTIALLY VERIFIED (in-process handler) findings remain in earlier sections / `preserved-09-llm-mcp-original/`
+scripts/llm_mcp_loop.py:343:"Direct in-process MCP handler invocation is not used on this path.",
+manual-verification/14-clean-room/clean-room-verification.md:10:**PARTIALLY VERIFIED** — works from README, but committed results and simulated MCP remain gaps.
+manual-verification/mcp-transport/clean-room-stdio/clean-room-rerun-log.txt:1163:"Direct in-process MCP handler invocation is not used on this path.",
+manual-verification/mcp-transport/clean-room-stdio/clean-room-log.txt:1006:"Direct in-process MCP handler invocation is not used on this path.",
+manual-verification/mcp-transport/clean-room-stdio/cleanroom-llm-summary.json:27:"Direct in-process MCP handler invocation is not used on this path.",

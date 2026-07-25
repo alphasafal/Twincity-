@@ -1,0 +1,7 @@
+COMMAND: ./scripts/setup_energyplus.sh
+START_UTC=2026-07-25T11:43:51Z
+EnergyPlus already present at /workspace/third_party/EnergyPlus
+EnergyPlus, Version 24.1.0-9d7789a3ac
+END_UTC=2026-07-25T11:43:51Z
+EXIT_CODE=0
+DURATION_SEC=0

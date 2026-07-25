@@ -1,0 +1,35 @@
+== Eco-Loop final submission check ==
+UTC=2026-07-25T12:01:41Z
+PASS exists+nonempty: /workspace/final-release/FINAL_RELEASE_REPORT.md
+PASS exists+nonempty: /workspace/final-release/FINAL_RELEASE_MANIFEST.json
+PASS exists+nonempty: /workspace/final-release/FINAL_OWNER_CHECKLIST.md
+PASS exists+nonempty: /workspace/final-release/FINAL_DEMO_SCRIPT.md
+PASS exists+nonempty: /workspace/final-release/FINAL_JUDGE_QA.md
+PASS exists+nonempty: /workspace/final-release/FINAL_LIMITATIONS.md
+PASS exists+nonempty: /workspace/final-release/FINAL_CLAIMS.md
+PASS exists+nonempty: /workspace/final-release/FINAL_COMMAND_REFERENCE.md
+PASS exists+nonempty: /workspace/final-release/PRESENTATION_CONTENT.md
+PASS exists+nonempty: /workspace/final-release/SUBMISSION_FILE_CHECKLIST.md
+PASS exists+nonempty: /workspace/final-release/SECURITY_AND_PRIVACY_CHECK.md
+PASS exists+nonempty: /workspace/final-release/RELEASE_NOTES.md
+PASS exists+nonempty: /workspace/final-release/checksums/SHA256SUMS.txt
+PASS exists+nonempty: /workspace/final-release/submission-package/README.md
+PASS exists+nonempty: /workspace/final-release/submission-package/FINAL_RELEASE_REPORT.md
+PASS exists+nonempty: /workspace/final-release/submission-package/FINAL_CLAIMS.md
+PASS exists+nonempty: /workspace/final-release/submission-package/FINAL_LIMITATIONS.md
+PASS exists+nonempty: /workspace/final-release/submission-package/FINAL_DEMO_SCRIPT.md
+PASS exists+nonempty: /workspace/final-release/submission-package/FINAL_JUDGE_QA.md
+PASS exists+nonempty: /workspace/final-release/submission-package/PRESENTATION_CONTENT.md
+-- secret scan --
+PASS no high-confidence secret patterns in final-release/
+-- forbidden artifacts --
+PASS no venv/node_modules in package
+PASS no .env/pid in package
+-- stale final-release commit wording --
+PASS no intermediate commit labeled as final release
+PASS manifest structure PASS 29e88cbd829a
+SUBMISSION_FILE_CHECKLIST.md: FAILED
+submission-package/SUBMISSION_FILE_CHECKLIST.md: FAILED
+sha256sum: WARNING: 2 computed checksums did NOT match
+FAIL checksum mismatch
+SUBMISSION CHECK: FAIL

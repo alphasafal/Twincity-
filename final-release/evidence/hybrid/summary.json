@@ -1,0 +1,46 @@
+{
+  "path": "hybrid_supervisory",
+  "description": "Ollama selects ECM/strategy via MCP tools; deterministic optimiser computes setpoints; SafetyShield remains authoritative.",
+  "mcp_transport": "stdio",
+  "mcp_client_pid": 114421,
+  "mcp_server_pid": 114442,
+  "mcp_pids_differ": true,
+  "baseline": {
+    "total_energy_kwh": 421.5057,
+    "hvac_energy_kwh": 13.8459,
+    "peak_power_kw": 19.9325,
+    "occupied_comfort_violation_hours": 0.0,
+    "status": "completed"
+  },
+  "agent": {
+    "total_energy_kwh": 417.331,
+    "hvac_energy_kwh": 13.3365,
+    "peak_power_kw": 20.0705,
+    "occupied_comfort_violation_hours": 0.0,
+    "action_counts": {
+      "approved": 48,
+      "rejected": 0,
+      "fallback": 0,
+      "total_decisions": 48
+    },
+    "controller": "hybrid_supervisory+safety_shield",
+    "status": "completed"
+  },
+  "strategy_counts": {
+    "HOLD_CURRENT_POLICY": 11,
+    "ECO_MODE": 14,
+    "COMFORT_FIRST": 13,
+    "PRE_COOL": 5,
+    "UNOCCUPIED_SETBACK": 5
+  },
+  "self_correction_log": "/workspace/results/hybrid/self_correction.jsonl",
+  "stage_log": "/workspace/results/hybrid/stage_log.jsonl",
+  "mcp_trace": "/workspace/results/hybrid/mcp-runtime-trace.jsonl",
+  "authoritative_savings_claim": "Path A comfort-zero deterministic experiment",
+  "notes": [
+    "Path C proves LLM supervisory involvement in the closed loop.",
+    "Numeric setpoints are computed by the deterministic optimiser.",
+    "SafetyShield retains final authority before Clg-SetP-Sch writes.",
+    "Self-correction outcomes are logged in self_correction.jsonl."
+  ]
+}

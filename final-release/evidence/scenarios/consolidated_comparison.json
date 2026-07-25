@@ -1,0 +1,157 @@
+{
+  "schema_version": "1.0",
+  "scenarios": [
+    {
+      "scenario": "normal_summer",
+      "description": "Normal summer DemoPeriod",
+      "total_energy_kwh": {
+        "baseline": 421.5057,
+        "agent": 415.9999,
+        "absolute_delta_agent_minus_baseline": -5.5058,
+        "percent_reduction": 1.3062,
+        "percent_delta": -1.3062
+      },
+      "hvac_energy_kwh": {
+        "baseline": 13.8459,
+        "agent": 13.157,
+        "absolute_delta_agent_minus_baseline": -0.6889,
+        "percent_reduction": 4.9755,
+        "percent_delta": -4.9755
+      },
+      "peak_power_kw": {
+        "baseline": 19.9325,
+        "agent": 19.64,
+        "absolute_delta_agent_minus_baseline": -0.2925,
+        "percent_reduction": 1.4675,
+        "percent_delta": -1.4675
+      },
+      "carbon_estimate_kg": {
+        "baseline": 175.7679,
+        "agent": 173.472,
+        "absolute_delta_agent_minus_baseline": -2.2959,
+        "percent_reduction": 1.3062,
+        "percent_delta": -1.3062
+      },
+      "occupied_comfort_violation_hours": {
+        "baseline": 0.0,
+        "agent": 0.0,
+        "absolute_delta_agent_minus_baseline": 0.0,
+        "percent_reduction": null,
+        "percent_delta": null
+      },
+      "occupied_comfort_degree_hours": {
+        "baseline": 0.0,
+        "agent": 0.0,
+        "absolute_delta_agent_minus_baseline": 0.0,
+        "percent_reduction": null,
+        "percent_delta": null
+      },
+      "approved_actions": 48,
+      "rejected_actions": 0,
+      "fallback_actions": 0
+    },
+    {
+      "scenario": "high_occupancy",
+      "description": "Same weather; denser occupancy schedule fractions",
+      "total_energy_kwh": {
+        "baseline": 424.2069,
+        "agent": 418.5289,
+        "absolute_delta_agent_minus_baseline": -5.678,
+        "percent_reduction": 1.3385,
+        "percent_delta": -1.3385
+      },
+      "hvac_energy_kwh": {
+        "baseline": 14.0756,
+        "agent": 13.3461,
+        "absolute_delta_agent_minus_baseline": -0.7295,
+        "percent_reduction": 5.1827,
+        "percent_delta": -5.1827
+      },
+      "peak_power_kw": {
+        "baseline": 19.996,
+        "agent": 19.7055,
+        "absolute_delta_agent_minus_baseline": -0.2905,
+        "percent_reduction": 1.4528,
+        "percent_delta": -1.4528
+      },
+      "carbon_estimate_kg": {
+        "baseline": 176.8943,
+        "agent": 174.5265,
+        "absolute_delta_agent_minus_baseline": -2.3678,
+        "percent_reduction": 1.3385,
+        "percent_delta": -1.3385
+      },
+      "occupied_comfort_violation_hours": {
+        "baseline": 0.0,
+        "agent": 0.0,
+        "absolute_delta_agent_minus_baseline": 0.0,
+        "percent_reduction": null,
+        "percent_delta": null
+      },
+      "occupied_comfort_degree_hours": {
+        "baseline": 0.0,
+        "agent": 0.0,
+        "absolute_delta_agent_minus_baseline": 0.0,
+        "percent_reduction": null,
+        "percent_delta": null
+      },
+      "approved_actions": 48,
+      "rejected_actions": 0,
+      "fallback_actions": 0
+    },
+    {
+      "scenario": "hot_peak",
+      "description": "Hotter mid-summer peak window",
+      "total_energy_kwh": {
+        "baseline": 432.904,
+        "agent": 427.389,
+        "absolute_delta_agent_minus_baseline": -5.515,
+        "percent_reduction": 1.274,
+        "percent_delta": -1.274
+      },
+      "hvac_energy_kwh": {
+        "baseline": 14.1741,
+        "agent": 13.4549,
+        "absolute_delta_agent_minus_baseline": -0.7192,
+        "percent_reduction": 5.074,
+        "percent_delta": -5.074
+      },
+      "peak_power_kw": {
+        "baseline": 19.8272,
+        "agent": 19.6127,
+        "absolute_delta_agent_minus_baseline": -0.2145,
+        "percent_reduction": 1.0818,
+        "percent_delta": -1.0818
+      },
+      "carbon_estimate_kg": {
+        "baseline": 180.521,
+        "agent": 178.2212,
+        "absolute_delta_agent_minus_baseline": -2.2998,
+        "percent_reduction": 1.274,
+        "percent_delta": -1.274
+      },
+      "occupied_comfort_violation_hours": {
+        "baseline": 0.0,
+        "agent": 0.0,
+        "absolute_delta_agent_minus_baseline": 0.0,
+        "percent_reduction": null,
+        "percent_delta": null
+      },
+      "occupied_comfort_degree_hours": {
+        "baseline": 0.0,
+        "agent": 0.0,
+        "absolute_delta_agent_minus_baseline": 0.0,
+        "percent_reduction": null,
+        "percent_delta": null
+      },
+      "approved_actions": 48,
+      "rejected_actions": 0,
+      "fallback_actions": 0
+    }
+  ],
+  "notes": [
+    "Within each scenario, baseline and agent share identical IDF/EPW/occupancy/period.",
+    "Carbon is an estimate using the documented emission factor.",
+    "No synthetic \u00d71.12 multipliers are applied."
+  ]
+}

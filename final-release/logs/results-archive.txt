@@ -1,0 +1,11 @@
+ARCHIVE=/tmp/ecolooop-results-archive-20260725T114338Z
+UTC=2026-07-25T11:43:38Z
+total 28
+drwxr-xr-x 4 ubuntu ubuntu  4096 Jul 25 11:43 .
+drwxrwxrwt 1 root   root   12288 Jul 25 11:43 ..
+drwxr-xr-x 7 ubuntu ubuntu  4096 Jul 25 11:15 results
+drwxr-xr-x 2 ubuntu ubuntu  4096 Jul 25 11:30 submission-evidence
+--- results tree (pre-archive copy) ---
+152
+13M	/tmp/ecolooop-results-archive-20260725T114338Z/results
+60K	/tmp/ecolooop-results-archive-20260725T114338Z/submission-evidence
