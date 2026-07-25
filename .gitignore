@@ -38,3 +38,7 @@ results/**
 submission-evidence/**
 !submission-evidence/.gitkeep
 !submission-evidence/**/.gitkeep
+
+# Ephemeral MCP server pidfiles from local experiment runs
+manual-verification/mcp-transport/**/*.pid
+manual-verification/mcp-transport/mcp-server-*.pid
