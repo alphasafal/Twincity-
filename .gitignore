@@ -45,3 +45,6 @@ manual-verification/mcp-transport/mcp-server-*.pid
 
 # Unpacked submission staging (zip is the deliverable)
 Eco-Loop-Hackathon-Submission/
+
+.agents/
+.cursor/mcp.json
