@@ -84,3 +84,27 @@ Pre-remediation commit: `b63311c3f929a8d9a85dfbf8ed5845231c486b6b`
 | No silent mock fallback | PASS |
 
 Clean-room clone workflow: see `mcp-transport/clean-room-stdio/` (populated next).
+
+
+## 4. True clean-room (stdio commit `95a58e754e6a17ba987fa65d09401bd97f69ca43`)
+
+Clone: `/tmp/ecolooop-stdio-cleanroom-20260725T112256Z`
+
+At clone time: tracked results = gitkeeps only; working-tree JSON count = **0**.
+
+Rerun inside clone (`clean-room-stdio/clean-room-rerun-log.txt`):
+
+| Step | Exit |
+|------|------|
+| check_prerequisites | 0 |
+| run_baseline | 0 |
+| run_agent | 0 |
+| compare_results | 0 |
+| run_llm_mcp_experiment | 0 |
+| build_submission_evidence | 0 |
+
+Clean-room LLM MCP: transport=stdio, client_pid=51319, server_pid=51324, pids_differ=True.
+
+Deterministic clean-room: baseline 421.5057, agent 415.9999, comfort 0, actions 48/0/0.
+
+**Clean-room: VERIFIED**

@@ -21,3 +21,28 @@ Tested commit HEAD: `589643c3557c56922b79edd886e88ea9e6833474` · Phase0 freeze:
 | No silent mock fallback | **VERIFIED (after fix)** | `16-final-evidence/status-energyplus-missing-after-fix.json` |
 | MCP is invoked | **PARTIALLY VERIFIED (after fix)** | in-process `call_tool`; not stdio MCP server |
 | LLM failure falls back | **VERIFIED (counts fixed)** | `llm_fallback_recount` fallback=48 |
+
+
+---
+
+## Post MCP-transport remediation (`95a58e754e6a17ba987fa65d09401bd97f69ca43` · `2026-07-25T11:30:38.737937+00:00`)
+
+Original Phase 9 FAILED/PARTIALLY rows above are historical. New evaluations:
+
+| Claim | Status | Evidence |
+|-------|--------|----------|
+| Separate MCP server process | **VERIFIED** | client 51319 ≠ server 51324 |
+| MCP initialization | **VERIFIED** | `initialize_ok` in mcp-runtime-trace.jsonl |
+| tools/list | **VERIFIED** | tools_list event + 5 experiment tools |
+| tools/call over stdio | **VERIFIED** | 240 request/response pairs |
+| MCP request IDs recorded | **VERIFIED** | request_id on tools_call_* events |
+| No direct handler in authoritative path | **VERIFIED** | llm_mcp_loop uses stdio_session only |
+| MCP server failure detected | **VERIFIED** | failure matrix 8/8 |
+| Safe fallback on MCP failure | **VERIFIED** | deterministic_fallback path |
+| Fresh clone has no pre-generated results | **VERIFIED** | gitkeeps only; JSON count 0 |
+| Dashboard honest no-data | **VERIFIED** | status-nodata.json |
+| Fresh experiments populate dashboard | **VERIFIED** | status-with-results + checksums |
+| Ollama prerequisite verified | **VERIFIED** | check_prerequisites.sh PASS |
+| Full clean-clone workflow | **VERIFIED** | clean-room-stdio rerun exits 0 |
+
+Independent readiness score after remediation: **95/100** (not copied from prior scores).
