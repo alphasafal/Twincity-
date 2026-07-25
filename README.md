@@ -1,306 +1,180 @@
-# TwinPilot
+# TwinPilot — Eco-Loop Building Agents
 
-**Verifiable Autonomous Building Optimization**
+**Verifiable autonomous building optimization** with a real EnergyPlus closed-loop experiment path and an independent Safety Shield.
 
-> Autonomous optimization you can verify.
-
-TwinPilot is a demo platform for **safe, explainable building control**: a digital twin + optimizer proposes actions, an independent **Safety Shield** validates them, and operators can approve, override, or roll back — with a prediction ledger so claims stay auditable.
-
-This repository ships a working **simulated** demo (mock building simulator by default). EnergyPlus and Ollama are optional. TwinPilot is **not production-certified** and does **not** integrate with real BMS vendors (no Honeywell/BACnet production connectors in this repo).
+> AI proposes → safety validates → EnergyPlus (or mock twin) executes → results are auditable.
 
 ---
+
+## Problem statement
+
+Buildings waste energy when HVAC setpoints ignore occupancy, weather, and comfort constraints. Fully autonomous LLM control is unsafe. Operators need a closed loop that is **measurable**, **reproducible**, and **hard-gated** by deterministic safety rules.
+
+## Proposed solution
+
+TwinPilot / Eco-Loop separates **proposal** from **actuation**:
+
+1. Observe building state (EnergyPlus Runtime API or mock twin)
+2. Agent proposes a cooling-setpoint adjustment
+3. Deterministic Safety Shield validates range, rate, deadband, sensors, and infrastructure health
+4. Only approved actions are injected (EnergyPlus schedule actuator or mock apply)
+5. Baseline vs agent experiments quantify energy, peak, comfort, and carbon *estimates*
 
 ## Architecture
 
-```mermaid
-flowchart LR
-  subgraph Clients
-    Web[Next.js Web]
-    Mobile[Expo Mobile]
-    MCP[MCP Server]
-  end
+```text
+Web / Mobile / MCP ──► FastAPI RuntimeHub ──► Mock twin (default UI demo)
+                         │
+                         ├── Optimizer + SafetyShield
+                         └── Agent (deterministic | Ollama)
 
-  subgraph API["services/api FastAPI"]
-    REST[REST /api/v1]
-    WS[WebSocket /ws]
-    Loop[Control Loop]
-    Shield[Safety Shield]
-    Agent[Agent Provider]
-  end
-
-  subgraph Engines
-    Opt[Optimizer]
-    Sim[Simulator mock / EnergyPlus]
-  end
-
-  DB[(SQLite / DB)]
-
-  Web --> REST
-  Web --> WS
-  Mobile --> REST
-  MCP --> REST
-  REST --> Loop
-  Loop --> Opt
-  Loop --> Sim
-  Loop --> Shield
-  REST --> Agent
-  REST --> DB
-  Loop --> DB
+EnergyPlus evidence path (evaluation):
+  scripts/run_baseline.sh | run_agent.sh
+    → ep_experiment (pyenergyplus Runtime API)
+    → results/{baseline,agent,comparison}/
 ```
 
-See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for control loop, safety, MCP, deployment, and data-model diagrams.
+Details: [docs/architecture.md](docs/architecture.md) · Audit map: [docs/audit/repository-map.md](docs/audit/repository-map.md)
 
----
-
-## Features
-
-- **Operating modes**: AUTONOMOUS · GUARDED · ADVISORY · FALLBACK · MANUAL
-- **Multi-objective optimization** (energy, cost, carbon, comfort, peak, equipment)
-- **Independent Safety Shield** — constraints, rate limits, confidence, validation tokens
-- **Prediction ledger** — predicted vs realized outcomes
-- **Demo scenarios** — hot day, occupancy spike, carbon intensity, faulty sensor, infeasible target, simulation failure, rollback
-- **Operator web UI** — dashboard, zones, decisions, alerts, digital twin, analytics, assistant, audit
-- **Mobile (Expo)** — approvals, alerts, rollback, offline banner
-- **MCP server** — read-only resources + narrowly scoped tools (no unrestricted actuation)
-- **Optional EnergyPlus adapter** with graceful mock fallback
-- **Optional Ollama** for richer assistant explanations (deterministic provider by default)
-
----
-
-## Tech stack
+## Technologies
 
 | Layer | Stack |
 |-------|--------|
-| API | FastAPI, SQLAlchemy, Alembic, JWT, Pydantic Settings |
-| Optimizer / Safety | `twinpilot-optimizer` (pure Python) |
-| Simulator | Mock twin (default) · EnergyPlus adapter (optional) |
+| API | FastAPI, SQLAlchemy, JWT |
+| Optimizer / Safety | `twinpilot-optimizer` |
+| Simulator | Mock twin · EnergyPlus 24.1 Runtime API |
 | Agent | Deterministic (default) · Ollama (optional) |
-| Web | Next.js 15, React 19, TanStack Query, Tailwind, Zod |
-| Mobile | Expo 52, Expo Router |
-| MCP | `twinpilot-mcp` (stdio / FastMCP) |
-| Monorepo | pnpm workspaces + Turborepo |
+| Web | Next.js 15, React 19, Tailwind |
+| Mobile | Expo 52 |
+| MCP | `twinpilot-mcp` |
+| Experiments | `scripts/run_*.sh` → JSON under `results/` |
 
----
+## Installation
+
+```bash
+./scripts/setup.sh                 # Python venv, packages, pnpm, .env
+./scripts/setup_energyplus.sh      # EnergyPlus 24.1 → third_party/EnergyPlus
+```
+
+Or: `make setup`. Copy `.env.example` → `.env` (done by setup).
+
+**Versions:** Python ≥3.11, Node 20+/22 (see `.nvmrc`), pnpm 10, EnergyPlus 24.1.0.
+
+## Demo procedure
+
+### A) Measured EnergyPlus closed loop (quote these numbers)
+
+```bash
+./scripts/run_baseline.sh
+./scripts/run_agent.sh
+./scripts/compare_results.sh
+# → results/comparison/comparison.json
+```
+
+### B) Operator UI (mock twin — clearly labeled)
+
+```bash
+./scripts/run_demo.sh
+# http://localhost:3000
+```
+
+| Role | Email | Password |
+|------|-------|----------|
+| Manager | `manager@twinpilot.demo` | `TwinPilot-Manager-Demo!` |
+| Admin | `admin@twinpilot.demo` | `TwinPilot-Admin-Demo!` |
+| Operator | `operator@twinpilot.demo` | `TwinPilot-Operator-Demo!` |
+| Viewer | `viewer@twinpilot.demo` | `TwinPilot-Viewer-Demo!` |
+
+Full walkthrough: [docs/demo-script.md](docs/demo-script.md)
+
+## Baseline methodology
+
+| Fixed across both runs | Differs |
+|------------------------|---------|
+| `office_5zone.idf` | Controller only |
+| `chicago.epw` | Baseline: fixed schedules |
+| `OCCUPY-1` occupancy | Agent: hourly SafetyShield-gated `Clg-SetP-Sch` overrides |
+| `DemoPeriod` Jul 15–16 | |
+
+## Actual measured results
+
+From a successful local run (`results/comparison/comparison.json`):
+
+| Metric | Baseline | Agent | % Δ |
+|--------|----------|-------|-----|
+| Total energy (kWh) | 421.51 | 406.21 | **−3.63%** |
+| HVAC energy (kWh) | 13.85 | 12.16 | **−12.20%** |
+| Peak power (kW) | 19.93 | 19.50 | **−2.18%** |
+| Carbon estimate (kg) | 175.77 | 169.39 | −3.63% |
+| Occupied comfort violation hours | 0 | 1 | — |
+
+Carbon uses a documented factor (0.417 kg/kWh), not live grid intensity.  
+Do **not** quote the mock dashboard “energy saved %” as EnergyPlus evidence.
+
+See [docs/results.md](docs/results.md).
+
+## Safety design
+
+- LLM **cannot** write actuators directly
+- Checks: setpoint min/max, rate limit, heating/cooling deadband, missing/impossible/stale sensors, LLM timeout, MCP failure, malformed JSON, invalid schema, EnergyPlus failure, manual override → **FALLBACK hold**
+- Docs: [docs/safety.md](docs/safety.md)
 
 ## Repository structure
 
 ```
-apps/web                 Next.js operator console
-apps/mobile              Expo mobile app
-services/api             FastAPI backend + control loop
-services/optimizer       Planner, objectives, Safety Shield
-services/simulator       Mock + EnergyPlus adapter
-services/agent           Deterministic / Ollama providers
-services/mcp-server      MCP tools & resources
-packages/*               Shared contracts, api-client, config, tokens
-building-models/         Sample IDF / weather placeholders
-infrastructure/          Dockerfiles + setup/demo scripts
-docs/                    Architecture, API, safety, demo script
-tests/integration        Cross-service API flow tests
+apps/web, apps/mobile
+services/{api,optimizer,simulator,agent,mcp-server}
+building-models/sample-office/office_5zone.idf
+building-models/weather/chicago.epw
+scripts/{setup,setup_energyplus,run_demo,run_baseline,run_agent,compare_results}.sh
+results/{baseline,agent,comparison}/
+docs/ + docs/audit/
+FINAL_HACKATHON_READINESS_REPORT.md
 ```
 
----
+## Limitations
 
-## Prerequisites
+See [docs/limitations.md](docs/limitations.md). Highlights:
 
-- **Python 3.11+** (3.12 recommended)
-- **Node.js 22** (see `.nvmrc`) + **pnpm 10**
-- Optional: Docker / Docker Compose
-- Optional: EnergyPlus + Python bindings
-- Optional: Ollama (`llama3.2` or compatible)
+- UI defaults to **mock** twin; EnergyPlus proof is the experiment harness
+- No production BMS/BACnet connectors
+- EnergyPlus install is downloaded locally (not committed)
 
----
+## Future scope
 
-## Quick start
-
-```bash
-make setup    # venv, editable Python packages, pnpm install, .env
-make replay   # headless end-to-end scenario walkthrough (starts API if needed)
-make demo     # API :8000 + Web :3000
-```
-
-Open **http://localhost:3000** and log in with a demo account below.
-
-`make replay` exercises: login → hot-day scenario → plan simulate/approve/apply →
-sensor-fault (Guarded) → infeasible target → assistant → rollback → ledger/audit.
-
-Optional open-source LLM (not required — deterministic agent is default):
-
-```bash
-make ollama                 # install Ollama + pull llama3.2:1b
-# then in .env: AGENT_PROVIDER=ollama
-make demo
-```
-
-Alternative:
-
-```bash
-make api      # FastAPI only
-make web      # Next.js only
-make mobile   # Expo
-```
-
-Docker (demo profile — SQLite, no Redis):
-
-```bash
-docker compose --profile demo up --build
-```
-
----
-
-## Demo credentials (development only)
-
-| Role | Email | Password |
-|------|-------|----------|
-| Administrator | `admin@twinpilot.demo` | `TwinPilot-Admin-Demo!` |
-| Facility Manager | `manager@twinpilot.demo` | `TwinPilot-Manager-Demo!` |
-| Operator | `operator@twinpilot.demo` | `TwinPilot-Operator-Demo!` |
-| Viewer | `viewer@twinpilot.demo` | `TwinPilot-Viewer-Demo!` |
-
-Seeded building: **TwinPilot Demo Office** (Bengaluru, simulated).
-
----
+- Live dashboard fed from EnergyPlus co-simulation ticks
+- Per-zone EMS actuators
+- Full ASHRAE comfort outputs
+- Production BMS adapters under the same Safety Shield
 
 ## Environment variables
 
-Copy [`.env.example`](.env.example) to `.env`. Key variables:
+See [`.env.example`](.env.example). Critical:
 
-| Variable | Default | Notes |
-|----------|---------|--------|
-| `DEMO_MODE` | `true` | Enables demo UX / relaxed ingest |
-| `DATABASE_URL` | `sqlite:///./twinpilot.db` | No Redis required for demo |
-| `SIMULATOR_PROVIDER` | `mock` | Or `energyplus` |
-| `AGENT_PROVIDER` | `deterministic` | Or `ollama` |
-| `JWT_SECRET` / `JWT_REFRESH_SECRET` | dev secrets | Change outside demo |
-| `NEXT_PUBLIC_API_URL` | `http://localhost:8000` | Web |
-| `EXPO_PUBLIC_API_URL` | `http://localhost:8000` | Mobile |
-| `ENERGYPLUS_*` | unset | Optional; see [docs/ENERGYPLUS.md](docs/ENERGYPLUS.md) |
-| `OLLAMA_BASE_URL` / `OLLAMA_MODEL` | localhost / `llama3.2` | Optional |
-
-Full list: [`.env.example`](.env.example).
-
----
-
-## Running components
-
-### Backend (API)
-
-```bash
-make api
-# http://localhost:8000/docs  ·  /health  ·  /ready
-```
-
-Control loop runs in-process when `CONTROL_LOOP_ENABLED=true`.
-
-### Web
-
-```bash
-make web
-# http://localhost:3000
-```
-
-### Mobile
-
-```bash
-make mobile
-# Set EXPO_PUBLIC_API_URL to your machine IP for a physical device
-```
-
-### Mock simulator (default)
-
-Default `SIMULATOR_PROVIDER=mock` — deterministic twin with playback speed, scenarios, and what-if controls via `/api/v1/demo/*`.
-
-### EnergyPlus (optional)
-
-```bash
-export SIMULATOR_PROVIDER=energyplus
-export ENERGYPLUS_HOME=...
-export ENERGYPLUS_MODEL_PATH=...
-export ENERGYPLUS_WEATHER_PATH=...
-make energyplus-check
-make api
-```
-
-If EnergyPlus is missing, the adapter **falls back to mock**. See [docs/ENERGYPLUS.md](docs/ENERGYPLUS.md).
-
-### MCP server
-
-```bash
-cd services/mcp-server && pip install -e .
-export TWINPILOT_API_URL=http://localhost:8000
-python -m twinpilot_mcp
-```
-
-Details: [docs/MCP.md](docs/MCP.md).
-
-### Ollama (optional)
-
-```bash
-ollama pull llama3.2
-export AGENT_PROVIDER=ollama
-export OLLAMA_BASE_URL=http://localhost:11434
-make api
-```
-
-Without Ollama, keep `AGENT_PROVIDER=deterministic`.
-
----
+- `SIMULATOR_PROVIDER=mock|energyplus`
+- `ENERGYPLUS_HOME`, `ENERGYPLUS_MODEL_PATH`, `ENERGYPLUS_WEATHER_PATH`
+- `ENERGYPLUS_ALLOW_MOCK_FALLBACK=0` (strict; no silent mock)
+- `AGENT_PROVIDER=deterministic|ollama`
 
 ## Tests
 
 ```bash
-make test                 # API pytest + web typecheck/lint (+ integration)
-cd services/api && pytest # Safety / objective unit tests
+make test
+PYTHONPATH=services/simulator:services/optimizer python -m pytest services/simulator/tests services/optimizer/tests -q
 ```
 
-See [docs/TESTING.md](docs/TESTING.md).
-
----
-
-## Demo scenarios
-
-Via UI (Simulator page) or API:
-
-| ID | Description |
-|----|-------------|
-| `normal_hot_day` | Baseline hot-day optimization |
-| `occupancy_spike` | Unexpected occupancy |
-| `carbon_intensive` | High grid carbon intensity |
-| `faulty_sensor` | Sensor failure → confidence / mode impact |
-| `infeasible_target` | Aggressive target rejected as infeasible |
-| `simulation_failure` | Simulator failure path |
-| `rollback` | Safe-policy rollback |
-
-Guided walkthrough: [docs/DEMO_SCRIPT.md](docs/DEMO_SCRIPT.md) (~7 minutes).
-
----
-
-## Known limitations (honest)
-
-- **Simulated demo** — KPIs and savings are labeled simulated; not verified real-building savings.
-- **No production BMS / Honeywell / BACnet connectors** in this repo.
-- **EnergyPlus** optional; adapter falls back to mock when bindings/paths are unavailable; full co-simulation is environment-specific.
-- **Ollama** optional; assistant works with the deterministic provider.
-- **SQLite** default — fine for demo; Postgres optional via Compose `full` profile.
-- **Not production-certified** — security hardening, HA, and site commissioning are out of scope.
-
----
-
-## Documentation
+## Documentation index
 
 | Doc | Topic |
 |-----|--------|
-| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | System design & diagrams |
-| [docs/API.md](docs/API.md) | REST + WebSocket reference |
-| [docs/SAFETY.md](docs/SAFETY.md) | Safety Shield & modes |
-| [docs/ENERGYPLUS.md](docs/ENERGYPLUS.md) | Optional EnergyPlus |
-| [docs/DEMO_SCRIPT.md](docs/DEMO_SCRIPT.md) | 7-minute demo |
-| [docs/TESTING.md](docs/TESTING.md) | Test strategy |
-| [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) | Local / Docker deploy |
-| [docs/BUILD_STATUS.md](docs/BUILD_STATUS.md) | Phase checklist |
-| [docs/MCP.md](docs/MCP.md) | MCP resources & tools |
-
----
+| [docs/architecture.md](docs/architecture.md) | Architecture |
+| [docs/setup.md](docs/setup.md) | Setup / troubleshooting |
+| [docs/safety.md](docs/safety.md) | Safety |
+| [docs/results.md](docs/results.md) | Measured results |
+| [docs/demo-script.md](docs/demo-script.md) | Demo script |
+| [docs/limitations.md](docs/limitations.md) | Limitations |
+| [docs/audit/](docs/audit/) | Repository map, closed-loop trace, dashboard lineage |
+| [FINAL_HACKATHON_READINESS_REPORT.md](FINAL_HACKATHON_READINESS_REPORT.md) | Scorecard |
 
 ## License / status
 

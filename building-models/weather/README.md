@@ -1,9 +1,7 @@
-# Weather (EPW)
+# Weather files
 
-Place EnergyPlus weather files (`.epw`) here, for example a Bengaluru or similar climate file matching the demo office location.
+| File | Source |
+|------|--------|
+| `chicago.epw` | EnergyPlus 24.1 weather data (`USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw`) |
 
-```bash
-export ENERGYPLUS_WEATHER_PATH=/absolute/path/to/building-models/weather/your-climate.epw
-```
-
-EPW files are not vendored in-repo. Without them, the EnergyPlus adapter falls back to the mock twin.
+Used by both baseline and agent experiments so weather is identical.

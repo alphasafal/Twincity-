@@ -798,10 +798,14 @@ class RuntimeHub:
     def _record_kpi_snapshot(self, state: dict[str, Any], baseline: bool) -> None:
         interval_h = 0.25
         energy = state["total_building_power_kw"] * interval_h
+        # Synthetic counterfactual baseline used ONLY for the mock-twin live demo KPI
+        # strip. Real EnergyPlus baseline/agent evidence lives under results/*.
+        # Factor 1.12 is an explicit demo heuristic — not a measured savings claim.
+        mock_baseline_factor = 1.12 if state.get("simulated", True) else 1.0
         if baseline or not self.kpi_history:
-            self.baseline_energy_kwh += energy * 1.12
+            self.baseline_energy_kwh += energy * mock_baseline_factor
         self.twin_energy_kwh += energy
-        baseline_power = state["total_building_power_kw"] * 1.12
+        baseline_power = state["total_building_power_kw"] * mock_baseline_factor
         self.cost_saved += max(0.0, (baseline_power - state["total_building_power_kw"]) * interval_h * state["electricity_tariff"])
         self.carbon_avoided += max(
             0.0,
@@ -810,7 +814,7 @@ class RuntimeHub:
             * state["grid_carbon_intensity"]
             / 1000.0,
         )
-        if baseline_power > 0:
+        if baseline_power > 0 and mock_baseline_factor != 1.0:
             self.peak_reduction_pct = max(
                 self.peak_reduction_pct,
                 (baseline_power - state["total_building_power_kw"]) / baseline_power * 100,
@@ -837,6 +841,12 @@ class RuntimeHub:
                 "comfort_compliance": self.comfort_compliance,
                 "baseline_energy_kwh": round(self.baseline_energy_kwh, 2),
                 "twin_energy_kwh": round(self.twin_energy_kwh, 2),
+                "simulated": bool(state.get("simulated", True)),
+                "baseline_method": (
+                    "synthetic_factor_1_12_mock_demo"
+                    if mock_baseline_factor != 1.0
+                    else "same_as_measured_power_no_synthetic_counterfactual"
+                ),
             }
         )
         self.kpi_history = self.kpi_history[-500:]

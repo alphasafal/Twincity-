@@ -240,7 +240,13 @@ def building_status(building_id: str, db: DbSession, user: CurrentUser) -> dict[
         "state": state,
         "service_health": hub.service_health,
         "kpi_history": hub.kpi_history[-96:],
-        "simulated": True,
+        "simulated": bool(state.get("simulated", True)),
+        "data_label": (
+            "mock_twin"
+            if state.get("simulated", True)
+            else "energyplus_or_measured"
+        ),
+        "simulator_health": hub.simulator.health(),
         "active_scenario": hub.active_scenario,
     }
 
@@ -379,7 +385,14 @@ def zone_override(
 # ── Telemetry ─────────────────────────────────────────────────────────
 @router.get("/buildings/{building_id}/telemetry/latest")
 def telemetry_latest(building_id: str, user: CurrentUser) -> dict[str, Any]:
-    return {"building_id": building_id, "state": hub.latest_state, "simulated": True}
+    return {
+        "building_id": building_id,
+        "state": hub.latest_state,
+        "simulated": bool((hub.latest_state or {}).get("simulated", True)),
+        "data_label": "mock_twin"
+        if (hub.latest_state or {}).get("simulated", True)
+        else "energyplus_or_measured",
+    }
 
 
 @router.get("/buildings/{building_id}/telemetry/history")
@@ -507,7 +520,11 @@ def generate_optimization(
             }
         )
     db.commit()
-    return {"plans": saved, "weights": weights.model_dump(), "simulated": True}
+    return {
+        "plans": saved,
+        "weights": weights.model_dump(),
+        "simulated": bool((hub.latest_state or {}).get("simulated", True)),
+    }
 
 
 @router.get("/control-plans/{plan_id}")
@@ -695,7 +712,10 @@ def simulate_plan(
         "simulated_peak_kw": result.peak_kw,
         "comfort_violation_minutes": float(result.comfort_violation_minutes),
         "planner_comfort_violation_minutes": prior.get("comfort_violation_minutes", 0),
-        "label": "simulated",
+        "label": "mock_twin_simulated"
+        if result.simulated
+        else result.metrics.get("label", "energyplus_anchored"),
+        "simulated": result.simulated,
     }
     db.commit()
     return {"status": "COMPLETED", "result": result.model_dump(), "plan_id": plan.id}
@@ -1050,13 +1070,26 @@ def analytics_summary(building_id: str, user: CurrentUser) -> dict[str, Any]:
         "carbon_avoided_kg": round(hub.carbon_avoided, 2),
         "peak_demand_reduction_pct": round(hub.peak_reduction_pct, 2),
         "comfort_compliance_pct": hub.comfort_compliance,
-        "label": "simulated",
+        "label": "mock_twin_demo_kpis"
+        if (hub.latest_state or {}).get("simulated", True)
+        else "energyplus_live_state",
+        "simulated": bool((hub.latest_state or {}).get("simulated", True)),
+        "evidence_note": (
+            "For measured EnergyPlus baseline-vs-agent results see "
+            "results/comparison/comparison.json from ./scripts/compare_results.sh"
+        ),
     }
 
 
 @router.get("/buildings/{building_id}/analytics/timeseries")
 def analytics_timeseries(building_id: str, user: CurrentUser) -> dict[str, Any]:
-    return {"building_id": building_id, "points": hub.kpi_history[-288:], "label": "simulated"}
+    simulated = bool((hub.latest_state or {}).get("simulated", True))
+    return {
+        "building_id": building_id,
+        "points": hub.kpi_history[-288:],
+        "label": "mock_twin_demo_kpis" if simulated else "energyplus_live_state",
+        "simulated": simulated,
+    }
 
 
 @router.get("/buildings/{building_id}/analytics/export")

@@ -39,11 +39,14 @@ class ConstraintLimits(BaseModel):
     min_heating_setpoint: float = 16.0
     max_heating_setpoint: float = 24.0
     max_setpoint_change_per_interval: float = 1.5
+    heating_cooling_deadband_c: float = 1.5
     minimum_ventilation: float = 0.3
     maximum_control_duration: int = 240
     minimum_confidence_for_autonomy: float = 0.85
     maximum_data_age_seconds: int = 300
     max_violation_minutes: float = 15.0
+    min_sensor_temperature_c: float = 0.0
+    max_sensor_temperature_c: float = 50.0
 
 
 class ProposedAction(BaseModel):
@@ -53,6 +56,8 @@ class ProposedAction(BaseModel):
     proposed_value: float | None = None
     duration_minutes: int = 60
     outdoor_air_fraction: float | None = None
+    paired_heating_setpoint: float | None = None
+    paired_cooling_setpoint: float | None = None
 
 
 class ValidationContext(BaseModel):
@@ -71,6 +76,17 @@ class ValidationContext(BaseModel):
     approved: bool = False
     limits: ConstraintLimits = Field(default_factory=ConstraintLimits)
     now: datetime | None = None
+    # Failure / sensor integrity signals (LLM cannot clear these)
+    missing_temperature: bool = False
+    missing_occupancy: bool = False
+    impossible_sensor_value: bool = False
+    llm_timeout: bool = False
+    mcp_failure: bool = False
+    energyplus_failure: bool = False
+    manual_override: bool = False
+    malformed_agent_response: bool = False
+    invalid_action_schema: bool = False
+    measured_zone_temperature: float | None = None
 
 
 class SafetyShield:
@@ -128,6 +144,43 @@ class SafetyShield:
         else:
             add("setpoint_range", True, "Range check not applicable for this action type")
 
+        # 2b. Heating / cooling deadband
+        deadband_ok = True
+        if (
+            action.action_type in {"cooling_setpoint", "request_zone_setpoint"}
+            and value is not None
+            and action.paired_heating_setpoint is not None
+        ):
+            deadband_ok = value >= (
+                action.paired_heating_setpoint + limits.heating_cooling_deadband_c
+            )
+            add(
+                "heating_cooling_deadband",
+                deadband_ok,
+                "Heating/cooling deadband maintained"
+                if deadband_ok
+                else "Cooling setpoint too close to heating setpoint",
+                None if deadband_ok else "Heating/cooling deadband would be violated",
+            )
+        elif (
+            action.action_type == "heating_setpoint"
+            and value is not None
+            and action.paired_cooling_setpoint is not None
+        ):
+            deadband_ok = (
+                action.paired_cooling_setpoint >= value + limits.heating_cooling_deadband_c
+            )
+            add(
+                "heating_cooling_deadband",
+                deadband_ok,
+                "Heating/cooling deadband maintained"
+                if deadband_ok
+                else "Heating setpoint too close to cooling setpoint",
+                None if deadband_ok else "Heating/cooling deadband would be violated",
+            )
+        else:
+            add("heating_cooling_deadband", True, "Deadband check not applicable")
+
         # 3. Max movement per interval
         movement_ok = True
         if value is not None and action.current_value is not None:
@@ -162,14 +215,39 @@ class SafetyShield:
             None if fresh else "Telemetry is not sufficiently fresh",
         )
 
-        # 6. Sensor health
+        # 6. Sensor health / missing / impossible values
+        sensors_ok = (
+            context.required_sensors_healthy
+            and not context.missing_temperature
+            and not context.missing_occupancy
+            and not context.impossible_sensor_value
+        )
+        if context.measured_zone_temperature is not None:
+            t = context.measured_zone_temperature
+            if t != t or abs(t) == float("inf"):  # NaN / inf
+                sensors_ok = False
+            elif t < limits.min_sensor_temperature_c or t > limits.max_sensor_temperature_c:
+                sensors_ok = False
+                context.impossible_sensor_value = True
         add(
             "sensor_health",
-            context.required_sensors_healthy,
-            "Required sensors are healthy"
-            if context.required_sensors_healthy
-            else "Required sensors are unhealthy",
-            None if context.required_sensors_healthy else "Required sensors are not healthy",
+            sensors_ok,
+            "Required sensors are healthy" if sensors_ok else "Required sensors are unhealthy",
+            None if sensors_ok else "Required sensors are not healthy or values are invalid",
+        )
+        add(
+            "missing_temperature",
+            not context.missing_temperature,
+            "Zone temperature present"
+            if not context.missing_temperature
+            else "Zone temperature missing",
+            None if not context.missing_temperature else "Zone temperature is missing",
+        )
+        add(
+            "missing_occupancy",
+            not context.missing_occupancy,
+            "Occupancy present" if not context.missing_occupancy else "Occupancy missing",
+            None if not context.missing_occupancy else "Occupancy is missing",
         )
 
         # 7. Confidence vs mode
@@ -292,12 +370,50 @@ class SafetyShield:
             else "Simulation does not correspond to the current building state",
         )
 
+        # 16. Infrastructure / agent integrity failures → emergency fallback path
+        infra_ok = not (
+            context.llm_timeout
+            or context.mcp_failure
+            or context.energyplus_failure
+            or context.malformed_agent_response
+            or context.invalid_action_schema
+            or context.manual_override
+        )
+        infra_msg = "Agent/infrastructure integrity ok"
+        infra_block = None
+        if context.manual_override:
+            infra_msg = "Manual override active — automatic actuation blocked"
+            infra_block = "Manual override blocks automatic actuation"
+        elif context.llm_timeout:
+            infra_msg = "LLM timed out"
+            infra_block = "LLM timeout — no uncontrolled action; fallback hold"
+        elif context.mcp_failure:
+            infra_msg = "MCP failure"
+            infra_block = "MCP failure — no uncontrolled action; fallback hold"
+        elif context.energyplus_failure:
+            infra_msg = "EnergyPlus failure"
+            infra_block = "EnergyPlus failure — actuation blocked"
+        elif context.malformed_agent_response:
+            infra_msg = "Malformed agent response"
+            infra_block = "Malformed agent response rejected"
+        elif context.invalid_action_schema:
+            infra_msg = "Invalid action schema"
+            infra_block = "Invalid action schema rejected"
+        add("infrastructure_integrity", infra_ok, infra_msg, infra_block)
+
         valid = all(c.passed for c in checks)
         recommended = None
         if not valid:
-            if context.critical_alert_blocking or not context.simulation_ok:
+            if (
+                context.critical_alert_blocking
+                or not context.simulation_ok
+                or context.llm_timeout
+                or context.mcp_failure
+                or context.energyplus_failure
+                or context.manual_override
+            ):
                 recommended = OperatingMode.FALLBACK
-            elif not context.required_sensors_healthy or not fresh:
+            elif not sensors_ok or not fresh:
                 recommended = OperatingMode.GUARDED
             else:
                 recommended = OperatingMode.ADVISORY
