@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# LLM-via-MCP closed-loop experiment path with stage logs.
-# EnergyPlus observation → MCP resource/tool → LLM structured proposal → SafetyShield → actuator
+# LLM + stdio MCP closed-loop experiment path with stage logs.
+# EnergyPlus → MCP client → stdio → separate MCP server → tools → Ollama → SafetyShield → actuator
 # Deterministic controller is the fallback when Ollama/MCP is unavailable.
 set -euo pipefail
 

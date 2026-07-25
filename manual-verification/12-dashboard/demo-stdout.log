@@ -30,3 +30,6 @@ Press Ctrl+C to stop.
  ○ Compiling /live-demo ...
  ✓ Compiled /live-demo in 2.1s (1850 modules)
  GET /live-demo 200 in 2213ms
+ ✓ Compiled in 430ms (861 modules)
+ ✓ Compiled in 199ms (861 modules)
+ ✓ Compiled in 191ms (861 modules)

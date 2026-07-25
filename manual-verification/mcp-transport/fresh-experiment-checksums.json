@@ -1,0 +1,16 @@
+{
+  "baseline_ts": "2026-07-25T11:22:06.921990+00:00",
+  "agent_ts": "2026-07-25T11:22:07.546063+00:00",
+  "baseline_total": 421.5057,
+  "agent_total": 415.9999,
+  "comfort_agent": 0.0,
+  "actions": {
+    "approved": 48,
+    "rejected": 0,
+    "fallback": 0,
+    "total_decisions": 48
+  },
+  "baseline_summary_sha256": "8600ab8306c4fbf0cc191f29c9184127cdad867bba2b1d1049938a03b8756698",
+  "agent_summary_sha256": "62ea9542e1a95ac3d3277d18a35ebb2040e624ed4af6e2ef0dc4cd317dff815c",
+  "comparison_sha256": "d632b17057fb68689496b31fae2c4af7dbfa3d8d7fe0c21b6c89c530469953f6"
+}

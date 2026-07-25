@@ -1,0 +1,488 @@
+2026-07-25 11:15:26,759 INFO twinpilot_mcp.energyplus_experiment: Starting EnergyPlus experiment MCP server pid=37852 transport=stdio
+2026-07-25 11:15:27,037 INFO mcp.server.lowlevel.server: Processing request of type ListToolsRequest
+2026-07-25 11:15:27,041 INFO mcp.server.lowlevel.server: Processing request of type ListToolsRequest
+2026-07-25 11:15:27,043 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:15:27,043 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=37852
+2026-07-25 11:18:07,234 INFO twinpilot_mcp.energyplus_experiment: Starting EnergyPlus experiment MCP server pid=38200 transport=stdio
+2026-07-25 11:18:07,491 INFO mcp.server.lowlevel.server: Processing request of type ListToolsRequest
+2026-07-25 11:18:07,494 INFO mcp.server.lowlevel.server: Processing request of type ListToolsRequest
+2026-07-25 11:18:08,348 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:08,348 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:18:08,352 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:08,352 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:18:08,356 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:08,356 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:18:15,704 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:15,753 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=False disposition=rejected server_pid=38200
+2026-07-25 11:18:15,758 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:15,758 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=1 server_pid=38200
+2026-07-25 11:18:15,764 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:15,764 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:18:15,766 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:15,766 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:18:15,769 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:15,769 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:18:20,035 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:20,036 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=True disposition=approved server_pid=38200
+2026-07-25 11:18:20,041 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:20,042 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=2 server_pid=38200
+2026-07-25 11:18:20,048 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:20,048 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:18:20,051 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:20,051 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:18:20,053 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:20,053 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:18:24,564 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:24,565 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=True disposition=approved server_pid=38200
+2026-07-25 11:18:24,570 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:24,570 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=3 server_pid=38200
+2026-07-25 11:18:24,576 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:24,576 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:18:24,579 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:24,579 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:18:24,582 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:24,582 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:18:28,404 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:28,404 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=False disposition=rejected server_pid=38200
+2026-07-25 11:18:28,408 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:28,408 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=4 server_pid=38200
+2026-07-25 11:18:28,413 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:28,413 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:18:28,415 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:28,415 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:18:28,418 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:28,419 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:18:32,196 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:32,196 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=True disposition=approved server_pid=38200
+2026-07-25 11:18:32,200 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:32,200 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=5 server_pid=38200
+2026-07-25 11:18:32,206 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:32,206 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:18:32,208 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:32,208 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:18:32,211 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:32,211 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:18:36,808 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:36,809 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=True disposition=approved server_pid=38200
+2026-07-25 11:18:36,812 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:36,812 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=6 server_pid=38200
+2026-07-25 11:18:36,819 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:36,819 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:18:36,822 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:36,822 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:18:36,824 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:36,824 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:18:40,668 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:40,669 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=True disposition=approved server_pid=38200
+2026-07-25 11:18:40,672 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:40,673 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=7 server_pid=38200
+2026-07-25 11:18:40,678 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:40,678 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:18:40,681 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:40,682 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:18:40,684 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:40,684 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:18:45,160 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:45,161 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=False disposition=rejected server_pid=38200
+2026-07-25 11:18:45,164 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:45,164 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=8 server_pid=38200
+2026-07-25 11:18:45,171 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:45,172 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:18:45,174 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:45,175 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:18:45,177 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:45,177 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:18:49,693 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:49,694 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=True disposition=approved server_pid=38200
+2026-07-25 11:18:49,698 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:49,698 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=9 server_pid=38200
+2026-07-25 11:18:49,709 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:49,709 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:18:49,712 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:49,712 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:18:49,715 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:49,715 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:18:53,384 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:53,385 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=False disposition=rejected server_pid=38200
+2026-07-25 11:18:53,389 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:53,389 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=10 server_pid=38200
+2026-07-25 11:18:53,397 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:53,398 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:18:53,400 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:53,400 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:18:53,403 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:53,404 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:18:57,678 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:57,679 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=True disposition=approved server_pid=38200
+2026-07-25 11:18:57,683 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:57,684 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=11 server_pid=38200
+2026-07-25 11:18:57,693 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:57,694 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:18:57,696 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:57,696 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:18:57,699 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:18:57,699 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:19:01,808 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:01,808 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=False disposition=rejected server_pid=38200
+2026-07-25 11:19:01,813 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:01,813 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=12 server_pid=38200
+2026-07-25 11:19:01,820 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:01,820 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:19:01,823 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:01,823 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:19:01,826 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:01,826 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:19:05,409 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:05,409 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=True disposition=approved server_pid=38200
+2026-07-25 11:19:05,413 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:05,414 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=13 server_pid=38200
+2026-07-25 11:19:05,419 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:05,420 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:19:05,423 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:05,423 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:19:05,426 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:05,426 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:19:09,208 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:09,209 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=True disposition=approved server_pid=38200
+2026-07-25 11:19:09,214 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:09,214 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=14 server_pid=38200
+2026-07-25 11:19:09,220 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:09,221 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:19:09,223 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:09,223 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:19:09,227 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:09,227 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:19:12,900 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:12,901 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=False disposition=rejected server_pid=38200
+2026-07-25 11:19:12,904 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:12,905 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=15 server_pid=38200
+2026-07-25 11:19:12,911 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:12,911 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:19:12,914 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:12,914 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:19:12,917 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:12,917 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:19:17,169 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:17,169 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=True disposition=approved server_pid=38200
+2026-07-25 11:19:17,173 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:17,174 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=16 server_pid=38200
+2026-07-25 11:19:17,180 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:17,180 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:19:17,183 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:17,183 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:19:17,187 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:17,187 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:19:21,012 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:21,013 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=False disposition=rejected server_pid=38200
+2026-07-25 11:19:21,017 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:21,018 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=17 server_pid=38200
+2026-07-25 11:19:21,024 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:21,024 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:19:21,028 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:21,028 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:19:21,030 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:21,031 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:19:24,776 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:24,777 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=False disposition=rejected server_pid=38200
+2026-07-25 11:19:24,781 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:24,781 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=18 server_pid=38200
+2026-07-25 11:19:24,788 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:24,788 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:19:24,791 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:24,792 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:19:24,794 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:24,795 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:19:28,973 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:28,973 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=True disposition=approved server_pid=38200
+2026-07-25 11:19:28,977 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:28,977 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=19 server_pid=38200
+2026-07-25 11:19:28,984 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:28,984 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:19:28,987 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:28,987 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:19:28,990 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:28,990 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:19:33,090 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:33,090 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=True disposition=approved server_pid=38200
+2026-07-25 11:19:33,094 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:33,094 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=20 server_pid=38200
+2026-07-25 11:19:33,101 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:33,101 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:19:33,104 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:33,104 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:19:33,107 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:33,107 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:19:37,231 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:37,232 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=True disposition=approved server_pid=38200
+2026-07-25 11:19:37,235 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:37,236 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=21 server_pid=38200
+2026-07-25 11:19:37,241 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:37,241 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:19:37,244 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:37,244 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:19:37,247 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:37,247 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:19:41,055 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:41,055 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=False disposition=rejected server_pid=38200
+2026-07-25 11:19:41,059 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:41,059 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=22 server_pid=38200
+2026-07-25 11:19:41,063 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:41,064 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:19:41,067 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:41,067 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:19:41,071 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:41,071 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:19:44,982 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:44,982 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=True disposition=approved server_pid=38200
+2026-07-25 11:19:44,986 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:44,986 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=23 server_pid=38200
+2026-07-25 11:19:44,991 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:44,991 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:19:44,994 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:44,994 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:19:44,997 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:44,997 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:19:49,222 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:49,222 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=True disposition=approved server_pid=38200
+2026-07-25 11:19:49,226 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:49,226 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=24 server_pid=38200
+2026-07-25 11:19:49,230 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:49,231 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:19:49,234 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:49,234 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:19:49,236 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:49,236 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:19:53,038 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:53,038 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=True disposition=approved server_pid=38200
+2026-07-25 11:19:53,042 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:53,042 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=25 server_pid=38200
+2026-07-25 11:19:53,047 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:53,047 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:19:53,051 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:53,051 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:19:53,055 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:53,055 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:19:57,052 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:57,053 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=True disposition=approved server_pid=38200
+2026-07-25 11:19:57,057 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:57,057 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=26 server_pid=38200
+2026-07-25 11:19:57,062 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:57,062 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:19:57,065 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:57,066 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:19:57,068 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:19:57,068 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:20:01,367 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:01,368 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=False disposition=rejected server_pid=38200
+2026-07-25 11:20:01,371 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:01,372 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=27 server_pid=38200
+2026-07-25 11:20:01,376 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:01,376 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:20:01,379 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:01,380 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:20:01,383 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:01,383 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:20:04,895 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:04,895 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=False disposition=rejected server_pid=38200
+2026-07-25 11:20:04,898 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:04,899 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=28 server_pid=38200
+2026-07-25 11:20:04,903 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:04,903 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:20:04,905 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:04,906 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:20:04,908 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:04,908 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:20:08,555 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:08,555 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=True disposition=approved server_pid=38200
+2026-07-25 11:20:08,559 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:08,560 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=29 server_pid=38200
+2026-07-25 11:20:08,564 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:08,564 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:20:08,567 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:08,567 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:20:08,571 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:08,571 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:20:12,536 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:12,536 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=True disposition=approved server_pid=38200
+2026-07-25 11:20:12,540 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:12,540 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=30 server_pid=38200
+2026-07-25 11:20:12,547 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:12,547 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:20:12,550 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:12,550 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:20:12,552 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:12,552 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:20:16,528 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:16,528 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=True disposition=approved server_pid=38200
+2026-07-25 11:20:16,532 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:16,532 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=31 server_pid=38200
+2026-07-25 11:20:16,539 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:16,539 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:20:16,564 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:16,564 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:20:16,568 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:16,568 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:20:20,660 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:20,661 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=False disposition=rejected server_pid=38200
+2026-07-25 11:20:20,664 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:20,665 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=32 server_pid=38200
+2026-07-25 11:20:20,673 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:20,673 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:20:20,676 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:20,676 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:20:20,679 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:20,679 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:20:24,867 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:24,867 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=True disposition=approved server_pid=38200
+2026-07-25 11:20:24,871 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:24,871 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=33 server_pid=38200
+2026-07-25 11:20:24,879 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:24,879 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:20:24,882 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:24,882 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:20:24,885 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:24,885 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:20:29,025 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:29,026 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=False disposition=rejected server_pid=38200
+2026-07-25 11:20:29,030 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:29,030 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=34 server_pid=38200
+2026-07-25 11:20:29,036 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:29,036 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:20:29,039 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:29,040 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:20:29,043 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:29,043 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:20:32,970 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:32,971 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=True disposition=approved server_pid=38200
+2026-07-25 11:20:32,975 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:32,975 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=35 server_pid=38200
+2026-07-25 11:20:32,982 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:32,982 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:20:32,985 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:32,985 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:20:32,988 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:32,988 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:20:36,759 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:36,759 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=False disposition=rejected server_pid=38200
+2026-07-25 11:20:36,764 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:36,764 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=36 server_pid=38200
+2026-07-25 11:20:36,770 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:36,771 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:20:36,773 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:36,774 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:20:36,776 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:36,776 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:20:40,427 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:40,427 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=False disposition=rejected server_pid=38200
+2026-07-25 11:20:40,431 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:40,432 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=37 server_pid=38200
+2026-07-25 11:20:40,438 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:40,438 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:20:40,441 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:40,441 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:20:40,444 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:40,444 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:20:44,715 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:44,716 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=True disposition=approved server_pid=38200
+2026-07-25 11:20:44,720 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:44,720 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=38 server_pid=38200
+2026-07-25 11:20:44,727 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:44,728 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:20:44,731 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:44,731 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:20:44,734 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:44,735 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:20:48,971 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:48,972 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=False disposition=rejected server_pid=38200
+2026-07-25 11:20:48,976 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:48,976 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=39 server_pid=38200
+2026-07-25 11:20:48,982 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:48,982 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:20:48,986 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:48,986 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:20:48,989 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:48,990 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:20:52,956 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:52,957 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=False disposition=rejected server_pid=38200
+2026-07-25 11:20:52,960 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:52,960 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=40 server_pid=38200
+2026-07-25 11:20:52,966 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:52,966 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:20:52,970 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:52,970 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:20:52,973 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:52,973 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:20:57,174 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:57,175 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=True disposition=approved server_pid=38200
+2026-07-25 11:20:57,179 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:57,179 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=41 server_pid=38200
+2026-07-25 11:20:57,184 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:57,185 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:20:57,187 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:57,188 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:20:57,191 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:20:57,191 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:21:00,774 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:21:00,774 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=True disposition=approved server_pid=38200
+2026-07-25 11:21:00,778 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:21:00,778 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=42 server_pid=38200
+2026-07-25 11:21:00,784 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:21:00,784 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:21:00,787 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:21:00,787 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:21:00,791 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:21:00,791 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:21:04,460 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:21:04,460 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=True disposition=approved server_pid=38200
+2026-07-25 11:21:04,465 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:21:04,465 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=43 server_pid=38200
+2026-07-25 11:21:04,472 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:21:04,472 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:21:04,475 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:21:04,475 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:21:04,478 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:21:04,478 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:21:08,296 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:21:08,296 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=False disposition=rejected server_pid=38200
+2026-07-25 11:21:08,300 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:21:08,300 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=44 server_pid=38200
+2026-07-25 11:21:08,307 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:21:08,308 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:21:08,311 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:21:08,311 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:21:08,314 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:21:08,314 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:21:11,919 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:21:11,919 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=True disposition=approved server_pid=38200
+2026-07-25 11:21:11,923 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:21:11,923 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=45 server_pid=38200
+2026-07-25 11:21:11,929 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:21:11,929 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:21:11,932 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:21:11,932 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:21:11,934 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:21:11,934 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:21:15,853 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:21:15,854 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=True disposition=approved server_pid=38200
+2026-07-25 11:21:15,858 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:21:15,858 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=46 server_pid=38200
+2026-07-25 11:21:15,863 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:21:15,863 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:21:15,866 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:21:15,866 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:21:15,869 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:21:15,869 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:21:19,984 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:21:19,984 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=True disposition=approved server_pid=38200
+2026-07-25 11:21:19,988 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:21:19,988 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=47 server_pid=38200
+2026-07-25 11:21:19,993 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:21:19,993 INFO twinpilot_mcp.energyplus_experiment: tool=get_building_observation server_pid=38200
+2026-07-25 11:21:19,996 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:21:19,996 INFO twinpilot_mcp.energyplus_experiment: tool=propose_or_prepare_control_context server_pid=38200
+2026-07-25 11:21:19,999 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:21:19,999 INFO twinpilot_mcp.energyplus_experiment: tool=get_controller_constraints server_pid=38200
+2026-07-25 11:21:23,436 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:21:23,436 INFO twinpilot_mcp.energyplus_experiment: tool=validate_control_action approved=False disposition=rejected server_pid=38200
+2026-07-25 11:21:23,440 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:21:23,440 INFO twinpilot_mcp.energyplus_experiment: tool=record_control_decision n=48 server_pid=38200

@@ -58,6 +58,8 @@ export default function DashboardPage() {
   const { data, isLoading, error, socketStatus } = useLiveBuilding(buildingId);
   const experiment = (data?.experiment || null) as ExperimentBlock | null;
   const isEnergyPlus = data?.data_mode === "energyplus" && experiment?.available;
+  const energyPlusNoData =
+    data?.data_mode === "energyplus" && !experiment?.available;
 
   const history = (data?.kpi_history || []).map((p, idx) => ({
     idx,
@@ -124,6 +126,12 @@ export default function DashboardPage() {
 
       {data ? (
         <>
+          {energyPlusNoData ? (
+            <EmptyState>
+              No EnergyPlus experiment results found. Run the baseline and agent
+              experiment scripts first.
+            </EmptyState>
+          ) : null}
           {isEnergyPlus ? (
             <>
               <div className="mb-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
