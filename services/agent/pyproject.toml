@@ -1,0 +1,16 @@
+[project]
+name = "twinpilot-agent"
+version = "0.1.0"
+description = "TwinPilot open-source LLM supervisor adapters"
+requires-python = ">=3.11"
+dependencies = [
+  "pydantic>=2.10",
+  "httpx>=0.28",
+]
+
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["twinpilot_agent*"]

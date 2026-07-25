@@ -1,0 +1,15 @@
+run_pair,label,metric,run1,run2,abs_diff,rel_diff_pct
+run1_vs_run2,baseline,total_energy_kwh,421.5057,421.5057,0.0,0.0
+run1_vs_run2,agent,total_energy_kwh,415.9999,415.9999,0.0,0.0
+run1_vs_run2,baseline,hvac_energy_kwh,13.8459,13.8459,0.0,0.0
+run1_vs_run2,agent,hvac_energy_kwh,13.157,13.157,0.0,0.0
+run1_vs_run2,baseline,peak_power_kw,19.9325,19.9325,0.0,0.0
+run1_vs_run2,agent,peak_power_kw,19.64,19.64,0.0,0.0
+run1_vs_run2,baseline,occupied_comfort_violation_hours,0.0,0.0,0.0,0
+run1_vs_run2,agent,occupied_comfort_violation_hours,0.0,0.0,0.0,0
+run1_vs_run2,baseline,occupied_comfort_degree_hours,0.0,0.0,0.0,0
+run1_vs_run2,agent,occupied_comfort_degree_hours,0.0,0.0,0.0,0
+run1_vs_run2,agent,actions_approved,48,48,0,0
+run1_vs_run2,agent,actions_rejected,0,0,0,0
+run1_vs_run2,agent,actions_fallback,0,0,0,0
+run1_vs_run2,agent,actions_total_decisions,48,48,0,0

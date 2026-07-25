@@ -1,0 +1,153 @@
+{
+  "tested_commit": "95a58e754e6a17ba987fa65d09401bd97f69ca43",
+  "pre_remediation_commit": "b63311c3f929a8d9a85dfbf8ed5845231c486b6b",
+  "tested_at": "2026-07-25T11:30:38.737937+00:00",
+  "overall_status": "PASS",
+  "readiness_score": 95,
+  "score_breakdown": {
+    "energyplus_closed_loop": 24,
+    "experiment_validity": 14,
+    "energy_comfort": 15,
+    "llm_mcp": 9,
+    "safety_fallback": 14,
+    "dashboard": 8,
+    "clean_room": 7,
+    "docs_demo": 4
+  },
+  "readiness_score_note": "Recalculated after stdio MCP remediation + clean-room; not restored from prior 87/90.",
+  "claims": {
+    "energyplus_runs": {
+      "status": "VERIFIED",
+      "evidence": [
+        "fresh baseline/agent",
+        "clean-room"
+      ]
+    },
+    "real_actuator_write": {
+      "status": "VERIFIED",
+      "evidence": [
+        "06-actuator-proof preserved",
+        "fresh agent actions"
+      ]
+    },
+    "next_state_received": {
+      "status": "VERIFIED",
+      "evidence": [
+        "06-actuator-proof"
+      ]
+    },
+    "baseline_agent_fairness": {
+      "status": "VERIFIED",
+      "evidence": [
+        "05-fairness"
+      ]
+    },
+    "metrics_reproduced": {
+      "status": "VERIFIED",
+      "evidence": [
+        "fresh-experiment-checksums.json",
+        "cleanroom summaries"
+      ]
+    },
+    "comfort_independently_verified": {
+      "status": "VERIFIED",
+      "evidence": [
+        "08-comfort",
+        "cleanroom agent comfort 0"
+      ]
+    },
+    "mcp_invocation": {
+      "status": "VERIFIED",
+      "evidence": [
+        "stdio separate process",
+        "mcp-runtime-trace.jsonl",
+        "cleanroom-llm-summary.json"
+      ]
+    },
+    "ollama_response": {
+      "status": "VERIFIED",
+      "evidence": [
+        "llm_structured_proposal stages",
+        "prereq checker"
+      ]
+    },
+    "safety_rejection": {
+      "status": "VERIFIED",
+      "evidence": [
+        "safety_shield_rejects_unsafe"
+      ]
+    },
+    "fallback": {
+      "status": "VERIFIED",
+      "evidence": [
+        "mcp-failure-matrix.csv",
+        "llm fallback path"
+      ]
+    },
+    "dashboard_real_data": {
+      "status": "VERIFIED",
+      "evidence": [
+        "status-with-results.json"
+      ]
+    },
+    "no_silent_mock_fallback": {
+      "status": "VERIFIED",
+      "evidence": [
+        "status-nodata.json"
+      ]
+    },
+    "clean_room_reproducibility": {
+      "status": "VERIFIED",
+      "evidence": [
+        "clean-room-stdio/"
+      ]
+    },
+    "results_not_precommitted": {
+      "status": "VERIFIED",
+      "evidence": [
+        "git ls-files results = gitkeeps only"
+      ]
+    }
+  },
+  "p0_issues": [],
+  "p1_issues": [
+    "LLM-controller comfort/energy vary by model stochasticity (separate from deterministic Path A claims)"
+  ],
+  "p2_issues": [
+    "Git similarity detection may rename deleted results JSON into evidence logs in commit history metadata"
+  ],
+  "acceptance_gates": {
+    "mcp_pids_differ": true,
+    "mcp_initialize": true,
+    "tools_list": true,
+    "tools_call_stdio": true,
+    "no_direct_handler": true,
+    "kill_server_fails_client": true,
+    "no_tracked_generated_results": true,
+    "honest_nodata_dashboard": true,
+    "fresh_experiments_populate_dashboard": true,
+    "ollama_prereq_checker": true,
+    "clean_clone_workflow": true,
+    "actuator_and_next_state_still_pass": true,
+    "comfort_zero_deterministic": true,
+    "no_silent_mock": true
+  },
+  "human_checks_remaining": [
+    "Personally confirm `ps` shows twinpilot_mcp child during LLM experiment",
+    "Open dashboard with empty results/ then after local baseline/agent"
+  ],
+  "remediation_commits": [
+    "95a58e754e6a17ba987fa65d09401bd97f69ca43",
+    "1b6a04557185e4dea0389f4f5961e4538a729bc1"
+  ],
+  "tested_commit_note": "Tip commit updated in follow-up commit after guide refresh",
+  "manual_guide": "manual-verification/MANUAL_VERIFICATION_GUIDE.md",
+  "remediation_report": "manual-verification/MCP_TRANSPORT_REMEDIATION_REPORT.md",
+  "clean_room_evidence_commit": "1b6a04557185e4dea0389f4f5961e4538a729bc1",
+  "branch_tip_at_write": "fe219aca70729bbf689e00528804a392d8f7de53",
+  "note": "tested_commit is the stdio MCP remediation implementation commit; later commits are docs/guide polish.",
+  "final_release_pointer": {
+    "see": "final-release/FINAL_RELEASE_MANIFEST.json",
+    "note": "Sealed hackathon release commit and recalculated internal score live under final-release/. Historical rows in this file are preserved."
+  }
+}

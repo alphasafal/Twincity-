@@ -1,0 +1,6 @@
+2026-07-25 11:17:40,255 INFO twinpilot_mcp.energyplus_experiment: Starting EnergyPlus experiment MCP server pid=38078 transport=stdio
+2026-07-25 11:17:40,512 INFO mcp.server.lowlevel.server: Processing request of type ListToolsRequest
+2026-07-25 11:17:40,514 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:17:40,514 WARNING mcp.server.lowlevel.server: Tool 'definitely_not_a_tool' not listed, no validation will be performed
+2026-07-25 11:17:40,516 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-07-25 11:17:40,518 INFO mcp.server.lowlevel.server: Processing request of type CallToolRequest

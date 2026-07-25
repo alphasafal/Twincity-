@@ -1,0 +1,35 @@
+Starting TwinPilot demo (SIMULATOR_PROVIDER=mock)
+For EnergyPlus experiments use ./scripts/run_baseline.sh / run_agent.sh instead.
+==> Starting TwinPilot API on :8000
+API healthy
+==> Starting TwinPilot Web on :3000
+
+TwinPilot demo is running (simulated data).
+  Web:  http://localhost:3000
+  API:  http://localhost:8000
+  Docs: http://localhost:8000/docs
+
+Login (dev only):
+  manager@twinpilot.demo / TwinPilot-Manager-Demo!
+
+Press Ctrl+C to stop.
+
+> @twinpilot/web@0.1.0 dev /workspace/apps/web
+> next dev --port 3000
+
+   ▲ Next.js 15.5.21
+   - Local:        http://localhost:3000
+   - Network:      http://172.30.0.2:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 1310ms
+ ○ Compiling /dashboard ...
+ ✓ Compiled /dashboard in 5s (1861 modules)
+ GET /dashboard 200 in 5539ms
+ ○ Compiling /live-demo ...
+ ✓ Compiled /live-demo in 2.1s (1850 modules)
+ GET /live-demo 200 in 2213ms
+ ✓ Compiled in 430ms (861 modules)
+ ✓ Compiled in 199ms (861 modules)
+ ✓ Compiled in 191ms (861 modules)

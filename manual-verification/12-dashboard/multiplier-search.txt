@@ -1,0 +1,3 @@
+apps/web/components/DataModeBanner.tsx:40:            : " · No synthetic ×1.12 multiplier"}
+services/api/app/api/v1/router.py:274:    # Mock mode — no synthetic ×1.12 savings
+services/api/app/services/runtime.py:801:        # No synthetic multipliers (×1.12 removed). Mock twin KPIs are live power

@@ -1,0 +1,9 @@
+case,expected,actual,pass,fallback_action,unsafe_actuator,energyplus_continued
+1_server_unavailable,hard_fail_start,RuntimeError,True,deterministic_fallback_in_llm_loop,no,yes_via_fallback
+2_terminated_during_request,call_fails,ok=False; error=ClosedResourceError: MCP server call failed,True,caller_fallback,no,if_fallback_used
+3_request_timeout,call_fails,ok=False; error=ClosedResourceError: MCP server call failed,True,deterministic_fallback,no,yes_via_fallback
+5_unknown_tool,call_fails,ok=False; error=Unknown tool: definitely_not_a_tool,True,fallback,no,yes_via_fallback
+6_schema_invalid_args,call_fails,ok=False; error=Error executing tool get_building_observation: Expecting property name enclosed in double quotes: line 1 column 2 (char 1),True,fallback,no,yes_via_fallback
+4_malformed_tool_args,call_fails,ok=False; error=Error executing tool record_control_decision: decision_json must be a non-empty JSON string,True,fallback,no,yes_via_fallback
+7_server_restart,new_session_ok,ok=True; pids 38163!=38185,True,none,no,yes
+8_clean_client_shutdown,closed_cleanly,"{""closed"": true, ""client_pid"": 38163, ""server_pid"": 38185, ""thread_alive"": false}",True,none,no,n/a

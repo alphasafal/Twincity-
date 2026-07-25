@@ -1,0 +1,692 @@
+[1m[91mI001 [0m[[1m[96m*[0m] [1mImport block is un-sorted or un-formatted[0m
+  [1m[94m-->[0m scripts/build_submission_evidence.py:15:1
+   [1m[94m|[0m
+[1m[94m13 |[0m sys.path[:0] = [str(ROOT / "services" / "simulator"), str(ROOT / "services" / "optimizer"), str(ROOT / "services" / "api")]
+[1m[94m14 |[0m
+[1m[94m15 |[0m from twinpilot_simulator.ep_experiment import SafetyLimits, validate_setpoint_action  # noqa: E402
+   [1m[94m|[0m [1m[91m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[1m[94m16 |[0m
+[1m[94m17 |[0m EVID = ROOT / "submission-evidence"
+   [1m[94m|[0m
+[1m[96mhelp[0m: [1mOrganize imports[0m
+[1m[94m  [0m [1m[94m|[0m
+[1m[94m14[0m [1m[94m|[0m
+[1m[94m  [0m [1m[31m-[0m [31mfrom twinpilot_simulator.ep_experiment import SafetyLimits, validate_setpoint_action  # noqa: E402
+[0m[1m[94m15[0m [1m[32m+[0m [32mfrom twinpilot_simulator.ep_experiment import (  # noqa: E402
+[0m[1m[94m16[0m [1m[32m+[0m [32m    SafetyLimits,
+[0m[1m[94m17[0m [1m[32m+[0m [32m    validate_setpoint_action,
+[0m[1m[94m18[0m [1m[32m+[0m [32m)
+[0m[1m[94m19[0m [1m[94m|[0m
+[1m[94m  [0m [1m[94m|[0m
+
+[1m[91mRUF100 [0m[[1m[96m*[0m] [1mUnused `noqa` directive (non-enabled: `E402`)[0m
+  [1m[94m-->[0m scripts/build_submission_evidence.py:15:87
+   [1m[94m|[0m
+[1m[94m13 |[0m sys.path[:0] = [str(ROOT / "services" / "simulator"), str(ROOT / "services" / "optimizer"), str(ROOT / "services" / "api")]
+[1m[94m14 |[0m
+[1m[94m15 |[0m from twinpilot_simulator.ep_experiment import SafetyLimits, validate_setpoint_action  # noqa: E402
+   [1m[94m|[0m                                                                                       [1m[91m^^^^^^^^^^^^[0m
+[1m[94m16 |[0m
+[1m[94m17 |[0m EVID = ROOT / "submission-evidence"
+   [1m[94m|[0m
+[1m[96mhelp[0m: [1mRemove unused `noqa` directive[0m
+[1m[94m  [0m [1m[94m|[0m
+[1m[94m14[0m [1m[94m|[0m
+[1m[94m  [0m [1m[31m-[0m [31mfrom twinpilot_simulator.ep_experiment import SafetyLimits, validate_setpoint_action[0m[1m[31m  # noqa: E402[0m[0m[31m
+[0m[1m[94m15[0m [1m[32m+[0m [32mfrom twinpilot_simulator.ep_experiment import SafetyLimits, validate_setpoint_action[0m[32m
+[0m[1m[94m16[0m [1m[94m|[0m
+[1m[94m  [0m [1m[94m|[0m
+
+[1m[91mF401 [0m[[1m[96m*[0m] [1m`PIL.ImageFont` imported but unused[0m
+  [1m[94m-->[0m scripts/build_submission_evidence.py:34:43
+   [1m[94m|[0m
+[1m[94m32 |[0m     """Generate a simple architecture diagram PNG without heavy deps if possible."""
+[1m[94m33 |[0m     try:
+[1m[94m34 |[0m         from PIL import Image, ImageDraw, ImageFont  # type: ignore
+   [1m[94m|[0m                                           [1m[91m^^^^^^^^^[0m
+[1m[94m35 |[0m     except Exception:
+[1m[94m36 |[0m         # Fallback: write a minimal valid PNG via pure Python
+   [1m[94m|[0m
+[1m[96mhelp[0m: [1mRemove unused import: `PIL.ImageFont`[0m
+[1m[94m  [0m [1m[94m|[0m
+[1m[94m33[0m [1m[94m|[0m     try:
+[1m[94m  [0m [1m[31m-[0m [31m        from PIL import Image, [0m[1m[31mImageDraw, ImageFont[0m[0m[31m  # type: ignore
+[0m[1m[94m34[0m [1m[32m+[0m [32m        from PIL import Image, [0m[1m[32mImageDraw[0m[0m[32m  # type: ignore
+[0m[1m[94m35[0m [1m[94m|[0m     except Exception:
+[1m[94m  [0m [1m[94m|[0m
+
+[1m[91mBLE001 [0m[1mDo not catch blind exception: `Exception`[0m
+  [1m[94m-->[0m scripts/build_submission_evidence.py:35:12
+   [1m[94m|[0m
+[1m[94m33 |[0m     try:
+[1m[94m34 |[0m         from PIL import Image, ImageDraw, ImageFont  # type: ignore
+[1m[94m35 |[0m     except Exception:
+   [1m[94m|[0m            [1m[91m^^^^^^^^^[0m
+[1m[94m36 |[0m         # Fallback: write a minimal valid PNG via pure Python
+[1m[94m37 |[0m         # 1x1 is too weak — use struct zlib for a simple labeled bitmap using ppm→png via none
+   [1m[94m|[0m
+
+[1m[91mS110 [0m[1m`try`-`except`-`pass` detected, consider logging the exception[0m
+  [1m[94m-->[0m scripts/build_submission_evidence.py:68:9
+   [1m[94m|[0m
+[1m[94m66 |[0m               )
+[1m[94m67 |[0m               return
+[1m[94m68 |[0m [1m[91m/[0m         except Exception:
+[1m[94m69 |[0m [1m[91m|[0m             pass
+   [1m[94m|[0m [1m[91m|________________^[0m
+[1m[94m70 |[0m           # Last resort: copy a generated PPM and mark — create PNG with stdlib only (minimal)
+[1m[94m71 |[0m           # Write a simple uncompressed-like PNG using struct
+   [1m[94m|[0m
+
+[1m[91mBLE001 [0m[1mDo not catch blind exception: `Exception`[0m
+  [1m[94m-->[0m scripts/build_submission_evidence.py:68:16
+   [1m[94m|[0m
+[1m[94m66 |[0m             )
+[1m[94m67 |[0m             return
+[1m[94m68 |[0m         except Exception:
+   [1m[94m|[0m                [1m[91m^^^^^^^^^[0m
+[1m[94m69 |[0m             pass
+[1m[94m70 |[0m         # Last resort: copy a generated PPM and mark — create PNG with stdlib only (minimal)
+   [1m[94m|[0m
+
+[1m[91mI001 [0m[[1m[96m*[0m] [1mImport block is un-sorted or un-formatted[0m
+  [1m[94m-->[0m scripts/llm_mcp_loop.py:26:1
+   [1m[94m|[0m
+[1m[94m24 |[0m   ]
+[1m[94m25 |[0m
+[1m[94m26 |[0m [1m[91m/[0m from twinpilot_simulator.ep_experiment import (  # noqa: E402
+[1m[94m27 |[0m [1m[91m|[0m     ExperimentConfig,
+[1m[94m28 |[0m [1m[91m|[0m     SafetyLimits,
+[1m[94m29 |[0m [1m[91m|[0m     propose_agent_cooling_setpoint,
+[1m[94m30 |[0m [1m[91m|[0m     resolve_paths_from_env,
+[1m[94m31 |[0m [1m[91m|[0m     run_experiment,
+[1m[94m32 |[0m [1m[91m|[0m     validate_setpoint_action,
+[1m[94m33 |[0m [1m[91m|[0m )
+   [1m[94m|[0m [1m[91m|_^[0m
+   [1m[94m|[0m
+[1m[96mhelp[0m: [1mOrganize imports[0m
+[1m[94m  [0m [1m[94m|[0m
+[1m[94m34[0m [1m[94m|[0m
+[1m[94m  [0m [1m[31m-[0m[31m
+[0m[1m[94m35[0m [1m[94m|[0m OUT = Path(os.environ.get("RESULTS_LLM_DIR", ROOT / "results" / "llm_mcp"))
+[1m[94m  [0m [1m[94m|[0m
+
+[1m[91mRUF100 [0m[[1m[96m*[0m] [1mUnused `noqa` directive (non-enabled: `E402`)[0m
+  [1m[94m-->[0m scripts/llm_mcp_loop.py:26:50
+   [1m[94m|[0m
+[1m[94m24 |[0m ]
+[1m[94m25 |[0m
+[1m[94m26 |[0m from twinpilot_simulator.ep_experiment import (  # noqa: E402
+   [1m[94m|[0m                                                  [1m[91m^^^^^^^^^^^^[0m
+[1m[94m27 |[0m     ExperimentConfig,
+[1m[94m28 |[0m     SafetyLimits,
+   [1m[94m|[0m
+[1m[96mhelp[0m: [1mRemove unused `noqa` directive[0m
+[1m[94m  [0m [1m[94m|[0m
+[1m[94m25[0m [1m[94m|[0m
+[1m[94m  [0m [1m[31m-[0m [31mfrom twinpilot_simulator.ep_experiment import ([0m[1m[31m  # noqa: E402[0m[0m[31m
+[0m[1m[94m26[0m [1m[32m+[0m [32mfrom twinpilot_simulator.ep_experiment import ([0m[32m
+[0m[1m[94m27[0m [1m[94m|[0m     ExperimentConfig,
+[1m[94m  [0m [1m[94m|[0m
+
+[1m[91mBLE001 [0m[1mDo not catch blind exception: `Exception`[0m
+   [1m[94m-->[0m scripts/llm_mcp_loop.py:110:12
+    [1m[94m|[0m
+[1m[94m108 |[0m         )
+[1m[94m109 |[0m         return sp, {"source": "ollama", "raw": parsed, "confidence": conf}
+[1m[94m110 |[0m     except Exception as exc:
+    [1m[94m|[0m            [1m[91m^^^^^^^^^[0m
+[1m[94m111 |[0m         log_stage(
+[1m[94m112 |[0m             "llm_structured_proposal",
+    [1m[94m|[0m
+
+[1m[91mRUF100 [0m[[1m[96m*[0m] [1mUnused `noqa` directive (non-enabled: `E402`)[0m
+  [1m[94m-->[0m scripts/run_scenarios.py:15:50
+   [1m[94m|[0m
+[1m[94m13 |[0m sys.path[:0] = [str(ROOT / "services" / "simulator"), str(ROOT / "services" / "optimizer")]
+[1m[94m14 |[0m
+[1m[94m15 |[0m from twinpilot_simulator.ep_experiment import (  # noqa: E402
+   [1m[94m|[0m                                                  [1m[91m^^^^^^^^^^^^[0m
+[1m[94m16 |[0m     ExperimentConfig,
+[1m[94m17 |[0m     ExperimentPaths,
+   [1m[94m|[0m
+[1m[96mhelp[0m: [1mRemove unused `noqa` directive[0m
+[1m[94m  [0m [1m[94m|[0m
+[1m[94m14[0m [1m[94m|[0m
+[1m[94m  [0m [1m[31m-[0m [31mfrom twinpilot_simulator.ep_experiment import ([0m[1m[31m  # noqa: E402[0m[0m[31m
+[0m[1m[94m15[0m [1m[32m+[0m [32mfrom twinpilot_simulator.ep_experiment import ([0m[32m
+[0m[1m[94m16[0m [1m[94m|[0m     ExperimentConfig,
+[1m[94m  [0m [1m[94m|[0m
+
+[1m[91mFURB167 [0m[[1m[96m*[0m] [1mUse of regular expression alias `re.S`[0m
+  [1m[94m-->[0m scripts/run_scenarios.py:72:62
+   [1m[94m|[0m
+[1m[94m70 |[0m     Yes,                     !- Use Weather File Rain Indicators
+[1m[94m71 |[0m     Yes;                     !- Use Weather File Snow Indicators"""
+[1m[94m72 |[0m     text2, n = re.subn(pattern, new_rp, text, count=1, flags=re.S)
+   [1m[94m|[0m                                                              [1m[91m^^^^[0m
+[1m[94m73 |[0m     if n != 1:
+[1m[94m74 |[0m         raise RuntimeError("Failed to patch RunPeriod for scenario IDF")
+   [1m[94m|[0m
+[1m[96mhelp[0m: [1mReplace with `re.DOTALL`[0m
+[1m[94m  [0m [1m[94m|[0m
+[1m[94m71[0m [1m[94m|[0m     Yes;                     !- Use Weather File Snow Indicators"""
+[1m[94m  [0m [1m[31m-[0m [31m    text2, n = re.subn(pattern, new_rp, text, count=1, [0m[1m[31mflags=re.S)[0m[0m[31m
+[0m[1m[94m72[0m [1m[32m+[0m [32m    text2, n = re.subn(pattern, new_rp, text, count=1, [0m[1m[32mflags=re.DOTALL)[0m[0m[32m
+[0m[1m[94m73[0m [1m[94m|[0m     if n != 1:
+[1m[94m  [0m [1m[94m|[0m
+
+[1m[91mFURB167 [0m[[1m[96m*[0m] [1mUse of regular expression alias `re.S`[0m
+  [1m[94m-->[0m scripts/run_scenarios.py:90:19
+   [1m[94m|[0m
+[1m[94m88 |[0m             r"(  Schedule:Compact,\n    OCCUPY-1,.*?;)",
+[1m[94m89 |[0m             text2,
+[1m[94m90 |[0m             flags=re.S,
+   [1m[94m|[0m                   [1m[91m^^^^[0m
+[1m[94m91 |[0m         )
+[1m[94m92 |[0m         if m:
+   [1m[94m|[0m
+[1m[96mhelp[0m: [1mReplace with `re.DOTALL`[0m
+[1m[94m  [0m [1m[94m|[0m
+[1m[94m89[0m [1m[94m|[0m             text2,
+[1m[94m  [0m [1m[31m-[0m [31m            [0m[1m[31mflags=re.S,[0m[0m[31m
+[0m[1m[94m90[0m [1m[32m+[0m [32m            [0m[1m[32mflags=re.DOTALL,[0m[0m[32m
+[0m[1m[94m91[0m [1m[94m|[0m         )
+[1m[94m  [0m [1m[94m|[0m
+
+[1m[91mF401 [0m[[1m[96m*[0m] [1m`app.services.experiment_store.load_comparison` imported but unused[0m
+  [1m[94m-->[0m services/api/app/api/v1/router.py:84:5
+   [1m[94m|[0m
+[1m[94m82 |[0m     experiment_dashboard_payload,
+[1m[94m83 |[0m     load_actions,
+[1m[94m84 |[0m     load_comparison,
+   [1m[94m|[0m     [1m[91m^^^^^^^^^^^^^^^[0m
+[1m[94m85 |[0m     load_consolidated_scenarios,
+[1m[94m86 |[0m     load_stream_frames,
+   [1m[94m|[0m
+[1m[96mhelp[0m: [1mRemove unused import: `app.services.experiment_store.load_comparison`[0m
+[1m[94m  [0m [1m[94m|[0m
+[1m[94m83[0m [1m[94m|[0m     load_actions,
+[1m[94m  [0m [1m[31m-[0m [31m    load_comparison,
+[0m[1m[94m84[0m [1m[94m|[0m     load_consolidated_scenarios,
+[1m[94m  [0m [1m[94m|[0m
+
+[1m[91mRUF003 [0m[1mComment contains ambiguous `×` (MULTIPLICATION SIGN). Did you mean `x` (LATIN SMALL LETTER X)?[0m
+   [1m[94m-->[0m services/api/app/api/v1/router.py:274:32
+    [1m[94m|[0m
+[1m[94m272 |[0m         }
+[1m[94m273 |[0m
+[1m[94m274 |[0m     # Mock mode — no synthetic ×1.12 savings
+    [1m[94m|[0m                                [1m[91m^[0m
+[1m[94m275 |[0m     return {
+[1m[94m276 |[0m         "building": BuildingOut.model_validate(building).model_dump(),
+    [1m[94m|[0m
+
+[1m[91mRUF003 [0m[1mComment contains ambiguous `×` (MULTIPLICATION SIGN). Did you mean `x` (LATIN SMALL LETTER X)?[0m
+   [1m[94m-->[0m services/api/app/services/runtime.py:801:37
+    [1m[94m|[0m
+[1m[94m799 |[0m         interval_h = 0.25
+[1m[94m800 |[0m         energy = state["total_building_power_kw"] * interval_h
+[1m[94m801 |[0m         # No synthetic multipliers (×1.12 removed). Mock twin KPIs are live power
+    [1m[94m|[0m                                     [1m[91m^[0m
+[1m[94m802 |[0m         # integrals only; EnergyPlus evidence comes from results/* via DATA_MODE.
+[1m[94m803 |[0m         if baseline or not self.kpi_history:
+    [1m[94m|[0m
+
+[1m[91mI001 [0m[[1m[96m*[0m] [1mImport block is un-sorted or un-formatted[0m
+  [1m[94m-->[0m services/optimizer/tests/test_safety_failure_modes.py:3:1
+   [1m[94m|[0m
+[1m[94m 1 |[0m   """Safety + failure-mode tests — unsafe / failed recommendations must not pass."""
+[1m[94m 2 |[0m
+[1m[94m 3 |[0m [1m[91m/[0m from __future__ import annotations
+[1m[94m 4 |[0m [1m[91m|[0m
+[1m[94m 5 |[0m [1m[91m|[0m import pytest
+[1m[94m 6 |[0m [1m[91m|[0m
+[1m[94m 7 |[0m [1m[91m|[0m from twinpilot_optimizer.modes import OperatingMode
+[1m[94m 8 |[0m [1m[91m|[0m from twinpilot_optimizer.safety import (
+[1m[94m 9 |[0m [1m[91m|[0m     ConstraintLimits,
+[1m[94m10 |[0m [1m[91m|[0m     ProposedAction,
+[1m[94m11 |[0m [1m[91m|[0m     SafetyShield,
+[1m[94m12 |[0m [1m[91m|[0m     ValidationContext,
+[1m[94m13 |[0m [1m[91m|[0m )
+   [1m[94m|[0m [1m[91m|_^[0m
+   [1m[94m|[0m
+[1m[96mhelp[0m: [1mOrganize imports[0m
+[1m[94m [0m [1m[94m|[0m
+[1m[94m5[0m [1m[94m|[0m import pytest
+[1m[94m [0m [1m[31m-[0m[31m
+[0m[1m[94m6[0m [1m[94m|[0m from twinpilot_optimizer.modes import OperatingMode
+[1m[94m [0m [1m[94m|[0m
+
+[1m[91mI001 [0m[[1m[96m*[0m] [1mImport block is un-sorted or un-formatted[0m
+ [1m[94m-->[0m services/optimizer/twinpilot_optimizer/__init__.py:3:1
+  [1m[94m|[0m
+[1m[94m1 |[0m   """TwinPilot optimization and safety engine."""
+[1m[94m2 |[0m
+[1m[94m3 |[0m [1m[91m/[0m from twinpilot_optimizer.confidence import ConfidenceBreakdown, compute_confidence
+[1m[94m4 |[0m [1m[91m|[0m from twinpilot_optimizer.modes import ModeThresholds, OperatingMode, recommend_mode, transition_mode
+[1m[94m5 |[0m [1m[91m|[0m from twinpilot_optimizer.objective import ObjectiveWeights, PlanMetrics, score_plan
+[1m[94m6 |[0m [1m[91m|[0m from twinpilot_optimizer.safety import SafetyCheck, SafetyResult, SafetyShield
+  [1m[94m|[0m [1m[91m|______________________________________________________________________________^[0m
+[1m[94m7 |[0m
+[1m[94m8 |[0m   __all__ = [
+  [1m[94m|[0m
+[1m[96mhelp[0m: [1mOrganize imports[0m
+[1m[94m  [0m [1m[94m|[0m
+[1m[94m3 [0m [1m[94m|[0m from twinpilot_optimizer.confidence import ConfidenceBreakdown, compute_confidence
+[1m[94m  [0m [1m[31m-[0m [31mfrom twinpilot_optimizer.modes import ModeThresholds, OperatingMode, recommend_mode, transition_mode
+[0m[1m[94m4 [0m [1m[32m+[0m [32mfrom twinpilot_optimizer.modes import (
+[0m[1m[94m5 [0m [1m[32m+[0m [32m    ModeThresholds,
+[0m[1m[94m6 [0m [1m[32m+[0m [32m    OperatingMode,
+[0m[1m[94m7 [0m [1m[32m+[0m [32m    recommend_mode,
+[0m[1m[94m8 [0m [1m[32m+[0m [32m    transition_mode,
+[0m[1m[94m9 [0m [1m[32m+[0m [32m)
+[0m[1m[94m10[0m [1m[94m|[0m from twinpilot_optimizer.objective import ObjectiveWeights, PlanMetrics, score_plan
+[1m[94m  [0m [1m[94m|[0m
+
+[1m[91mRUF022 [0m[[1m[96m*[0m] [1m`__all__` is not sorted[0m
+  [1m[94m-->[0m services/optimizer/twinpilot_optimizer/__init__.py:8:11
+   [1m[94m|[0m
+[1m[94m 6 |[0m   from twinpilot_optimizer.safety import SafetyCheck, SafetyResult, SafetyShield
+[1m[94m 7 |[0m
+[1m[94m 8 |[0m   __all__ = [
+   [1m[94m|[0m  [1m[91m___________^[0m
+[1m[94m 9 |[0m [1m[91m|[0m     "ConfidenceBreakdown",
+[1m[94m10 |[0m [1m[91m|[0m     "compute_confidence",
+[1m[94m11 |[0m [1m[91m|[0m     "ModeThresholds",
+[1m[94m12 |[0m [1m[91m|[0m     "OperatingMode",
+[1m[94m13 |[0m [1m[91m|[0m     "recommend_mode",
+[1m[94m14 |[0m [1m[91m|[0m     "transition_mode",
+[1m[94m15 |[0m [1m[91m|[0m     "ObjectiveWeights",
+[1m[94m16 |[0m [1m[91m|[0m     "PlanMetrics",
+[1m[94m17 |[0m [1m[91m|[0m     "score_plan",
+[1m[94m18 |[0m [1m[91m|[0m     "SafetyCheck",
+[1m[94m19 |[0m [1m[91m|[0m     "SafetyResult",
+[1m[94m20 |[0m [1m[91m|[0m     "SafetyShield",
+[1m[94m21 |[0m [1m[91m|[0m ]
+   [1m[94m|[0m [1m[91m|_^[0m
+   [1m[94m|[0m
+[1m[96mhelp[0m: [1mApply an isort-style sorting to `__all__`[0m
+[1m[94m  [0m [1m[94m|[0m
+[1m[94m9 [0m [1m[94m|[0m     "ConfidenceBreakdown",
+[1m[94m  [0m [1m[31m-[0m [31m    "compute_confidence",
+[0m[1m[94m10[0m [1m[94m|[0m     "ModeThresholds",
+[1m[94m  [0m [1m[31m-[0m [31m    "OperatingMode",
+[0m[1m[94m  [0m [1m[31m-[0m [31m    "recommend_mode",
+[0m[1m[94m  [0m [1m[31m-[0m [31m    "transition_mode",
+[0m[1m[94m11[0m [1m[94m|[0m     "ObjectiveWeights",
+[1m[94m12[0m [1m[32m+[0m [32m    "OperatingMode",
+[0m[1m[94m13[0m [1m[94m|[0m     "PlanMetrics",
+[1m[94m  [0m [1m[31m-[0m [31m    "score_plan",
+[0m[1m[94m14[0m [1m[94m|[0m     "SafetyCheck",
+[1m[94m15[0m [1m[94m|[0m     "SafetyResult",
+[1m[94m16[0m [1m[94m|[0m     "SafetyShield",
+[1m[94m17[0m [1m[32m+[0m [32m    "compute_confidence",
+[0m[1m[94m18[0m [1m[32m+[0m [32m    "recommend_mode",
+[0m[1m[94m19[0m [1m[32m+[0m [32m    "score_plan",
+[0m[1m[94m20[0m [1m[32m+[0m [32m    "transition_mode",
+[0m[1m[94m21[0m [1m[94m|[0m ]
+[1m[94m  [0m [1m[94m|[0m
+
+[1m[91mSIM102 [0m[1mUse a single `if` statement instead of nested `if` statements[0m
+   [1m[94m-->[0m services/optimizer/twinpilot_optimizer/anomaly.py:116:5
+    [1m[94m|[0m
+[1m[94m114 |[0m               )
+[1m[94m115 |[0m
+[1m[94m116 |[0m [1m[91m/[0m     if series.model_prediction is not None and abs(latest - series.model_prediction) > model_delta:
+[1m[94m117 |[0m [1m[91m|[0m         # Only secondary if not already critical implausible
+[1m[94m118 |[0m [1m[91m|[0m         if not any(f.rule == "implausible_temperature" for f in findings):
+    [1m[94m|[0m [1m[91m|__________________________________________________________________________^[0m
+[1m[94m119 |[0m               findings.append(
+[1m[94m120 |[0m                   AnomalyFinding(
+    [1m[94m|[0m
+[1m[96mhelp[0m: [1mCombine `if` statements using `and`[0m
+
+[1m[91mBLE001 [0m[1mDo not catch blind exception: `Exception`[0m
+   [1m[94m-->[0m services/optimizer/twinpilot_optimizer/anomaly.py:165:12
+    [1m[94m|[0m
+[1m[94m163 |[0m     try:
+[1m[94m164 |[0m         from sklearn.ensemble import IsolationForest
+[1m[94m165 |[0m     except Exception:
+    [1m[94m|[0m            [1m[91m^^^^^^^^^[0m
+[1m[94m166 |[0m         # Deterministic fallback score using robust z-score
+[1m[94m167 |[0m         arr = np.array(values, dtype=float)
+    [1m[94m|[0m
+
+[1m[91mUP035 [0m[[1m[96m*[0m] [1mImport from `collections.abc` instead: `Iterable`[0m
+  [1m[94m-->[0m services/optimizer/twinpilot_optimizer/modes.py:9:1
+   [1m[94m|[0m
+[1m[94m 8 |[0m from enum import Enum
+[1m[94m 9 |[0m from typing import Iterable
+   [1m[94m|[0m [1m[91m^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[1m[94m10 |[0m
+[1m[94m11 |[0m from pydantic import BaseModel, Field
+   [1m[94m|[0m
+[1m[96mhelp[0m: [1mImport from `collections.abc`[0m
+[1m[94m  [0m [1m[94m|[0m
+[1m[94m8 [0m [1m[94m|[0m from enum import Enum
+[1m[94m  [0m [1m[31m-[0m [31mfrom [0m[1m[31mtyping[0m[0m[31m import Iterable
+[0m[1m[94m9 [0m [1m[32m+[0m [32mfrom [0m[1m[32mcollections.abc[0m[0m[32m import Iterable
+[0m[1m[94m10[0m [1m[94m|[0m
+[1m[94m  [0m [1m[94m|[0m
+
+[1m[91mI001 [0m[[1m[96m*[0m] [1mImport block is un-sorted or un-formatted[0m
+  [1m[94m-->[0m services/optimizer/twinpilot_optimizer/planner.py:3:1
+   [1m[94m|[0m
+[1m[94m 1 |[0m   """Candidate plan generation for the control loop."""
+[1m[94m 2 |[0m
+[1m[94m 3 |[0m [1m[91m/[0m from __future__ import annotations
+[1m[94m 4 |[0m [1m[91m|[0m
+[1m[94m 5 |[0m [1m[91m|[0m from enum import Enum
+[1m[94m 6 |[0m [1m[91m|[0m from typing import Any
+[1m[94m 7 |[0m [1m[91m|[0m
+[1m[94m 8 |[0m [1m[91m|[0m from pydantic import BaseModel, Field
+[1m[94m 9 |[0m [1m[91m|[0m
+[1m[94m10 |[0m [1m[91m|[0m from twinpilot_optimizer.objective import ObjectiveWeights, PlanMetrics, ScoreBreakdown, score_plan
+   [1m[94m|[0m [1m[91m|___________________________________________________________________________________________________^[0m
+   [1m[94m|[0m
+[1m[96mhelp[0m: [1mOrganize imports[0m
+[1m[94m  [0m [1m[94m|[0m
+[1m[94m9 [0m [1m[94m|[0m
+[1m[94m  [0m [1m[31m-[0m [31mfrom twinpilot_optimizer.objective import ObjectiveWeights, PlanMetrics, ScoreBreakdown, score_plan
+[0m[1m[94m10[0m [1m[32m+[0m [32mfrom twinpilot_optimizer.objective import (
+[0m[1m[94m11[0m [1m[32m+[0m [32m    ObjectiveWeights,
+[0m[1m[94m12[0m [1m[32m+[0m [32m    PlanMetrics,
+[0m[1m[94m13[0m [1m[32m+[0m [32m    ScoreBreakdown,
+[0m[1m[94m14[0m [1m[32m+[0m [32m    score_plan,
+[0m[1m[94m15[0m [1m[32m+[0m [32m)
+[0m[1m[94m16[0m [1m[94m|[0m
+[1m[94m  [0m [1m[94m|[0m
+
+[1m[91mISC004 [0m[1mUnparenthesized implicit string concatenation in collection[0m
+   [1m[94m-->[0m services/optimizer/twinpilot_optimizer/planner.py:279:17
+    [1m[94m|[0m
+[1m[94m277 |[0m               feasible=False,
+[1m[94m278 |[0m               infeasibility_reasons=[
+[1m[94m279 |[0m [1m[91m/[0m                 "The requested target is not feasible under current weather, occupancy and comfort constraints. "
+[1m[94m280 |[0m [1m[91m|[0m                 "The maximum predicted safe saving is 17.8%."
+    [1m[94m|[0m [1m[91m|_____________________________________________________________^[0m
+[1m[94m281 |[0m               ],
+[1m[94m282 |[0m           )
+    [1m[94m|[0m
+[1m[96mhelp[0m: [1mDid you forget a comma?[0m
+[1m[96mhelp[0m: [1mWrap implicitly concatenated strings in parentheses[0m
+
+[1m[91mPLR0124 [0m[1mName compared with itself, consider replacing `value == value`[0m
+   [1m[94m-->[0m services/optimizer/twinpilot_optimizer/safety.py:116:37
+    [1m[94m|[0m
+[1m[94m114 |[0m         if value is not None:
+[1m[94m115 |[0m             try:
+[1m[94m116 |[0m                 finite = finite and value == value  # NaN check
+    [1m[94m|[0m                                     [1m[91m^^^^^[0m
+[1m[94m117 |[0m             except Exception:
+[1m[94m118 |[0m                 finite = False
+    [1m[94m|[0m
+
+[1m[91mBLE001 [0m[1mDo not catch blind exception: `Exception`[0m
+   [1m[94m-->[0m services/optimizer/twinpilot_optimizer/safety.py:117:20
+    [1m[94m|[0m
+[1m[94m115 |[0m             try:
+[1m[94m116 |[0m                 finite = finite and value == value  # NaN check
+[1m[94m117 |[0m             except Exception:
+    [1m[94m|[0m                    [1m[91m^^^^^^^^^[0m
+[1m[94m118 |[0m                 finite = False
+[1m[94m119 |[0m         add(
+    [1m[94m|[0m
+
+[1m[91mPLR0124 [0m[1mName compared with itself, consider replacing `t != t`[0m
+   [1m[94m-->[0m services/optimizer/twinpilot_optimizer/safety.py:227:16
+    [1m[94m|[0m
+[1m[94m225 |[0m         if context.measured_zone_temperature is not None:
+[1m[94m226 |[0m             t = context.measured_zone_temperature
+[1m[94m227 |[0m             if t != t or abs(t) == float("inf"):  # NaN / inf
+    [1m[94m|[0m                [1m[91m^[0m
+[1m[94m228 |[0m                 sensors_ok = False
+[1m[94m229 |[0m             elif t < limits.min_sensor_temperature_c or t > limits.max_sensor_temperature_c:
+    [1m[94m|[0m
+
+[1m[91mF841 [0m[1mLocal variable `mode_ok` is assigned to but never used[0m
+   [1m[94m-->[0m services/optimizer/twinpilot_optimizer/safety.py:333:13
+    [1m[94m|[0m
+[1m[94m331 |[0m             )
+[1m[94m332 |[0m         elif not mode_allows_auto_apply(context.mode, risk.value) and not context.approved:
+[1m[94m333 |[0m             mode_ok = False
+    [1m[94m|[0m             [1m[91m^^^^^^^[0m
+[1m[94m334 |[0m             add(
+[1m[94m335 |[0m                 "mode_permission",
+    [1m[94m|[0m
+[1m[96mhelp[0m: [1mRemove assignment to unused variable `mode_ok`[0m
+
+[1m[91mI001 [0m[[1m[96m*[0m] [1mImport block is un-sorted or un-formatted[0m
+  [1m[94m-->[0m services/simulator/tests/test_ep_experiment_safety.py:3:1
+   [1m[94m|[0m
+[1m[94m 1 |[0m   """EnergyPlus experiment safety helpers and strict-mode adapter tests."""
+[1m[94m 2 |[0m
+[1m[94m 3 |[0m [1m[91m/[0m from __future__ import annotations
+[1m[94m 4 |[0m [1m[91m|[0m
+[1m[94m 5 |[0m [1m[91m|[0m import os
+[1m[94m 6 |[0m [1m[91m|[0m from pathlib import Path
+[1m[94m 7 |[0m [1m[91m|[0m
+[1m[94m 8 |[0m [1m[91m|[0m import pytest
+[1m[94m 9 |[0m [1m[91m|[0m
+[1m[94m10 |[0m [1m[91m|[0m from twinpilot_simulator.ep_experiment import (
+[1m[94m11 |[0m [1m[91m|[0m     EnergyPlusUnavailableError,
+[1m[94m12 |[0m [1m[91m|[0m     SafetyLimits,
+[1m[94m13 |[0m [1m[91m|[0m     propose_agent_cooling_setpoint,
+[1m[94m14 |[0m [1m[91m|[0m     resolve_paths_from_env,
+[1m[94m15 |[0m [1m[91m|[0m     validate_setpoint_action,
+[1m[94m16 |[0m [1m[91m|[0m )
+[1m[94m17 |[0m [1m[91m|[0m from twinpilot_simulator.energyplus import EnergyPlusAdapter
+[1m[94m18 |[0m [1m[91m|[0m from twinpilot_simulator.base import SimulationConfig
+   [1m[94m|[0m [1m[91m|_____________________________________________________^[0m
+   [1m[94m|[0m
+[1m[96mhelp[0m: [1mOrganize imports[0m
+[1m[94m  [0m [1m[94m|[0m
+[1m[94m8 [0m [1m[94m|[0m import pytest
+[1m[94m  [0m [1m[31m-[0m[31m
+[0m[1m[94m9 [0m [1m[32m+[0m [32mfrom twinpilot_simulator.base import SimulationConfig
+[0m[1m[94m10[0m [1m[32m+[0m [32mfrom twinpilot_simulator.energyplus import EnergyPlusAdapter
+[0m[1m[94m11[0m [1m[94m|[0m from twinpilot_simulator.ep_experiment import (
+--------------------------------------------------------------------------------
+[1m[94m17[0m [1m[94m|[0m )
+[1m[94m  [0m [1m[31m-[0m [31mfrom twinpilot_simulator.energyplus import EnergyPlusAdapter
+[0m[1m[94m  [0m [1m[31m-[0m [31mfrom twinpilot_simulator.base import SimulationConfig
+[0m[1m[94m18[0m [1m[94m|[0m
+[1m[94m  [0m [1m[94m|[0m
+
+[1m[91mRUF059 [0m[1mUnpacked variable `reasons` is never used[0m
+  [1m[94m-->[0m services/simulator/tests/test_ep_experiment_safety.py:40:9
+   [1m[94m|[0m
+[1m[94m39 |[0m def test_ep_validate_fallback_on_mcp_failure():
+[1m[94m40 |[0m     ok, reasons, disposition = validate_setpoint_action(
+   [1m[94m|[0m         [1m[91m^^^^^^^[0m
+[1m[94m41 |[0m         proposed=24.5,
+[1m[94m42 |[0m         current=23.9,
+   [1m[94m|[0m
+[1m[96mhelp[0m: [1mPrefix it with an underscore or any other dummy variable pattern[0m
+
+[1m[91mRUF059 [0m[1mUnpacked variable `sp` is never used[0m
+  [1m[94m-->[0m services/simulator/tests/test_ep_experiment_safety.py:88:5
+   [1m[94m|[0m
+[1m[94m87 |[0m def test_agent_proposal_handles_impossible_temps():
+[1m[94m88 |[0m     sp, reason, conf = propose_agent_cooling_setpoint(
+   [1m[94m|[0m     [1m[91m^^[0m
+[1m[94m89 |[0m         outdoor_c=30.0,
+[1m[94m90 |[0m         zone_temps={"SPACE1-1": 120.0},
+   [1m[94m|[0m
+[1m[96mhelp[0m: [1mPrefix it with an underscore or any other dummy variable pattern[0m
+
+[1m[91mI001 [0m[[1m[96m*[0m] [1mImport block is un-sorted or un-formatted[0m
+   [1m[94m-->[0m services/simulator/tests/test_ep_experiment_safety.py:124:5
+    [1m[94m|[0m
+[1m[94m122 |[0m     if not (home / "energyplus").exists():
+[1m[94m123 |[0m         pytest.skip("EnergyPlus not installed")
+[1m[94m124 |[0m     from twinpilot_simulator.ep_experiment import ExperimentConfig, run_experiment, resolve_paths_from_env
+    [1m[94m|[0m     [1m[91m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[1m[94m125 |[0m
+[1m[94m126 |[0m     out = Path("results/baseline")
+    [1m[94m|[0m
+[1m[96mhelp[0m: [1mOrganize imports[0m
+[1m[94m   [0m [1m[94m|[0m
+[1m[94m123[0m [1m[94m|[0m         pytest.skip("EnergyPlus not installed")
+[1m[94m   [0m [1m[31m-[0m [31m    from twinpilot_simulator.ep_experiment import ExperimentConfig, run_experiment, resolve_paths_from_env
+[0m[1m[94m124[0m [1m[32m+[0m [32m    from twinpilot_simulator.ep_experiment import (
+[0m[1m[94m125[0m [1m[32m+[0m [32m        ExperimentConfig,
+[0m[1m[94m126[0m [1m[32m+[0m [32m        resolve_paths_from_env,
+[0m[1m[94m127[0m [1m[32m+[0m [32m        run_experiment,
+[0m[1m[94m128[0m [1m[32m+[0m [32m    )
+[0m[1m[94m129[0m [1m[94m|[0m
+[1m[94m   [0m [1m[94m|[0m
+
+[1m[91mI001 [0m[[1m[96m*[0m] [1mImport block is un-sorted or un-formatted[0m
+ [1m[94m-->[0m services/simulator/twinpilot_simulator/__init__.py:3:1
+  [1m[94m|[0m
+[1m[94m1 |[0m   """TwinPilot building simulation adapters."""
+[1m[94m2 |[0m
+[1m[94m3 |[0m [1m[91m/[0m from twinpilot_simulator.base import BuildingSimulator, SimulationConfig, SimulationResult
+[1m[94m4 |[0m [1m[91m|[0m from twinpilot_simulator.mock import MockBuildingSimulator
+[1m[94m5 |[0m [1m[91m|[0m from twinpilot_simulator.energyplus import EnergyPlusAdapter
+  [1m[94m|[0m [1m[91m|____________________________________________________________^[0m
+[1m[94m6 |[0m
+[1m[94m7 |[0m   __all__ = [
+  [1m[94m|[0m
+[1m[96mhelp[0m: [1mOrganize imports[0m
+[1m[94m  [0m [1m[94m|[0m
+[1m[94m2 [0m [1m[94m|[0m
+[1m[94m  [0m [1m[31m-[0m [31mfrom twinpilot_simulator.base import BuildingSimulator, SimulationConfig, SimulationResult
+[0m[1m[94m3 [0m [1m[32m+[0m [32mfrom twinpilot_simulator.base import (
+[0m[1m[94m4 [0m [1m[32m+[0m [32m    BuildingSimulator,
+[0m[1m[94m5 [0m [1m[32m+[0m [32m    SimulationConfig,
+[0m[1m[94m6 [0m [1m[32m+[0m [32m    SimulationResult,
+[0m[1m[94m7 [0m [1m[32m+[0m [32m)
+[0m[1m[94m8 [0m [1m[32m+[0m [32mfrom twinpilot_simulator.energyplus import EnergyPlusAdapter
+[0m[1m[94m9 [0m [1m[94m|[0m from twinpilot_simulator.mock import MockBuildingSimulator
+[1m[94m  [0m [1m[31m-[0m [31mfrom twinpilot_simulator.energyplus import EnergyPlusAdapter
+[0m[1m[94m10[0m [1m[94m|[0m
+[1m[94m  [0m [1m[94m|[0m
+
+[1m[91mRUF022 [0m[[1m[96m*[0m] [1m`__all__` is not sorted[0m
+  [1m[94m-->[0m services/simulator/twinpilot_simulator/__init__.py:7:11
+   [1m[94m|[0m
+[1m[94m 5 |[0m   from twinpilot_simulator.energyplus import EnergyPlusAdapter
+[1m[94m 6 |[0m
+[1m[94m 7 |[0m   __all__ = [
+   [1m[94m|[0m  [1m[91m___________^[0m
+[1m[94m 8 |[0m [1m[91m|[0m     "BuildingSimulator",
+[1m[94m 9 |[0m [1m[91m|[0m     "SimulationConfig",
+[1m[94m10 |[0m [1m[91m|[0m     "SimulationResult",
+[1m[94m11 |[0m [1m[91m|[0m     "MockBuildingSimulator",
+[1m[94m12 |[0m [1m[91m|[0m     "EnergyPlusAdapter",
+[1m[94m13 |[0m [1m[91m|[0m ]
+   [1m[94m|[0m [1m[91m|_^[0m
+   [1m[94m|[0m
+[1m[96mhelp[0m: [1mApply an isort-style sorting to `__all__`[0m
+[1m[94m  [0m [1m[94m|[0m
+[1m[94m8 [0m [1m[94m|[0m     "BuildingSimulator",
+[1m[94m9 [0m [1m[32m+[0m [32m    "EnergyPlusAdapter",
+[0m[1m[94m10[0m [1m[32m+[0m [32m    "MockBuildingSimulator",
+[0m[1m[94m11[0m [1m[94m|[0m     "SimulationConfig",
+[1m[94m12[0m [1m[94m|[0m     "SimulationResult",
+[1m[94m  [0m [1m[31m-[0m [31m    "MockBuildingSimulator",
+[0m[1m[94m  [0m [1m[31m-[0m [31m    "EnergyPlusAdapter",
+[0m[1m[94m13[0m [1m[94m|[0m ]
+[1m[94m  [0m [1m[94m|[0m
+
+[1m[91mI001 [0m[[1m[96m*[0m] [1mImport block is un-sorted or un-formatted[0m
+  [1m[94m-->[0m services/simulator/twinpilot_simulator/energyplus.py:3:1
+   [1m[94m|[0m
+[1m[94m 1 |[0m   """EnergyPlus adapter — real Runtime API when configured; no silent mock in strict mode."""
+[1m[94m 2 |[0m
+[1m[94m 3 |[0m [1m[91m/[0m from __future__ import annotations
+[1m[94m 4 |[0m [1m[91m|[0m
+[1m[94m 5 |[0m [1m[91m|[0m import logging
+[1m[94m 6 |[0m [1m[91m|[0m import os
+[1m[94m 7 |[0m [1m[91m|[0m from typing import Any
+[1m[94m 8 |[0m [1m[91m|[0m
+[1m[94m 9 |[0m [1m[91m|[0m from twinpilot_simulator.base import (
+[1m[94m10 |[0m [1m[91m|[0m     BuildingState,
+[1m[94m11 |[0m [1m[91m|[0m     ControlActionInput,
+[1m[94m12 |[0m [1m[91m|[0m     PlanInput,
+[1m[94m13 |[0m [1m[91m|[0m     SimulationConfig,
+[1m[94m14 |[0m [1m[91m|[0m     SimulationResult,
+[1m[94m15 |[0m [1m[91m|[0m     ZoneState,
+[1m[94m16 |[0m [1m[91m|[0m )
+[1m[94m17 |[0m [1m[91m|[0m from twinpilot_simulator.ep_experiment import (
+[1m[94m18 |[0m [1m[91m|[0m     EnergyPlusUnavailableError,
+[1m[94m19 |[0m [1m[91m|[0m     ExperimentConfig,
+[1m[94m20 |[0m [1m[91m|[0m     ExperimentPaths,
+[1m[94m21 |[0m [1m[91m|[0m     run_experiment,
+[1m[94m22 |[0m [1m[91m|[0m     validate_setpoint_action,
+[1m[94m23 |[0m [1m[91m|[0m     SafetyLimits,
+[1m[94m24 |[0m [1m[91m|[0m )
+[1m[94m25 |[0m [1m[91m|[0m from twinpilot_simulator.mock import MockBuildingSimulator
+   [1m[94m|[0m [1m[91m|__________________________________________________________^[0m
+[1m[94m26 |[0m
+[1m[94m27 |[0m   logger = logging.getLogger(__name__)
+   [1m[94m|[0m
+[1m[96mhelp[0m: [1mOrganize imports[0m
+[1m[94m  [0m [1m[94m|[0m
+[1m[94m20[0m [1m[94m|[0m     ExperimentPaths,
+[1m[94m21[0m [1m[32m+[0m [32m    SafetyLimits,
+[0m[1m[94m22[0m [1m[94m|[0m     run_experiment,
+[1m[94m23[0m [1m[94m|[0m     validate_setpoint_action,
+[1m[94m  [0m [1m[31m-[0m [31m    SafetyLimits,
+[0m[1m[94m24[0m [1m[94m|[0m )
+[1m[94m  [0m [1m[94m|[0m
+
+[1m[91mBLE001 [0m[1mDo not catch blind exception: `Exception`[0m
+   [1m[94m-->[0m services/simulator/twinpilot_simulator/ep_experiment.py:394:24
+    [1m[94m|[0m
+[1m[94m392 |[0m                     part = (dt or "").strip().split()[-1]
+[1m[94m393 |[0m                     hour = int(part.split(":")[0])
+[1m[94m394 |[0m                 except Exception:
+    [1m[94m|[0m                        [1m[91m^^^^^^^^^[0m
+[1m[94m395 |[0m                     hour = None
+[1m[94m396 |[0m                 occupied = hour is not None and 6 <= hour < 20
+    [1m[94m|[0m
+
+[1m[91mS110 [0m[1m`try`-`except`-`pass` detected, consider logging the exception[0m
+   [1m[94m-->[0m services/simulator/twinpilot_simulator/ep_experiment.py:576:9
+    [1m[94m|[0m
+[1m[94m574 |[0m               if api.exchange.warmup_flag(state_arg):
+[1m[94m575 |[0m                   return
+[1m[94m576 |[0m [1m[91m/[0m         except Exception:
+[1m[94m577 |[0m [1m[91m|[0m             pass
+    [1m[94m|[0m [1m[91m|________________^[0m
+[1m[94m578 |[0m
+[1m[94m579 |[0m           month = api.exchange.month(state_arg)
+    [1m[94m|[0m
+
+[1m[91mBLE001 [0m[1mDo not catch blind exception: `Exception`[0m
+   [1m[94m-->[0m services/simulator/twinpilot_simulator/ep_experiment.py:576:16
+    [1m[94m|[0m
+[1m[94m574 |[0m             if api.exchange.warmup_flag(state_arg):
+[1m[94m575 |[0m                 return
+[1m[94m576 |[0m         except Exception:
+    [1m[94m|[0m                [1m[91m^^^^^^^^^[0m
+[1m[94m577 |[0m             pass
+    [1m[94m|[0m
+
+[1m[91mF823 [0m[1mLocal variable `unsafe_injected` referenced before assignment[0m
+   [1m[94m-->[0m services/simulator/twinpilot_simulator/ep_experiment.py:682:50
+    [1m[94m|[0m
+[1m[94m681 |[0m         # Optional one-shot unsafe proposal for safety demonstration runs only.
+[1m[94m682 |[0m         if config.inject_unsafe_proposal and not unsafe_injected:
+    [1m[94m|[0m                                                  [1m[91m^^^^^^^^^^^^^^^[0m
+[1m[94m683 |[0m             proposed = 35.0
+[1m[94m684 |[0m             reason = "intentional_unsafe_demo_proposal"
+    [1m[94m|[0m
+
+[1m[91mF841 [0m[1mLocal variable `unsafe_injected` is assigned to but never used[0m
+   [1m[94m-->[0m services/simulator/twinpilot_simulator/ep_experiment.py:686:13
+    [1m[94m|[0m
+[1m[94m684 |[0m             reason = "intentional_unsafe_demo_proposal"
+[1m[94m685 |[0m             confidence = 0.99
+[1m[94m686 |[0m             unsafe_injected = True
+    [1m[94m|[0m             [1m[91m^^^^^^^^^^^^^^^[0m
+[1m[94m687 |[0m             proposal_source = "safety_demo"
+    [1m[94m|[0m
+[1m[96mhelp[0m: [1mRemove assignment to unused variable `unsafe_injected`[0m
+
+Found 39 errors.
+[[36m*[0m] 19 fixable with the `--fix` option (5 hidden fixes can be enabled with the `--unsafe-fixes` option).
