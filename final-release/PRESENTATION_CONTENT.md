@@ -1,6 +1,6 @@
 # Presentation Content (6 slides)
 
-**Commit:** `39cb4da36b9f79de36aa797de28de5bb0a76f950`
+**Commit:** `f0f94d84d08969784cf2373ddbb3cca6e3fa909b`
 
 ## Slide 1 — Problem and objective
 - **Message:** Unsafe autonomy is unacceptable; measurable gated autonomy is the goal.

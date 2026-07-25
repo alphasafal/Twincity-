@@ -1,8 +1,8 @@
-FINAL_RELEASE_COMMIT=39cb4da36b9f79de36aa797de28de5bb0a76f950
+FINAL_RELEASE_COMMIT=f0f94d84d08969784cf2373ddbb3cca6e3fa909b
 EVIDENCE_PACK_COMMIT=29e88cbd829a333b4661ea8d6c448b1a02a46325
+SHA_SEAL_TIP=39cb4da36b9f79de36aa797de28de5bb0a76f950
 BRANCH=cursor/ecolooop-energyplus-audit-b6b3
-SEALED_AT=2026-07-25T12:02:42.369629+00:00
-NOTE=Tag repository HEAD after the alignment commit lands; FINAL_RELEASE_COMMIT names the SHA-seal tip that first recorded the pack SHA consistently. Evidence bytes were introduced in EVIDENCE_PACK_COMMIT.
+NOTE=FINAL_RELEASE_COMMIT is the repository tip containing this file. Tag this SHA.
 PRE_SEAL_CODE_TIP=133b0530670f2ed5b9fcf011d7a0adaa0b63228c
-TAG_TARGET_HEAD=cbd1dc1dd44d1cc1a7cf12ed2f663a1abb49e9ce
-OWNER_TAG_COMMAND=git tag -a hackathon-final-v1 cbd1dc1dd44d1cc1a7cf12ed2f663a1abb49e9ce -m "Verified Eco-Loop hackathon release"
+TAG_TARGET_HEAD=f0f94d84d08969784cf2373ddbb3cca6e3fa909b
+OWNER_TAG_COMMAND=git tag -a hackathon-final-v1 f0f94d84d08969784cf2373ddbb3cca6e3fa909b -m "Verified Eco-Loop hackathon release"
