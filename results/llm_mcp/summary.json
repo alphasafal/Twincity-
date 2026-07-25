@@ -5,11 +5,11 @@
     "status": "completed"
   },
   "agent": {
-    "total_energy_kwh": 396.2547,
+    "total_energy_kwh": 397.0752,
     "status": "completed",
     "action_counts": {
-      "approved": 16,
-      "rejected": 32,
+      "approved": 14,
+      "rejected": 34,
       "fallback": 0,
       "total_decisions": 48
     },

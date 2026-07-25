@@ -1,0 +1,5 @@
+11:   ************* No node connection errors were found.
+13:   ************* Simulation Error Summary *************
+14:   ************* EnergyPlus Warmup Error Summary. During Warmup: 0 Warning; 0 Severe Errors.
+15:   ************* EnergyPlus Sizing Error Summary. During Sizing: 0 Warning; 0 Severe Errors.
+16:   ************* EnergyPlus Completed Successfully-- 0 Warning; 0 Severe Errors; Elapsed Time=00hr 00min  0.28sec

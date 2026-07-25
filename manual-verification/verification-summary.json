@@ -1,0 +1,129 @@
+{
+  "tested_commit": "589643c3557c56922b79edd886e88ea9e6833474",
+  "phase0_freeze_commit": "61ed36cc9bc89cd37ba7a38a1ec7b4d1e12702e1",
+  "tested_at": "2026-07-25T11:08:07.584946+00:00",
+  "overall_status": "CONDITIONAL_PASS",
+  "readiness_score": 87,
+  "score_breakdown": {
+    "energyplus_closed_loop": 23,
+    "experiment_validity": 13,
+    "energy_comfort": 15,
+    "llm_mcp": 7,
+    "safety_fallback": 14,
+    "dashboard": 7,
+    "clean_room": 5,
+    "docs_demo": 3
+  },
+  "claims": {
+    "energyplus_runs": {
+      "status": "VERIFIED",
+      "evidence": [
+        "results/*/energyplus_run/eplusout.csv",
+        "03-baseline",
+        "04-agent"
+      ]
+    },
+    "real_actuator_write": {
+      "status": "VERIFIED",
+      "evidence": [
+        "ep_experiment.set_actuator_value",
+        "06-actuator-proof/actuator-runtime-trace.csv"
+      ]
+    },
+    "next_state_received": {
+      "status": "VERIFIED",
+      "evidence": [
+        "06-actuator-proof/next-state-proof.md"
+      ]
+    },
+    "baseline_agent_fairness": {
+      "status": "VERIFIED",
+      "evidence": [
+        "05-fairness/experiment-input-comparison.md"
+      ]
+    },
+    "metrics_reproduced": {
+      "status": "VERIFIED",
+      "evidence": [
+        "05-fairness/independent-metrics.json",
+        "13-recovery/reproducibility-comparison.csv"
+      ]
+    },
+    "comfort_independently_verified": {
+      "status": "VERIFIED",
+      "evidence": [
+        "08-comfort/comfort-verification.md"
+      ]
+    },
+    "mcp_invocation": {
+      "status": "PARTIALLY_VERIFIED_AFTER_FIX",
+      "evidence": [
+        "twinpilot_mcp.handlers.call_tool in-process",
+        "16-final-evidence/mcp-dispatch-stage.jsonl"
+      ]
+    },
+    "ollama_response": {
+      "status": "VERIFIED",
+      "evidence": [
+        "results/llm_mcp/stage_log.jsonl llm_structured_proposal",
+        "09-llm-mcp"
+      ]
+    },
+    "safety_rejection": {
+      "status": "VERIFIED",
+      "evidence": [
+        "safety_shield_rejects_unsafe",
+        "10-safety"
+      ]
+    },
+    "fallback": {
+      "status": "VERIFIED",
+      "evidence": [
+        "16-final-evidence/llm_fallback_recount/summary.json fallback 48"
+      ]
+    },
+    "dashboard_real_data": {
+      "status": "VERIFIED",
+      "evidence": [
+        "12-dashboard/dashboard-api-responses/raw-vs-api-checks.json"
+      ]
+    },
+    "no_silent_mock_fallback": {
+      "status": "VERIFIED_AFTER_FIX",
+      "evidence": [
+        "16-final-evidence/status-energyplus-missing-after-fix.json",
+        "router.py energyplus_results_unavailable"
+      ]
+    },
+    "clean_room_reproducibility": {
+      "status": "PARTIALLY_VERIFIED",
+      "evidence": [
+        "14-clean-room/clean-room-verification.md"
+      ]
+    }
+  },
+  "p0_issues": [
+    "ORIGINAL: MCP was simulated packaging only (fixed to in-process twinpilot_mcp.handlers.call_tool; remote MCP transport still absent)",
+    "ORIGINAL: silent mock fallthrough (FIXED)"
+  ],
+  "p1_issues": [
+    "Committed results/ still pre-seeds clones",
+    "MCP transport remains in-process (not stdio MCP server)",
+    "README may still over-simplify MCP path wording in places"
+  ],
+  "p2_issues": [
+    "Integration pytest requires undocumented PYTHONPATH",
+    "Demo port/DB conflicts can break login (readonly sqlite)",
+    "run_demo.sh messaging still emphasizes simulated data"
+  ],
+  "human_checks_remaining": [
+    "Confirm git commit hash locally",
+    "Personally watch Ollama logs during run_llm_mcp_experiment.sh",
+    "Personally confirm no twinpilot_mcp process during LLM experiment",
+    "Open dashboard DataModeBanner with DATA_MODE=energyplus",
+    "Remove results and confirm API no longer shows energyplus KPIs without mock disguise after fixes"
+  ],
+  "readiness_score_pre_fix": 83,
+  "tested_at_post_fix": "2026-07-25T11:09:36.750049+00:00",
+  "readiness_score_note": "Independent post-fix score; not copied from prior 90/100 claim. Pre-fix was 83."
+}

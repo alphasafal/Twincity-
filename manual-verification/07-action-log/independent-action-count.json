@@ -1,0 +1,9 @@
+{
+  "total_rows": 48,
+  "approved": 48,
+  "rejected": 0,
+  "fallback": 0,
+  "unique_timestamps": 48,
+  "duplicate_timestamps": 0,
+  "monotonic_sorted": true
+}

@@ -699,7 +699,8 @@ def run_experiment(config: ExperimentConfig) -> dict[str, Any]:
             mcp_failed=mcp_failed,
         )
 
-        if approved and disposition == "approved":
+        apply_approved = approved and disposition == "approved"
+        if apply_approved:
             api.exchange.set_actuator_value(state_arg, handles["clg"], proposed)
             current_cooling = proposed
             applied_value = proposed
@@ -711,6 +712,11 @@ def run_experiment(config: ExperimentConfig) -> dict[str, Any]:
             applied_value = current_cooling
             energyplus_accepted = False
             executed = f"hold_safe_setpoint={current_cooling}"
+
+        # LLM-path deterministic substitute: count as fallback even when the
+        # substitute setpoint itself passes the safety gate and is applied.
+        if str(proposal_source).startswith("deterministic_fallback"):
+            disposition = "fallback"
 
         action_record = {
             "sim_time": minute_key,

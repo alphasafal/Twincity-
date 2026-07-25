@@ -1,0 +1,21 @@
+{
+  "total": 35,
+  "passed": 35,
+  "failed": [],
+  "limits": {
+    "min_cooling_setpoint": 22.0,
+    "max_cooling_setpoint": 28.0,
+    "min_heating_setpoint": 16.0,
+    "max_heating_setpoint": 24.0,
+    "max_setpoint_change_per_interval": 1.0,
+    "heating_cooling_deadband_c": 1.5,
+    "comfort_occupied_min_c": 21.0,
+    "comfort_occupied_max_c": 26.0,
+    "comfort_warning_c": 25.3,
+    "max_occupied_cooling_setpoint": 24.8,
+    "max_unoccupied_cooling_setpoint": 25.8,
+    "max_sensor_temperature_c": 50.0,
+    "min_sensor_temperature_c": 0.0,
+    "max_data_age_seconds": 900.0
+  }
+}

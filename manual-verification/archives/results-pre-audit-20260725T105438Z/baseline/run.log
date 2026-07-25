@@ -1,0 +1,5 @@
+status=completed rc=0 mode=baseline scenario=default elapsed_s=0.289
+actions=0 observations=192 stream_frames=42
+total_energy_kwh=421.5057
+comfort_violation_hours=0.0
+comfort_degree_hours=0.0

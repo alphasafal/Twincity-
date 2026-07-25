@@ -1,0 +1,4 @@
+agent_start_utc=2026-07-25T10:57:30Z
+agent_end_utc=2026-07-25T10:57:31Z
+exit_code=0
+duration_seconds=1

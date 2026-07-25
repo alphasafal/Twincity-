@@ -1,0 +1,1 @@
+{"status":"ok","service":"api","demo_mode":true,"simulator":{"status":"ok","provider":"mock","simulated":true,"paused":false,"speed":1,"scenario":null,"step_index":4},"components":{"api":"ok","database":"ok","simulator":"ok","mcp":"ok","agent":"ok","websocket":"ok","optimizer":"ok"}}

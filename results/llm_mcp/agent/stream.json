@@ -157,7 +157,7 @@
       "weather_outdoor_c": 18.9,
       "energy_power_kw": null,
       "current_setpoint_c": 24.0,
-      "proposed_setpoint_c": 22.6,
+      "proposed_setpoint_c": 22.0,
       "controller_mode": "llm_mcp",
       "safety_shield_result": {
         "disposition": "rejected",
@@ -192,17 +192,19 @@
       "weather_outdoor_c": 19.325,
       "energy_power_kw": null,
       "current_setpoint_c": 24.0,
-      "proposed_setpoint_c": 25.0,
+      "proposed_setpoint_c": 26.0,
       "controller_mode": "llm_mcp",
       "safety_shield_result": {
-        "disposition": "approved",
-        "blocking_reasons": [],
-        "approved": true
+        "disposition": "rejected",
+        "blocking_reasons": [
+          "max_setpoint_change_exceeded"
+        ],
+        "approved": false
       },
-      "executed_action": "set_clg_setpoint=25.0",
+      "executed_action": "hold_safe_setpoint=24.0",
       "next_simulation_state": {
-        "cooling_setpoint_c": 25.0,
-        "energyplus_action_accepted": true
+        "cooling_setpoint_c": 24.0,
+        "energyplus_action_accepted": false
       }
     },
     {
@@ -223,17 +225,17 @@
       },
       "weather_outdoor_c": 21.0,
       "energy_power_kw": null,
-      "current_setpoint_c": 25.0,
-      "proposed_setpoint_c": 26.0,
+      "current_setpoint_c": 24.0,
+      "proposed_setpoint_c": 25.0,
       "controller_mode": "llm_mcp",
       "safety_shield_result": {
         "disposition": "approved",
         "blocking_reasons": [],
         "approved": true
       },
-      "executed_action": "set_clg_setpoint=26.0",
+      "executed_action": "set_clg_setpoint=25.0",
       "next_simulation_state": {
-        "cooling_setpoint_c": 26.0,
+        "cooling_setpoint_c": 25.0,
         "energyplus_action_accepted": true
       }
     },
@@ -255,18 +257,20 @@
       },
       "weather_outdoor_c": 22.75,
       "energy_power_kw": null,
-      "current_setpoint_c": 26.0,
+      "current_setpoint_c": 25.0,
       "proposed_setpoint_c": 25.0,
       "controller_mode": "llm_mcp",
       "safety_shield_result": {
-        "disposition": "approved",
-        "blocking_reasons": [],
-        "approved": true
+        "disposition": "rejected",
+        "blocking_reasons": [
+          "low_confidence"
+        ],
+        "approved": false
       },
-      "executed_action": "set_clg_setpoint=25.0",
+      "executed_action": "hold_safe_setpoint=25.0",
       "next_simulation_state": {
         "cooling_setpoint_c": 25.0,
-        "energyplus_action_accepted": true
+        "energyplus_action_accepted": false
       }
     },
     {
@@ -288,175 +292,6 @@
       "weather_outdoor_c": 24.699999999999996,
       "energy_power_kw": null,
       "current_setpoint_c": 25.0,
-      "proposed_setpoint_c": 24.0,
-      "controller_mode": "llm_mcp",
-      "safety_shield_result": {
-        "disposition": "approved",
-        "blocking_reasons": [],
-        "approved": true
-      },
-      "executed_action": "set_clg_setpoint=24.0",
-      "next_simulation_state": {
-        "cooling_setpoint_c": 24.0,
-        "energyplus_action_accepted": true
-      }
-    },
-    {
-      "timestamp": "07-15T09:23",
-      "zone_temperatures_c": {
-        "SPACE1-1": 23.9982486605848,
-        "SPACE2-1": 23.998628789414845,
-        "SPACE3-1": 23.99876557517085,
-        "SPACE4-1": 23.48144742683831,
-        "SPACE5-1": 23.998671849116235
-      },
-      "occupancy": {
-        "SPACE1-1": 11.0,
-        "SPACE2-1": 5.0,
-        "SPACE3-1": 11.0,
-        "SPACE4-1": 5.0,
-        "SPACE5-1": 20.0
-      },
-      "weather_outdoor_c": 26.150000000000002,
-      "energy_power_kw": null,
-      "current_setpoint_c": 24.0,
-      "proposed_setpoint_c": 25.0,
-      "controller_mode": "llm_mcp",
-      "safety_shield_result": {
-        "disposition": "approved",
-        "blocking_reasons": [],
-        "approved": true
-      },
-      "executed_action": "set_clg_setpoint=25.0",
-      "next_simulation_state": {
-        "cooling_setpoint_c": 25.0,
-        "energyplus_action_accepted": true
-      }
-    },
-    {
-      "timestamp": "07-15T10:23",
-      "zone_temperatures_c": {
-        "SPACE1-1": 24.99854607409935,
-        "SPACE2-1": 24.99850898141324,
-        "SPACE3-1": 24.998577922660868,
-        "SPACE4-1": 24.43103127039094,
-        "SPACE5-1": 24.998899240471083
-      },
-      "occupancy": {
-        "SPACE1-1": 11.0,
-        "SPACE2-1": 5.0,
-        "SPACE3-1": 11.0,
-        "SPACE4-1": 5.0,
-        "SPACE5-1": 20.0
-      },
-      "weather_outdoor_c": 28.075000000000003,
-      "energy_power_kw": null,
-      "current_setpoint_c": 25.0,
-      "proposed_setpoint_c": 23.0,
-      "controller_mode": "llm_mcp",
-      "safety_shield_result": {
-        "disposition": "rejected",
-        "blocking_reasons": [
-          "max_setpoint_change_exceeded",
-          "heating_cooling_deadband_violation"
-        ],
-        "approved": false
-      },
-      "executed_action": "hold_safe_setpoint=25.0",
-      "next_simulation_state": {
-        "cooling_setpoint_c": 25.0,
-        "energyplus_action_accepted": false
-      }
-    },
-    {
-      "timestamp": "07-15T11:15",
-      "zone_temperatures_c": {
-        "SPACE1-1": 24.997746083742147,
-        "SPACE2-1": 24.99804893573921,
-        "SPACE3-1": 24.997895816921698,
-        "SPACE4-1": 24.897723241981854,
-        "SPACE5-1": 24.997619597476
-      },
-      "occupancy": {
-        "SPACE1-1": 8.8,
-        "SPACE2-1": 4.0,
-        "SPACE3-1": 8.8,
-        "SPACE4-1": 4.0,
-        "SPACE5-1": 16.0
-      },
-      "weather_outdoor_c": 29.324999999999996,
-      "energy_power_kw": null,
-      "current_setpoint_c": 25.0,
-      "proposed_setpoint_c": 22.0,
-      "controller_mode": "llm_mcp",
-      "safety_shield_result": {
-        "disposition": "rejected",
-        "blocking_reasons": [
-          "max_setpoint_change_exceeded",
-          "heating_cooling_deadband_violation"
-        ],
-        "approved": false
-      },
-      "executed_action": "hold_safe_setpoint=25.0",
-      "next_simulation_state": {
-        "cooling_setpoint_c": 25.0,
-        "energyplus_action_accepted": false
-      }
-    },
-    {
-      "timestamp": "07-15T12:15",
-      "zone_temperatures_c": {
-        "SPACE1-1": 24.998375348410203,
-        "SPACE2-1": 24.998661551678005,
-        "SPACE3-1": 24.998436398379305,
-        "SPACE4-1": 24.942553086809607,
-        "SPACE5-1": 24.998255656225638
-      },
-      "occupancy": {
-        "SPACE1-1": 4.4,
-        "SPACE2-1": 2.0,
-        "SPACE3-1": 4.4,
-        "SPACE4-1": 2.0,
-        "SPACE5-1": 8.0
-      },
-      "weather_outdoor_c": 30.875000000000004,
-      "energy_power_kw": null,
-      "current_setpoint_c": 25.0,
-      "proposed_setpoint_c": 22.0,
-      "controller_mode": "llm_mcp",
-      "safety_shield_result": {
-        "disposition": "rejected",
-        "blocking_reasons": [
-          "max_setpoint_change_exceeded",
-          "heating_cooling_deadband_violation"
-        ],
-        "approved": false
-      },
-      "executed_action": "hold_safe_setpoint=25.0",
-      "next_simulation_state": {
-        "cooling_setpoint_c": 25.0,
-        "energyplus_action_accepted": false
-      }
-    },
-    {
-      "timestamp": "07-15T13:15",
-      "zone_temperatures_c": {
-        "SPACE1-1": 24.99876332135038,
-        "SPACE2-1": 24.99899278030292,
-        "SPACE3-1": 24.998801831604126,
-        "SPACE4-1": 24.996651017500334,
-        "SPACE5-1": 24.998160629986067
-      },
-      "occupancy": {
-        "SPACE1-1": 8.8,
-        "SPACE2-1": 4.0,
-        "SPACE3-1": 8.8,
-        "SPACE4-1": 4.0,
-        "SPACE5-1": 16.0
-      },
-      "weather_outdoor_c": 31.7,
-      "energy_power_kw": null,
-      "current_setpoint_c": 25.0,
       "proposed_setpoint_c": 26.0,
       "controller_mode": "llm_mcp",
       "safety_shield_result": {
@@ -471,13 +306,13 @@
       }
     },
     {
-      "timestamp": "07-15T14:15",
+      "timestamp": "07-15T09:20",
       "zone_temperatures_c": {
-        "SPACE1-1": 25.998367053126813,
-        "SPACE2-1": 25.993972156548455,
-        "SPACE3-1": 25.99836193040551,
-        "SPACE4-1": 25.98218067633545,
-        "SPACE5-1": 25.9982125118956
+        "SPACE1-1": 24.673565575466302,
+        "SPACE2-1": 25.896325780795056,
+        "SPACE3-1": 25.994362909154468,
+        "SPACE4-1": 23.545335066549814,
+        "SPACE5-1": 24.46842548812994
       },
       "occupancy": {
         "SPACE1-1": 11.0,
@@ -486,76 +321,7 @@
         "SPACE4-1": 5.0,
         "SPACE5-1": 20.0
       },
-      "weather_outdoor_c": 31.7,
-      "energy_power_kw": null,
-      "current_setpoint_c": 26.0,
-      "proposed_setpoint_c": 22.0,
-      "controller_mode": "llm_mcp",
-      "safety_shield_result": {
-        "disposition": "rejected",
-        "blocking_reasons": [
-          "max_setpoint_change_exceeded",
-          "heating_cooling_deadband_violation"
-        ],
-        "approved": false
-      },
-      "executed_action": "hold_safe_setpoint=26.0",
-      "next_simulation_state": {
-        "cooling_setpoint_c": 26.0,
-        "energyplus_action_accepted": false
-      }
-    },
-    {
-      "timestamp": "07-15T15:15",
-      "zone_temperatures_c": {
-        "SPACE1-1": 25.997736391539917,
-        "SPACE2-1": 25.976512263368143,
-        "SPACE3-1": 25.997783727775566,
-        "SPACE4-1": 25.99743569542776,
-        "SPACE5-1": 25.997695240482837
-      },
-      "occupancy": {
-        "SPACE1-1": 11.0,
-        "SPACE2-1": 5.0,
-        "SPACE3-1": 11.0,
-        "SPACE4-1": 5.0,
-        "SPACE5-1": 20.0
-      },
-      "weather_outdoor_c": 31.825,
-      "energy_power_kw": null,
-      "current_setpoint_c": 26.0,
-      "proposed_setpoint_c": 24.0,
-      "controller_mode": "llm_mcp",
-      "safety_shield_result": {
-        "disposition": "rejected",
-        "blocking_reasons": [
-          "max_setpoint_change_exceeded"
-        ],
-        "approved": false
-      },
-      "executed_action": "hold_safe_setpoint=26.0",
-      "next_simulation_state": {
-        "cooling_setpoint_c": 26.0,
-        "energyplus_action_accepted": false
-      }
-    },
-    {
-      "timestamp": "07-15T16:15",
-      "zone_temperatures_c": {
-        "SPACE1-1": 25.997972105242205,
-        "SPACE2-1": 25.65720770133919,
-        "SPACE3-1": 25.9979707685489,
-        "SPACE4-1": 25.99793008880895,
-        "SPACE5-1": 25.99788076866897
-      },
-      "occupancy": {
-        "SPACE1-1": 11.0,
-        "SPACE2-1": 5.0,
-        "SPACE3-1": 11.0,
-        "SPACE4-1": 5.0,
-        "SPACE5-1": 20.0
-      },
-      "weather_outdoor_c": 32.2,
+      "weather_outdoor_c": 26.150000000000002,
       "energy_power_kw": null,
       "current_setpoint_c": 26.0,
       "proposed_setpoint_c": 28.0,
@@ -574,13 +340,252 @@
       }
     },
     {
+      "timestamp": "07-15T10:23",
+      "zone_temperatures_c": {
+        "SPACE1-1": 25.882009763054945,
+        "SPACE2-1": 25.998215383896,
+        "SPACE3-1": 25.998304584812203,
+        "SPACE4-1": 24.474248495873077,
+        "SPACE5-1": 25.482955501217745
+      },
+      "occupancy": {
+        "SPACE1-1": 11.0,
+        "SPACE2-1": 5.0,
+        "SPACE3-1": 11.0,
+        "SPACE4-1": 5.0,
+        "SPACE5-1": 20.0
+      },
+      "weather_outdoor_c": 28.075000000000003,
+      "energy_power_kw": null,
+      "current_setpoint_c": 26.0,
+      "proposed_setpoint_c": 24.0,
+      "controller_mode": "llm_mcp",
+      "safety_shield_result": {
+        "disposition": "rejected",
+        "blocking_reasons": [
+          "max_setpoint_change_exceeded"
+        ],
+        "approved": false
+      },
+      "executed_action": "hold_safe_setpoint=26.0",
+      "next_simulation_state": {
+        "cooling_setpoint_c": 26.0,
+        "energyplus_action_accepted": false
+      }
+    },
+    {
+      "timestamp": "07-15T11:23",
+      "zone_temperatures_c": {
+        "SPACE1-1": 25.99826551361493,
+        "SPACE2-1": 25.998429719523887,
+        "SPACE3-1": 25.99831687885301,
+        "SPACE4-1": 24.971485216264956,
+        "SPACE5-1": 25.934805284464023
+      },
+      "occupancy": {
+        "SPACE1-1": 8.8,
+        "SPACE2-1": 4.0,
+        "SPACE3-1": 8.8,
+        "SPACE4-1": 4.0,
+        "SPACE5-1": 16.0
+      },
+      "weather_outdoor_c": 29.324999999999996,
+      "energy_power_kw": null,
+      "current_setpoint_c": 26.0,
+      "proposed_setpoint_c": 24.0,
+      "controller_mode": "llm_mcp",
+      "safety_shield_result": {
+        "disposition": "rejected",
+        "blocking_reasons": [
+          "max_setpoint_change_exceeded"
+        ],
+        "approved": false
+      },
+      "executed_action": "hold_safe_setpoint=26.0",
+      "next_simulation_state": {
+        "cooling_setpoint_c": 26.0,
+        "energyplus_action_accepted": false
+      }
+    },
+    {
+      "timestamp": "07-15T12:15",
+      "zone_temperatures_c": {
+        "SPACE1-1": 25.997944735930812,
+        "SPACE2-1": 25.998412998149472,
+        "SPACE3-1": 25.998066193909917,
+        "SPACE4-1": 25.12545762930967,
+        "SPACE5-1": 25.91404312185728
+      },
+      "occupancy": {
+        "SPACE1-1": 4.4,
+        "SPACE2-1": 2.0,
+        "SPACE3-1": 4.4,
+        "SPACE4-1": 2.0,
+        "SPACE5-1": 8.0
+      },
+      "weather_outdoor_c": 30.875000000000004,
+      "energy_power_kw": null,
+      "current_setpoint_c": 26.0,
+      "proposed_setpoint_c": 22.0,
+      "controller_mode": "llm_mcp",
+      "safety_shield_result": {
+        "disposition": "rejected",
+        "blocking_reasons": [
+          "max_setpoint_change_exceeded",
+          "heating_cooling_deadband_violation"
+        ],
+        "approved": false
+      },
+      "executed_action": "hold_safe_setpoint=26.0",
+      "next_simulation_state": {
+        "cooling_setpoint_c": 26.0,
+        "energyplus_action_accepted": false
+      }
+    },
+    {
+      "timestamp": "07-15T13:15",
+      "zone_temperatures_c": {
+        "SPACE1-1": 25.998423281269474,
+        "SPACE2-1": 25.998863711268232,
+        "SPACE3-1": 25.998528968803775,
+        "SPACE4-1": 25.376973764746154,
+        "SPACE5-1": 25.99075206179465
+      },
+      "occupancy": {
+        "SPACE1-1": 8.8,
+        "SPACE2-1": 4.0,
+        "SPACE3-1": 8.8,
+        "SPACE4-1": 4.0,
+        "SPACE5-1": 16.0
+      },
+      "weather_outdoor_c": 31.7,
+      "energy_power_kw": null,
+      "current_setpoint_c": 26.0,
+      "proposed_setpoint_c": 28.0,
+      "controller_mode": "llm_mcp",
+      "safety_shield_result": {
+        "disposition": "rejected",
+        "blocking_reasons": [
+          "max_setpoint_change_exceeded"
+        ],
+        "approved": false
+      },
+      "executed_action": "hold_safe_setpoint=26.0",
+      "next_simulation_state": {
+        "cooling_setpoint_c": 26.0,
+        "energyplus_action_accepted": false
+      }
+    },
+    {
+      "timestamp": "07-15T14:15",
+      "zone_temperatures_c": {
+        "SPACE1-1": 25.9980100837491,
+        "SPACE2-1": 25.998186882124394,
+        "SPACE3-1": 25.99804459833866,
+        "SPACE4-1": 25.995310390037584,
+        "SPACE5-1": 25.997415911281053
+      },
+      "occupancy": {
+        "SPACE1-1": 11.0,
+        "SPACE2-1": 5.0,
+        "SPACE3-1": 11.0,
+        "SPACE4-1": 5.0,
+        "SPACE5-1": 20.0
+      },
+      "weather_outdoor_c": 31.7,
+      "energy_power_kw": null,
+      "current_setpoint_c": 26.0,
+      "proposed_setpoint_c": 24.5,
+      "controller_mode": "llm_mcp",
+      "safety_shield_result": {
+        "disposition": "rejected",
+        "blocking_reasons": [
+          "max_setpoint_change_exceeded"
+        ],
+        "approved": false
+      },
+      "executed_action": "hold_safe_setpoint=26.0",
+      "next_simulation_state": {
+        "cooling_setpoint_c": 26.0,
+        "energyplus_action_accepted": false
+      }
+    },
+    {
+      "timestamp": "07-15T15:15",
+      "zone_temperatures_c": {
+        "SPACE1-1": 25.997718388426232,
+        "SPACE2-1": 25.997875825682826,
+        "SPACE3-1": 25.997772516557575,
+        "SPACE4-1": 25.99744182351284,
+        "SPACE5-1": 25.99737428882004
+      },
+      "occupancy": {
+        "SPACE1-1": 11.0,
+        "SPACE2-1": 5.0,
+        "SPACE3-1": 11.0,
+        "SPACE4-1": 5.0,
+        "SPACE5-1": 20.0
+      },
+      "weather_outdoor_c": 31.825,
+      "energy_power_kw": null,
+      "current_setpoint_c": 26.0,
+      "proposed_setpoint_c": 26.0,
+      "controller_mode": "llm_mcp",
+      "safety_shield_result": {
+        "disposition": "rejected",
+        "blocking_reasons": [
+          "low_confidence"
+        ],
+        "approved": false
+      },
+      "executed_action": "hold_safe_setpoint=26.0",
+      "next_simulation_state": {
+        "cooling_setpoint_c": 26.0,
+        "energyplus_action_accepted": false
+      }
+    },
+    {
+      "timestamp": "07-15T16:15",
+      "zone_temperatures_c": {
+        "SPACE1-1": 25.997977411139317,
+        "SPACE2-1": 25.69754523473209,
+        "SPACE3-1": 25.997976788292192,
+        "SPACE4-1": 25.99793364917305,
+        "SPACE5-1": 25.997777426416768
+      },
+      "occupancy": {
+        "SPACE1-1": 11.0,
+        "SPACE2-1": 5.0,
+        "SPACE3-1": 11.0,
+        "SPACE4-1": 5.0,
+        "SPACE5-1": 20.0
+      },
+      "weather_outdoor_c": 32.2,
+      "energy_power_kw": null,
+      "current_setpoint_c": 26.0,
+      "proposed_setpoint_c": 24.0,
+      "controller_mode": "llm_mcp",
+      "safety_shield_result": {
+        "disposition": "rejected",
+        "blocking_reasons": [
+          "max_setpoint_change_exceeded"
+        ],
+        "approved": false
+      },
+      "executed_action": "hold_safe_setpoint=26.0",
+      "next_simulation_state": {
+        "cooling_setpoint_c": 26.0,
+        "energyplus_action_accepted": false
+      }
+    },
+    {
       "timestamp": "07-15T17:15",
       "zone_temperatures_c": {
-        "SPACE1-1": 25.998040884151955,
-        "SPACE2-1": 25.151411002198707,
-        "SPACE3-1": 25.9979796867775,
-        "SPACE4-1": 25.825646711496418,
-        "SPACE5-1": 25.997665952698764
+        "SPACE1-1": 25.998045232368693,
+        "SPACE2-1": 25.178870771601858,
+        "SPACE3-1": 25.99798498750602,
+        "SPACE4-1": 25.838924296831387,
+        "SPACE5-1": 25.997628163482165
       },
       "occupancy": {
         "SPACE1-1": 11.0,
@@ -610,11 +615,11 @@
     {
       "timestamp": "07-15T18:23",
       "zone_temperatures_c": {
-        "SPACE1-1": 25.296457372084443,
-        "SPACE2-1": 24.085442908428387,
-        "SPACE3-1": 25.434525013777584,
-        "SPACE4-1": 24.311618907352173,
-        "SPACE5-1": 25.325030242751467
+        "SPACE1-1": 25.308895323053815,
+        "SPACE2-1": 24.103571422844762,
+        "SPACE3-1": 25.443091132553736,
+        "SPACE4-1": 24.323514047444235,
+        "SPACE5-1": 25.33738451490769
       },
       "occupancy": {
         "SPACE1-1": 5.5,
@@ -644,11 +649,11 @@
     {
       "timestamp": "07-15T19:23",
       "zone_temperatures_c": {
-        "SPACE1-1": 23.928074358283794,
-        "SPACE2-1": 22.74930164802511,
-        "SPACE3-1": 24.07095442473015,
-        "SPACE4-1": 22.776389843015682,
-        "SPACE5-1": 23.931188771988904
+        "SPACE1-1": 23.939320712639375,
+        "SPACE2-1": 22.76225785957021,
+        "SPACE3-1": 24.08169285868638,
+        "SPACE4-1": 22.78596608540933,
+        "SPACE5-1": 23.94409204456971
       },
       "occupancy": {
         "SPACE1-1": 0.0,
@@ -660,275 +665,7 @@
       "weather_outdoor_c": 27.224999999999998,
       "energy_power_kw": null,
       "current_setpoint_c": 26.0,
-      "proposed_setpoint_c": 27.0,
-      "controller_mode": "llm_mcp",
-      "safety_shield_result": {
-        "disposition": "approved",
-        "blocking_reasons": [],
-        "approved": true
-      },
-      "executed_action": "set_clg_setpoint=27.0",
-      "next_simulation_state": {
-        "cooling_setpoint_c": 27.0,
-        "energyplus_action_accepted": true
-      }
-    },
-    {
-      "timestamp": "07-15T20:23",
-      "zone_temperatures_c": {
-        "SPACE1-1": 23.120072235319704,
-        "SPACE2-1": 22.84927661570932,
-        "SPACE3-1": 23.200477682642603,
-        "SPACE4-1": 22.921802140215636,
-        "SPACE5-1": 23.065563977518092
-      },
-      "occupancy": {
-        "SPACE1-1": 0.0,
-        "SPACE2-1": 0.0,
-        "SPACE3-1": 0.0,
-        "SPACE4-1": 0.0,
-        "SPACE5-1": 0.0
-      },
-      "weather_outdoor_c": 22.349999999999998,
-      "energy_power_kw": null,
-      "current_setpoint_c": 27.0,
-      "proposed_setpoint_c": 24.0,
-      "controller_mode": "llm_mcp",
-      "safety_shield_result": {
-        "disposition": "rejected",
-        "blocking_reasons": [
-          "max_setpoint_change_exceeded"
-        ],
-        "approved": false
-      },
-      "executed_action": "hold_safe_setpoint=27.0",
-      "next_simulation_state": {
-        "cooling_setpoint_c": 27.0,
-        "energyplus_action_accepted": false
-      }
-    },
-    {
-      "timestamp": "07-15T21:15",
-      "zone_temperatures_c": {
-        "SPACE1-1": 23.064514303755626,
-        "SPACE2-1": 22.970598978866498,
-        "SPACE3-1": 23.101851149395564,
-        "SPACE4-1": 23.04381661699527,
-        "SPACE5-1": 22.97265898635123
-      },
-      "occupancy": {
-        "SPACE1-1": 0.0,
-        "SPACE2-1": 0.0,
-        "SPACE3-1": 0.0,
-        "SPACE4-1": 0.0,
-        "SPACE5-1": 0.0
-      },
-      "weather_outdoor_c": 23.075000000000003,
-      "energy_power_kw": null,
-      "current_setpoint_c": 27.0,
-      "proposed_setpoint_c": 25.0,
-      "controller_mode": "llm_mcp",
-      "safety_shield_result": {
-        "disposition": "rejected",
-        "blocking_reasons": [
-          "max_setpoint_change_exceeded"
-        ],
-        "approved": false
-      },
-      "executed_action": "hold_safe_setpoint=27.0",
-      "next_simulation_state": {
-        "cooling_setpoint_c": 27.0,
-        "energyplus_action_accepted": false
-      }
-    },
-    {
-      "timestamp": "07-15T22:15",
-      "zone_temperatures_c": {
-        "SPACE1-1": 22.633440097415093,
-        "SPACE2-1": 22.591717225911314,
-        "SPACE3-1": 22.62894278532003,
-        "SPACE4-1": 22.639139595959413,
-        "SPACE5-1": 22.440820607907103
-      },
-      "occupancy": {
-        "SPACE1-1": 0.0,
-        "SPACE2-1": 0.0,
-        "SPACE3-1": 0.0,
-        "SPACE4-1": 0.0,
-        "SPACE5-1": 0.0
-      },
-      "weather_outdoor_c": 24.324999999999996,
-      "energy_power_kw": null,
-      "current_setpoint_c": 27.0,
-      "proposed_setpoint_c": 25.0,
-      "controller_mode": "llm_mcp",
-      "safety_shield_result": {
-        "disposition": "rejected",
-        "blocking_reasons": [
-          "max_setpoint_change_exceeded"
-        ],
-        "approved": false
-      },
-      "executed_action": "hold_safe_setpoint=27.0",
-      "next_simulation_state": {
-        "cooling_setpoint_c": 27.0,
-        "energyplus_action_accepted": false
-      }
-    },
-    {
-      "timestamp": "07-15T23:15",
-      "zone_temperatures_c": {
-        "SPACE1-1": 22.45991976094385,
-        "SPACE2-1": 22.399619483435593,
-        "SPACE3-1": 22.42772746850837,
-        "SPACE4-1": 22.428026614300755,
-        "SPACE5-1": 22.14288839560382
-      },
-      "occupancy": {
-        "SPACE1-1": 0.0,
-        "SPACE2-1": 0.0,
-        "SPACE3-1": 0.0,
-        "SPACE4-1": 0.0,
-        "SPACE5-1": 0.0
-      },
-      "weather_outdoor_c": 25.6,
-      "energy_power_kw": null,
-      "current_setpoint_c": 27.0,
-      "proposed_setpoint_c": 25.0,
-      "controller_mode": "llm_mcp",
-      "safety_shield_result": {
-        "disposition": "rejected",
-        "blocking_reasons": [
-          "max_setpoint_change_exceeded"
-        ],
-        "approved": false
-      },
-      "executed_action": "hold_safe_setpoint=27.0",
-      "next_simulation_state": {
-        "cooling_setpoint_c": 27.0,
-        "energyplus_action_accepted": false
-      }
-    },
-    {
-      "timestamp": "07-16T00:15",
-      "zone_temperatures_c": {
-        "SPACE1-1": 22.29923952807527,
-        "SPACE2-1": 22.244635221363307,
-        "SPACE3-1": 22.2653297554079,
-        "SPACE4-1": 22.26119988567935,
-        "SPACE5-1": 21.937125154650783
-      },
-      "occupancy": {
-        "SPACE1-1": 0.0,
-        "SPACE2-1": 0.0,
-        "SPACE3-1": 0.0,
-        "SPACE4-1": 0.0,
-        "SPACE5-1": 0.0
-      },
-      "weather_outdoor_c": 24.900000000000002,
-      "energy_power_kw": null,
-      "current_setpoint_c": 27.0,
-      "proposed_setpoint_c": 24.0,
-      "controller_mode": "llm_mcp",
-      "safety_shield_result": {
-        "disposition": "rejected",
-        "blocking_reasons": [
-          "max_setpoint_change_exceeded"
-        ],
-        "approved": false
-      },
-      "executed_action": "hold_safe_setpoint=27.0",
-      "next_simulation_state": {
-        "cooling_setpoint_c": 27.0,
-        "energyplus_action_accepted": false
-      }
-    },
-    {
-      "timestamp": "07-16T01:15",
-      "zone_temperatures_c": {
-        "SPACE1-1": 21.983018652372277,
-        "SPACE2-1": 21.967515988930288,
-        "SPACE3-1": 21.943701140440652,
-        "SPACE4-1": 21.977064757185875,
-        "SPACE5-1": 21.78242050062059
-      },
-      "occupancy": {
-        "SPACE1-1": 0.0,
-        "SPACE2-1": 0.0,
-        "SPACE3-1": 0.0,
-        "SPACE4-1": 0.0,
-        "SPACE5-1": 0.0
-      },
-      "weather_outdoor_c": 22.650000000000002,
-      "energy_power_kw": null,
-      "current_setpoint_c": 27.0,
-      "proposed_setpoint_c": 24.0,
-      "controller_mode": "llm_mcp",
-      "safety_shield_result": {
-        "disposition": "rejected",
-        "blocking_reasons": [
-          "max_setpoint_change_exceeded"
-        ],
-        "approved": false
-      },
-      "executed_action": "hold_safe_setpoint=27.0",
-      "next_simulation_state": {
-        "cooling_setpoint_c": 27.0,
-        "energyplus_action_accepted": false
-      }
-    },
-    {
-      "timestamp": "07-16T02:15",
-      "zone_temperatures_c": {
-        "SPACE1-1": 21.757852612467893,
-        "SPACE2-1": 21.744882698550402,
-        "SPACE3-1": 21.70699723089735,
-        "SPACE4-1": 21.75036444042492,
-        "SPACE5-1": 21.642518739714887
-      },
-      "occupancy": {
-        "SPACE1-1": 0.0,
-        "SPACE2-1": 0.0,
-        "SPACE3-1": 0.0,
-        "SPACE4-1": 0.0,
-        "SPACE5-1": 0.0
-      },
-      "weather_outdoor_c": 22.625,
-      "energy_power_kw": null,
-      "current_setpoint_c": 27.0,
-      "proposed_setpoint_c": 26.0,
-      "controller_mode": "llm_mcp",
-      "safety_shield_result": {
-        "disposition": "approved",
-        "blocking_reasons": [],
-        "approved": true
-      },
-      "executed_action": "set_clg_setpoint=26.0",
-      "next_simulation_state": {
-        "cooling_setpoint_c": 26.0,
-        "energyplus_action_accepted": true
-      }
-    },
-    {
-      "timestamp": "07-16T03:15",
-      "zone_temperatures_c": {
-        "SPACE1-1": 21.713842315450314,
-        "SPACE2-1": 21.667645015623737,
-        "SPACE3-1": 21.654928612021944,
-        "SPACE4-1": 21.670781710164075,
-        "SPACE5-1": 21.523607564263013
-      },
-      "occupancy": {
-        "SPACE1-1": 0.0,
-        "SPACE2-1": 0.0,
-        "SPACE3-1": 0.0,
-        "SPACE4-1": 0.0,
-        "SPACE5-1": 0.0
-      },
-      "weather_outdoor_c": 23.9,
-      "energy_power_kw": null,
-      "current_setpoint_c": 26.0,
-      "proposed_setpoint_c": 22.0,
+      "proposed_setpoint_c": 22.7,
       "controller_mode": "llm_mcp",
       "safety_shield_result": {
         "disposition": "rejected",
@@ -945,13 +682,13 @@
       }
     },
     {
-      "timestamp": "07-16T04:15",
+      "timestamp": "07-15T20:23",
       "zone_temperatures_c": {
-        "SPACE1-1": 21.655837954533,
-        "SPACE2-1": 21.598497792305622,
-        "SPACE3-1": 21.594161518704162,
-        "SPACE4-1": 21.600292406544543,
-        "SPACE5-1": 21.43677388752665
+        "SPACE1-1": 23.130075905879618,
+        "SPACE2-1": 22.856934447772407,
+        "SPACE3-1": 23.21037452940612,
+        "SPACE4-1": 22.927228096085265,
+        "SPACE5-1": 23.07686031045361
       },
       "occupancy": {
         "SPACE1-1": 0.0,
@@ -960,10 +697,44 @@
         "SPACE4-1": 0.0,
         "SPACE5-1": 0.0
       },
-      "weather_outdoor_c": 23.9,
+      "weather_outdoor_c": 22.349999999999998,
       "energy_power_kw": null,
       "current_setpoint_c": 26.0,
-      "proposed_setpoint_c": 23.8,
+      "proposed_setpoint_c": 25.0,
+      "controller_mode": "llm_mcp",
+      "safety_shield_result": {
+        "disposition": "rejected",
+        "blocking_reasons": [
+          "low_confidence"
+        ],
+        "approved": false
+      },
+      "executed_action": "hold_safe_setpoint=26.0",
+      "next_simulation_state": {
+        "cooling_setpoint_c": 26.0,
+        "energyplus_action_accepted": false
+      }
+    },
+    {
+      "timestamp": "07-15T21:15",
+      "zone_temperatures_c": {
+        "SPACE1-1": 23.07325286163947,
+        "SPACE2-1": 22.97934150710696,
+        "SPACE3-1": 23.110571121972452,
+        "SPACE4-1": 23.05136339767676,
+        "SPACE5-1": 22.982487586873887
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "weather_outdoor_c": 23.075000000000003,
+      "energy_power_kw": null,
+      "current_setpoint_c": 26.0,
+      "proposed_setpoint_c": 24.0,
       "controller_mode": "llm_mcp",
       "safety_shield_result": {
         "disposition": "rejected",
@@ -979,13 +750,13 @@
       }
     },
     {
-      "timestamp": "07-16T05:23",
+      "timestamp": "07-15T22:15",
       "zone_temperatures_c": {
-        "SPACE1-1": 21.723968471733077,
-        "SPACE2-1": 22.333208952913388,
-        "SPACE3-1": 22.684698492519,
-        "SPACE4-1": 21.69808300822237,
-        "SPACE5-1": 21.400505008713886
+        "SPACE1-1": 22.640684286052267,
+        "SPACE2-1": 22.599295479883345,
+        "SPACE3-1": 22.636208843562862,
+        "SPACE4-1": 22.645986729439624,
+        "SPACE5-1": 22.448914761828085
       },
       "occupancy": {
         "SPACE1-1": 0.0,
@@ -1011,13 +782,13 @@
       }
     },
     {
-      "timestamp": "07-16T06:20",
+      "timestamp": "07-15T23:15",
       "zone_temperatures_c": {
-        "SPACE1-1": 22.200016398857954,
-        "SPACE2-1": 22.506270715604938,
-        "SPACE3-1": 23.583497577247602,
-        "SPACE4-1": 22.199848563695593,
-        "SPACE5-1": 22.201560304649057
+        "SPACE1-1": 22.465842120907922,
+        "SPACE2-1": 22.405886000231405,
+        "SPACE3-1": 22.4336846440305,
+        "SPACE4-1": 22.43386452412768,
+        "SPACE5-1": 22.14949346812584
       },
       "occupancy": {
         "SPACE1-1": 0.0,
@@ -1026,10 +797,109 @@
         "SPACE4-1": 0.0,
         "SPACE5-1": 0.0
       },
-      "weather_outdoor_c": 25.875000000000004,
+      "weather_outdoor_c": 25.6,
       "energy_power_kw": null,
       "current_setpoint_c": 25.0,
+      "proposed_setpoint_c": 26.0,
+      "controller_mode": "llm_mcp",
+      "safety_shield_result": {
+        "disposition": "approved",
+        "blocking_reasons": [],
+        "approved": true
+      },
+      "executed_action": "set_clg_setpoint=26.0",
+      "next_simulation_state": {
+        "cooling_setpoint_c": 26.0,
+        "energyplus_action_accepted": true
+      }
+    },
+    {
+      "timestamp": "07-16T00:15",
+      "zone_temperatures_c": {
+        "SPACE1-1": 22.30396258411023,
+        "SPACE2-1": 22.249655452492654,
+        "SPACE3-1": 22.270089527415283,
+        "SPACE4-1": 22.265971423082828,
+        "SPACE5-1": 21.94238589340918
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "weather_outdoor_c": 24.900000000000002,
+      "energy_power_kw": null,
+      "current_setpoint_c": 26.0,
       "proposed_setpoint_c": 23.0,
+      "controller_mode": "llm_mcp",
+      "safety_shield_result": {
+        "disposition": "rejected",
+        "blocking_reasons": [
+          "max_setpoint_change_exceeded",
+          "heating_cooling_deadband_violation"
+        ],
+        "approved": false
+      },
+      "executed_action": "hold_safe_setpoint=26.0",
+      "next_simulation_state": {
+        "cooling_setpoint_c": 26.0,
+        "energyplus_action_accepted": false
+      }
+    },
+    {
+      "timestamp": "07-16T01:15",
+      "zone_temperatures_c": {
+        "SPACE1-1": 21.98686566555153,
+        "SPACE2-1": 21.971602830755966,
+        "SPACE3-1": 21.947581734927198,
+        "SPACE4-1": 21.98100851748018,
+        "SPACE5-1": 21.78669192840393
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "weather_outdoor_c": 22.650000000000002,
+      "energy_power_kw": null,
+      "current_setpoint_c": 26.0,
+      "proposed_setpoint_c": 25.0,
+      "controller_mode": "llm_mcp",
+      "safety_shield_result": {
+        "disposition": "approved",
+        "blocking_reasons": [],
+        "approved": true
+      },
+      "executed_action": "set_clg_setpoint=25.0",
+      "next_simulation_state": {
+        "cooling_setpoint_c": 25.0,
+        "energyplus_action_accepted": true
+      }
+    },
+    {
+      "timestamp": "07-16T02:15",
+      "zone_temperatures_c": {
+        "SPACE1-1": 21.760987378009297,
+        "SPACE2-1": 21.748208181862125,
+        "SPACE3-1": 21.710161607528814,
+        "SPACE4-1": 21.753607783947192,
+        "SPACE5-1": 21.645990350872598
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "weather_outdoor_c": 22.625,
+      "energy_power_kw": null,
+      "current_setpoint_c": 25.0,
+      "proposed_setpoint_c": 22.0,
       "controller_mode": "llm_mcp",
       "safety_shield_result": {
         "disposition": "rejected",
@@ -1046,13 +916,13 @@
       }
     },
     {
-      "timestamp": "07-16T07:23",
+      "timestamp": "07-16T03:15",
       "zone_temperatures_c": {
-        "SPACE1-1": 22.19946181665304,
-        "SPACE2-1": 23.65375867716174,
-        "SPACE3-1": 24.259350735554982,
-        "SPACE4-1": 22.199765510783024,
-        "SPACE5-1": 22.200898750050783
+        "SPACE1-1": 21.716386305614947,
+        "SPACE2-1": 21.670343972152605,
+        "SPACE3-1": 21.657498379909462,
+        "SPACE4-1": 21.67343364542236,
+        "SPACE5-1": 21.526427358690373
       },
       "occupancy": {
         "SPACE1-1": 0.0,
@@ -1061,7 +931,7 @@
         "SPACE4-1": 0.0,
         "SPACE5-1": 0.0
       },
-      "weather_outdoor_c": 27.099999999999998,
+      "weather_outdoor_c": 23.9,
       "energy_power_kw": null,
       "current_setpoint_c": 25.0,
       "proposed_setpoint_c": 24.0,
@@ -1078,22 +948,22 @@
       }
     },
     {
-      "timestamp": "07-16T08:20",
+      "timestamp": "07-16T04:15",
       "zone_temperatures_c": {
-        "SPACE1-1": 23.336007480511824,
-        "SPACE2-1": 23.999728626432752,
-        "SPACE3-1": 23.99973618892769,
-        "SPACE4-1": 22.46708357099224,
-        "SPACE5-1": 23.090564814411078
+        "SPACE1-1": 21.65790362223321,
+        "SPACE2-1": 21.6006887248747,
+        "SPACE3-1": 21.596248981059958,
+        "SPACE4-1": 21.602456410038997,
+        "SPACE5-1": 21.43906348461514
       },
       "occupancy": {
-        "SPACE1-1": 11.0,
-        "SPACE2-1": 5.0,
-        "SPACE3-1": 11.0,
-        "SPACE4-1": 5.0,
-        "SPACE5-1": 20.0
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
       },
-      "weather_outdoor_c": 28.725,
+      "weather_outdoor_c": 23.9,
       "energy_power_kw": null,
       "current_setpoint_c": 24.0,
       "proposed_setpoint_c": 22.0,
@@ -1113,13 +983,145 @@
       }
     },
     {
+      "timestamp": "07-16T05:23",
+      "zone_temperatures_c": {
+        "SPACE1-1": 21.725621119985348,
+        "SPACE2-1": 22.334959057998546,
+        "SPACE3-1": 22.686379985064775,
+        "SPACE4-1": 21.699820840182575,
+        "SPACE5-1": 21.402340478960042
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "weather_outdoor_c": 24.324999999999996,
+      "energy_power_kw": null,
+      "current_setpoint_c": 24.0,
+      "proposed_setpoint_c": 26.0,
+      "controller_mode": "llm_mcp",
+      "safety_shield_result": {
+        "disposition": "rejected",
+        "blocking_reasons": [
+          "max_setpoint_change_exceeded"
+        ],
+        "approved": false
+      },
+      "executed_action": "hold_safe_setpoint=24.0",
+      "next_simulation_state": {
+        "cooling_setpoint_c": 24.0,
+        "energyplus_action_accepted": false
+      }
+    },
+    {
+      "timestamp": "07-16T06:20",
+      "zone_temperatures_c": {
+        "SPACE1-1": 22.20033721974812,
+        "SPACE2-1": 22.507465775537828,
+        "SPACE3-1": 23.584742728647615,
+        "SPACE4-1": 22.20073320116285,
+        "SPACE5-1": 22.202169896546682
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "weather_outdoor_c": 25.875000000000004,
+      "energy_power_kw": null,
+      "current_setpoint_c": 24.0,
+      "proposed_setpoint_c": 26.0,
+      "controller_mode": "llm_mcp",
+      "safety_shield_result": {
+        "disposition": "rejected",
+        "blocking_reasons": [
+          "max_setpoint_change_exceeded"
+        ],
+        "approved": false
+      },
+      "executed_action": "hold_safe_setpoint=24.0",
+      "next_simulation_state": {
+        "cooling_setpoint_c": 24.0,
+        "energyplus_action_accepted": false
+      }
+    },
+    {
+      "timestamp": "07-16T07:23",
+      "zone_temperatures_c": {
+        "SPACE1-1": 22.200099708887176,
+        "SPACE2-1": 23.654957056898663,
+        "SPACE3-1": 23.999735866920386,
+        "SPACE4-1": 22.20099665045787,
+        "SPACE5-1": 22.200439034599572
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "weather_outdoor_c": 27.099999999999998,
+      "energy_power_kw": null,
+      "current_setpoint_c": 24.0,
+      "proposed_setpoint_c": 25.0,
+      "controller_mode": "llm_mcp",
+      "safety_shield_result": {
+        "disposition": "approved",
+        "blocking_reasons": [],
+        "approved": true
+      },
+      "executed_action": "set_clg_setpoint=25.0",
+      "next_simulation_state": {
+        "cooling_setpoint_c": 25.0,
+        "energyplus_action_accepted": true
+      }
+    },
+    {
+      "timestamp": "07-16T08:20",
+      "zone_temperatures_c": {
+        "SPACE1-1": 23.334260965584786,
+        "SPACE2-1": 24.999570489700947,
+        "SPACE3-1": 24.99961146730894,
+        "SPACE4-1": 22.464935520462554,
+        "SPACE5-1": 23.090588029925236
+      },
+      "occupancy": {
+        "SPACE1-1": 11.0,
+        "SPACE2-1": 5.0,
+        "SPACE3-1": 11.0,
+        "SPACE4-1": 5.0,
+        "SPACE5-1": 20.0
+      },
+      "weather_outdoor_c": 28.725,
+      "energy_power_kw": null,
+      "current_setpoint_c": 25.0,
+      "proposed_setpoint_c": 24.0,
+      "controller_mode": "llm_mcp",
+      "safety_shield_result": {
+        "disposition": "approved",
+        "blocking_reasons": [],
+        "approved": true
+      },
+      "executed_action": "set_clg_setpoint=24.0",
+      "next_simulation_state": {
+        "cooling_setpoint_c": 24.0,
+        "energyplus_action_accepted": true
+      }
+    },
+    {
       "timestamp": "07-16T09:23",
       "zone_temperatures_c": {
-        "SPACE1-1": 23.998707235885796,
-        "SPACE2-1": 23.998757723484104,
-        "SPACE3-1": 23.998669105688712,
-        "SPACE4-1": 23.693721381298772,
-        "SPACE5-1": 23.998823046628466
+        "SPACE1-1": 23.99872559080608,
+        "SPACE2-1": 23.998776459687498,
+        "SPACE3-1": 23.99866298099768,
+        "SPACE4-1": 23.69775543114919,
+        "SPACE5-1": 23.99883065305079
       },
       "occupancy": {
         "SPACE1-1": 11.0,
@@ -1131,30 +1133,27 @@
       "weather_outdoor_c": 30.275,
       "energy_power_kw": null,
       "current_setpoint_c": 24.0,
-      "proposed_setpoint_c": 22.0,
+      "proposed_setpoint_c": 24.0,
       "controller_mode": "llm_mcp",
       "safety_shield_result": {
-        "disposition": "rejected",
-        "blocking_reasons": [
-          "max_setpoint_change_exceeded",
-          "heating_cooling_deadband_violation"
-        ],
-        "approved": false
+        "disposition": "approved",
+        "blocking_reasons": [],
+        "approved": true
       },
-      "executed_action": "hold_safe_setpoint=24.0",
+      "executed_action": "set_clg_setpoint=24.0",
       "next_simulation_state": {
         "cooling_setpoint_c": 24.0,
-        "energyplus_action_accepted": false
+        "energyplus_action_accepted": true
       }
     },
     {
       "timestamp": "07-16T10:15",
       "zone_temperatures_c": {
-        "SPACE1-1": 23.998013730179316,
-        "SPACE2-1": 23.998601534888635,
-        "SPACE3-1": 23.99823044899964,
-        "SPACE4-1": 23.998120943409695,
-        "SPACE5-1": 23.997645627090748
+        "SPACE1-1": 23.9980200218589,
+        "SPACE2-1": 23.998604869292354,
+        "SPACE3-1": 23.99823711724377,
+        "SPACE4-1": 23.998132267295592,
+        "SPACE5-1": 23.99765723811409
       },
       "occupancy": {
         "SPACE1-1": 11.0,
@@ -1184,11 +1183,11 @@
     {
       "timestamp": "07-16T11:15",
       "zone_temperatures_c": {
-        "SPACE1-1": 23.998251597381405,
-        "SPACE2-1": 23.998765705898798,
-        "SPACE3-1": 23.998332829003687,
-        "SPACE4-1": 23.998302900945195,
-        "SPACE5-1": 23.997949824239974
+        "SPACE1-1": 23.99825275822289,
+        "SPACE2-1": 23.998766945029253,
+        "SPACE3-1": 23.998334976168604,
+        "SPACE4-1": 23.99830420751892,
+        "SPACE5-1": 23.99795384154501
       },
       "occupancy": {
         "SPACE1-1": 8.8,
@@ -1198,6 +1197,75 @@
         "SPACE5-1": 16.0
       },
       "weather_outdoor_c": 31.825,
+      "energy_power_kw": null,
+      "current_setpoint_c": 24.0,
+      "proposed_setpoint_c": 22.0,
+      "controller_mode": "llm_mcp",
+      "safety_shield_result": {
+        "disposition": "rejected",
+        "blocking_reasons": [
+          "max_setpoint_change_exceeded",
+          "heating_cooling_deadband_violation"
+        ],
+        "approved": false
+      },
+      "executed_action": "hold_safe_setpoint=24.0",
+      "next_simulation_state": {
+        "cooling_setpoint_c": 24.0,
+        "energyplus_action_accepted": false
+      }
+    },
+    {
+      "timestamp": "07-16T12:15",
+      "zone_temperatures_c": {
+        "SPACE1-1": 23.998739702789468,
+        "SPACE2-1": 23.99915724930949,
+        "SPACE3-1": 23.99876806102578,
+        "SPACE4-1": 23.998777358518698,
+        "SPACE5-1": 23.998572499562588
+      },
+      "occupancy": {
+        "SPACE1-1": 4.4,
+        "SPACE2-1": 2.0,
+        "SPACE3-1": 4.4,
+        "SPACE4-1": 2.0,
+        "SPACE5-1": 8.0
+      },
+      "weather_outdoor_c": 32.35,
+      "energy_power_kw": null,
+      "current_setpoint_c": 24.0,
+      "proposed_setpoint_c": 26.0,
+      "controller_mode": "llm_mcp",
+      "safety_shield_result": {
+        "disposition": "rejected",
+        "blocking_reasons": [
+          "max_setpoint_change_exceeded"
+        ],
+        "approved": false
+      },
+      "executed_action": "hold_safe_setpoint=24.0",
+      "next_simulation_state": {
+        "cooling_setpoint_c": 24.0,
+        "energyplus_action_accepted": false
+      }
+    },
+    {
+      "timestamp": "07-16T13:15",
+      "zone_temperatures_c": {
+        "SPACE1-1": 23.99903352069795,
+        "SPACE2-1": 23.999160761291375,
+        "SPACE3-1": 23.99904296723702,
+        "SPACE4-1": 23.99903274482147,
+        "SPACE5-1": 23.998661136798848
+      },
+      "occupancy": {
+        "SPACE1-1": 8.8,
+        "SPACE2-1": 4.0,
+        "SPACE3-1": 8.8,
+        "SPACE4-1": 4.0,
+        "SPACE5-1": 16.0
+      },
+      "weather_outdoor_c": 32.925,
       "energy_power_kw": null,
       "current_setpoint_c": 24.0,
       "proposed_setpoint_c": 25.0,
@@ -1214,31 +1282,30 @@
       }
     },
     {
-      "timestamp": "07-16T12:15",
+      "timestamp": "07-16T14:15",
       "zone_temperatures_c": {
-        "SPACE1-1": 24.998658243472274,
-        "SPACE2-1": 24.998791969105834,
-        "SPACE3-1": 24.99868716306235,
-        "SPACE4-1": 24.74198565516453,
-        "SPACE5-1": 24.998790221177046
+        "SPACE1-1": 24.998513597942615,
+        "SPACE2-1": 24.99856870231284,
+        "SPACE3-1": 24.99852232464729,
+        "SPACE4-1": 24.99830617696555,
+        "SPACE5-1": 24.998488860731463
       },
       "occupancy": {
-        "SPACE1-1": 4.4,
-        "SPACE2-1": 2.0,
-        "SPACE3-1": 4.4,
-        "SPACE4-1": 2.0,
-        "SPACE5-1": 8.0
+        "SPACE1-1": 11.0,
+        "SPACE2-1": 5.0,
+        "SPACE3-1": 11.0,
+        "SPACE4-1": 5.0,
+        "SPACE5-1": 20.0
       },
-      "weather_outdoor_c": 32.35,
+      "weather_outdoor_c": 33.3,
       "energy_power_kw": null,
       "current_setpoint_c": 25.0,
-      "proposed_setpoint_c": 22.0,
+      "proposed_setpoint_c": 26.0,
       "controller_mode": "llm_mcp",
       "safety_shield_result": {
         "disposition": "rejected",
         "blocking_reasons": [
-          "max_setpoint_change_exceeded",
-          "heating_cooling_deadband_violation"
+          "low_confidence"
         ],
         "approved": false
       },
@@ -1249,22 +1316,22 @@
       }
     },
     {
-      "timestamp": "07-16T13:15",
+      "timestamp": "07-16T15:15",
       "zone_temperatures_c": {
-        "SPACE1-1": 24.99877131721765,
-        "SPACE2-1": 24.998993942843352,
-        "SPACE3-1": 24.99879363064992,
-        "SPACE4-1": 24.975035141536843,
-        "SPACE5-1": 24.998367754894545
+        "SPACE1-1": 24.998012983988595,
+        "SPACE2-1": 24.998138315698625,
+        "SPACE3-1": 24.998062611769743,
+        "SPACE4-1": 24.997816650002928,
+        "SPACE5-1": 24.997875127993897
       },
       "occupancy": {
-        "SPACE1-1": 8.8,
-        "SPACE2-1": 4.0,
-        "SPACE3-1": 8.8,
-        "SPACE4-1": 4.0,
-        "SPACE5-1": 16.0
+        "SPACE1-1": 11.0,
+        "SPACE2-1": 5.0,
+        "SPACE3-1": 11.0,
+        "SPACE4-1": 5.0,
+        "SPACE5-1": 20.0
       },
-      "weather_outdoor_c": 32.925,
+      "weather_outdoor_c": 33.175,
       "energy_power_kw": null,
       "current_setpoint_c": 25.0,
       "proposed_setpoint_c": 26.0,
@@ -1281,81 +1348,13 @@
       }
     },
     {
-      "timestamp": "07-16T14:15",
-      "zone_temperatures_c": {
-        "SPACE1-1": 25.99832397043107,
-        "SPACE2-1": 25.994148739112685,
-        "SPACE3-1": 25.998336582244946,
-        "SPACE4-1": 25.98169269574032,
-        "SPACE5-1": 25.99819959001241
-      },
-      "occupancy": {
-        "SPACE1-1": 11.0,
-        "SPACE2-1": 5.0,
-        "SPACE3-1": 11.0,
-        "SPACE4-1": 5.0,
-        "SPACE5-1": 20.0
-      },
-      "weather_outdoor_c": 33.3,
-      "energy_power_kw": null,
-      "current_setpoint_c": 26.0,
-      "proposed_setpoint_c": 28.0,
-      "controller_mode": "llm_mcp",
-      "safety_shield_result": {
-        "disposition": "rejected",
-        "blocking_reasons": [
-          "max_setpoint_change_exceeded"
-        ],
-        "approved": false
-      },
-      "executed_action": "hold_safe_setpoint=26.0",
-      "next_simulation_state": {
-        "cooling_setpoint_c": 26.0,
-        "energyplus_action_accepted": false
-      }
-    },
-    {
-      "timestamp": "07-16T15:15",
-      "zone_temperatures_c": {
-        "SPACE1-1": 25.997707806295022,
-        "SPACE2-1": 25.980646946215884,
-        "SPACE3-1": 25.99778369127896,
-        "SPACE4-1": 25.997375234546283,
-        "SPACE5-1": 25.99770494801176
-      },
-      "occupancy": {
-        "SPACE1-1": 11.0,
-        "SPACE2-1": 5.0,
-        "SPACE3-1": 11.0,
-        "SPACE4-1": 5.0,
-        "SPACE5-1": 20.0
-      },
-      "weather_outdoor_c": 33.175,
-      "energy_power_kw": null,
-      "current_setpoint_c": 26.0,
-      "proposed_setpoint_c": 24.0,
-      "controller_mode": "llm_mcp",
-      "safety_shield_result": {
-        "disposition": "rejected",
-        "blocking_reasons": [
-          "max_setpoint_change_exceeded"
-        ],
-        "approved": false
-      },
-      "executed_action": "hold_safe_setpoint=26.0",
-      "next_simulation_state": {
-        "cooling_setpoint_c": 26.0,
-        "energyplus_action_accepted": false
-      }
-    },
-    {
       "timestamp": "07-16T16:15",
       "zone_temperatures_c": {
-        "SPACE1-1": 25.99783802602331,
-        "SPACE2-1": 25.653941116151007,
-        "SPACE3-1": 25.99793486092344,
-        "SPACE4-1": 25.997594877415317,
-        "SPACE5-1": 25.9978389335707
+        "SPACE1-1": 25.99816679393989,
+        "SPACE2-1": 25.392790500244317,
+        "SPACE3-1": 25.998281164127906,
+        "SPACE4-1": 25.997696571995707,
+        "SPACE5-1": 25.991414951645154
       },
       "occupancy": {
         "SPACE1-1": 11.0,
@@ -1367,7 +1366,7 @@
       "weather_outdoor_c": 32.8,
       "energy_power_kw": null,
       "current_setpoint_c": 26.0,
-      "proposed_setpoint_c": 28.0,
+      "proposed_setpoint_c": 24.0,
       "controller_mode": "llm_mcp",
       "safety_shield_result": {
         "disposition": "rejected",
@@ -1385,11 +1384,11 @@
     {
       "timestamp": "07-16T17:15",
       "zone_temperatures_c": {
-        "SPACE1-1": 25.997796928296776,
-        "SPACE2-1": 25.259755090548545,
-        "SPACE3-1": 25.997828204627503,
-        "SPACE4-1": 25.998045175030416,
-        "SPACE5-1": 25.99754417762571
+        "SPACE1-1": 25.997804333890443,
+        "SPACE2-1": 25.12833400711597,
+        "SPACE3-1": 25.99784540571372,
+        "SPACE4-1": 25.99801947954719,
+        "SPACE5-1": 25.997802327539297
       },
       "occupancy": {
         "SPACE1-1": 11.0,
@@ -1399,41 +1398,6 @@
         "SPACE5-1": 20.0
       },
       "weather_outdoor_c": 32.525,
-      "energy_power_kw": null,
-      "current_setpoint_c": 26.0,
-      "proposed_setpoint_c": 22.0,
-      "controller_mode": "llm_mcp",
-      "safety_shield_result": {
-        "disposition": "rejected",
-        "blocking_reasons": [
-          "max_setpoint_change_exceeded",
-          "heating_cooling_deadband_violation"
-        ],
-        "approved": false
-      },
-      "executed_action": "hold_safe_setpoint=26.0",
-      "next_simulation_state": {
-        "cooling_setpoint_c": 26.0,
-        "energyplus_action_accepted": false
-      }
-    },
-    {
-      "timestamp": "07-16T18:23",
-      "zone_temperatures_c": {
-        "SPACE1-1": 25.70493089310494,
-        "SPACE2-1": 24.346183530802307,
-        "SPACE3-1": 25.642695023338124,
-        "SPACE4-1": 25.998987290466943,
-        "SPACE5-1": 25.42263583541739
-      },
-      "occupancy": {
-        "SPACE1-1": 5.5,
-        "SPACE2-1": 2.5,
-        "SPACE3-1": 5.5,
-        "SPACE4-1": 2.5,
-        "SPACE5-1": 10.0
-      },
-      "weather_outdoor_c": 31.424999999999997,
       "energy_power_kw": null,
       "current_setpoint_c": 26.0,
       "proposed_setpoint_c": 24.0,
@@ -1452,13 +1416,47 @@
       }
     },
     {
+      "timestamp": "07-16T18:23",
+      "zone_temperatures_c": {
+        "SPACE1-1": 25.6750035628753,
+        "SPACE2-1": 24.272499866440565,
+        "SPACE3-1": 25.61268047759292,
+        "SPACE4-1": 25.998791742553784,
+        "SPACE5-1": 25.393442233668477
+      },
+      "occupancy": {
+        "SPACE1-1": 5.5,
+        "SPACE2-1": 2.5,
+        "SPACE3-1": 5.5,
+        "SPACE4-1": 2.5,
+        "SPACE5-1": 10.0
+      },
+      "weather_outdoor_c": 31.424999999999997,
+      "energy_power_kw": null,
+      "current_setpoint_c": 26.0,
+      "proposed_setpoint_c": 28.0,
+      "controller_mode": "llm_mcp",
+      "safety_shield_result": {
+        "disposition": "rejected",
+        "blocking_reasons": [
+          "max_setpoint_change_exceeded"
+        ],
+        "approved": false
+      },
+      "executed_action": "hold_safe_setpoint=26.0",
+      "next_simulation_state": {
+        "cooling_setpoint_c": 26.0,
+        "energyplus_action_accepted": false
+      }
+    },
+    {
       "timestamp": "07-16T19:20",
       "zone_temperatures_c": {
-        "SPACE1-1": 24.44813923377027,
-        "SPACE2-1": 23.011801808677422,
-        "SPACE3-1": 24.394338172836427,
-        "SPACE4-1": 24.876152977706298,
-        "SPACE5-1": 24.06206029368173
+        "SPACE1-1": 24.411553260598694,
+        "SPACE2-1": 22.963182021391543,
+        "SPACE3-1": 24.357325020414997,
+        "SPACE4-1": 24.85089118361795,
+        "SPACE5-1": 24.01890410895232
       },
       "occupancy": {
         "SPACE1-1": 0.0,
@@ -1486,11 +1484,11 @@
     {
       "timestamp": "07-16T20:20",
       "zone_temperatures_c": {
-        "SPACE1-1": 24.10850830603863,
-        "SPACE2-1": 23.388784924819742,
-        "SPACE3-1": 24.01632452290556,
-        "SPACE4-1": 24.278417898139978,
-        "SPACE5-1": 23.364590121333936
+        "SPACE1-1": 24.075738127111805,
+        "SPACE2-1": 23.354350011047575,
+        "SPACE3-1": 23.983216662904034,
+        "SPACE4-1": 24.252852147936608,
+        "SPACE5-1": 23.32744519108427
       },
       "occupancy": {
         "SPACE1-1": 0.0,
@@ -1502,7 +1500,7 @@
       "weather_outdoor_c": 29.725,
       "energy_power_kw": null,
       "current_setpoint_c": 27.0,
-      "proposed_setpoint_c": 24.0,
+      "proposed_setpoint_c": 25.0,
       "controller_mode": "llm_mcp",
       "safety_shield_result": {
         "disposition": "rejected",
@@ -1520,11 +1518,11 @@
     {
       "timestamp": "07-16T21:15",
       "zone_temperatures_c": {
-        "SPACE1-1": 24.036877731947136,
-        "SPACE2-1": 23.680948159591345,
-        "SPACE3-1": 23.942279481628553,
-        "SPACE4-1": 24.491888555166902,
-        "SPACE5-1": 23.29268864084075
+        "SPACE1-1": 24.008468501856317,
+        "SPACE2-1": 23.648719746883792,
+        "SPACE3-1": 23.913589832017514,
+        "SPACE4-1": 24.465027865636962,
+        "SPACE5-1": 23.260653808880583
       },
       "occupancy": {
         "SPACE1-1": 0.0,
@@ -1536,27 +1534,27 @@
       "weather_outdoor_c": 28.624999999999996,
       "energy_power_kw": null,
       "current_setpoint_c": 27.0,
-      "proposed_setpoint_c": 28.0,
+      "proposed_setpoint_c": 26.0,
       "controller_mode": "llm_mcp",
       "safety_shield_result": {
         "disposition": "approved",
         "blocking_reasons": [],
         "approved": true
       },
-      "executed_action": "set_clg_setpoint=28.0",
+      "executed_action": "set_clg_setpoint=26.0",
       "next_simulation_state": {
-        "cooling_setpoint_c": 28.0,
+        "cooling_setpoint_c": 26.0,
         "energyplus_action_accepted": true
       }
     },
     {
       "timestamp": "07-16T22:15",
       "zone_temperatures_c": {
-        "SPACE1-1": 23.516949072282518,
-        "SPACE2-1": 23.332695178532543,
-        "SPACE3-1": 23.43832427228199,
-        "SPACE4-1": 23.816420398710214,
-        "SPACE5-1": 22.800912525886464
+        "SPACE1-1": 23.493544185370006,
+        "SPACE2-1": 23.306379719286465,
+        "SPACE3-1": 23.414676180001795,
+        "SPACE4-1": 23.793304123581983,
+        "SPACE5-1": 22.774681441476524
       },
       "occupancy": {
         "SPACE1-1": 0.0,
@@ -1567,28 +1565,30 @@
       },
       "weather_outdoor_c": 27.650000000000002,
       "energy_power_kw": null,
-      "current_setpoint_c": 28.0,
-      "proposed_setpoint_c": 28.0,
+      "current_setpoint_c": 26.0,
+      "proposed_setpoint_c": 24.0,
       "controller_mode": "llm_mcp",
       "safety_shield_result": {
-        "disposition": "approved",
-        "blocking_reasons": [],
-        "approved": true
+        "disposition": "rejected",
+        "blocking_reasons": [
+          "max_setpoint_change_exceeded"
+        ],
+        "approved": false
       },
-      "executed_action": "set_clg_setpoint=28.0",
+      "executed_action": "hold_safe_setpoint=26.0",
       "next_simulation_state": {
-        "cooling_setpoint_c": 28.0,
-        "energyplus_action_accepted": true
+        "cooling_setpoint_c": 26.0,
+        "energyplus_action_accepted": false
       }
     },
     {
       "timestamp": "07-16T23:15",
       "zone_temperatures_c": {
-        "SPACE1-1": 23.148238598959722,
-        "SPACE2-1": 23.033158118631984,
-        "SPACE3-1": 23.078735365391797,
-        "SPACE4-1": 23.31283244192408,
-        "SPACE5-1": 22.510777434659037
+        "SPACE1-1": 23.12919606710215,
+        "SPACE2-1": 23.012041573633493,
+        "SPACE3-1": 23.0594870001111,
+        "SPACE4-1": 23.293557997825154,
+        "SPACE5-1": 22.48950491922046
       },
       "occupancy": {
         "SPACE1-1": 0.0,
@@ -1599,8 +1599,8 @@
       },
       "weather_outdoor_c": 26.924999999999997,
       "energy_power_kw": null,
-      "current_setpoint_c": 28.0,
-      "proposed_setpoint_c": 25.0,
+      "current_setpoint_c": 26.0,
+      "proposed_setpoint_c": 24.0,
       "controller_mode": "llm_mcp",
       "safety_shield_result": {
         "disposition": "rejected",
@@ -1609,9 +1609,9 @@
         ],
         "approved": false
       },
-      "executed_action": "hold_safe_setpoint=28.0",
+      "executed_action": "hold_safe_setpoint=26.0",
       "next_simulation_state": {
-        "cooling_setpoint_c": 28.0,
+        "cooling_setpoint_c": 26.0,
         "energyplus_action_accepted": false
       }
     }
