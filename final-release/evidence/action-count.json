@@ -1,0 +1,22 @@
+{
+  "generated_at_utc": "2026-07-25T11:44:51.624870+00:00",
+  "source": "results/agent/actions.json",
+  "row_count": 48,
+  "independent": {
+    "approved": 48,
+    "rejected": 0,
+    "fallback": 0,
+    "by_disposition": {
+      "approved": 48
+    }
+  },
+  "app_action_counts": {
+    "approved": 48,
+    "rejected": 0,
+    "fallback": 0,
+    "total_decisions": 48
+  },
+  "actuator_written_true": 48,
+  "energyplus_accepted_true": 48,
+  "match_app": true
+}

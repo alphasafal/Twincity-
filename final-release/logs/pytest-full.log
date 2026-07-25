@@ -1,0 +1,19 @@
+...F................                                                     [100%]
+=================================== FAILURES ===================================
+E   AssertionError: assert False is True
+     +  where False = <built-in method get of dict object at 0x7fda883b2680>('simulated')
+     +    where <built-in method get of dict object at 0x7fda883b2680> = {'building': {'id': 'a279ef0e-2fc2-4df3-86c4-aaeebd04381d', 'name': 'TwinPilot Demo Office Updated', 'location': 'Beng...998827804941, 'data_freshness': 0.9682556583173911, 'forecast_confidence': 0.9, ...}, 'live_total_load_kw': 19.64, ...}.get
+/workspace/tests/integration/test_control_flow.py:85: AssertionError: assert False is True
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  /workspace/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+.venv/lib/python3.12/site-packages/passlib/utils/__init__.py:854
+  /workspace/.venv/lib/python3.12/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+    from crypt import crypt as _crypt
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/integration/test_control_flow.py::test_control_flow_login_status_optimize_validate
+1 failed, 19 passed, 2 warnings in 4.70s

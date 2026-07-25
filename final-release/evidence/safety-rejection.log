@@ -1,0 +1,10 @@
+UTC=2026-07-25T11:51:44.057262+00:00
+test=unsafe_35C_proposal
+proposed_cooling_setpoint_c=35.0
+current_setpoint_c=24.0
+approved=False
+disposition=rejected
+reasons=["cooling_setpoint_out_of_range", "max_setpoint_change_exceeded"]
+fallback_or_retain=retain_or_reject_no_actuator_for_35C
+stage_row={"ts": "2026-07-25T11:51:20.191516+00:00", "stage": "safety_shield_rejects_unsafe", "proposed": 35.0, "approved": false, "disposition": "rejected", "reasons": ["cooling_setpoint_out_of_range", "max_setpoint_change_exceeded"]}
+verdict=PASS

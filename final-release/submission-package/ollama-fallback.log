@@ -1,0 +1,15 @@
+UTC=2026-07-25T11:51:47.823079+00:00
+test=ollama_unavailable_invalid_host
+OLLAMA_BASE_URL=http://127.0.0.1:1
+fallback_dir=/tmp/ecolooop-ollama-fallback-20260725T115145Z
+exit_code_line_see=final-release/logs/ollama-fallback-run.log
+llm_structured_proposal_failures=48
+deterministic_fallback_stages=48
+action_dispositions={'fallback': 48}
+proposal_sources={'deterministic_fallback': 48}
+app_action_counts={'approved': 0, 'rejected': 0, 'fallback': 48, 'total_decisions': 48}
+sample_failure={"ts": "2026-07-25T11:51:47.101324+00:00", "stage": "llm_structured_proposal", "ok": false, "provider": "ollama", "error": "<urlopen error [Errno 111] Connection refused>", "fallback": "deterministic"}
+sample_fallback={"ts": "2026-07-25T11:51:47.101421+00:00", "stage": "deterministic_fallback", "proposed": 24.9, "reason": "unoccupied_setback", "confidence": 0.88}
+mock_data_used=false
+unsafe_actuator_for_failed_llm=false
+verdict=PASS

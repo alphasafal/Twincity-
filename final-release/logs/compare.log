@@ -1,0 +1,78 @@
+COMMAND: ./scripts/compare_results.sh
+START_UTC=2026-07-25T11:43:52Z
+./scripts/compare_results.sh: line 29: {cmp[timestamp_utc]}: command not found
+./scripts/compare_results.sh: command substitution: line 29: syntax error near unexpected token `cmp.get'
+./scripts/compare_results.sh: command substitution: line 29: `json\n{json.dumps(cmp.get('agent_action_counts'), indent=2)}\n'
+{
+  "schema_version": "1.1",
+  "timestamp_utc": "2026-07-25T11:43:52.890664+00:00",
+  "scenario": "default",
+  "inputs_identical": true,
+  "baseline_status": "completed",
+  "agent_status": "completed",
+  "total_energy_kwh": {
+    "baseline": 421.5057,
+    "agent": 415.9999,
+    "absolute_delta_agent_minus_baseline": -5.5058,
+    "percent_reduction": 1.3062,
+    "percent_delta": -1.3062
+  },
+  "hvac_energy_kwh": {
+    "baseline": 13.8459,
+    "agent": 13.157,
+    "absolute_delta_agent_minus_baseline": -0.6889,
+    "percent_reduction": 4.9755,
+    "percent_delta": -4.9755
+  },
+  "peak_power_kw": {
+    "baseline": 19.9325,
+    "agent": 19.64,
+    "absolute_delta_agent_minus_baseline": -0.2925,
+    "percent_reduction": 1.4675,
+    "percent_delta": -1.4675
+  },
+  "carbon_estimate_kg": {
+    "baseline": 175.7679,
+    "agent": 173.472,
+    "absolute_delta_agent_minus_baseline": -2.2959,
+    "percent_reduction": 1.3062,
+    "percent_delta": -1.3062
+  },
+  "occupied_comfort_violation_hours": {
+    "baseline": 0.0,
+    "agent": 0.0,
+    "absolute_delta_agent_minus_baseline": 0.0,
+    "percent_reduction": null,
+    "percent_delta": null
+  },
+  "occupied_comfort_degree_hours": {
+    "baseline": 0.0,
+    "agent": 0.0,
+    "absolute_delta_agent_minus_baseline": 0.0,
+    "percent_reduction": null,
+    "percent_delta": null
+  },
+  "agent_action_counts": {
+    "approved": 48,
+    "rejected": 0,
+    "fallback": 0,
+    "total_decisions": 48
+  },
+  "carbon_accounting": {
+    "label": "estimate",
+    "formula": "total_energy_kwh * emission_factor_kg_per_kwh",
+    "emission_factor_kg_per_kwh": 0.417,
+    "units": "kg CO2e (estimate)"
+  },
+  "notes": [
+    "percent_reduction = (baseline - agent) / baseline * 100 (positive means agent used less).",
+    "Carbon values are estimates using a documented kg/kWh factor.",
+    "Only controller differs: baseline has no setpoint overrides; agent uses SafetyShield-gated overrides.",
+    "Synthetic multipliers (e.g. \u00d71.12) are not used."
+  ]
+}
+Wrote /workspace/results/comparison/comparison.json
+Wrote /workspace/results/comparison/comparison.md
+END_UTC=2026-07-25T11:43:52Z
+EXIT_CODE=0
+DURATION_SEC=0

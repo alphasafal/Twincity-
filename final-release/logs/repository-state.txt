@@ -1,0 +1,127 @@
+=== FINAL RELEASE CANDIDATE FREEZE ===
+pwd: /workspace
+utc: 2026-07-25T11:42:47Z
+local: 2026-07-25T11:42:47+0000
+branch: ecolooop-hackathon-final
+HEAD: 39cb4da36b9f79de36aa797de28de5bb0a76f950
+HEAD_SHORT: 133b053
+
+=== git status ===
+On branch ecolooop-hackathon-final
+Your branch is up to date with 'origin/ecolooop-hackathon-final'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   manual-verification/mcp-transport/mcp-runtime-trace.jsonl
+	modified:   manual-verification/mcp-transport/mcp-server-decisions.jsonl
+	modified:   manual-verification/mcp-transport/mcp-server-stderr.log
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	final-release/
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+=== latest 15 commits ===
+133b053 Clarify verification-summary commit identity (remediation vs tip)
+fe219ac Align verification-summary tested_commit with HEAD
+5c563bb Pin verification-summary tested_commit to tip
+f9c2aa9 Refresh owner manual guide for stdio MCP and record acceptance gates
+9085cbc Restore submission-evidence gitkeep and pin remediation commit hashes
+1b6a045 Document stdio MCP clean-room verification and update claim matrix
+95a58e7 Remediate MCP stdio transport and stop committing experiment results
+b63311c Record evidence-bundle commit hash in verification-summary
+8c8b7e0 Independent verification evidence and P0/P1 hardening fixes
+589643c Add precise 33-item audit map and closed-loop code trace
+61ed36c Final hackathon hardening: real dashboard DATA_MODE, LLM-MCP, comfort-zero
+8277ecb Harden Eco-Loop: real EnergyPlus closed loop, safety, and audit evidence
+5980adc Fix invite-user integration test to use unique emails
+f2c1202 Add settings write APIs, rate limits, replay script, and Ollama setup
+6d95258 Document Playwright e2e login smoke test
+
+=== remotes ===
+origin	https://x-access-token:ghs_1210556_eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJhdXRobmQiLCJjdHgiOiJJNFUzTk9OLVpWMEZXNWF5eWc1cG1ocGw1WWx0eTNRcjZTdTdsNldCZmFHSk9HZXlUcDl3cVgxQ2Vsay1YNU0iLCJleHAiOjE3ODQ5ODMzNjcsImlhdCI6MTc4NDk3OTc2NywiaXNzIjoiZ2l0aHViIiwianRpIjoiZDU1NDVkNTctNWI1My00MTllLTk2Y2QtNTkyYjRmZmEyYzg1IiwidmVyIjozfQ.ceVwEEPujWVtPD7HCJZnn9I2xwCGr17Zd0kVUNaVnC6yM1WzHq7IXQ-cVJ8WIW07w2Jz07Huj2I3012zrQSI5A@github.com/alphasafal/Twincity- (fetch)
+origin	https://x-access-token:ghs_1210556_eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJhdXRobmQiLCJjdHgiOiJJNFUzTk9OLVpWMEZXNWF5eWc1cG1ocGw1WWx0eTNRcjZTdTdsNldCZmFHSk9HZXlUcDl3cVgxQ2Vsay1YNU0iLCJleHAiOjE3ODQ5ODMzNjcsImlhdCI6MTc4NDk3OTc2NywiaXNzIjoiZ2l0aHViIiwianRpIjoiZDU1NDVkNTctNWI1My00MTllLTk2Y2QtNTkyYjRmZmEyYzg1IiwidmVyIjozfQ.ceVwEEPujWVtPD7HCJZnn9I2xwCGr17Zd0kVUNaVnC6yM1WzHq7IXQ-cVJ8WIW07w2Jz07Huj2I3012zrQSI5A@github.com/alphasafal/Twincity- (push)
+
+=== tracked results/submission-evidence ===
+results/.gitkeep
+results/agent/.gitkeep
+results/baseline/.gitkeep
+results/comparison/.gitkeep
+results/llm_mcp/.gitkeep
+submission-evidence/.gitkeep
+
+=== untracked (top) ===
+ M manual-verification/mcp-transport/mcp-runtime-trace.jsonl
+ M manual-verification/mcp-transport/mcp-server-decisions.jsonl
+ M manual-verification/mcp-transport/mcp-server-stderr.log
+?? final-release/logs/repository-state.txt
+
+=== check-ignore samples ===
+.gitignore:33:results/**	results/baseline/summary.json
+.gitignore:33:results/**	results/agent/summary.json
+.gitignore:14:.env	.env
+.gitignore:38:submission-evidence/**	submission-evidence/comparison.json
+
+=== ignored relevant (git status --ignored short) ===
+ M manual-verification/mcp-transport/mcp-runtime-trace.jsonl
+ M manual-verification/mcp-transport/mcp-server-decisions.jsonl
+ M manual-verification/mcp-transport/mcp-server-stderr.log
+?? final-release/
+!! .env
+!! .pytest_cache/
+!! .ruff_cache/
+!! .venv/
+!! apps/mobile/node_modules/
+!! apps/web/.env.local
+!! apps/web/.next/
+!! apps/web/node_modules/
+!! apps/web/tsconfig.tsbuildinfo
+!! node_modules/
+!! packages/api-client/node_modules/
+!! packages/config/node_modules/
+!! packages/contracts/node_modules/
+!! packages/design-tokens/node_modules/
+!! results/agent/actions.json
+!! results/agent/comfort_analysis.json
+!! results/agent/energyplus-runtime.log
+!! results/agent/energyplus_run/
+!! results/agent/run.log
+!! results/agent/stream.json
+!! results/agent/summary.json
+!! results/baseline/actions.json
+!! results/baseline/comfort_analysis.json
+!! results/baseline/energyplus-runtime.log
+!! results/baseline/energyplus_run/
+!! results/baseline/run.log
+!! results/baseline/stream.json
+!! results/baseline/summary.json
+!! results/comparison/comparison.json
+!! results/comparison/comparison.md
+!! results/llm_mcp/agent/
+!! results/llm_mcp/baseline/
+!! results/llm_mcp/stage_log.jsonl
+!! results/llm_mcp/summary.json
+!! results/scenarios/
+!! scripts/__pycache__/
+!! services/agent/twinpilot_agent.egg-info/
+!! services/agent/twinpilot_agent/__pycache__/
+!! services/api/.pytest_cache/
+!! services/api/.ruff_cache/
+!! services/api/app/__pycache__/
+!! services/api/app/api/__pycache__/
+!! services/api/app/api/v1/__pycache__/
+!! services/api/app/core/__pycache__/
+!! services/api/app/db/__pycache__/
+!! services/api/app/models/__pycache__/
+!! services/api/app/schemas/__pycache__/
+!! services/api/app/services/__pycache__/
+!! services/api/tests/__pycache__/
+!! services/api/twinpilot_api.egg-info/
+!! services/mcp-server/twinpilot_mcp.egg-info/
+!! services/mcp-server/twinpilot_mcp/__pycache__/
+!! services/optimizer/.pytest_cache/
+!! services/optimizer/tests/__pycache__/
+!! services/optimizer/twinpilot_optimizer.egg-info/
+!! services/optimizer/twinpilot_optimizer/__pycache__/
