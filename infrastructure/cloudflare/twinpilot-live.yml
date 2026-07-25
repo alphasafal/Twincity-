@@ -1,0 +1,16 @@
+# Named Cloudflare Tunnel config for Eco-Loop live demo.
+# Hostname: twinpilot.webyaar.in → local reverse proxy :8080 (Next.js + API)
+#
+# Requires credentials from `cloudflared tunnel create twinpilot-live`
+# and DNS route: `cloudflared tunnel route dns twinpilot-live twinpilot.webyaar.in`
+
+tunnel: twinpilot-live
+credentials-file: /home/ubuntu/.cloudflared/twinpilot-live.json
+
+ingress:
+  - hostname: twinpilot.webyaar.in
+    service: http://127.0.0.1:8080
+    originRequest:
+      noTLSVerify: true
+      disableChunkedEncoding: true
+  - service: http_status:404
