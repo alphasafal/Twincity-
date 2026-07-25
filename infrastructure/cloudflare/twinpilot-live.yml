@@ -1,0 +1,10 @@
+tunnel: 49baf5e4-397b-44e3-a47e-21ed41c1f330
+credentials-file: /home/ubuntu/.cloudflared/twinpilot-live.json
+
+ingress:
+  - hostname: twinpilot.webyaar.in
+    service: http://127.0.0.1:8080
+    originRequest:
+      noTLSVerify: true
+      disableChunkedEncoding: true
+  - service: http_status:404

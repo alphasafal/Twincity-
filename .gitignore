@@ -1,0 +1,68 @@
+node_modules
+.turbo
+.next
+dist
+build
+.expo
+*.pyc
+__pycache__
+.pytest_cache
+.mypy_cache
+.ruff_cache
+.venv
+venv
+.env
+.env.local
+*.db
+*.sqlite3
+.DS_Store
+coverage
+playwright-report
+test-results
+*.egg-info
+.python-version
+*.tsbuildinfo
+apps/mobile/.expo
+apps/web/.next
+
+# Local EnergyPlus install (download via scripts/setup_energyplus.sh)
+third_party/EnergyPlus/
+third_party/*.tar.gz
+
+# Generated experiment outputs (never commit authoritative results)
+results/**
+!results/**/.gitkeep
+!results/.gitkeep
+
+# Generated submission evidence artifacts
+submission-evidence/**
+!submission-evidence/.gitkeep
+!submission-evidence/**/.gitkeep
+
+# Ephemeral MCP server pidfiles from local experiment runs
+manual-verification/mcp-transport/**/*.pid
+manual-verification/mcp-transport/mcp-server-*.pid
+
+# Unpacked submission staging (zip is the deliverable)
+Eco-Loop-Hackathon-Submission/
+
+# Ephemeral slide/video render intermediates (keep final PDF/MP4)
+final-release/demo-video/frames/
+final-release/demo-video/live-frames/
+final-release/demo-video/closed-loop-capture.html
+final-release/demo-video/live-closed-loop-capture.html
+final-release/demo-video/concat.txt
+final-release/demo-video/live-concat.txt
+final-release/demo-video/duration.txt
+screenshot.png
+
+.agents/
+
+# Local editor config (not part of the product)
+.cursor/
+
+
+# Cloudflare tunnel secrets (never commit)
+.cloudflared/
+**/.cloudflared/
+
