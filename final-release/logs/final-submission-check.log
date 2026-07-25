@@ -27,7 +27,7 @@ PASS no venv/node_modules in package
 PASS no .env/pid in package
 -- stale final-release commit wording --
 PASS no intermediate commit labeled as final release
-PASS manifest structure PASS 133b0530670f
+PASS manifest structure PASS 29e88cbd829a
 SUBMISSION_FILE_CHECKLIST.md: FAILED
 submission-package/SUBMISSION_FILE_CHECKLIST.md: FAILED
 sha256sum: WARNING: 2 computed checksums did NOT match

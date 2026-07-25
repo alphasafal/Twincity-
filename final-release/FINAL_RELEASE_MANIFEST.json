@@ -1,8 +1,8 @@
 {
   "project": "Eco-Loop Building Agents",
-  "final_release_commit": "133b0530670f2ed5b9fcf011d7a0adaa0b63228c",
+  "final_release_commit": "29e88cbd829a333b4661ea8d6c448b1a02a46325",
   "branch": "cursor/ecolooop-energyplus-audit-b6b3",
-  "generated_at": "2026-07-25T12:01:39.455435+00:00",
+  "generated_at": "2026-07-25T12:02:03.976363+00:00",
   "overall_status": "PASS",
   "internal_readiness_score": 99,
   "authoritative_results": {
@@ -62,11 +62,10 @@
   "p0_issues": [],
   "p1_issues": [],
   "owner_actions_remaining": [
-    "Confirm sealed commit SHA after final docs commit",
-    "Run ./scripts/final_smoke_test.sh before live demo",
-    "Create annotated tag hackathon-final-v1 manually",
-    "Push branch/tag only after explicit owner approval",
-    "Record backup demo video"
+    "Run ./scripts/final_smoke_test.sh immediately before live demo",
+    "Record backup demonstration video",
+    "Create annotated tag hackathon-final-v1 on this commit",
+    "Push branch/tag only after explicit owner approval"
   ],
   "score_breakdown": {
     "Real EnergyPlus closed loop": {
