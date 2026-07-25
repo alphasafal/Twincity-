@@ -24,19 +24,27 @@ in each `package.json` / `pyproject.toml`, so don't duplicate them.
   `*.example` files by the update script. The web app needs `apps/web/.env.local` with
   `NEXT_PUBLIC_API_URL=http://localhost:8000` or API calls fail.
 - The default demo runs fully on the **mock** twin: `SIMULATOR_PROVIDER=mock`,
-  `AGENT_PROVIDER=deterministic`. **EnergyPlus and Ollama are optional heavy dependencies**
-  and are NOT installed by the update script. Only install them (`./scripts/setup_energyplus.sh`,
-  Ollama) if you specifically need the real closed-loop / LLM experiment paths.
-- `results/*` contain only `.gitkeep` on a fresh checkout. The `DATA_MODE=energyplus`
-  dashboard payload and the integration test
-  `tests/integration/test_experiment_dashboard.py::test_experiment_payload_has_real_reductions_no_synthetic`
-  require first running the EnergyPlus experiments (`scripts/run_baseline.sh`,
-  `scripts/run_agent.sh`). Without EnergyPlus this test fails and the dashboard shows an
-  honest "no results" state — this is expected, not an environment bug.
-- Ruff (current version) reports pre-existing lint errors in `services/api`
-  (`F401` unused `load_comparison` import + two `RUF003` ambiguous `×` in comments).
-  These already fail upstream CI on the source branch and are not caused by env setup;
-  don't "fix" them as part of environment work.
+  `AGENT_PROVIDER=deterministic`, and needs neither EnergyPlus nor Ollama.
+- **EnergyPlus 24.1 and Ollama are heavy deps installed once (via `./scripts/setup_energyplus.sh`
+  and the ollama.com installer) and persisted in the VM snapshot** — they are intentionally
+  NOT in the startup update script (large download + system-level install). EnergyPlus lives
+  at `third_party/EnergyPlus/` (gitignored). If a future VM lacks them, reinstall with those
+  same scripts (`sudo apt-get install -y zstd` is required before the ollama installer).
+- **Ollama has no systemd here**, so start it manually before LLM/prereq checks:
+  `OLLAMA_HOST=127.0.0.1:11434 ollama serve` (run in a tmux/background session). The model
+  `llama3.2:1b` is pulled; re-pull with `ollama pull llama3.2:1b` if missing. Export
+  `OLLAMA_BASE_URL=http://127.0.0.1:11434` and `OLLAMA_MODEL=llama3.2:1b` for the experiment scripts.
+- `results/**` is gitignored (never commit generated results). Regenerate with
+  `scripts/run_baseline.sh` + `scripts/run_agent.sh` + `scripts/compare_results.sh` (Path A),
+  `scripts/run_llm_mcp_experiment.sh` (Path B), `scripts/run_hybrid_supervisory_experiment.sh`
+  (Path C). Each EnergyPlus *agent* run takes ~3–5 min; LLM paths are slower (per-hour Ollama
+  calls). The `DATA_MODE=energyplus` API/dashboard reads `results/*` live — no API restart
+  needed after regenerating. `tests/integration/test_experiment_dashboard.py` requires Path A
+  results to exist. `./scripts/check_prerequisites.sh` and `./scripts/final_smoke_test.sh`
+  validate the whole setup.
+- The LLM/MCP experiment scripts overwrite tracked trace logs under
+  `manual-verification/mcp-transport/*.jsonl`; `git checkout -- manual-verification/` to
+  discard that re-run noise before committing.
 - A benign `RuntimeError: unable to perform operation on <TCPTransport closed=True ...>`
   can appear in the API log when the browser navigates away and the `/ws` WebSocket closes.
   It is cosmetic and does not affect the request/response API.
