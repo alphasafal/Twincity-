@@ -1,0 +1,6 @@
+{"ts": "2026-07-25T11:51:47.101324+00:00", "stage": "llm_structured_proposal", "ok": false, "provider": "ollama", "error": "<urlopen error [Errno 111] Connection refused>", "fallback": "deterministic"}
+{"ts": "2026-07-25T11:51:47.111295+00:00", "stage": "llm_structured_proposal", "ok": false, "provider": "ollama", "error": "<urlopen error [Errno 111] Connection refused>", "fallback": "deterministic"}
+{"ts": "2026-07-25T11:51:47.120747+00:00", "stage": "llm_structured_proposal", "ok": false, "provider": "ollama", "error": "<urlopen error [Errno 111] Connection refused>", "fallback": "deterministic"}
+{"ts": "2026-07-25T11:51:47.101421+00:00", "stage": "deterministic_fallback", "proposed": 24.9, "reason": "unoccupied_setback", "confidence": 0.88}
+{"ts": "2026-07-25T11:51:47.111363+00:00", "stage": "deterministic_fallback", "proposed": 25.9, "reason": "unoccupied_setback", "confidence": 0.88}
+{"ts": "2026-07-25T11:51:47.120806+00:00", "stage": "deterministic_fallback", "proposed": 26.9, "reason": "unoccupied_setback", "confidence": 0.88}

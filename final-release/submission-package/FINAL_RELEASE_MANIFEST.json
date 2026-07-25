@@ -1,0 +1,123 @@
+{
+  "project": "Eco-Loop Building Agents",
+  "final_release_commit": "133b0530670f2ed5b9fcf011d7a0adaa0b63228c",
+  "branch": "cursor/ecolooop-energyplus-audit-b6b3",
+  "generated_at": "2026-07-25T12:01:39.455435+00:00",
+  "overall_status": "PASS",
+  "internal_readiness_score": 99,
+  "authoritative_results": {
+    "baseline_total_energy_kwh": 421.5057,
+    "agent_total_energy_kwh": 415.9999,
+    "total_energy_reduction_percent": 1.3062,
+    "baseline_hvac_energy_kwh": 13.8459,
+    "agent_hvac_energy_kwh": 13.157,
+    "hvac_energy_reduction_percent": 4.9755,
+    "baseline_peak_power_kw": 19.9325,
+    "agent_peak_power_kw": 19.64,
+    "peak_power_reduction_percent": 1.4675,
+    "baseline_comfort_violation_hours": 0.0,
+    "agent_comfort_violation_hours": 0.0,
+    "comfort_degree_hours": 0.0,
+    "approved_actions": 48,
+    "rejected_actions": 0,
+    "fallback_actions": 0
+  },
+  "verification": {
+    "energyplus_closed_loop": "PASS",
+    "actuator_write": "PASS",
+    "next_state": "PASS",
+    "mcp_separate_process": "PASS",
+    "mcp_initialize": "PASS",
+    "mcp_tools_list": "PASS",
+    "mcp_tools_call": "PASS",
+    "ollama_response": "PASS",
+    "safety_rejection": "PASS",
+    "fallback": "PASS",
+    "dashboard_real_data": "PASS",
+    "dashboard_no_data_state": "PASS",
+    "no_silent_mock_fallback": "PASS",
+    "clean_clone": "PASS",
+    "tests": "PASS"
+  },
+  "critical_evidence": [
+    "final-release/evidence/independent-metrics.json",
+    "final-release/evidence/final-actuator-trace.csv",
+    "final-release/evidence/final-next-state-proof.md",
+    "final-release/evidence/mcp-process-proof.md",
+    "final-release/evidence/mcp-runtime-trace.jsonl",
+    "final-release/evidence/ollama-runtime-proof.md",
+    "final-release/evidence/safety-rejection.log",
+    "final-release/evidence/ollama-fallback.log",
+    "final-release/evidence/dashboard-real-data-proof.md",
+    "final-release/evidence/dashboard-no-data-proof.md",
+    "final-release/logs/clean-clone.log"
+  ],
+  "known_limitations": [
+    "EnergyPlus digital-building only",
+    "No physical BMS connector",
+    "Local Ollama prerequisite",
+    "Carbon values are estimates",
+    "Sample office / Chicago EPW specific"
+  ],
+  "p0_issues": [],
+  "p1_issues": [],
+  "owner_actions_remaining": [
+    "Confirm sealed commit SHA after final docs commit",
+    "Run ./scripts/final_smoke_test.sh before live demo",
+    "Create annotated tag hackathon-final-v1 manually",
+    "Push branch/tag only after explicit owner approval",
+    "Record backup demo video"
+  ],
+  "score_breakdown": {
+    "Real EnergyPlus closed loop": {
+      "max": 20,
+      "earned": 20,
+      "note": "Fresh baseline/agent completed successfully"
+    },
+    "Actuator and next-state proof": {
+      "max": 10,
+      "earned": 10,
+      "note": "final-actuator-trace + next-state PASS"
+    },
+    "Experiment validity and reproducibility": {
+      "max": 12,
+      "earned": 12,
+      "note": "Fairness VALID"
+    },
+    "Energy and comfort evidence": {
+      "max": 12,
+      "earned": 12,
+      "note": "Independent metrics match; comfort 0/0"
+    },
+    "Real MCP stdio integration": {
+      "max": 10,
+      "earned": 10,
+      "note": "PIDs 65999!=66004"
+    },
+    "Ollama structured proposal path": {
+      "max": 8,
+      "earned": 8,
+      "note": "48 structured proposals logged"
+    },
+    "SafetyShield and failure handling": {
+      "max": 12,
+      "earned": 12,
+      "note": "35C reject + 48 fallback + recovery"
+    },
+    "Dashboard data integrity": {
+      "max": 6,
+      "earned": 6,
+      "note": "no-data honest; real-data matches; no x1.12"
+    },
+    "Clean-clone workflow": {
+      "max": 5,
+      "earned": 5,
+      "note": "PASS"
+    },
+    "Documentation and demo readiness": {
+      "max": 5,
+      "earned": 4,
+      "note": "Pack complete; owner tag/push remaining (-1)"
+    }
+  }
+}

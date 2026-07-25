@@ -1,0 +1,48 @@
+{
+  "generated_at_utc": "2026-07-25T11:44:51.624870+00:00",
+  "source": {
+    "baseline_summary": "results/baseline/summary.json",
+    "agent_summary": "results/agent/summary.json",
+    "baseline_csv": "/workspace/results/baseline/energyplus_run/eplusout.csv",
+    "agent_csv": "/workspace/results/agent/energyplus_run/eplusout.csv"
+  },
+  "baseline": {
+    "total_energy_kwh": 421.5057,
+    "hvac_energy_kwh": 13.8459,
+    "peak_power_kw": 19.9325,
+    "occupied_comfort_violation_hours": 0.0,
+    "occupied_comfort_degree_hours": 0.0,
+    "simulation_status": "completed",
+    "timestamp_utc": "2026-07-25T11:43:51.941063+00:00"
+  },
+  "agent": {
+    "total_energy_kwh": 415.9999,
+    "hvac_energy_kwh": 13.157,
+    "peak_power_kw": 19.64,
+    "occupied_comfort_violation_hours": 0.0,
+    "occupied_comfort_degree_hours": 0.0,
+    "simulation_status": "completed",
+    "timestamp_utc": "2026-07-25T11:43:52.671086+00:00",
+    "action_counts_app": {
+      "approved": 48,
+      "rejected": 0,
+      "fallback": 0,
+      "total_decisions": 48
+    }
+  },
+  "independent_reductions_percent": {
+    "total_energy": 1.306222,
+    "hvac_energy": 4.97548,
+    "peak_power": 1.467453
+  },
+  "app_reductions_percent": {
+    "total_energy": 1.3062,
+    "hvac_energy": 4.9755,
+    "peak_power": 1.4675
+  },
+  "match_within_rounding": {
+    "total_energy": true,
+    "hvac_energy": true,
+    "peak_power": true
+  }
+}

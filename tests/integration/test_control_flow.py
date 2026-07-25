@@ -82,7 +82,17 @@ def test_control_flow_login_status_optimize_validate(client):
     status = client.request("GET", f"/api/v1/buildings/{building_id}/status", headers=headers)
     assert status.status_code == 200
     status_body = status.json()
-    assert status_body.get("simulated") is True
+    # Hackathon default DATA_MODE=energyplus serves measured results when present
+    # (simulated=False). Explicit mock mode still reports simulated=True.
+    assert status_body.get("data_mode") in {"energyplus", "mock"}
+    if status_body.get("data_mode") == "mock":
+        assert status_body.get("simulated") is True
+    else:
+        assert status_body.get("simulated") is False
+        assert status_body.get("data_label") in {
+            "energyplus_experiment_results",
+            "energyplus_results_unavailable",
+        }
     assert "mode" in status_body
 
     gen = client.request(

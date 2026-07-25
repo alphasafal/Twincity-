@@ -1,0 +1,13 @@
+START_UTC=2026-07-25T11:51:57Z
+== ollama health ==
+['llama3.2:1b']
+== one structured generate ==
+{
+ "result": {
+ "proposed_cooling_setpoint_c": 24.5,
+ "reason": "recovery_probe",
+ "confidence": 0.8
+ } }
+== short recovery llm_mcp (already proven full run; confirm PIDs via session open) ==
+{'transport': 'stdio', 'client_pid': 71733, 'server_pid': 71735, 'pids_differ': True, 'initialized': True, 'tool_count': 5, 'tools': ['get_building_observation', 'propose_or_prepare_control_context', 'validate_control_action', 'get_controller_constraints', 'record_control_decision']}
+END_UTC=2026-07-25T11:52:00Z
