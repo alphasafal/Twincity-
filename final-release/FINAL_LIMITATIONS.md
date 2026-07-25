@@ -1,6 +1,6 @@
 # Final Limitations
 
-**Commit:** `29e88cbd829a333b4661ea8d6c448b1a02a46325` · **Generated:** 2026-07-25T12:01:39.455435+00:00
+**Commit:** `39cb4da36b9f79de36aa797de28de5bb0a76f950` · **Generated:** 2026-07-25T12:01:39.455435+00:00
 
 1. EnergyPlus digital-building scope only — no physical BMS connector.
 2. No BACnet/BMS actuation path in this prototype.

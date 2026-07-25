@@ -1,7 +1,7 @@
 # Security and Privacy Check
 
 Generated: 2026-07-25T12:01:39.455435+00:00
-Release commit (candidate): `29e88cbd829a333b4661ea8d6c448b1a02a46325`
+Release commit (candidate): `39cb4da36b9f79de36aa797de28de5bb0a76f950`
 Branch: `cursor/ecolooop-energyplus-audit-b6b3`
 
 ## Secret scan result

@@ -1,6 +1,6 @@
 # Final 3-Minute Demo Script
 
-**Commit:** `29e88cbd829a333b4661ea8d6c448b1a02a46325`
+**Commit:** `39cb4da36b9f79de36aa797de28de5bb0a76f950`
 
 **Always say:** “AI proposes. SafetyShield validates. EnergyPlus executes.”
 **Never say:** physical BMS deployment, or 12.20% HVAC as the comfort-zero result.
@@ -20,7 +20,7 @@
 ```
 **Words:** “These rows show Clg-SetP-Sch written and the next zone temperature returned.”
 **Show:** `final-release/evidence/final-actuator-trace.csv`
-**Fallback:** “Live EnergyPlus is pre-verified at commit 29e88cbd829a; here are five consecutive actuator→next-state rows.”
+**Fallback:** “Live EnergyPlus is pre-verified at commit 39cb4da36b9f; here are five consecutive actuator→next-state rows.”
 
 ## 1:35–2:05 — Results
 **Words:** “Identical inputs: HVAC about 4.98% lower, total energy 1.31% lower, peak 1.47% lower, zero comfort violations.”
