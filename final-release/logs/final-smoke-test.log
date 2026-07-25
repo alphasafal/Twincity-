@@ -1,6 +1,6 @@
 == Eco-Loop final smoke test ==
 UTC=2026-07-25T12:01:39Z
-HEAD=133b0530670f2ed5b9fcf011d7a0adaa0b63228c
+HEAD=29e88cbd829a333b4661ea8d6c448b1a02a46325
 BRANCH=cursor/ecolooop-energyplus-audit-b6b3
 == Eco-Loop prerequisite check ==
 root=/workspace

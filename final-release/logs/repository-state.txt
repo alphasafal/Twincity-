@@ -3,7 +3,7 @@ pwd: /workspace
 utc: 2026-07-25T11:42:47Z
 local: 2026-07-25T11:42:47+0000
 branch: cursor/ecolooop-energyplus-audit-b6b3
-HEAD: 133b0530670f2ed5b9fcf011d7a0adaa0b63228c
+HEAD: 29e88cbd829a333b4661ea8d6c448b1a02a46325
 HEAD_SHORT: 133b053
 
 === git status ===

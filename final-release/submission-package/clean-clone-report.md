@@ -1,7 +1,7 @@
 # Clean-Clone Report
 
 Generated: 2026-07-25T12:01:39.455435+00:00
-Source commit at clone start: `133b0530670f2ed5b9fcf011d7a0adaa0b63228c`
+Source commit at clone start: `29e88cbd829a333b4661ea8d6c448b1a02a46325`
 
 ## Method
 - Temporary clone via `scripts/_final_clean_clone_run.sh`
