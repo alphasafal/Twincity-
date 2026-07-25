@@ -1,0 +1,18 @@
+scripts/llm_mcp_loop.py:52:def mcp_observation_from_energyplus(obs: dict[str, Any]) -> dict[str, Any]:
+scripts/llm_mcp_loop.py:53:    """Simulate MCP resource/tool payload built from EnergyPlus observations.
+scripts/llm_mcp_loop.py:55:    Uses the same JSON shape as twinpilot_mcp building://current-state style tools.
+scripts/llm_mcp_loop.py:137:        mcp_payload = mcp_observation_from_energyplus(obs)
+services/mcp-server/twinpilot_mcp/server.py:16:from twinpilot_mcp.catalog import RESOURCES, TOOLS
+services/mcp-server/twinpilot_mcp/server.py:17:from twinpilot_mcp.client import TwinPilotClient
+services/mcp-server/twinpilot_mcp/server.py:18:from twinpilot_mcp.handlers import call_tool, read_resource
+services/mcp-server/twinpilot_mcp/server.py:20:logger = logging.getLogger("twinpilot_mcp")
+services/mcp-server/twinpilot_mcp/server.py:325:        from twinpilot_mcp.fallback import run_fallback
+services/mcp-server/twinpilot_mcp/server.py:346:    from twinpilot_mcp.fallback import run_fallback
+services/mcp-server/twinpilot_mcp/handlers.py:8:from twinpilot_mcp.catalog import FORBIDDEN_TOOLS, RESOURCE_URIS, TOOL_NAMES
+services/mcp-server/twinpilot_mcp/handlers.py:9:from twinpilot_mcp.client import TwinPilotClient
+services/mcp-server/twinpilot_mcp/fallback.py:15:from twinpilot_mcp import __version__
+services/mcp-server/twinpilot_mcp/fallback.py:16:from twinpilot_mcp.catalog import RESOURCES, TOOLS
+services/mcp-server/twinpilot_mcp/fallback.py:17:from twinpilot_mcp.client import TwinPilotClient
+services/mcp-server/twinpilot_mcp/fallback.py:18:from twinpilot_mcp.handlers import call_tool, read_resource
+services/mcp-server/twinpilot_mcp/__main__.py:1:"""Allow `python -m twinpilot_mcp`."""
+services/mcp-server/twinpilot_mcp/__main__.py:3:from twinpilot_mcp.server import main

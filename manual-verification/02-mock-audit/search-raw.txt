@@ -1,0 +1,306 @@
+=== SEARCH TIMESTAMP 2026-07-25T10:54:48Z ===
+=== mock|mocked|synthetic|fake|placeholder|fallback|hardcoded|fixture|stub ===
+services/api/tests/test_objective_modes.py:48:    assert recommend_mode(0.2) == OperatingMode.FALLBACK
+services/api/tests/test_objective_modes.py:49:    assert recommend_mode(0.99, critical_fault=True) == OperatingMode.FALLBACK
+services/api/tests/test_objective_modes.py:54:        # FALLBACK -> AUTONOMOUS is not directly allowed without force
+services/api/tests/test_objective_modes.py:55:        transition_mode(OperatingMode.FALLBACK, OperatingMode.AUTONOMOUS, force=False)
+services/api/tests/test_objective_modes.py:81:async def test_structured_llm_fallback_output():
+apps/web/e2e/critical-flows.spec.ts:24:      page.getByText(/AUTONOMOUS|GUARDED|ADVISORY|FALLBACK|MANUAL/i).first(),
+apps/web/e2e/critical-flows.spec.ts:42:      await expect(page.getByText(/GUARDED|FALLBACK|started|sensor/i).first()).toBeVisible({
+docs/results.md:6:Controller is the only intentional difference. **No ×1.12 synthetic multiplier.**
+docs/results.md:27:Agent actions: **48** approved, **0** rejected, **0** fallback.
+scripts/run_llm_mcp_experiment.sh:4:# Deterministic controller is the fallback when Ollama/MCP is unavailable.
+apps/web/components/DataModeBanner.tsx:8:  syntheticMultiplierApplied,
+apps/web/components/DataModeBanner.tsx:12:  syntheticMultiplierApplied?: boolean | null;
+apps/web/components/DataModeBanner.tsx:37:              : "Mock digital twin")}
+apps/web/components/DataModeBanner.tsx:38:          {syntheticMultiplierApplied
+apps/web/components/DataModeBanner.tsx:39:            ? " · WARNING: synthetic multiplier active"
+apps/web/components/DataModeBanner.tsx:40:            : " · No synthetic ×1.12 multiplier"}
+docs/API.md:10:Responses that include live KPIs typically set `"simulated": true` when using the mock twin.
+docs/API.md:97:Analytics payloads are labeled **simulated** for the mock twin.
+scripts/llm_mcp_loop.py:5:LLM never bypasses SafetyShield. Deterministic proposer is fallback.
+scripts/llm_mcp_loop.py:113:            {"ok": False, "provider": "ollama", "error": str(exc), "fallback": "deterministic"},
+scripts/llm_mcp_loop.py:119:    """Return a proposal_fn for run_experiment that uses MCP+LLM with deterministic fallback."""
+scripts/llm_mcp_loop.py:149:                "deterministic_fallback",
+scripts/llm_mcp_loop.py:152:            return det_sp, f"deterministic_fallback:{reason}", conf, "deterministic_fallback"
+scripts/llm_mcp_loop.py:223:            "If Ollama is down, deterministic_fallback is used and logged.",
+scripts/setup.sh:28:echo "==> EnergyPlus (optional for mock demo; required for real closed-loop experiments)"
+scripts/setup.sh:31:    echo "WARNING: EnergyPlus install failed. Mock demo still works with SIMULATOR_PROVIDER=mock."
+scripts/setup.sh:37:echo "  Mock demo:     ./scripts/run_demo.sh"
+apps/web/components/OperatingModeBadge.tsx:9:  FALLBACK: "border-critical/40 bg-critical/10 text-critical",
+docs/audit/repository-map.md:29:  SafetyShield     Mock (default)    Deterministic
+docs/audit/repository-map.md:31:                   (was stub→mock)   Ollama optional
+docs/audit/repository-map.md:75:| IDF/EPW in repo (pre-audit) | **None** — only README placeholders under `building-models/` |
+docs/audit/repository-map.md:76:| Live process | **Not implemented** — adapter imported `pyenergyplus.api` optionally then delegated all dynamics to `MockBuildingSimulator` |
+docs/audit/repository-map.md:77:| Control injection | `apply_action` → mock only |
+docs/audit/repository-map.md:78:| Status label | API `building_status` hardcoded `"simulated": True` |
+docs/audit/repository-map.md:99:- Malformed LLM JSON → one repair → deterministic fallback + reasoning note
+docs/audit/repository-map.md:114:- Mock path outputs: in-memory `BuildingState`, KPI history with synthetic baseline `power * 1.12` **only when `simulated=true`** (labeled)
+docs/audit/repository-map.md:145:## 13. Mocked / placeholder components (inventory)
+docs/audit/repository-map.md:149:| `MockBuildingSimulator` | Real mock twin (deterministic) |
+docs/audit/repository-map.md:150:| `EnergyPlusAdapter` (pre-fix) | Stub over mock |
+docs/audit/repository-map.md:151:| IDF/EPW assets | Placeholder READMEs only |
+docs/audit/repository-map.md:152:| Baseline energy (`* 1.12`) | Synthetic |
+docs/audit/repository-map.md:177:| Silent mock fallback | **Fixed** — strict unless `ENERGYPLUS_ALLOW_MOCK_FALLBACK=1` |
+docs/audit/repository-map.md:178:| Dashboard hardcoded simulated | **Fixed** — state-driven + labels |
+docs/audit/repository-map.md:180:Remaining non-P0: live UI still mock-default; see `FINAL_HACKATHON_READINESS_REPORT.md`.
+apps/web/components/ModeBanner.tsx:22:  FALLBACK: {
+apps/web/components/ModeBanner.tsx:23:    title: "Fallback mode",
+scripts/run_scenarios.py:152:        "fallback_actions": (cmp.get("agent_action_counts") or {}).get("fallback"),
+scripts/run_scenarios.py:166:            "No synthetic ×1.12 multipliers are applied.",
+scripts/run_demo.sh:2:# Start the local mock-twin demo (API + web). Does not claim EnergyPlus closed-loop.
+scripts/run_demo.sh:8:export SIMULATOR_PROVIDER="${SIMULATOR_PROVIDER:-mock}"
+docs/audit/dashboard-data-lineage.md:13:| Mock mode (`DATA_MODE=mock`) live load | **Mock twin** | No invented savings (×1.12 **removed**) |
+docs/audit/dashboard-data-lineage.md:22:| UI element | Source API | DB / engine | Update frequency | Unit | Fallback | Classification |
+docs/audit/dashboard-data-lineage.md:25:| Live total load | status → `state.total_building_power_kw` | simulator state | control interval (~5s) | kW | null if no state | Mock (default) / E+ peak if energyplus init |
+docs/audit/dashboard-data-lineage.md:26:| Energy saved today % | status `energy_saved_today_pct` | RuntimeHub KPI counters | each KPI snapshot | % | 0 | **Synthetic** when `simulated=true` |
+docs/audit/dashboard-data-lineage.md:27:| Cost saved | status `cost_saved_today` | RuntimeHub | each snapshot | currency units | 0 | Synthetic vs mock baseline |
+docs/audit/dashboard-data-lineage.md:28:| Carbon avoided | status `carbon_avoided_today_kg` | RuntimeHub | each snapshot | kg | 0 | Synthetic |
+docs/audit/dashboard-data-lineage.md:29:| Peak reduction % | status `peak_demand_reduction_pct` | RuntimeHub | each snapshot | % | 0 | Synthetic (mock only) |
+docs/audit/dashboard-data-lineage.md:30:| Comfort compliance % | status `comfort_compliance_pct` | RuntimeHub from zone comfort_status | each snapshot | % | seeded 96.4 | Derived mock |
+docs/audit/dashboard-data-lineage.md:31:| Healthy sensors % | status computed from zone `sensor_health` | simulator state | poll | % | 0 | Mock / adapter |
+docs/audit/dashboard-data-lineage.md:34:| KPI history chart | status `kpi_history` / analytics timeseries | RuntimeHub memory | each snapshot | kW / % | empty | Mock-labeled |
+docs/audit/dashboard-data-lineage.md:35:| Zone cards | `GET /buildings/{id}/zones` + live state | `zones` + simulator | poll / WS | °C, etc. | DB last | Mock telemetry default |
+docs/audit/dashboard-data-lineage.md:36:| Digital twin | state endpoint | simulator | poll | mixed | — | Mock unless energyplus |
+docs/audit/dashboard-data-lineage.md:37:| Analytics summary | `GET .../analytics/summary` | RuntimeHub | poll | mixed | 0 | Labeled `mock_twin_demo_kpis` |
+docs/audit/dashboard-data-lineage.md:42:API now returns `simulated` from `hub.latest_state.simulated` (not hardcoded `true`) and `data_label`.
+docs/audit/dashboard-data-lineage.md:46:## Fake / synthetic values removed or labeled
+docs/audit/dashboard-data-lineage.md:48:1. Hardcoded `"simulated": True` on status/state → now reflects simulator state.
+docs/audit/dashboard-data-lineage.md:49:2. Analytics `label: "simulated"` → `mock_twin_demo_kpis` or `energyplus_live_state`.
+docs/audit/dashboard-data-lineage.md:50:3. Synthetic 1.12 baseline factor → applied only when `state.simulated` is true; documented in KPI `baseline_method`.
+docs/audit/closed-loop-trace.md:22:Interactive TwinPilot API/dashboard closed loop still defaults to the **mock twin**
+docs/audit/closed-loop-trace.md:23:(`SIMULATOR_PROVIDER=mock`). The **measured** EnergyPlus closed loop is the experiment harness.
+docs/audit/closed-loop-trace.md:29:| Signal | Source | Transform | Mocked? |
+docs/audit/closed-loop-trace.md:38:| Safety validation | `validate_setpoint_action` + `SafetyShield` checks | Hard rejects / fallback hold | Deterministic |
+docs/audit/closed-loop-trace.md:42:| Dashboard update | API KPI endpoints (mock demo) / `results/*` for measured | See dashboard lineage | Mock KPIs labeled |
+docs/audit/closed-loop-trace.md:43:| Audit log | `results/agent/actions.json` + API `AuditEvent` for mock demo | JSON / SQLite | Experiment log is real |
+docs/audit/closed-loop-trace.md:49:1. Replaced silent EnergyPlus→mock delegation with `ep_experiment.run_experiment` Runtime API loop.
+docs/audit/closed-loop-trace.md:51:3. Strict mode: `EnergyPlusAdapter` raises `EnergyPlusUnavailableError` unless `ENERGYPLUS_ALLOW_MOCK_FALLBACK=1`.
+docs/audit/closed-loop-trace.md:65:- Agent decisions: **48** approved / 0 rejected / 0 fallback
+docs/audit/closed-loop-trace.md:66:- Dashboard default: `DATA_MODE=energyplus` (no ×1.12)
+scripts/build_submission_evidence.py:36:        # Fallback: write a minimal valid PNG via pure Python
+scripts/build_submission_evidence.py:53:<text x="40" y="290" fill="#9ca3af" font-size="16">DATA_MODE=energyplus (default hackathon) | DATA_MODE=mock (explicit)</text>
+scripts/build_submission_evidence.py:54:<text x="40" y="340" fill="#9ca3af" font-size="16">LLM never bypasses SafetyShield. Deterministic fallback on LLM/MCP failure.</text>
+scripts/build_submission_evidence.py:159:                "fallback_actions": (agent.get("action_counts") or {}).get("fallback"),
+scripts/build_submission_evidence.py:198:        f"fallback_action=retain_safe_setpoint=23.9\n"
+scripts/build_submission_evidence.py:214:    (EVID / "fallback-log.txt").write_text(
+scripts/build_submission_evidence.py:215:        "LLM UNAVAILABLE / TIMEOUT FALLBACK DEMONSTRATION\n"
+scripts/build_submission_evidence.py:220:        f"fallback_action=hold_last_safe_setpoint\n"
+scripts/build_submission_evidence.py:265:- `DATA_MODE=energyplus` (hackathon default) serves `results/*` — no ×1.12 synthetic savings
+docs/demo-script.md:3:## Path 1 — Operator UI (mock twin, 5–8 minutes)
+docs/demo-script.md:9:5. State clearly: **this path uses the mock digital twin**, not EnergyPlus meters.
+docs/demo-script.md:25:- Known limitation: interactive dashboard defaults to mock; measured proof is the experiment harness.
+apps/web/lib/api.ts:315:  llmFallbackDemo() {
+apps/web/lib/api.ts:316:    return apiFetch<Record<string, unknown>>("/api/v1/experiments/llm-fallback-demo", {
+apps/web/lib/types.ts:5:  | "FALLBACK"
+apps/web/lib/types.ts:130:  data_mode?: "energyplus" | "mock" | string;
+apps/web/lib/types.ts:133:  synthetic_multiplier_applied?: boolean;
+apps/web/lib/ws.ts:12:  /** Polling fallback interval when websocket is unavailable */
+apps/web/lib/ws.ts:14:  /** Optional poll fetcher used as fallback */
+apps/web/lib/ws.ts:20: * WebSocket client with exponential reconnect and HTTP polling fallback.
+apps/web/lib/ws.ts:76:      // onclose will handle reconnect / fallback
+docs/BUILD_STATUS.md:50:| Mock building twin | ✅ | Default |
+docs/BUILD_STATUS.md:52:| EnergyPlus adapter | ⚠️ | Optional; falls back to mock |
+docs/BUILD_STATUS.md:53:| Sample IDF/EPW shipped | ⚠️ | Placeholders + README only |
+docs/BUILD_STATUS.md:77:| Live WS with poll fallback | ✅ | |
+docs/BUILD_STATUS.md:110:| 4 | Real-time telemetry | ✅ (WS + poll fallback) |
+docs/BUILD_STATUS.md:129:| 23 | Works with mock simulator | ✅ |
+apps/mobile/src/components/SafeRollbackButton.tsx:100:            placeholder="Reason for rollback…"
+apps/mobile/src/components/SafeRollbackButton.tsx:101:            placeholderTextColor={colors.muted}
+docs/MCP.md:128:- Prefers official `mcp` FastMCP; falls back to low-level SDK, then a stdio JSON-RPC server that still documents the same catalog (`python -m twinpilot_mcp --catalog` / `--fallback`).
+apps/mobile/src/components/ModeBanner.tsx:17:  FALLBACK: {
+apps/mobile/src/components/ModeBanner.tsx:18:    title: "Fallback mode",
+docs/SAFETY.md:16:| **FALLBACK** | Safe policy; critical faults / low confidence |
+docs/SAFETY.md:19:Mode recommendations use deterministic thresholds in `twinpilot_optimizer.modes` (default autonomous ≥ 0.85, guarded ≥ 0.65, advisory ≥ 0.40). Critical sensor faults force FALLBACK. Administrators can PATCH mode with a reason (audited).
+docs/SAFETY.md:40:14. **Critical alert blocking** in FALLBACK
+docs/SAFETY.md:72:| `faulty_sensor` | Confidence drop / FALLBACK pressure |
+apps/web/app/settings/page.tsx:16:const MODES = ["AUTONOMOUS", "GUARDED", "ADVISORY", "FALLBACK", "MANUAL"] as const;
+apps/web/app/settings/users/page.tsx:91:              placeholder="Name"
+apps/web/app/settings/users/page.tsx:97:              placeholder="Email"
+apps/web/app/settings/users/page.tsx:103:              placeholder="Temporary password"
+apps/web/app/settings/users/page.tsx:121:              placeholder="Audit reason"
+apps/mobile/src/components/DecisionApprovalCard.tsx:122:                  placeholder={
+apps/mobile/src/components/DecisionApprovalCard.tsx:125:                  placeholderTextColor={colors.muted}
+apps/mobile/src/lib/hooks.ts:45:    placeholderData: cachedStatus ?? undefined,
+apps/mobile/src/lib/types.ts:5:  | "FALLBACK"
+docs/DEMO_SCRIPT.md:24:3. Mention WebSocket live updates (or polling fallback).
+docs/DEMO_SCRIPT.md:39:## Minute 3:30–5 — Scenario: faulty sensor → fallback (≈90s)
+docs/DEMO_SCRIPT.md:43:3. Watch confidence drop, alerts, and mode pressure toward **FALLBACK** / advisory behavior.
+docs/DEMO_SCRIPT.md:74:- [ ] Know which provider is active (`mock` vs `energyplus`, `deterministic` vs `ollama`)
+docs/limitations.md:3:1. **Interactive API/dashboard defaults to mock twin.** Real EnergyPlus closed-loop evidence is produced by `scripts/run_*.sh`, not by the 5-second UI control loop.
+docs/safety.md:5:**The LLM never bypasses the Safety Shield.** Proposals are advisory until a deterministic validator approves them. On failure, the system holds the last safe setpoint (fallback) — it does not invent an uncontrolled action.
+docs/safety.md:18:| LLM timeout | `llm_timeout` → FALLBACK |
+docs/safety.md:19:| MCP failure | `mcp_failure` → FALLBACK |
+docs/safety.md:24:| Emergency fallback | hold last safe cooling schedule value in E+ loop |
+docs/safety.md:34:Logged in `results/agent/actions.json` with `disposition`: `approved` | `rejected` | `fallback`.
+apps/web/app/dashboard/page.tsx:52:    fallback?: number;
+apps/web/app/dashboard/page.tsx:110:        syntheticMultiplierApplied={data?.synthetic_multiplier_applied}
+apps/web/app/dashboard/page.tsx:184:                  hint={`Rejected ${experiment?.action_counts?.rejected ?? 0} · Fallback ${experiment?.action_counts?.fallback ?? 0}`}
+apps/web/app/dashboard/page.tsx:266:                    hint="No synthetic multiplier in mock mode"
+apps/web/app/dashboard/page.tsx:286:                    <h2 className="text-sm font-semibold">Power (mock twin)</h2>
+docs/setup.md:10:## Quick start (mock demo)
+docs/setup.md:40:If EnergyPlus is missing, experiment scripts **exit non-zero** (no silent mock success).
+docs/setup.md:48:| `SIMULATOR_PROVIDER` | `mock` (default) or `energyplus` |
+docs/setup.md:52:| `ENERGYPLUS_ALLOW_MOCK_FALLBACK` | Must be `1` to allow mock if E+ fails (debug only) |
+docs/setup.md:61:Compose demo profile still defaults to the mock twin unless EnergyPlus is installed in the image and env is wired.
+docs/setup.md:75:| Dashboard savings look “too round” | Those are mock synthetic KPIs — use `results/comparison/` |
+docs/setup.md:76:| API fails with energyplus provider | Set paths or use `SIMULATOR_PROVIDER=mock` for UI demo |
+docs/architecture.md:5:### A) Interactive mock closed loop (default demo)
+docs/architecture.md:8:Web/Mobile/MCP → FastAPI RuntimeHub → MockBuildingSimulator
+docs/architecture.md:12:`SIMULATOR_PROVIDER=mock` (default). Suitable for UI, MCP, and operator workflow demos.
+docs/architecture.md:31:Agent proposal → SafetyShield / validate_setpoint_action → approved action only → EnergyPlus / mock apply
+docs/architecture.md:40:| `services/simulator` | Mock twin + EnergyPlus adapter + `ep_experiment` |
+docs/ARCHITECTURE.md:5:**Scope note:** This demo uses a **mock building simulator** by default. There is no production Honeywell/BMS integration in this repository.
+docs/ARCHITECTURE.md:75:Modes are managed by `twinpilot_optimizer.modes` (deterministic thresholds). Critical faults force **FALLBACK**; operators can force **MANUAL**.
+docs/ARCHITECTURE.md:119:  API --> Twin[In-process mock twin]
+apps/web/app/assistant/page.tsx:124:              placeholder="Ask TwinPilot…"
+docs/ENERGYPLUS.md:3:Default UI demo uses **`SIMULATOR_PROVIDER=mock`**.  
+docs/ENERGYPLUS.md:22:| `ENERGYPLUS_ALLOW_MOCK_FALLBACK=1` | **Explicit** debug opt-in to mock; default is **strict fail** |
+docs/ENERGYPLUS.md:38:- **Strict (default):** missing EnergyPlus → `EnergyPlusUnavailableError` (no silent mock).
+docs/ENERGYPLUS.md:39:- **Fallback:** only if `ENERGYPLUS_ALLOW_MOCK_FALLBACK=1`.
+apps/mobile/app/assistant.tsx:110:            placeholder="Ask TwinPilot…"
+apps/mobile/app/assistant.tsx:111:            placeholderTextColor={colors.muted}
+apps/mobile/app/(auth)/login.tsx:89:                  placeholder="email@twinpilot.demo"
+apps/mobile/app/(auth)/login.tsx:90:                  placeholderTextColor={colors.muted}
+apps/mobile/app/(auth)/login.tsx:110:                  placeholder="Password"
+apps/mobile/app/(auth)/login.tsx:111:                  placeholderTextColor={colors.muted}
+apps/web/app/live-demo/page.tsx:81:        syntheticMultiplierApplied={false}
+services/optimizer/tests/test_safety_failure_modes.py:16:@pytest.fixture
+services/optimizer/tests/test_safety_failure_modes.py:32:def test_llm_timeout_blocks_and_recommends_fallback(shield: SafetyShield):
+services/optimizer/tests/test_safety_failure_modes.py:42:    assert result.recommended_mode == OperatingMode.FALLBACK
+services/optimizer/tests/test_safety_failure_modes.py:63:    assert result.recommended_mode == OperatingMode.FALLBACK
+services/optimizer/tests/test_safety_failure_modes.py:177:    assert result.recommended_mode == OperatingMode.FALLBACK
+services/mcp-server/twinpilot_mcp/server.py:322:    force_fallback = "--fallback" in args or os.getenv("TWINPILOT_MCP_FORCE_FALLBACK") == "1"
+services/mcp-server/twinpilot_mcp/server.py:323:    if force_fallback:
+services/mcp-server/twinpilot_mcp/server.py:324:        logger.info("Starting TwinPilot MCP stdio JSON-RPC fallback server")
+services/mcp-server/twinpilot_mcp/server.py:325:        from twinpilot_mcp.fallback import run_fallback
+services/mcp-server/twinpilot_mcp/server.py:327:        run_fallback()
+services/mcp-server/twinpilot_mcp/server.py:330:    # Prefer FastMCP, then low-level SDK, then stdio fallback.
+services/mcp-server/twinpilot_mcp/server.py:343:        logger.warning("Low-level MCP SDK unavailable or failed (%s); using fallback", low_exc)
+services/mcp-server/twinpilot_mcp/server.py:345:    logger.info("Starting TwinPilot MCP stdio JSON-RPC fallback server")
+services/mcp-server/twinpilot_mcp/server.py:346:    from twinpilot_mcp.fallback import run_fallback
+services/mcp-server/twinpilot_mcp/server.py:348:    run_fallback()
+services/mcp-server/twinpilot_mcp/handlers.py:1:"""Shared resource/tool dispatch used by FastMCP and fallback servers."""
+services/optimizer/twinpilot_optimizer/anomaly.py:166:        # Deterministic fallback score using robust z-score
+services/mcp-server/twinpilot_mcp/catalog.py:4:server and the stdio JSON-RPC fallback.
+services/api/app/services/runtime.py:31:from twinpilot_simulator.mock import MockBuildingSimulator
+services/api/app/services/runtime.py:59:        self.simulator: MockBuildingSimulator | EnergyPlusAdapter
+services/api/app/services/runtime.py:63:            self.simulator = MockBuildingSimulator()
+services/api/app/services/runtime.py:184:            if isinstance(self.simulator, MockBuildingSimulator):
+services/api/app/services/runtime.py:191:                # EnergyPlus adapter mirrors mock stepping in demo environments
+services/api/app/services/runtime.py:193:                if hasattr(self.simulator, "_fallback"):
+services/api/app/services/runtime.py:194:                    fb = self.simulator._fallback  # type: ignore[attr-defined]
+services/api/app/services/runtime.py:195:                    if isinstance(fb, MockBuildingSimulator) and not fb._paused:
+services/api/app/services/runtime.py:389:            critical_alert_blocking=building.current_mode == "FALLBACK",
+services/api/app/services/runtime.py:564:            building.current_mode = "FALLBACK"
+services/api/app/services/runtime.py:593:        if isinstance(self.simulator, MockBuildingSimulator):
+services/api/app/services/runtime.py:599:            if isinstance(self.simulator, MockBuildingSimulator):
+services/api/app/services/runtime.py:606:            if isinstance(self.simulator, MockBuildingSimulator):
+services/api/app/services/runtime.py:614:            if isinstance(self.simulator, MockBuildingSimulator):
+services/api/app/services/runtime.py:620:            if isinstance(self.simulator, MockBuildingSimulator):
+services/api/app/services/runtime.py:700:                source="mock_simulator",
+services/api/app/services/runtime.py:721:                        source="mock_simulator",
+=== numeric claim literals ===
+./FINAL_HACKATHON_READINESS_REPORT.md:53:| Total energy | 421.51 kWh | 416.00 kWh | **1.31%** |
+./FINAL_HACKATHON_READINESS_REPORT.md:54:| HVAC energy | 13.85 kWh | 13.16 kWh | **4.98%** |
+./FINAL_HACKATHON_READINESS_REPORT.md:55:| Peak power | 19.93 kW | 19.64 kW | **1.47%** |
+./docs/results.md:20:| Total energy (kWh) | 421.5057 | 415.9999 | **1.31%** |
+./docs/results.md:21:| HVAC energy (kWh) | 13.8459 | 13.1570 | **4.98%** |
+./docs/results.md:22:| Peak power (kW) | 19.9325 | 19.6400 | **1.47%** |
+./docs/results.md:23:| Carbon estimate (kg) | 175.7679 | 173.5320 | 1.31% |
+./docs/audit/closed-loop-trace.md:60:- Baseline total energy ≈ **421.51 kWh**
+./docs/audit/closed-loop-trace.md:61:- Agent total energy ≈ **416.00 kWh** (**1.31%** reduction)
+./docs/audit/closed-loop-trace.md:62:- HVAC energy ≈ **4.98%** reduction
+./docs/audit/closed-loop-trace.md:63:- Peak power ≈ **1.47%** reduction
+./submission-evidence/agent-results.csv:2:415.9999,13.157,19.64,173.472,0.0,0.0,48,0,0
+./submission-evidence/baseline-results.csv:2:421.5057,13.8459,19.9325,175.7679,0.0,0.0
+./submission-evidence/multi-scenario-comparison.json:22:        "baseline": 19.9325,
+./submission-evidence/multi-scenario-comparison.json:23:        "agent": 19.64,
+./submission-evidence/comparison.json:23:    "baseline": 19.9325,
+./submission-evidence/comparison.json:24:    "agent": 19.64,
+./README.md:107:| Total energy (kWh) | 421.51 | 416.00 | **1.31%** |
+./README.md:108:| HVAC energy (kWh) | 13.85 | 13.16 | **4.98%** |
+./README.md:109:| Peak power (kW) | 19.93 | 19.64 | **1.47%** |
+./results/scenarios/normal_summer/baseline/stream.json:60:        "SPACE2-1": 21.310185308954363,
+./results/scenarios/normal_summer/baseline/stream.json:62:        "SPACE4-1": 21.31318576088261,
+./results/scenarios/normal_summer/baseline/stream.json:613:        "SPACE5-1": 21.473840943798557
+./results/scenarios/normal_summer/baseline/summary.json:34:  "peak_power_kw": 19.9325,
+./results/scenarios/normal_summer/baseline/summary.json:338:        "SPACE2-1": 21.310185308954363,
+./results/scenarios/normal_summer/baseline/summary.json:340:        "SPACE4-1": 21.31318576088261,
+./results/scenarios/normal_summer/model.idf:358:    1.310000,                !- Conductivity {W/m-K}
+./results/scenarios/high_occupancy/baseline/stream.json:60:        "SPACE2-1": 21.31078861098439,
+./results/scenarios/high_occupancy/baseline/stream.json:62:        "SPACE4-1": 21.313726718356147,
+./results/scenarios/high_occupancy/baseline/stream.json:613:        "SPACE5-1": 21.474169843166976
+./results/scenarios/high_occupancy/baseline/summary.json:338:        "SPACE2-1": 21.31078861098439,
+./results/scenarios/high_occupancy/baseline/summary.json:340:        "SPACE4-1": 21.313726718356147,
+./results/scenarios/normal_summer/comparison/comparison.json:23:    "baseline": 19.9325,
+./results/scenarios/normal_summer/comparison/comparison.json:24:    "agent": 19.64,
+./results/scenarios/high_occupancy/model.idf:358:    1.310000,                !- Conductivity {W/m-K}
+./building-models/sample-office/office_5zone.idf:358:    1.310000,                !- Conductivity {W/m-K}
+./results/scenarios/normal_summer/agent/stream.json:1065:        "SPACE1-1": 24.98963643067863,
+./results/scenarios/normal_summer/agent/summary.json:34:  "peak_power_kw": 19.64,
+./results/scenarios/normal_summer/agent/summary.json:1395:        "SPACE2-1": 21.310185308954363,
+./results/scenarios/normal_summer/agent/summary.json:1397:        "SPACE4-1": 21.31318576088261,
+./results/scenarios/high_occupancy/agent/stream.json:1065:        "SPACE1-1": 24.989536383096286,
+./results/scenarios/high_occupancy/agent/summary.json:1395:        "SPACE2-1": 21.31078861098439,
+./results/scenarios/high_occupancy/agent/summary.json:1397:        "SPACE4-1": 21.313726718356147,
+./results/scenarios/consolidated_comparison.json:22:        "baseline": 19.9325,
+./results/scenarios/consolidated_comparison.json:23:        "agent": 19.64,
+./results/llm_mcp/agent/actions.json:300:      "avg_zone_temp_c": 24.98725640830055,
+./results/comparison/comparison.md:10:| Peak power (kW) | 19.9325 | 19.64 | -0.2925 | -1.4675% |
+./results/comparison/comparison.json:23:    "baseline": 19.9325,
+./results/comparison/comparison.json:24:    "agent": 19.64,
+./results/agent/stream.json:1065:        "SPACE1-1": 24.98963643067863,
+./results/scenarios/hot_peak/model.idf:358:    1.310000,                !- Conductivity {W/m-K}
+./results/agent/summary.json:34:  "peak_power_kw": 19.64,
+./results/agent/summary.json:1395:        "SPACE2-1": 21.310185308954363,
+./results/agent/summary.json:1397:        "SPACE4-1": 21.31318576088261,
+./results/llm_mcp/agent/summary.json:605:        "avg_zone_temp_c": 24.98725640830055,
+./results/llm_mcp/agent/summary.json:1230:    "Electricity:HVAC": 41794634.98433378,
+./results/llm_mcp/agent/summary.json:1233:    "Fans:Electricity": 41794634.98433378
+./results/llm_mcp/agent/summary.json:1472:        "SPACE2-1": 21.310185308954363,
+./results/llm_mcp/agent/summary.json:1474:        "SPACE4-1": 21.31318576088261,
+./results/baseline/summary.json:34:  "peak_power_kw": 19.9325,
+./results/baseline/summary.json:338:        "SPACE2-1": 21.310185308954363,
+./results/baseline/summary.json:340:        "SPACE4-1": 21.31318576088261,
+./results/baseline/stream.json:60:        "SPACE2-1": 21.310185308954363,
+./results/baseline/stream.json:62:        "SPACE4-1": 21.31318576088261,
+./results/baseline/stream.json:613:        "SPACE5-1": 21.473840943798557
+./results/llm_mcp/baseline/stream.json:60:        "SPACE2-1": 21.310185308954363,
+./results/llm_mcp/baseline/stream.json:62:        "SPACE4-1": 21.31318576088261,
+./results/llm_mcp/baseline/stream.json:613:        "SPACE5-1": 21.473840943798557
+./results/llm_mcp/baseline/summary.json:34:  "peak_power_kw": 19.9325,
+./results/llm_mcp/baseline/summary.json:338:        "SPACE2-1": 21.310185308954363,
+./results/llm_mcp/baseline/summary.json:340:        "SPACE4-1": 21.31318576088261,
+./results/scenarios/hot_peak/agent/stream.json:1065:        "SPACE1-1": 24.98944077288072,
+./results/scenarios/hot_peak/agent/summary.json:53:      "max_c": 24.98016777913157,
+=== DATA_MODE / ALLOW_MOCK ===
+.env.example:38:DATA_MODE=energyplus
+.env.example:48:# Set ENERGYPLUS_ALLOW_MOCK_FALLBACK=1 only for local debugging.
+.env.example:49:ENERGYPLUS_ALLOW_MOCK_FALLBACK=0
+apps/web/components/DataModeBanner.tsx:31:          DATA_MODE={mode}
+scripts/build_submission_evidence.py:53:<text x="40" y="290" fill="#9ca3af" font-size="16">DATA_MODE=energyplus (default hackathon) | DATA_MODE=mock (explicit)</text>
+scripts/build_submission_evidence.py:111:    draw.text((40, 290), "DATA_MODE=energyplus (hackathon default)", fill=(156, 163, 175))
+scripts/build_submission_evidence.py:265:- `DATA_MODE=energyplus` (hackathon default) serves `results/*` — no ×1.12 synthetic savings
+apps/web/lib/types.ts:130:  data_mode?: "energyplus" | "mock" | string;
+apps/web/app/dashboard/page.tsx:60:  const isEnergyPlus = data?.data_mode === "energyplus" && experiment?.available;
+apps/web/app/dashboard/page.tsx:108:        dataMode={data?.data_mode}
+services/api/app/api/v1/router.py:226:    data_mode = (cfg.data_mode or "energyplus").strip().lower()
+services/api/app/api/v1/router.py:227:    if cfg.hackathon_mode and data_mode not in {"energyplus", "mock"}:
+services/api/app/api/v1/router.py:228:        data_mode = "energyplus"
+services/api/app/api/v1/router.py:231:    if data_mode == "energyplus" and experiment.get("available"):
+services/api/app/api/v1/router.py:265:            "data_mode": "energyplus",
+services/api/app/api/v1/router.py:297:        "data_mode": "mock",
+services/api/app/api/v1/router.py:305:            "Mock mode does not invent savings. Set DATA_MODE=energyplus for "
+services/api/app/api/v1/router.py:1117:    data_mode = (cfg.data_mode or "energyplus").strip().lower()
+services/api/app/api/v1/router.py:1119:    if data_mode == "energyplus" and experiment.get("available"):
+services/api/app/api/v1/router.py:1122:            "data_mode": "energyplus",
+services/api/app/api/v1/router.py:1150:        "data_mode": "mock",
+services/api/app/api/v1/router.py:1163:            "Set DATA_MODE=energyplus for measured baseline-vs-agent results."
+services/api/app/api/v1/router.py:1194:        "data_mode": "energyplus",
+services/api/app/services/runtime.py:802:        # integrals only; EnergyPlus evidence comes from results/* via DATA_MODE.
+services/api/app/services/experiment_store.py:153:        "data_mode": "energyplus",
+services/api/app/core/config.py:29:    data_mode: str = "energyplus"
+services/simulator/tests/test_ep_experiment_safety.py:103:    monkeypatch.delenv("ENERGYPLUS_ALLOW_MOCK_FALLBACK", raising=False)
+services/simulator/twinpilot_simulator/energyplus.py:44:    - ``ENERGYPLUS_ALLOW_MOCK_FALLBACK=1``: explicit opt-in to mock fallback
+services/simulator/twinpilot_simulator/energyplus.py:53:        self._allow_fallback = _env_flag("ENERGYPLUS_ALLOW_MOCK_FALLBACK", False)

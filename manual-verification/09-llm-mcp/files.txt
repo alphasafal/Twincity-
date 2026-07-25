@@ -1,0 +1,7 @@
+total 60
+drwxr-xr-x 4 ubuntu ubuntu  4096 Jul 25 10:58 .
+drwxr-xr-x 7 ubuntu ubuntu  4096 Jul 25 10:45 ..
+drwxr-xr-x 3 ubuntu ubuntu  4096 Jul 25 10:58 agent
+drwxr-xr-x 3 ubuntu ubuntu  4096 Jul 25 10:58 baseline
+-rw-r--r-- 1 ubuntu ubuntu 35963 Jul 25 11:00 stage_log.jsonl
+-rw-r--r-- 1 ubuntu ubuntu   696 Jul 25 11:00 summary.json

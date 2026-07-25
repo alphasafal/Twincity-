@@ -1,0 +1,5 @@
+status=completed rc=0 mode=baseline scenario=hot_peak elapsed_s=0.249
+actions=0 observations=192 stream_frames=45
+total_energy_kwh=432.904
+comfort_violation_hours=0.0
+comfort_degree_hours=0.0

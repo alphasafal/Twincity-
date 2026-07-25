@@ -1,0 +1,1134 @@
+[
+  {
+    "sim_time": "07-15T00:15",
+    "proposal_reason": "Climate control optimization",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 25.0,
+    "previous_cooling_setpoint_c": 23.9,
+    "applied_cooling_setpoint_c": 23.9,
+    "disposition": "rejected",
+    "blocking_reasons": [
+      "max_setpoint_change_exceeded"
+    ],
+    "confidence": 0.8,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": false,
+    "observation": {
+      "outdoor_c": 24.200000000000003,
+      "avg_zone_temp_c": 22.054832739026942,
+      "max_zone_temp_c": 22.150266267564337,
+      "total_occupancy": 0.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T01:15",
+    "proposal_reason": "suggested increasing cooling setpoint to maintain comfort zone",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 26.0,
+    "previous_cooling_setpoint_c": 23.9,
+    "applied_cooling_setpoint_c": 23.9,
+    "disposition": "rejected",
+    "blocking_reasons": [
+      "max_setpoint_change_exceeded"
+    ],
+    "confidence": 0.8,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": false,
+    "observation": {
+      "outdoor_c": 20.0,
+      "avg_zone_temp_c": 21.709545981078833,
+      "max_zone_temp_c": 21.750001199275104,
+      "total_occupancy": 0.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T02:15",
+    "proposal_reason": "Optimization for energy efficiency and occupant comfort",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 24.0,
+    "previous_cooling_setpoint_c": 23.9,
+    "applied_cooling_setpoint_c": 24.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.8,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 19.85,
+      "avg_zone_temp_c": 21.480160241773824,
+      "max_zone_temp_c": 21.52389333733471,
+      "total_occupancy": 0.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T03:15",
+    "proposal_reason": "Climate change and energy efficiency goals",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 22.0,
+    "previous_cooling_setpoint_c": 24.0,
+    "applied_cooling_setpoint_c": 24.0,
+    "disposition": "rejected",
+    "blocking_reasons": [
+      "max_setpoint_change_exceeded",
+      "heating_cooling_deadband_violation"
+    ],
+    "confidence": 90.0,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": false,
+    "observation": {
+      "outdoor_c": 19.275,
+      "avg_zone_temp_c": 21.260098069107162,
+      "max_zone_temp_c": 21.39320427936841,
+      "total_occupancy": 0.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T04:15",
+    "proposal_reason": "Insufficient heat loads",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 22.6,
+    "previous_cooling_setpoint_c": 24.0,
+    "applied_cooling_setpoint_c": 24.0,
+    "disposition": "rejected",
+    "blocking_reasons": [
+      "max_setpoint_change_exceeded",
+      "heating_cooling_deadband_violation"
+    ],
+    "confidence": 60.5,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": false,
+    "observation": {
+      "outdoor_c": 18.9,
+      "avg_zone_temp_c": 21.074592734486323,
+      "max_zone_temp_c": 21.272501913648952,
+      "total_occupancy": 0.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T05:23",
+    "proposal_reason": "Temperature is consistently above 22C during the day and below 20C at night",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 25.0,
+    "previous_cooling_setpoint_c": 24.0,
+    "applied_cooling_setpoint_c": 25.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.8,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 19.325,
+      "avg_zone_temp_c": 21.288305768027545,
+      "max_zone_temp_c": 21.711595413529725,
+      "total_occupancy": 0.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T06:19",
+    "proposal_reason": "Energy usage and occupancy",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 26.0,
+    "previous_cooling_setpoint_c": 25.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.8,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 21.0,
+      "avg_zone_temp_c": 22.259281419623754,
+      "max_zone_temp_c": 22.494015201385285,
+      "total_occupancy": 0.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T07:15",
+    "proposal_reason": "Occupant density is too high",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 25.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 25.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 70.0,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 22.75,
+      "avg_zone_temp_c": 22.3449646301428,
+      "max_zone_temp_c": 22.824485072052134,
+      "total_occupancy": 0.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T08:20",
+    "proposal_reason": "energy efficiency",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 24.0,
+    "previous_cooling_setpoint_c": 25.0,
+    "applied_cooling_setpoint_c": 24.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.8,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 24.699999999999996,
+      "avg_zone_temp_c": 23.181358033947816,
+      "max_zone_temp_c": 24.23767249426391,
+      "total_occupancy": 52.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T09:23",
+    "proposal_reason": "Insufficient cooling",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 25.0,
+    "previous_cooling_setpoint_c": 24.0,
+    "applied_cooling_setpoint_c": 25.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 70.0,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 26.150000000000002,
+      "avg_zone_temp_c": 23.89515246022501,
+      "max_zone_temp_c": 23.99876557517085,
+      "total_occupancy": 52.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T10:23",
+    "proposal_reason": "too warm",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 23.0,
+    "previous_cooling_setpoint_c": 25.0,
+    "applied_cooling_setpoint_c": 25.0,
+    "disposition": "rejected",
+    "blocking_reasons": [
+      "max_setpoint_change_exceeded",
+      "heating_cooling_deadband_violation"
+    ],
+    "confidence": 6.5,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": false,
+    "observation": {
+      "outdoor_c": 28.075000000000003,
+      "avg_zone_temp_c": 24.885112697807095,
+      "max_zone_temp_c": 24.998899240471083,
+      "total_occupancy": 52.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T11:15",
+    "proposal_reason": "reduction in indoor temperature is beneficial for occupant comfort and energy savings",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 22.0,
+    "previous_cooling_setpoint_c": 25.0,
+    "applied_cooling_setpoint_c": 25.0,
+    "disposition": "rejected",
+    "blocking_reasons": [
+      "max_setpoint_change_exceeded",
+      "heating_cooling_deadband_violation"
+    ],
+    "confidence": 80.0,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": false,
+    "observation": {
+      "outdoor_c": 29.324999999999996,
+      "avg_zone_temp_c": 24.97780673517218,
+      "max_zone_temp_c": 24.99804893573921,
+      "total_occupancy": 41.6,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T12:15",
+    "proposal_reason": "Insufficient cooling needed to maintain occupant comfort",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 22.0,
+    "previous_cooling_setpoint_c": 25.0,
+    "applied_cooling_setpoint_c": 25.0,
+    "disposition": "rejected",
+    "blocking_reasons": [
+      "max_setpoint_change_exceeded",
+      "heating_cooling_deadband_violation"
+    ],
+    "confidence": 6.5,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": false,
+    "observation": {
+      "outdoor_c": 30.875000000000004,
+      "avg_zone_temp_c": 24.98725640830055,
+      "max_zone_temp_c": 24.998661551678005,
+      "total_occupancy": 20.8,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T13:15",
+    "proposal_reason": "Increase air conditioning load by reducing window openings",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 26.0,
+    "previous_cooling_setpoint_c": 25.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 80.0,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 31.7,
+      "avg_zone_temp_c": 24.998273916148765,
+      "max_zone_temp_c": 24.99899278030292,
+      "total_occupancy": 41.6,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T14:15",
+    "proposal_reason": "Temperature comfort",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 22.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "rejected",
+    "blocking_reasons": [
+      "max_setpoint_change_exceeded",
+      "heating_cooling_deadband_violation"
+    ],
+    "confidence": 0.8,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": false,
+    "observation": {
+      "outdoor_c": 31.7,
+      "avg_zone_temp_c": 25.99421886566237,
+      "max_zone_temp_c": 25.998367053126813,
+      "total_occupancy": 52.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T15:15",
+    "proposal_reason": "Climate change and air pollution have led to increased CO2 levels.",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 24.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "rejected",
+    "blocking_reasons": [
+      "max_setpoint_change_exceeded"
+    ],
+    "confidence": 0.8,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": false,
+    "observation": {
+      "outdoor_c": 31.825,
+      "avg_zone_temp_c": 25.993432663718846,
+      "max_zone_temp_c": 25.997783727775566,
+      "total_occupancy": 52.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T16:15",
+    "proposal_reason": "Insufficient heating",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 28.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "rejected",
+    "blocking_reasons": [
+      "max_setpoint_change_exceeded"
+    ],
+    "confidence": 0.7,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": false,
+    "observation": {
+      "outdoor_c": 32.2,
+      "avg_zone_temp_c": 25.929792286521643,
+      "max_zone_temp_c": 25.997972105242205,
+      "total_occupancy": 52.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T17:15",
+    "proposal_reason": "Unnecessary cooling setpoint for high occupancy spaces",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 24.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "rejected",
+    "blocking_reasons": [
+      "max_setpoint_change_exceeded"
+    ],
+    "confidence": 0.8,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": false,
+    "observation": {
+      "outdoor_c": 31.5,
+      "avg_zone_temp_c": 25.79414884746467,
+      "max_zone_temp_c": 25.998040884151955,
+      "total_occupancy": 52.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T18:23",
+    "proposal_reason": "Based on energyplus_runtime_observation data",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 24.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "rejected",
+    "blocking_reasons": [
+      "max_setpoint_change_exceeded"
+    ],
+    "confidence": 0.8,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": false,
+    "observation": {
+      "outdoor_c": 29.275,
+      "avg_zone_temp_c": 24.890614888878808,
+      "max_zone_temp_c": 25.434525013777584,
+      "total_occupancy": 26.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T19:23",
+    "proposal_reason": "Optimization for peak energy demand",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 27.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 27.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.8,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 27.224999999999998,
+      "avg_zone_temp_c": 23.49118180920873,
+      "max_zone_temp_c": 24.07095442473015,
+      "total_occupancy": 0.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T20:23",
+    "proposal_reason": "Occupant density and outdoor temperature",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 24.0,
+    "previous_cooling_setpoint_c": 27.0,
+    "applied_cooling_setpoint_c": 27.0,
+    "disposition": "rejected",
+    "blocking_reasons": [
+      "max_setpoint_change_exceeded"
+    ],
+    "confidence": 70.0,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": false,
+    "observation": {
+      "outdoor_c": 22.349999999999998,
+      "avg_zone_temp_c": 23.031438530281072,
+      "max_zone_temp_c": 23.200477682642603,
+      "total_occupancy": 0.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T21:15",
+    "proposal_reason": "High occupancy rate in zones",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 25.0,
+    "previous_cooling_setpoint_c": 27.0,
+    "applied_cooling_setpoint_c": 27.0,
+    "disposition": "rejected",
+    "blocking_reasons": [
+      "max_setpoint_change_exceeded"
+    ],
+    "confidence": 0.7,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": false,
+    "observation": {
+      "outdoor_c": 23.075000000000003,
+      "avg_zone_temp_c": 23.030688007072836,
+      "max_zone_temp_c": 23.101851149395564,
+      "total_occupancy": 0.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T22:15",
+    "proposal_reason": "Reduced cooling setpoint due to high occupancy",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 25.0,
+    "previous_cooling_setpoint_c": 27.0,
+    "applied_cooling_setpoint_c": 27.0,
+    "disposition": "rejected",
+    "blocking_reasons": [
+      "max_setpoint_change_exceeded"
+    ],
+    "confidence": 0.8,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": false,
+    "observation": {
+      "outdoor_c": 24.324999999999996,
+      "avg_zone_temp_c": 22.58681206250259,
+      "max_zone_temp_c": 22.639139595959413,
+      "total_occupancy": 0.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T23:15",
+    "proposal_reason": "Insufficient outdoor temperature",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 25.0,
+    "previous_cooling_setpoint_c": 27.0,
+    "applied_cooling_setpoint_c": 27.0,
+    "disposition": "rejected",
+    "blocking_reasons": [
+      "max_setpoint_change_exceeded"
+    ],
+    "confidence": 0.2,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": false,
+    "observation": {
+      "outdoor_c": 25.6,
+      "avg_zone_temp_c": 22.371636344558475,
+      "max_zone_temp_c": 22.45991976094385,
+      "total_occupancy": 0.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T00:15",
+    "proposal_reason": "Reduced cooling setpoint to account for increased building occupants and moderate outdoor temperature",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 24.0,
+    "previous_cooling_setpoint_c": 27.0,
+    "applied_cooling_setpoint_c": 27.0,
+    "disposition": "rejected",
+    "blocking_reasons": [
+      "max_setpoint_change_exceeded"
+    ],
+    "confidence": 0.8,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": false,
+    "observation": {
+      "outdoor_c": 24.900000000000002,
+      "avg_zone_temp_c": 22.201505909035323,
+      "max_zone_temp_c": 22.29923952807527,
+      "total_occupancy": 0.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T01:15",
+    "proposal_reason": "Increased energy consumption due to increased occupancy",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 24.0,
+    "previous_cooling_setpoint_c": 27.0,
+    "applied_cooling_setpoint_c": 27.0,
+    "disposition": "rejected",
+    "blocking_reasons": [
+      "max_setpoint_change_exceeded"
+    ],
+    "confidence": 0.8,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": false,
+    "observation": {
+      "outdoor_c": 22.650000000000002,
+      "avg_zone_temp_c": 21.930744207909935,
+      "max_zone_temp_c": 21.983018652372277,
+      "total_occupancy": 0.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T02:15",
+    "proposal_reason": "High occupancy",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 26.0,
+    "previous_cooling_setpoint_c": 27.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.7,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 22.625,
+      "avg_zone_temp_c": 21.72052314441109,
+      "max_zone_temp_c": 21.757852612467893,
+      "total_occupancy": 0.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T03:15",
+    "proposal_reason": "Climate Zone",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 22.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "rejected",
+    "blocking_reasons": [
+      "max_setpoint_change_exceeded",
+      "heating_cooling_deadband_violation"
+    ],
+    "confidence": 90.0,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": false,
+    "observation": {
+      "outdoor_c": 23.9,
+      "avg_zone_temp_c": 21.646161043504616,
+      "max_zone_temp_c": 21.713842315450314,
+      "total_occupancy": 0.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T04:15",
+    "proposal_reason": "Reasonably cool to maintain occupant comfort",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 23.8,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "rejected",
+    "blocking_reasons": [
+      "max_setpoint_change_exceeded"
+    ],
+    "confidence": 0.9,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": false,
+    "observation": {
+      "outdoor_c": 23.9,
+      "avg_zone_temp_c": 21.577112711922794,
+      "max_zone_temp_c": 21.655837954533,
+      "total_occupancy": 0.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T05:23",
+    "proposal_reason": "Energy demand is increasing",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 25.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 25.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.8,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 24.324999999999996,
+      "avg_zone_temp_c": 21.968092786820343,
+      "max_zone_temp_c": 22.684698492519,
+      "total_occupancy": 0.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T06:20",
+    "proposal_reason": "Temperature increase is not sufficient to require cooling",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 23.0,
+    "previous_cooling_setpoint_c": 25.0,
+    "applied_cooling_setpoint_c": 25.0,
+    "disposition": "rejected",
+    "blocking_reasons": [
+      "max_setpoint_change_exceeded",
+      "heating_cooling_deadband_violation"
+    ],
+    "confidence": 0.8,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": false,
+    "observation": {
+      "outdoor_c": 25.875000000000004,
+      "avg_zone_temp_c": 22.53823871201103,
+      "max_zone_temp_c": 23.583497577247602,
+      "total_occupancy": 0.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T07:23",
+    "proposal_reason": "Climate norms",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 24.0,
+    "previous_cooling_setpoint_c": 25.0,
+    "applied_cooling_setpoint_c": 24.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.9,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 27.099999999999998,
+      "avg_zone_temp_c": 22.902647098040713,
+      "max_zone_temp_c": 24.259350735554982,
+      "total_occupancy": 0.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T08:20",
+    "proposal_reason": "Based on historical cooling load calculations and demand response incentives",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 22.0,
+    "previous_cooling_setpoint_c": 24.0,
+    "applied_cooling_setpoint_c": 24.0,
+    "disposition": "rejected",
+    "blocking_reasons": [
+      "max_setpoint_change_exceeded",
+      "heating_cooling_deadband_violation"
+    ],
+    "confidence": 0.7,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": false,
+    "observation": {
+      "outdoor_c": 28.725,
+      "avg_zone_temp_c": 23.37862413625512,
+      "max_zone_temp_c": 23.99973618892769,
+      "total_occupancy": 52.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T09:23",
+    "proposal_reason": "Higher cooling setpoint may be beneficial due to warmer outdoor temperatures",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 22.0,
+    "previous_cooling_setpoint_c": 24.0,
+    "applied_cooling_setpoint_c": 24.0,
+    "disposition": "rejected",
+    "blocking_reasons": [
+      "max_setpoint_change_exceeded",
+      "heating_cooling_deadband_violation"
+    ],
+    "confidence": 0.8,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": false,
+    "observation": {
+      "outdoor_c": 30.275,
+      "avg_zone_temp_c": 23.93773569859717,
+      "max_zone_temp_c": 23.998823046628466,
+      "total_occupancy": 52.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T10:15",
+    "proposal_reason": "Occupancy and outdoor temperature are not in line with typical indoor comfort zones",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 26.0,
+    "previous_cooling_setpoint_c": 24.0,
+    "applied_cooling_setpoint_c": 24.0,
+    "disposition": "rejected",
+    "blocking_reasons": [
+      "max_setpoint_change_exceeded"
+    ],
+    "confidence": 0.7,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": false,
+    "observation": {
+      "outdoor_c": 31.250000000000004,
+      "avg_zone_temp_c": 23.998122456913606,
+      "max_zone_temp_c": 23.998601534888635,
+      "total_occupancy": 52.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T11:15",
+    "proposal_reason": "to prevent overheating in zone SPACE5-1",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 25.0,
+    "previous_cooling_setpoint_c": 24.0,
+    "applied_cooling_setpoint_c": 25.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.8,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 31.825,
+      "avg_zone_temp_c": 23.998320571493814,
+      "max_zone_temp_c": 23.998765705898798,
+      "total_occupancy": 41.6,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T12:15",
+    "proposal_reason": "Optimal temperature range for indoor comfort",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 22.0,
+    "previous_cooling_setpoint_c": 25.0,
+    "applied_cooling_setpoint_c": 25.0,
+    "disposition": "rejected",
+    "blocking_reasons": [
+      "max_setpoint_change_exceeded",
+      "heating_cooling_deadband_violation"
+    ],
+    "confidence": 95.0,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": false,
+    "observation": {
+      "outdoor_c": 32.35,
+      "avg_zone_temp_c": 24.947382650396406,
+      "max_zone_temp_c": 24.998791969105834,
+      "total_occupancy": 20.8,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T13:15",
+    "proposal_reason": "Building temperature exceeds comfort threshold",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 26.0,
+    "previous_cooling_setpoint_c": 25.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 70.0,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 32.925,
+      "avg_zone_temp_c": 24.99399235742846,
+      "max_zone_temp_c": 24.998993942843352,
+      "total_occupancy": 41.6,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T14:15",
+    "proposal_reason": "High occupancy and outdoor temperature",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 28.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "rejected",
+    "blocking_reasons": [
+      "max_setpoint_change_exceeded"
+    ],
+    "confidence": 0.8,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": false,
+    "observation": {
+      "outdoor_c": 33.3,
+      "avg_zone_temp_c": 25.994140315508286,
+      "max_zone_temp_c": 25.998336582244946,
+      "total_occupancy": 52.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T15:15",
+    "proposal_reason": "No change to energy model",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 24.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "rejected",
+    "blocking_reasons": [
+      "max_setpoint_change_exceeded"
+    ],
+    "confidence": 90.0,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": false,
+    "observation": {
+      "outdoor_c": 33.175,
+      "avg_zone_temp_c": 25.99424372526958,
+      "max_zone_temp_c": 25.99778369127896,
+      "total_occupancy": 52.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T16:15",
+    "proposal_reason": "Temperature increase exceeds comfort threshold",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 28.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "rejected",
+    "blocking_reasons": [
+      "max_setpoint_change_exceeded"
+    ],
+    "confidence": 0.6,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": false,
+    "observation": {
+      "outdoor_c": 32.8,
+      "avg_zone_temp_c": 25.929029562816755,
+      "max_zone_temp_c": 25.99793486092344,
+      "total_occupancy": 52.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T17:15",
+    "proposal_reason": "Building occupants are not fully engaged in cooling",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 22.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "rejected",
+    "blocking_reasons": [
+      "max_setpoint_change_exceeded",
+      "heating_cooling_deadband_violation"
+    ],
+    "confidence": 0.8,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": false,
+    "observation": {
+      "outdoor_c": 32.525,
+      "avg_zone_temp_c": 25.850193915225788,
+      "max_zone_temp_c": 25.998045175030416,
+      "total_occupancy": 52.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T18:23",
+    "proposal_reason": "Insufficient occupancy",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 24.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "rejected",
+    "blocking_reasons": [
+      "max_setpoint_change_exceeded"
+    ],
+    "confidence": 0.9,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": false,
+    "observation": {
+      "outdoor_c": 31.424999999999997,
+      "avg_zone_temp_c": 25.423086514625943,
+      "max_zone_temp_c": 25.998987290466943,
+      "total_occupancy": 26.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T19:20",
+    "proposal_reason": "Maintaining a consistent temperature within the recommended range is crucial for occupant comfort and energy efficiency",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 27.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 27.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.8,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 30.450000000000003,
+      "avg_zone_temp_c": 24.158498497334428,
+      "max_zone_temp_c": 24.876152977706298,
+      "total_occupancy": 0.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T20:20",
+    "proposal_reason": "building condition",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 24.0,
+    "previous_cooling_setpoint_c": 27.0,
+    "applied_cooling_setpoint_c": 27.0,
+    "disposition": "rejected",
+    "blocking_reasons": [
+      "max_setpoint_change_exceeded"
+    ],
+    "confidence": 70.0,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": false,
+    "observation": {
+      "outdoor_c": 29.725,
+      "avg_zone_temp_c": 23.83132515464757,
+      "max_zone_temp_c": 24.278417898139978,
+      "total_occupancy": 0.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T21:15",
+    "proposal_reason": "No occupancy change",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 28.0,
+    "previous_cooling_setpoint_c": 27.0,
+    "applied_cooling_setpoint_c": 28.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.9,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 28.624999999999996,
+      "avg_zone_temp_c": 23.88893651383494,
+      "max_zone_temp_c": 24.491888555166902,
+      "total_occupancy": 0.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T22:15",
+    "proposal_reason": "No occupancy data",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 28.0,
+    "previous_cooling_setpoint_c": 28.0,
+    "applied_cooling_setpoint_c": 28.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 100.0,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 27.650000000000002,
+      "avg_zone_temp_c": 23.381060289538745,
+      "max_zone_temp_c": 23.816420398710214,
+      "total_occupancy": 0.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T23:15",
+    "proposal_reason": "Building is already cooling at setpoint",
+    "proposal_source": "llm_via_mcp",
+    "proposed_cooling_setpoint_c": 25.0,
+    "previous_cooling_setpoint_c": 28.0,
+    "applied_cooling_setpoint_c": 28.0,
+    "disposition": "rejected",
+    "blocking_reasons": [
+      "max_setpoint_change_exceeded"
+    ],
+    "confidence": 90.0,
+    "controller_mode": "llm_mcp",
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": false,
+    "observation": {
+      "outdoor_c": 26.924999999999997,
+      "avg_zone_temp_c": 23.016748391913325,
+      "max_zone_temp_c": 23.31283244192408,
+      "total_occupancy": 0.0,
+      "missing_occupancy": false
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  }
+]

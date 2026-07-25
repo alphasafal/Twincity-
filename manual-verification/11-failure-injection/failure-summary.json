@@ -1,0 +1,7 @@
+{
+  "total": 15,
+  "passed": 14,
+  "failed": [
+    "silent_mock_when_energyplus_missing_results"
+  ]
+}

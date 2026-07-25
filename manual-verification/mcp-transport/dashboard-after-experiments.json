@@ -1,0 +1,7 @@
+{
+  "data_mode": "energyplus",
+  "available": true,
+  "baseline_match": true,
+  "agent_match": true,
+  "no_multiplier": true
+}

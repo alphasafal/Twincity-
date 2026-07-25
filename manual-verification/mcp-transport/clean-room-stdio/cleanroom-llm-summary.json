@@ -1,0 +1,31 @@
+{
+  "path": "EnergyPlus \u2192 MCP client \u2192 stdio \u2192 separate MCP server process \u2192 MCP tools \u2192 Ollama structured proposal \u2192 SafetyShield \u2192 EnergyPlus actuator",
+  "mcp_transport": "stdio",
+  "mcp_client_pid": 51319,
+  "mcp_server_pid": 51324,
+  "mcp_pids_differ": true,
+  "baseline": {
+    "total_energy_kwh": 421.5057,
+    "status": "completed"
+  },
+  "agent": {
+    "total_energy_kwh": 407.4354,
+    "status": "completed",
+    "action_counts": {
+      "approved": 30,
+      "rejected": 18,
+      "fallback": 0,
+      "total_decisions": 48
+    },
+    "controller": "llm_mcp+safety_shield"
+  },
+  "llm_bypass_possible": false,
+  "stage_log": "/tmp/ecolooop-stdio-cleanroom-20260725T112256Z/results/llm_mcp/stage_log.jsonl",
+  "mcp_trace": "/tmp/ecolooop-stdio-cleanroom-20260725T112256Z/manual-verification/mcp-transport/mcp-runtime-trace.jsonl",
+  "notes": [
+    "Authoritative MCP path uses a separate stdio server process.",
+    "Direct in-process MCP handler invocation is not used on this path.",
+    "If Ollama or MCP fails, deterministic_fallback is used and logged.",
+    "Unsafe 35C proposal is rejected by SafetyShield."
+  ]
+}

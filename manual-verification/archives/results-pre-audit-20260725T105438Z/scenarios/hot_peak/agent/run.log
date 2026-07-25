@@ -1,0 +1,5 @@
+status=completed rc=0 mode=agent scenario=hot_peak elapsed_s=0.277
+actions=48 observations=192 stream_frames=48
+total_energy_kwh=427.389
+comfort_violation_hours=0.0
+comfort_degree_hours=0.0

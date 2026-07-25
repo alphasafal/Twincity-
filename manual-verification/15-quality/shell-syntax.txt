@@ -1,0 +1,8 @@
+OK scripts/compare_results.sh
+OK scripts/run_agent.sh
+OK scripts/run_baseline.sh
+OK scripts/run_demo.sh
+OK scripts/run_llm_mcp_experiment.sh
+OK scripts/run_scenarios.sh
+OK scripts/setup_energyplus.sh
+OK scripts/setup.sh
