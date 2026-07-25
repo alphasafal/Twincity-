@@ -798,7 +798,7 @@ class RuntimeHub:
     def _record_kpi_snapshot(self, state: dict[str, Any], baseline: bool) -> None:
         interval_h = 0.25
         energy = state["total_building_power_kw"] * interval_h
-        # No synthetic multipliers (×1.12 removed). Mock twin KPIs are live power
+        # No synthetic multipliers (x1.12 removed). Mock twin KPIs are live power
         # integrals only; EnergyPlus evidence comes from results/* via DATA_MODE.
         if baseline or not self.kpi_history:
             self.baseline_energy_kwh += energy

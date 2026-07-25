@@ -81,7 +81,6 @@ from app.schemas.common import (
 from app.services.experiment_store import (
     experiment_dashboard_payload,
     load_actions,
-    load_comparison,
     load_consolidated_scenarios,
     load_stream_frames,
     results_root,
@@ -310,7 +309,7 @@ def building_status(building_id: str, db: DbSession, user: CurrentUser) -> dict[
             ),
         }
 
-    # Explicit mock mode only — no synthetic ×1.12 savings
+    # Explicit mock mode only — no synthetic x1.12 savings
     return {
         "building": BuildingOut.model_validate(building).model_dump(),
         "mode": building.current_mode,
