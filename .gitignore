@@ -29,20 +29,12 @@ apps/web/.next
 third_party/EnergyPlus/
 third_party/*.tar.gz
 
-# Experiment working directories / large raw E+ outputs (keep JSON summaries)
-results/**/eplus*
-results/**/sqlite.err
-results/**/*.htm
-results/**/*.audit
-results/**/*.bnd
-results/**/*.eso
-results/**/*.mtr
-results/**/*.rdd
-results/**/*.mdd
-results/**/*.mtd
-results/**/*.shd
-results/**/*.wrl
-results/**/*.csv
-results/**/run_logs/
-!results/**/*.json
+# Generated experiment outputs (never commit authoritative results)
+results/**
 !results/**/.gitkeep
+!results/.gitkeep
+
+# Generated submission evidence artifacts
+submission-evidence/**
+!submission-evidence/.gitkeep
+!submission-evidence/**/.gitkeep

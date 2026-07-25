@@ -1,5 +1,0 @@
-status=completed rc=0 mode=agent scenario=normal_summer elapsed_s=0.247
-actions=48 observations=192 stream_frames=48
-total_energy_kwh=415.9999
-comfort_violation_hours=0.0
-comfort_degree_hours=0.0

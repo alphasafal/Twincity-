@@ -1,2 +1,0 @@
-total_energy_kwh,hvac_energy_kwh,peak_power_kw,carbon_estimate_kg,occupied_comfort_violation_hours,occupied_comfort_degree_hours,approved_actions,rejected_actions,fallback_actions
-415.9999,13.157,19.64,173.472,0.0,0.0,48,0,0

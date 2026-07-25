@@ -292,7 +292,10 @@ def building_status(building_id: str, db: DbSession, user: CurrentUser) -> dict[
             "simulated": False,
             "data_mode": "energyplus",
             "data_label": "energyplus_results_unavailable",
-            "data_source_visible": "EnergyPlus mode requested but results/* artifacts are missing or incomplete",
+            "data_source_visible": (
+                "No EnergyPlus experiment results found. "
+                "Run the baseline and agent experiment scripts first."
+            ),
             "synthetic_multiplier_applied": False,
             "experiment": experiment,
             "experiment_available": False,
@@ -300,9 +303,10 @@ def building_status(building_id: str, db: DbSession, user: CurrentUser) -> dict[
             "simulator_health": hub.simulator.health(),
             "active_scenario": hub.active_scenario or cfg.experiment_scenario,
             "note": (
-                "DATA_MODE=energyplus is active, but measured experiment results are unavailable. "
-                "Refusing to fall back to mock KPIs. Run ./scripts/run_baseline.sh and "
-                "./scripts/run_agent.sh, or set DATA_MODE=mock explicitly for the mock twin."
+                "No EnergyPlus experiment results found. "
+                "Run the baseline and agent experiment scripts first. "
+                "DATA_MODE=energyplus will not switch to mock automatically; "
+                "set DATA_MODE=mock explicitly for mock development mode."
             ),
         }
 
@@ -1201,9 +1205,9 @@ def analytics_summary(building_id: str, user: CurrentUser) -> dict[str, Any]:
             "experiment_available": False,
             "missing_artifacts": experiment.get("missing_artifacts") or [],
             "evidence_note": (
-                "DATA_MODE=energyplus is active, but measured experiment results are unavailable. "
-                "Refusing to fall back to mock analytics. Run the baseline/agent scripts or set "
-                "DATA_MODE=mock explicitly."
+                "No EnergyPlus experiment results found. "
+                "Run the baseline and agent experiment scripts first. "
+                "DATA_MODE=energyplus will not switch to mock automatically."
             ),
         }
     return {

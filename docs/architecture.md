@@ -1,15 +1,17 @@
 # Architecture — TwinPilot / Eco-Loop Building Agents
 
+This prototype controls an **EnergyPlus digital building**, not a physical BMS.
+
 ## Two loops
 
-### A) Interactive mock closed loop (default demo)
+### A) Interactive mock closed loop (explicit `DATA_MODE=mock` only)
 
 ```text
-Web/Mobile/MCP → FastAPI RuntimeHub → MockBuildingSimulator
-                 → Optimizer / SafetyShield → apply → DB/WS dashboard
+Web/Mobile → FastAPI RuntimeHub → MockBuildingSimulator
+             → Optimizer / SafetyShield → apply → DB/WS dashboard
 ```
 
-`SIMULATOR_PROVIDER=mock` (default). Suitable for UI, MCP, and operator workflow demos.
+Mock mode must be selected explicitly (`DATA_MODE=mock`). It does not invent EnergyPlus savings.
 
 ### B) Measured EnergyPlus closed loop (evaluation evidence)
 
@@ -23,9 +25,30 @@ scripts/run_baseline.sh | run_agent.sh
 
 Identical IDF, EPW, occupancy schedule, and run period. **Only the controller differs.**
 
+`results/*` artifacts are **generated locally and not committed**.
+
+When `DATA_MODE=energyplus` and results are missing, the dashboard shows an honest no-data state (it does not fall back to mock KPIs).
+
+### C) Optional LLM + separate local MCP server (stdio)
+
+```text
+EnergyPlus observation
+  → MCP client (experiment process)
+  → stdio transport
+  → separate MCP server process (`python -m twinpilot_mcp`, TWINPILOT_MCP_MODE=energyplus_experiment)
+  → MCP tools (get_building_observation, propose_or_prepare_control_context,
+               validate_control_action, get_controller_constraints, record_control_decision)
+  → Ollama structured proposal (local prerequisite)
+  → SafetyShield (authoritative actuation gate in ep_experiment)
+  → EnergyPlus actuator
+  → next simulation state
+```
+
+Do **not** describe in-process handler calls as remote MCP. The authoritative experiment path uses a **separate OS process** over stdio.
+
 ## Safety boundary
 
-The LLM (optional Ollama) **never** writes actuators directly.
+The LLM (optional local Ollama) **never** writes actuators directly.
 
 ```text
 Agent proposal → SafetyShield / validate_setpoint_action → approved action only → EnergyPlus / mock apply
@@ -39,10 +62,10 @@ Agent proposal → SafetyShield / validate_setpoint_action → approved action o
 | `services/optimizer` | Multi-objective planner + SafetyShield |
 | `services/simulator` | Mock twin + EnergyPlus adapter + `ep_experiment` |
 | `services/agent` | Deterministic / Ollama providers |
-| `services/mcp-server` | MCP tools (no unrestricted actuation) |
+| `services/mcp-server` | MCP server (stdio; EnergyPlus experiment tools + API-backed tools) |
 | `apps/web` | Next.js operator UI |
 | `apps/mobile` | Expo approvals |
 | `building-models` | IDF + EPW |
-| `scripts/` | Setup, demo, EnergyPlus experiments |
+| `scripts/` | Setup, demo, EnergyPlus experiments, prerequisite checks |
 
-See also `docs/ARCHITECTURE.md` (legacy diagrams) and `docs/audit/repository-map.md`.
+See also `docs/audit/repository-map.md` and `manual-verification/`.

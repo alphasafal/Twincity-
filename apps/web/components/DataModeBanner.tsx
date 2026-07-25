@@ -39,6 +39,15 @@ export function DataModeBanner({
             ? " · WARNING: synthetic multiplier active"
             : " · No synthetic ×1.12 multiplier"}
         </p>
+        {isEp &&
+        (dataSourceVisible || "")
+          .toLowerCase()
+          .includes("no energyplus experiment results") ? (
+          <p className="mt-2 text-sm font-medium text-amber-200">
+            No EnergyPlus experiment results found. Run the baseline and agent
+            experiment scripts first.
+          </p>
+        ) : null}
       </div>
     </div>
   );

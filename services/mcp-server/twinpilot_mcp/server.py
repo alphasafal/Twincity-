@@ -313,10 +313,22 @@ def dump_catalog() -> None:
 
 def main(argv: list[str] | None = None) -> None:
     args = list(sys.argv[1:] if argv is None else argv)
-    logging.basicConfig(level=os.getenv("TWINPILOT_MCP_LOG", "INFO"))
+    # Stdout is reserved for MCP protocol when running a server; log to stderr.
+    logging.basicConfig(
+        level=os.getenv("TWINPILOT_MCP_LOG", "INFO"),
+        stream=sys.stderr,
+        format="%(asctime)s %(levelname)s %(name)s: %(message)s",
+    )
 
     if "--catalog" in args:
         dump_catalog()
+        return
+
+    mode = os.getenv("TWINPILOT_MCP_MODE", "").strip().lower()
+    if mode == "energyplus_experiment" or "--energyplus-experiment" in args:
+        from twinpilot_mcp.energyplus_experiment_server import run_energyplus_experiment_stdio
+
+        run_energyplus_experiment_stdio()
         return
 
     force_fallback = "--fallback" in args or os.getenv("TWINPILOT_MCP_FORCE_FALLBACK") == "1"

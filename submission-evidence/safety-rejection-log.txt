@@ -1,7 +1,0 @@
-UNSAFE PROPOSAL DEMONSTRATION (does not contaminate efficiency experiment)
-proposed_cooling_setpoint_c=35.0
-approved=False
-disposition=rejected
-rejection_reasons=['cooling_setpoint_out_of_range', 'max_setpoint_change_exceeded']
-fallback_action=retain_safe_setpoint=23.9
-continued_operation=true

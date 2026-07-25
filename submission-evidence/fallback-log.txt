@@ -1,6 +1,0 @@
-LLM UNAVAILABLE / TIMEOUT FALLBACK DEMONSTRATION
-llm_status=timeout
-deterministic_or_hold disposition=fallback
-blocking_reasons=['llm_timeout']
-approved_for_actuation=False
-fallback_action=hold_last_safe_setpoint

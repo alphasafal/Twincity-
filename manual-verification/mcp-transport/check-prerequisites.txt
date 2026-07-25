@@ -1,0 +1,24 @@
+== Eco-Loop prerequisite check ==
+root=/workspace
+time=2026-07-25T11:21:47Z
+PASS  OS compatible (Linux)
+PASS  CPU architecture (x86_64)
+PASS  Python >=3.11 (3.12.3)
+PASS  Node.js >=20 (v22.14.0)
+PASS  pnpm available (10.33.3)
+PASS  EnergyPlus executable (/workspace/third_party/EnergyPlus/energyplus)
+PASS  EnergyPlus version (EnergyPlus, Version 24.1.0-9d7789a3ac)
+PASS  IDF present (/workspace/building-models/sample-office/office_5zone.idf)
+PASS  EPW present (/workspace/building-models/weather/chicago.epw)
+PASS  results/ is writable
+WARN  port 8000 is already in use
+PASS  port 3000 appears free (or lsof unavailable to confirm)
+WARN  port 11434 is already in use
+PASS  .env exists (values not printed)
+PASS  .env.example defines DATA_MODE
+PASS  Ollama executable (ollama version is 0.32.3)
+PASS  Ollama server healthy (http://127.0.0.1:11434)
+PASS  Required model present (llama3.2:1b)
+PASS  MCP SDK + twinpilot_mcp importable
+
+RESULT: PASS
