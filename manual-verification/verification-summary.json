@@ -1,5 +1,5 @@
 {
-  "tested_commit": "95a58e754e6a17ba987fa65d09401bd97f69ca43",
+  "tested_commit": "1b6a04557185e4dea0389f4f5961e4538a729bc1",
   "pre_remediation_commit": "b63311c3f929a8d9a85dfbf8ed5845231c486b6b",
   "tested_at": "2026-07-25T11:30:38.737937+00:00",
   "overall_status": "PASS",
@@ -135,5 +135,9 @@
   "human_checks_remaining": [
     "Personally confirm `ps` shows twinpilot_mcp child during LLM experiment",
     "Open dashboard with empty results/ then after local baseline/agent"
+  ],
+  "remediation_commits": [
+    "95a58e754e6a17ba987fa65d09401bd97f69ca43",
+    "1b6a04557185e4dea0389f4f5961e4538a729bc1"
   ]
 }
