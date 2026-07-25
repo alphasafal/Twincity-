@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "timestamp_utc": "2026-07-25T10:33:48.850189+00:00",
+  "inputs_identical": true,
+  "baseline_status": "completed",
+  "agent_status": "completed",
+  "total_energy_kwh": {
+    "baseline": 421.5057,
+    "agent": 406.2102,
+    "absolute_delta_agent_minus_baseline": -15.2955,
+    "percent_delta": -3.6288
+  },
+  "hvac_energy_kwh": {
+    "baseline": 13.8459,
+    "agent": 12.1566,
+    "absolute_delta_agent_minus_baseline": -1.6893,
+    "percent_delta": -12.2007
+  },
+  "peak_power_kw": {
+    "baseline": 19.9325,
+    "agent": 19.4989,
+    "absolute_delta_agent_minus_baseline": -0.4336,
+    "percent_delta": -2.1753
+  },
+  "carbon_estimate_kg": {
+    "baseline": 175.7679,
+    "agent": 169.3897,
+    "absolute_delta_agent_minus_baseline": -6.3782,
+    "percent_delta": -3.6288
+  },
+  "occupied_comfort_violation_hours": {
+    "baseline": 0.0,
+    "agent": 1.0,
+    "absolute_delta_agent_minus_baseline": 1.0,
+    "percent_delta": null
+  },
+  "agent_action_counts": {
+    "approved": 48,
+    "rejected": 0,
+    "fallback": 0,
+    "total_decisions": 48
+  },
+  "notes": [
+    "Negative absolute_delta means agent used less than baseline.",
+    "Carbon values are estimates using a documented kg/kWh factor.",
+    "Only controller differs: baseline has no setpoint overrides; agent uses SafetyShield-gated overrides."
+  ]
+}

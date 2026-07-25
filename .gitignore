@@ -24,3 +24,25 @@ test-results
 *.tsbuildinfo
 apps/mobile/.expo
 apps/web/.next
+
+# Local EnergyPlus install (download via scripts/setup_energyplus.sh)
+third_party/EnergyPlus/
+third_party/*.tar.gz
+
+# Experiment working directories / large raw E+ outputs (keep JSON summaries)
+results/**/eplus*
+results/**/sqlite.err
+results/**/*.htm
+results/**/*.audit
+results/**/*.bnd
+results/**/*.eso
+results/**/*.mtr
+results/**/*.rdd
+results/**/*.mdd
+results/**/*.mtd
+results/**/*.shd
+results/**/*.wrl
+results/**/*.csv
+results/**/run_logs/
+!results/**/*.json
+!results/**/.gitkeep

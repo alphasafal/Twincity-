@@ -60,3 +60,12 @@ replay:
 
 ollama:
 	@bash $(ROOT)/infrastructure/scripts/setup-ollama.sh
+
+.PHONY: run-baseline run-agent compare-results energyplus-experiments
+run-baseline:
+	@bash $(ROOT)/scripts/run_baseline.sh
+run-agent:
+	@bash $(ROOT)/scripts/run_agent.sh
+compare-results:
+	@bash $(ROOT)/scripts/compare_results.sh
+energyplus-experiments: run-baseline run-agent compare-results

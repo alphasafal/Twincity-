@@ -1,0 +1,866 @@
+[
+  {
+    "sim_time": "07-15T00:15",
+    "proposal_reason": "unoccupied_setback_rate_limited",
+    "proposed_cooling_setpoint_c": 25.4,
+    "previous_cooling_setpoint_c": 23.9,
+    "applied_cooling_setpoint_c": 25.4,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.88,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 24.200000000000003,
+      "avg_zone_temp_c": 22.054832739026942,
+      "total_occupancy": 0.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T01:15",
+    "proposal_reason": "unoccupied_setback",
+    "proposed_cooling_setpoint_c": 26.0,
+    "previous_cooling_setpoint_c": 25.4,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.88,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 20.0,
+      "avg_zone_temp_c": 21.709545981078833,
+      "total_occupancy": 0.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T02:15",
+    "proposal_reason": "unoccupied_setback",
+    "proposed_cooling_setpoint_c": 26.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.88,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 19.85,
+      "avg_zone_temp_c": 21.480160241773824,
+      "total_occupancy": 0.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T03:15",
+    "proposal_reason": "unoccupied_setback",
+    "proposed_cooling_setpoint_c": 26.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.88,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 19.275,
+      "avg_zone_temp_c": 21.260098069107162,
+      "total_occupancy": 0.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T04:15",
+    "proposal_reason": "unoccupied_setback",
+    "proposed_cooling_setpoint_c": 26.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.88,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 18.9,
+      "avg_zone_temp_c": 21.074592734486323,
+      "total_occupancy": 0.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T05:23",
+    "proposal_reason": "unoccupied_setback",
+    "proposed_cooling_setpoint_c": 26.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.88,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 19.325,
+      "avg_zone_temp_c": 21.288305768027545,
+      "total_occupancy": 0.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T06:19",
+    "proposal_reason": "unoccupied_setback",
+    "proposed_cooling_setpoint_c": 26.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.88,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 21.0,
+      "avg_zone_temp_c": 22.259281419623754,
+      "total_occupancy": 0.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T07:15",
+    "proposal_reason": "unoccupied_setback",
+    "proposed_cooling_setpoint_c": 26.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.88,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 22.75,
+      "avg_zone_temp_c": 22.3449646301428,
+      "total_occupancy": 0.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T08:20",
+    "proposal_reason": "occupied_mild_setback",
+    "proposed_cooling_setpoint_c": 26.5,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.5,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.9,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 24.699999999999996,
+      "avg_zone_temp_c": 23.181358033947816,
+      "total_occupancy": 52.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T09:20",
+    "proposal_reason": "hold",
+    "proposed_cooling_setpoint_c": 26.5,
+    "previous_cooling_setpoint_c": 26.5,
+    "applied_cooling_setpoint_c": 26.5,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.8,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 26.150000000000002,
+      "avg_zone_temp_c": 24.922198461611163,
+      "total_occupancy": 52.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T10:23",
+    "proposal_reason": "occupied_comfort_protect_rate_limited",
+    "proposed_cooling_setpoint_c": 25.0,
+    "previous_cooling_setpoint_c": 26.5,
+    "applied_cooling_setpoint_c": 25.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.93,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 28.075000000000003,
+      "avg_zone_temp_c": 25.7694820858676,
+      "total_occupancy": 52.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T11:15",
+    "proposal_reason": "hold",
+    "proposed_cooling_setpoint_c": 25.0,
+    "previous_cooling_setpoint_c": 25.0,
+    "applied_cooling_setpoint_c": 25.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.8,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 29.324999999999996,
+      "avg_zone_temp_c": 24.98790207333256,
+      "total_occupancy": 41.6
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T12:15",
+    "proposal_reason": "hold",
+    "proposed_cooling_setpoint_c": 25.0,
+    "previous_cooling_setpoint_c": 25.0,
+    "applied_cooling_setpoint_c": 25.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.8,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 30.875000000000004,
+      "avg_zone_temp_c": 24.99023973561527,
+      "total_occupancy": 20.8
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T13:15",
+    "proposal_reason": "hold",
+    "proposed_cooling_setpoint_c": 25.0,
+    "previous_cooling_setpoint_c": 25.0,
+    "applied_cooling_setpoint_c": 25.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.8,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 31.7,
+      "avg_zone_temp_c": 24.99855401528177,
+      "total_occupancy": 41.6
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T14:15",
+    "proposal_reason": "hold",
+    "proposed_cooling_setpoint_c": 25.0,
+    "previous_cooling_setpoint_c": 25.0,
+    "applied_cooling_setpoint_c": 25.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.8,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 31.7,
+      "avg_zone_temp_c": 24.998235706605072,
+      "total_occupancy": 52.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T15:15",
+    "proposal_reason": "hold",
+    "proposed_cooling_setpoint_c": 25.0,
+    "previous_cooling_setpoint_c": 25.0,
+    "applied_cooling_setpoint_c": 25.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.8,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 31.825,
+      "avg_zone_temp_c": 24.99798956491547,
+      "total_occupancy": 52.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T16:15",
+    "proposal_reason": "hold",
+    "proposed_cooling_setpoint_c": 25.0,
+    "previous_cooling_setpoint_c": 25.0,
+    "applied_cooling_setpoint_c": 25.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.8,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 32.2,
+      "avg_zone_temp_c": 24.99822336168835,
+      "total_occupancy": 52.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T17:15",
+    "proposal_reason": "hold",
+    "proposed_cooling_setpoint_c": 25.0,
+    "previous_cooling_setpoint_c": 25.0,
+    "applied_cooling_setpoint_c": 25.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.8,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 31.5,
+      "avg_zone_temp_c": 24.974110698154394,
+      "total_occupancy": 52.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T18:23",
+    "proposal_reason": "hold",
+    "proposed_cooling_setpoint_c": 25.0,
+    "previous_cooling_setpoint_c": 25.0,
+    "applied_cooling_setpoint_c": 25.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.8,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 29.275,
+      "avg_zone_temp_c": 24.454495198381064,
+      "total_occupancy": 26.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T19:23",
+    "proposal_reason": "unoccupied_setback",
+    "proposed_cooling_setpoint_c": 26.0,
+    "previous_cooling_setpoint_c": 25.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.88,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 27.224999999999998,
+      "avg_zone_temp_c": 23.267198662282567,
+      "total_occupancy": 0.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T20:23",
+    "proposal_reason": "unoccupied_setback",
+    "proposed_cooling_setpoint_c": 26.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.88,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 22.349999999999998,
+      "avg_zone_temp_c": 22.89767204190425,
+      "total_occupancy": 0.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T21:15",
+    "proposal_reason": "unoccupied_setback",
+    "proposed_cooling_setpoint_c": 26.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.88,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 23.075000000000003,
+      "avg_zone_temp_c": 22.91444424575648,
+      "total_occupancy": 0.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T22:15",
+    "proposal_reason": "unoccupied_setback",
+    "proposed_cooling_setpoint_c": 26.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.88,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 24.324999999999996,
+      "avg_zone_temp_c": 22.49608022567363,
+      "total_occupancy": 0.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-15T23:15",
+    "proposal_reason": "unoccupied_setback",
+    "proposed_cooling_setpoint_c": 26.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.88,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 25.6,
+      "avg_zone_temp_c": 22.30079007051164,
+      "total_occupancy": 0.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T00:15",
+    "proposal_reason": "unoccupied_setback",
+    "proposed_cooling_setpoint_c": 26.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.88,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 24.900000000000002,
+      "avg_zone_temp_c": 22.145916209998813,
+      "total_occupancy": 0.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T01:15",
+    "proposal_reason": "unoccupied_setback",
+    "proposed_cooling_setpoint_c": 26.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.88,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 22.650000000000002,
+      "avg_zone_temp_c": 21.886718108144315,
+      "total_occupancy": 0.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T02:15",
+    "proposal_reason": "unoccupied_setback",
+    "proposed_cooling_setpoint_c": 26.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.88,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 22.625,
+      "avg_zone_temp_c": 21.685459529365467,
+      "total_occupancy": 0.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T03:15",
+    "proposal_reason": "unoccupied_setback",
+    "proposed_cooling_setpoint_c": 26.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.88,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 23.9,
+      "avg_zone_temp_c": 21.618160750710086,
+      "total_occupancy": 0.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T04:15",
+    "proposal_reason": "unoccupied_setback",
+    "proposed_cooling_setpoint_c": 26.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.88,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 23.9,
+      "avg_zone_temp_c": 21.554775788332545,
+      "total_occupancy": 0.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T05:23",
+    "proposal_reason": "unoccupied_setback",
+    "proposed_cooling_setpoint_c": 26.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.88,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 24.324999999999996,
+      "avg_zone_temp_c": 21.9503475652832,
+      "total_occupancy": 0.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T06:20",
+    "proposal_reason": "unoccupied_setback",
+    "proposed_cooling_setpoint_c": 26.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.88,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 25.875000000000004,
+      "avg_zone_temp_c": 22.533529857468988,
+      "total_occupancy": 0.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T07:23",
+    "proposal_reason": "unoccupied_setback",
+    "proposed_cooling_setpoint_c": 26.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.88,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 27.099999999999998,
+      "avg_zone_temp_c": 22.899850078600355,
+      "total_occupancy": 0.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T08:19",
+    "proposal_reason": "hold",
+    "proposed_cooling_setpoint_c": 26.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.8,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 28.725,
+      "avg_zone_temp_c": 24.11964707430269,
+      "total_occupancy": 52.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T09:23",
+    "proposal_reason": "hold",
+    "proposed_cooling_setpoint_c": 26.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.8,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 30.275,
+      "avg_zone_temp_c": 25.123744862294146,
+      "total_occupancy": 52.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T10:23",
+    "proposal_reason": "occupied_comfort_protect_rate_limited",
+    "proposed_cooling_setpoint_c": 24.5,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 24.5,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.93,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 31.250000000000004,
+      "avg_zone_temp_c": 25.669372679323004,
+      "total_occupancy": 52.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T11:15",
+    "proposal_reason": "hold",
+    "proposed_cooling_setpoint_c": 24.5,
+    "previous_cooling_setpoint_c": 24.5,
+    "applied_cooling_setpoint_c": 24.5,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.8,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 31.825,
+      "avg_zone_temp_c": 24.497901214536054,
+      "total_occupancy": 41.6
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T12:15",
+    "proposal_reason": "hold",
+    "proposed_cooling_setpoint_c": 24.5,
+    "previous_cooling_setpoint_c": 24.5,
+    "applied_cooling_setpoint_c": 24.5,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.8,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 32.35,
+      "avg_zone_temp_c": 24.49861936624523,
+      "total_occupancy": 20.8
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T13:15",
+    "proposal_reason": "hold",
+    "proposed_cooling_setpoint_c": 24.5,
+    "previous_cooling_setpoint_c": 24.5,
+    "applied_cooling_setpoint_c": 24.5,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.8,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 32.925,
+      "avg_zone_temp_c": 24.498863712386097,
+      "total_occupancy": 41.6
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T14:15",
+    "proposal_reason": "hold",
+    "proposed_cooling_setpoint_c": 24.5,
+    "previous_cooling_setpoint_c": 24.5,
+    "applied_cooling_setpoint_c": 24.5,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.8,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 33.3,
+      "avg_zone_temp_c": 24.498370457872316,
+      "total_occupancy": 52.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T15:15",
+    "proposal_reason": "hold",
+    "proposed_cooling_setpoint_c": 24.5,
+    "previous_cooling_setpoint_c": 24.5,
+    "applied_cooling_setpoint_c": 24.5,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.8,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 33.175,
+      "avg_zone_temp_c": 24.49814790090686,
+      "total_occupancy": 52.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T16:15",
+    "proposal_reason": "hold",
+    "proposed_cooling_setpoint_c": 24.5,
+    "previous_cooling_setpoint_c": 24.5,
+    "applied_cooling_setpoint_c": 24.5,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.8,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 32.8,
+      "avg_zone_temp_c": 24.498336840138187,
+      "total_occupancy": 52.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T17:15",
+    "proposal_reason": "hold",
+    "proposed_cooling_setpoint_c": 24.5,
+    "previous_cooling_setpoint_c": 24.5,
+    "applied_cooling_setpoint_c": 24.5,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.8,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 32.525,
+      "avg_zone_temp_c": 24.498260738404646,
+      "total_occupancy": 52.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T18:23",
+    "proposal_reason": "hold",
+    "proposed_cooling_setpoint_c": 24.5,
+    "previous_cooling_setpoint_c": 24.5,
+    "applied_cooling_setpoint_c": 24.5,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.8,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 31.424999999999997,
+      "avg_zone_temp_c": 24.38281217284652,
+      "total_occupancy": 26.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T19:23",
+    "proposal_reason": "unoccupied_setback",
+    "proposed_cooling_setpoint_c": 26.0,
+    "previous_cooling_setpoint_c": 24.5,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.88,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 30.450000000000003,
+      "avg_zone_temp_c": 23.739320530212506,
+      "total_occupancy": 0.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T20:20",
+    "proposal_reason": "unoccupied_setback",
+    "proposed_cooling_setpoint_c": 26.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.88,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 29.725,
+      "avg_zone_temp_c": 23.541259039877055,
+      "total_occupancy": 0.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T21:15",
+    "proposal_reason": "unoccupied_setback",
+    "proposed_cooling_setpoint_c": 26.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.88,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 28.624999999999996,
+      "avg_zone_temp_c": 23.65440327212628,
+      "total_occupancy": 0.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T22:15",
+    "proposal_reason": "unoccupied_setback",
+    "proposed_cooling_setpoint_c": 26.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.88,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 27.650000000000002,
+      "avg_zone_temp_c": 23.202752887355047,
+      "total_occupancy": 0.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  },
+  {
+    "sim_time": "07-16T23:15",
+    "proposal_reason": "unoccupied_setback",
+    "proposed_cooling_setpoint_c": 26.0,
+    "previous_cooling_setpoint_c": 26.0,
+    "applied_cooling_setpoint_c": 26.0,
+    "disposition": "approved",
+    "blocking_reasons": [],
+    "confidence": 0.88,
+    "energyplus_actuator_written": true,
+    "energyplus_action_accepted": true,
+    "observation": {
+      "outdoor_c": 26.924999999999997,
+      "avg_zone_temp_c": 22.879648132598966,
+      "total_occupancy": 0.0
+    },
+    "safety": "SafetyShield-equivalent deterministic gate in ep_experiment"
+  }
+]
