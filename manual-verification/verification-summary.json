@@ -139,5 +139,8 @@
   "remediation_commits": [
     "95a58e754e6a17ba987fa65d09401bd97f69ca43",
     "1b6a04557185e4dea0389f4f5961e4538a729bc1"
-  ]
+  ],
+  "tested_commit_note": "Tip commit updated in follow-up commit after guide refresh",
+  "manual_guide": "manual-verification/MANUAL_VERIFICATION_GUIDE.md",
+  "remediation_report": "manual-verification/MCP_TRANSPORT_REMEDIATION_REPORT.md"
 }
