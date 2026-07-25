@@ -1,5 +1,5 @@
 {
-  "tested_commit": "589643c3557c56922b79edd886e88ea9e6833474",
+  "tested_commit": "8c8b7e07ee034c29f0d02bc810aabd1c51f43806",
   "phase0_freeze_commit": "61ed36cc9bc89cd37ba7a38a1ec7b4d1e12702e1",
   "tested_at": "2026-07-25T11:08:07.584946+00:00",
   "overall_status": "CONDITIONAL_PASS",
@@ -125,5 +125,8 @@
   ],
   "readiness_score_pre_fix": 83,
   "tested_at_post_fix": "2026-07-25T11:09:36.750049+00:00",
-  "readiness_score_note": "Independent post-fix score; not copied from prior 90/100 claim. Pre-fix was 83."
+  "readiness_score_note": "Independent post-fix score; not copied from prior 90/100 claim. Pre-fix was 83.",
+  "tested_commit_evidence_bundle": "8c8b7e07ee034c29f0d02bc810aabd1c51f43806",
+  "tested_commit_application_freeze": "61ed36cc9bc89cd37ba7a38a1ec7b4d1e12702e1",
+  "note": "Phase0 freeze was 61ed36c; experiments ran at 589643c (docs-only delta); evidence+fixes commit is 8c8b7e0"
 }
