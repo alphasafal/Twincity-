@@ -1,0 +1,610 @@
+{
+  "schema_version": "1.0",
+  "experiment": "baseline",
+  "simulation_status": "completed",
+  "scenario": "hot_peak",
+  "controller": "none",
+  "identical_inputs": {
+    "idf": "/workspace/results/scenarios/hot_peak/model.idf",
+    "epw": "/workspace/building-models/weather/chicago.epw",
+    "run_period": "DemoPeriod 07/15-07/16 (patched in IDF)",
+    "occupancy_schedule": "OCCUPY-1 (unchanged between experiments)"
+  },
+  "energyplus": {
+    "home": "/workspace/third_party/EnergyPlus",
+    "version_probe": "EnergyPlus Runtime API via pyenergyplus",
+    "return_code": 0,
+    "run_directory": "/workspace/results/scenarios/hot_peak/baseline/energyplus_run",
+    "wall_time_seconds": 0.249
+  },
+  "timestamp_utc": "2026-07-25T10:45:36.999752+00:00",
+  "mocked_components": [],
+  "data_provenance": {
+    "zone_temperature": "EnergyPlus variable Zone Air Temperature",
+    "occupancy": "EnergyPlus Zone People Occupant Count / People Occupant Count",
+    "energy": "EnergyPlus eplusout.csv meters (J \u2192 kWh)",
+    "weather": "chicago.epw",
+    "carbon": "derived estimate (factor documented)"
+  },
+  "total_energy_kwh": 432.904,
+  "hvac_energy_kwh": 14.1741,
+  "cooling_electricity_kwh": 154.9514,
+  "heating_electricity_kwh": 0.0,
+  "fans_electricity_kwh": 14.1741,
+  "peak_power_kw": 19.8272,
+  "carbon_estimate_kg": 180.521,
+  "carbon_factor_kg_per_kwh": 0.417,
+  "carbon_note": "estimate = total_energy_kwh * documented factor; not live grid intensity",
+  "zone_temperatures": {
+    "SPACE1-1": {
+      "min_c": 21.8283653866402,
+      "max_c": 23.899178974989187,
+      "avg_c": 23.119736030870488,
+      "samples": 48
+    },
+    "SPACE2-1": {
+      "min_c": 21.86229842122164,
+      "max_c": 23.8992828580952,
+      "avg_c": 23.11364558055685,
+      "samples": 48
+    },
+    "SPACE3-1": {
+      "min_c": 21.887065667674534,
+      "max_c": 23.999603023475075,
+      "avg_c": 23.246762263281543,
+      "samples": 48
+    },
+    "SPACE4-1": {
+      "min_c": 21.81095862141228,
+      "max_c": 23.89936628970841,
+      "avg_c": 23.061872234436503,
+      "samples": 48
+    },
+    "SPACE5-1": {
+      "min_c": 21.5244217096903,
+      "max_c": 23.899125169525128,
+      "avg_c": 22.920891972510745,
+      "samples": 48
+    }
+  },
+  "occupied_comfort_violation_hours": 0.0,
+  "occupied_comfort_degree_hours": 0.0,
+  "occupied_hour_samples_proxy": 112,
+  "comfort_analysis": {
+    "occupied_comfort_violation_hours": 0.0,
+    "occupied_comfort_degree_hours": 0.0,
+    "comfort_band_c": {
+      "min": 21.0,
+      "max": 26.0,
+      "warning": 25.3
+    },
+    "events": [],
+    "severity_note": "degree-hours = sum of |T - band| over occupied hours with violations"
+  },
+  "agent_actions": [],
+  "rejected_actions": [],
+  "fallback_actions": [],
+  "action_counts": {
+    "approved": 0,
+    "rejected": 0,
+    "fallback": 0,
+    "total_decisions": 0
+  },
+  "raw_csv": "/workspace/results/scenarios/hot_peak/baseline/energyplus_run/eplusout.csv",
+  "meters_joules": {
+    "Electricity:Facility": 1558454483.575648,
+    "Electricity:HVAC": 51026784.57102827,
+    "Cooling:Electricity": 557825082.2437925,
+    "Heating:Electricity": 0.0,
+    "Fans:Electricity": 51026784.57102827
+  },
+  "observations_sample": [
+    {
+      "sim_time": "07-18T00:15",
+      "outdoor_c": 25.975,
+      "zone_temps_c": {
+        "SPACE1-1": 22.60201280321632,
+        "SPACE2-1": 22.53835803084295,
+        "SPACE3-1": 22.549543799534653,
+        "SPACE4-1": 22.624927058016457,
+        "SPACE5-1": 22.06218200494597
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "cooling_setpoint_c": 23.9,
+      "heating_setpoint_c": 22.2,
+      "source": "energyplus_runtime_api"
+    },
+    {
+      "sim_time": "07-18T00:30",
+      "outdoor_c": 25.85,
+      "zone_temps_c": {
+        "SPACE1-1": 22.545647484115747,
+        "SPACE2-1": 22.484363174206045,
+        "SPACE3-1": 22.492097528578565,
+        "SPACE4-1": 22.559654166350022,
+        "SPACE5-1": 22.02308502658743
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "cooling_setpoint_c": 23.9,
+      "heating_setpoint_c": 22.2,
+      "source": "energyplus_runtime_api"
+    },
+    {
+      "sim_time": "07-18T00:45",
+      "outdoor_c": 25.725,
+      "zone_temps_c": {
+        "SPACE1-1": 22.49075306626851,
+        "SPACE2-1": 22.431067692868,
+        "SPACE3-1": 22.435456756474608,
+        "SPACE4-1": 22.49651919111411,
+        "SPACE5-1": 21.985680903964205
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "cooling_setpoint_c": 23.9,
+      "heating_setpoint_c": 22.2,
+      "source": "energyplus_runtime_api"
+    },
+    {
+      "sim_time": "07-18T00:60",
+      "outdoor_c": 25.6,
+      "zone_temps_c": {
+        "SPACE1-1": 22.43739840923169,
+        "SPACE2-1": 22.37877736158931,
+        "SPACE3-1": 22.380007645713267,
+        "SPACE4-1": 22.435654080841704,
+        "SPACE5-1": 21.949811757412306
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "cooling_setpoint_c": 23.9,
+      "heating_setpoint_c": 22.2,
+      "source": "energyplus_runtime_api"
+    },
+    {
+      "sim_time": "07-18T01:15",
+      "outdoor_c": 25.450000000000003,
+      "zone_temps_c": {
+        "SPACE1-1": 22.38560636956114,
+        "SPACE2-1": 22.328313274938473,
+        "SPACE3-1": 22.326773786574392,
+        "SPACE4-1": 22.377726995287226,
+        "SPACE5-1": 21.915343595125506
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "cooling_setpoint_c": 23.9,
+      "heating_setpoint_c": 22.2,
+      "source": "energyplus_runtime_api"
+    },
+    {
+      "sim_time": "07-18T01:30",
+      "outdoor_c": 25.3,
+      "zone_temps_c": {
+        "SPACE1-1": 22.33526848790108,
+        "SPACE2-1": 22.27957382887732,
+        "SPACE3-1": 22.275648011445128,
+        "SPACE4-1": 22.322496930383526,
+        "SPACE5-1": 21.882173368893845
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "cooling_setpoint_c": 23.9,
+      "heating_setpoint_c": 22.2,
+      "source": "energyplus_runtime_api"
+    },
+    {
+      "sim_time": "07-18T01:45",
+      "outdoor_c": 25.15,
+      "zone_temps_c": {
+        "SPACE1-1": 22.286244196013246,
+        "SPACE2-1": 22.232177783653583,
+        "SPACE3-1": 22.22613427021646,
+        "SPACE4-1": 22.26945846129268,
+        "SPACE5-1": 21.850220447730067
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "cooling_setpoint_c": 23.9,
+      "heating_setpoint_c": 22.2,
+      "source": "energyplus_runtime_api"
+    },
+    {
+      "sim_time": "07-18T01:60",
+      "outdoor_c": 25.0,
+      "zone_temps_c": {
+        "SPACE1-1": 22.23841517841598,
+        "SPACE2-1": 22.185897710156844,
+        "SPACE3-1": 22.17790953955866,
+        "SPACE4-1": 22.21827532814946,
+        "SPACE5-1": 21.81941428472911
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "cooling_setpoint_c": 23.9,
+      "heating_setpoint_c": 22.2,
+      "source": "energyplus_runtime_api"
+    },
+    {
+      "sim_time": "07-18T02:15",
+      "outdoor_c": 25.0,
+      "zone_temps_c": {
+        "SPACE1-1": 22.196374327957134,
+        "SPACE2-1": 22.14425445555649,
+        "SPACE3-1": 22.135367539854244,
+        "SPACE4-1": 22.17238505405884,
+        "SPACE5-1": 21.789703847723118
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "cooling_setpoint_c": 23.9,
+      "heating_setpoint_c": 22.2,
+      "source": "energyplus_runtime_api"
+    },
+    {
+      "sim_time": "07-18T02:30",
+      "outdoor_c": 25.0,
+      "zone_temps_c": {
+        "SPACE1-1": 22.159717146728948,
+        "SPACE2-1": 22.10685387379163,
+        "SPACE3-1": 22.098146365743574,
+        "SPACE4-1": 22.13129667027137,
+        "SPACE5-1": 21.761093246039888
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "cooling_setpoint_c": 23.9,
+      "heating_setpoint_c": 22.2,
+      "source": "energyplus_runtime_api"
+    },
+    {
+      "sim_time": "07-18T02:45",
+      "outdoor_c": 25.0,
+      "zone_temps_c": {
+        "SPACE1-1": 22.126481327528673,
+        "SPACE2-1": 22.072274732146063,
+        "SPACE3-1": 22.064361234053397,
+        "SPACE4-1": 22.09350994373338,
+        "SPACE5-1": 21.73362058490445
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "cooling_setpoint_c": 23.9,
+      "heating_setpoint_c": 22.2,
+      "source": "energyplus_runtime_api"
+    },
+    {
+      "sim_time": "07-18T02:60",
+      "outdoor_c": 25.0,
+      "zone_temps_c": {
+        "SPACE1-1": 22.09559099633335,
+        "SPACE2-1": 22.03985037096272,
+        "SPACE3-1": 22.032962209909638,
+        "SPACE4-1": 22.05829655945912,
+        "SPACE5-1": 21.70732516939082
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "cooling_setpoint_c": 23.9,
+      "heating_setpoint_c": 22.2,
+      "source": "energyplus_runtime_api"
+    },
+    {
+      "sim_time": "07-18T03:15",
+      "outdoor_c": 24.85,
+      "zone_temps_c": {
+        "SPACE1-1": 22.062446522544704,
+        "SPACE2-1": 22.006186012408353,
+        "SPACE3-1": 21.99957278285961,
+        "SPACE4-1": 22.022198741649895,
+        "SPACE5-1": 21.682208785418833
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "cooling_setpoint_c": 23.9,
+      "heating_setpoint_c": 22.2,
+      "source": "energyplus_runtime_api"
+    },
+    {
+      "sim_time": "07-18T03:30",
+      "outdoor_c": 24.7,
+      "zone_temps_c": {
+        "SPACE1-1": 22.027233140237144,
+        "SPACE2-1": 21.97151233749869,
+        "SPACE3-1": 21.964335236246594,
+        "SPACE4-1": 21.985412325068175,
+        "SPACE5-1": 21.65819573432599
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "cooling_setpoint_c": 23.9,
+      "heating_setpoint_c": 22.2,
+      "source": "energyplus_runtime_api"
+    },
+    {
+      "sim_time": "07-18T03:45",
+      "outdoor_c": 24.549999999999997,
+      "zone_temps_c": {
+        "SPACE1-1": 21.99154053652466,
+        "SPACE2-1": 21.936931734274737,
+        "SPACE3-1": 21.928729636567798,
+        "SPACE4-1": 21.949001172265152,
+        "SPACE5-1": 21.63516023057394
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "cooling_setpoint_c": 23.9,
+      "heating_setpoint_c": 22.2,
+      "source": "energyplus_runtime_api"
+    },
+    {
+      "sim_time": "07-18T03:60",
+      "outdoor_c": 24.4,
+      "zone_temps_c": {
+        "SPACE1-1": 21.95612537629125,
+        "SPACE2-1": 21.902837267197366,
+        "SPACE3-1": 21.893456143733328,
+        "SPACE4-1": 21.913319218968926,
+        "SPACE5-1": 21.61296763074791
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "cooling_setpoint_c": 23.9,
+      "heating_setpoint_c": 22.2,
+      "source": "energyplus_runtime_api"
+    },
+    {
+      "sim_time": "07-18T04:15",
+      "outdoor_c": 24.275,
+      "zone_temps_c": {
+        "SPACE1-1": 21.921827871211658,
+        "SPACE2-1": 21.869730056435365,
+        "SPACE3-1": 21.859179984820692,
+        "SPACE4-1": 21.87883475509984,
+        "SPACE5-1": 21.591505123214702
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "cooling_setpoint_c": 23.9,
+      "heating_setpoint_c": 22.2,
+      "source": "energyplus_runtime_api"
+    },
+    {
+      "sim_time": "07-18T04:30",
+      "outdoor_c": 24.15,
+      "zone_temps_c": {
+        "SPACE1-1": 21.888175005150654,
+        "SPACE2-1": 21.83699596833444,
+        "SPACE3-1": 21.825463205116815,
+        "SPACE4-1": 21.844904205411225,
+        "SPACE5-1": 21.5706939274952
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "cooling_setpoint_c": 23.9,
+      "heating_setpoint_c": 22.2,
+      "source": "energyplus_runtime_api"
+    },
+    {
+      "sim_time": "07-18T04:45",
+      "outdoor_c": 24.025,
+      "zone_temps_c": {
+        "SPACE1-1": 21.86880374318543,
+        "SPACE2-1": 21.876751377486006,
+        "SPACE3-1": 21.90150168830102,
+        "SPACE4-1": 21.83283280096612,
+        "SPACE5-1": 21.55143103088252
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "cooling_setpoint_c": 23.9,
+      "heating_setpoint_c": 22.2,
+      "source": "energyplus_runtime_api"
+    },
+    {
+      "sim_time": "07-18T04:60",
+      "outdoor_c": 23.9,
+      "zone_temps_c": {
+        "SPACE1-1": 21.861581068856633,
+        "SPACE2-1": 21.976648449680784,
+        "SPACE3-1": 22.05727663795644,
+        "SPACE4-1": 21.838951074468262,
+        "SPACE5-1": 21.536377998983944
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "cooling_setpoint_c": 23.9,
+      "heating_setpoint_c": 22.2,
+      "source": "energyplus_runtime_api"
+    },
+    {
+      "sim_time": "07-18T05:15",
+      "outdoor_c": 24.324999999999996,
+      "zone_temps_c": {
+        "SPACE1-1": 21.877860265825575,
+        "SPACE2-1": 22.11510479788033,
+        "SPACE3-1": 22.24484235780331,
+        "SPACE4-1": 21.869271704727296,
+        "SPACE5-1": 21.52744748986941
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "cooling_setpoint_c": 23.9,
+      "heating_setpoint_c": 22.2,
+      "source": "energyplus_runtime_api"
+    },
+    {
+      "sim_time": "07-18T05:30",
+      "outdoor_c": 24.75,
+      "zone_temps_c": {
+        "SPACE1-1": 21.91617877981181,
+        "SPACE2-1": 22.277433793016442,
+        "SPACE3-1": 22.438202109574213,
+        "SPACE4-1": 21.92097648654918,
+        "SPACE5-1": 21.525000748473712
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "cooling_setpoint_c": 23.9,
+      "heating_setpoint_c": 22.2,
+      "source": "energyplus_runtime_api"
+    },
+    {
+      "sim_time": "07-18T05:45",
+      "outdoor_c": 25.175000000000004,
+      "zone_temps_c": {
+        "SPACE1-1": 21.978146092147917,
+        "SPACE2-1": 22.53311324367436,
+        "SPACE3-1": 22.719793301333745,
+        "SPACE4-1": 21.995423620443425,
+        "SPACE5-1": 21.52920568059075
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "cooling_setpoint_c": 23.9,
+      "heating_setpoint_c": 22.2,
+      "source": "energyplus_runtime_api"
+    },
+    {
+      "sim_time": "07-18T05:68",
+      "outdoor_c": 25.6,
+      "zone_temps_c": {
+        "SPACE1-1": 22.07487206751331,
+        "SPACE2-1": 22.93894085179636,
+        "SPACE3-1": 23.13283517425676,
+        "SPACE4-1": 22.110598848880894,
+        "SPACE5-1": 21.544405558417544
+      },
+      "occupancy": {
+        "SPACE1-1": 0.0,
+        "SPACE2-1": 0.0,
+        "SPACE3-1": 0.0,
+        "SPACE4-1": 0.0,
+        "SPACE5-1": 0.0
+      },
+      "cooling_setpoint_c": 23.9,
+      "heating_setpoint_c": 22.2,
+      "source": "energyplus_runtime_api"
+    }
+  ],
+  "observations_count": 192,
+  "stream_frame_count": 45,
+  "error_message": null
+}

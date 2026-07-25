@@ -2,6 +2,7 @@
   "schema_version": "1.0",
   "experiment": "baseline",
   "simulation_status": "completed",
+  "scenario": "default",
   "controller": "none",
   "identical_inputs": {
     "idf": "/workspace/building-models/sample-office/office_5zone.idf",
@@ -13,10 +14,10 @@
     "home": "/workspace/third_party/EnergyPlus",
     "version_probe": "EnergyPlus Runtime API via pyenergyplus",
     "return_code": 0,
-    "run_directory": "/workspace/results/baseline/energyplus_run",
-    "wall_time_seconds": 0.258
+    "run_directory": "results/baseline/energyplus_run",
+    "wall_time_seconds": 0.289
   },
-  "timestamp_utc": "2026-07-25T10:33:48.143408+00:00",
+  "timestamp_utc": "2026-07-25T10:45:43.607034+00:00",
   "mocked_components": [],
   "data_provenance": {
     "zone_temperature": "EnergyPlus variable Zone Air Temperature",
@@ -67,7 +68,19 @@
     }
   },
   "occupied_comfort_violation_hours": 0.0,
+  "occupied_comfort_degree_hours": 0.0,
   "occupied_hour_samples_proxy": 112,
+  "comfort_analysis": {
+    "occupied_comfort_violation_hours": 0.0,
+    "occupied_comfort_degree_hours": 0.0,
+    "comfort_band_c": {
+      "min": 21.0,
+      "max": 26.0,
+      "warning": 25.3
+    },
+    "events": [],
+    "severity_note": "degree-hours = sum of |T - band| over occupied hours with violations"
+  },
   "agent_actions": [],
   "rejected_actions": [],
   "fallback_actions": [],
@@ -77,7 +90,7 @@
     "fallback": 0,
     "total_decisions": 0
   },
-  "raw_csv": "/workspace/results/baseline/energyplus_run/eplusout.csv",
+  "raw_csv": "results/baseline/energyplus_run/eplusout.csv",
   "meters_joules": {
     "Electricity:Facility": 1517420416.4428413,
     "Electricity:HVAC": 49845418.39649233,
@@ -592,5 +605,6 @@
     }
   ],
   "observations_count": 192,
+  "stream_frame_count": 42,
   "error_message": null
 }

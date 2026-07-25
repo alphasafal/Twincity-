@@ -55,11 +55,12 @@ Interactive TwinPilot API/dashboard closed loop still defaults to the **mock twi
 
 ## Measured sample (this environment)
 
-See `results/comparison/comparison.json` after running the scripts. Example observed values:
+See `results/comparison/comparison.json` after running the scripts (comfort-zero tuned):
 
 - Baseline total energy ≈ **421.51 kWh**
-- Agent total energy ≈ **406.21 kWh** (≈ **−3.63%**)
-- HVAC energy ≈ **−12.2%**
-- Peak power ≈ **−2.18%**
-- Occupied comfort violation hours: baseline **0**, agent **1** (honest tradeoff)
-- Agent decisions: **48** approved / 0 rejected / 0 fallback (hourly over 2-day period)
+- Agent total energy ≈ **416.00 kWh** (**1.31%** reduction)
+- HVAC energy ≈ **4.98%** reduction
+- Peak power ≈ **1.47%** reduction
+- Occupied comfort violation hours: **0** / **0** degree-hours
+- Agent decisions: **48** approved / 0 rejected / 0 fallback
+- Dashboard default: `DATA_MODE=energyplus` (no ×1.12)

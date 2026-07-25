@@ -59,7 +59,11 @@ for key, label in [
     ("occupied_comfort_violation_hours", "Occupied comfort violation hours"),
 ]:
     d = cmp[key]
-    pct = "n/a" if d["percent_delta"] is None else f"{d['percent_delta']}%"
+    pct = d.get("percent_reduction")
+    if pct is None:
+        pct = "n/a" if d.get("percent_delta") is None else f"{d['percent_delta']}%"
+    else:
+        pct = f"{pct}%"
     md.append(
         f"| {label} | {d['baseline']} | {d['agent']} | {d['absolute_delta_agent_minus_baseline']} | {pct} |"
     )

@@ -798,27 +798,17 @@ class RuntimeHub:
     def _record_kpi_snapshot(self, state: dict[str, Any], baseline: bool) -> None:
         interval_h = 0.25
         energy = state["total_building_power_kw"] * interval_h
-        # Synthetic counterfactual baseline used ONLY for the mock-twin live demo KPI
-        # strip. Real EnergyPlus baseline/agent evidence lives under results/*.
-        # Factor 1.12 is an explicit demo heuristic — not a measured savings claim.
-        mock_baseline_factor = 1.12 if state.get("simulated", True) else 1.0
+        # No synthetic multipliers (×1.12 removed). Mock twin KPIs are live power
+        # integrals only; EnergyPlus evidence comes from results/* via DATA_MODE.
         if baseline or not self.kpi_history:
-            self.baseline_energy_kwh += energy * mock_baseline_factor
+            self.baseline_energy_kwh += energy
         self.twin_energy_kwh += energy
-        baseline_power = state["total_building_power_kw"] * mock_baseline_factor
-        self.cost_saved += max(0.0, (baseline_power - state["total_building_power_kw"]) * interval_h * state["electricity_tariff"])
-        self.carbon_avoided += max(
-            0.0,
-            (baseline_power - state["total_building_power_kw"])
-            * interval_h
-            * state["grid_carbon_intensity"]
-            / 1000.0,
-        )
-        if baseline_power > 0 and mock_baseline_factor != 1.0:
-            self.peak_reduction_pct = max(
-                self.peak_reduction_pct,
-                (baseline_power - state["total_building_power_kw"]) / baseline_power * 100,
-            )
+        baseline_power = state["total_building_power_kw"]
+        # Cost/carbon "saved" are zero unless a true counterfactual exists.
+        # Do not invent savings from a scaled baseline.
+        self.cost_saved = 0.0
+        self.carbon_avoided = 0.0
+        self.peak_reduction_pct = 0.0
         comfortable = 0
         occupied = 0
         for z in state["zones"].values():
@@ -842,11 +832,7 @@ class RuntimeHub:
                 "baseline_energy_kwh": round(self.baseline_energy_kwh, 2),
                 "twin_energy_kwh": round(self.twin_energy_kwh, 2),
                 "simulated": bool(state.get("simulated", True)),
-                "baseline_method": (
-                    "synthetic_factor_1_12_mock_demo"
-                    if mock_baseline_factor != 1.0
-                    else "same_as_measured_power_no_synthetic_counterfactual"
-                ),
+                "baseline_method": "no_synthetic_multiplier",
             }
         )
         self.kpi_history = self.kpi_history[-500:]

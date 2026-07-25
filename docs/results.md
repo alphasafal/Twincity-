@@ -2,40 +2,56 @@
 
 ## Methodology
 
-| Item | Value |
-|------|-------|
-| Building model | `building-models/sample-office/office_5zone.idf` |
-| Weather | `building-models/weather/chicago.epw` |
-| Occupancy schedule | `OCCUPY-1` (identical) |
-| Period | `DemoPeriod` Jul 15–16 |
-| Baseline controller | Fixed IDF thermostat schedules (no overrides) |
-| Agent controller | Hourly cooling-setpoint overrides via Runtime actuator, SafetyShield-gated |
-| Carbon | Estimate = total kWh × **0.417 kg/kWh** (documented factor) |
+Identical IDF, EPW, occupancy schedule family, and DemoPeriod within each scenario.
+Controller is the only intentional difference. **No ×1.12 synthetic multiplier.**
 
-## How to reproduce
+Reproduction:
 
 ```bash
-./scripts/run_baseline.sh
-./scripts/run_agent.sh
-./scripts/compare_results.sh
+./scripts/run_baseline.sh && ./scripts/run_agent.sh && ./scripts/compare_results.sh
 ```
 
-## Measured results (this audit environment)
+## Default scenario (comfort-zero tuned controller)
 
-From `results/comparison/comparison.json`:
+From `results/comparison/comparison.json` (post comfort hardening):
 
-| Metric | Baseline | Agent | Δ | % |
-|--------|----------|-------|---|---|
-| Total energy (kWh) | 421.5057 | 406.2102 | −15.2955 | **−3.63%** |
-| HVAC energy (kWh) | 13.8459 | 12.1566 | −1.6893 | **−12.20%** |
-| Peak power (kW) | 19.9325 | 19.4989 | −0.4336 | **−2.18%** |
-| Carbon estimate (kg) | 175.7679 | 169.3897 | −6.3782 | −3.63% |
-| Occupied comfort violation hours | 0.0 | 1.0 | +1.0 | — |
+| Metric | Baseline | Agent | Reduction % |
+|--------|----------|-------|-------------|
+| Total energy (kWh) | 421.5057 | 415.9999 | **1.31%** |
+| HVAC energy (kWh) | 13.8459 | 13.1570 | **4.98%** |
+| Peak power (kW) | 19.9325 | 19.6400 | **1.47%** |
+| Carbon estimate (kg) | 175.7679 | 173.5320 | 1.31% |
+| Occupied comfort violation hours | 0.0 | **0.0** | — |
+| Comfort degree-hours | 0.0 | **0.0** | — |
 
 Agent actions: **48** approved, **0** rejected, **0** fallback.
 
-## Interpretation
+### Comfort investigation (prior 1-hour violation)
 
-- Energy and HVAC reductions are **measured EnergyPlus meter deltas**, not invented marketing numbers.
-- A small comfort tradeoff (+1 occupied violation hour under the documented band) is reported honestly.
-- Dashboard mock KPI “savings %” is **not** this table — see `docs/audit/dashboard-data-lineage.md`.
+Previous agent policy produced a single occupied overshoot:
+
+| Field | Value |
+|-------|-------|
+| Timestamp | 07/15 10:00 |
+| Zones | SPACE2-1, SPACE3-1 |
+| Boundary | max 26.0 °C |
+| Actual | ~26.22–26.24 °C |
+| Max deviation | ~0.24 °C |
+| Duration | 1 hour |
+| Degree-hours | ~0.24 |
+
+Controller updates (warning threshold, pre-cooling, occupied priority, rate limit) removed this violation while retaining HVAC energy improvement.
+
+## LLM-via-MCP path
+
+`./scripts/run_llm_mcp_experiment.sh` → `results/llm_mcp/`
+
+- Stages logged in `stage_log.jsonl` (observation → MCP → LLM → SafetyShield → actuator)
+- Ollama proposals that violate limits are **rejected** (example run: 32 rejected / 16 approved)
+- `llm_bypass_possible: false`
+
+## Multi-scenario
+
+`./scripts/run_scenarios.sh` → `results/scenarios/consolidated_comparison.json`
+
+Scenarios: `normal_summer`, `high_occupancy`, `hot_peak`.

@@ -31,6 +31,7 @@ const NAV = [
   { href: "/zones", label: "Zones", icon: Map },
   { href: "/optimization", label: "Optimization", icon: Target },
   { href: "/simulator", label: "Simulator", icon: Activity },
+  { href: "/live-demo", label: "Live Demo", icon: Gauge },
   { href: "/decisions", label: "Decisions", icon: ClipboardList },
   { href: "/alerts", label: "Alerts", icon: AlertTriangle },
   { href: "/analytics", label: "Analytics", icon: ChartLine },

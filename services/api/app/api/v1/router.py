@@ -78,6 +78,14 @@ from app.schemas.common import (
     WhatIfRequest,
     ZoneOut,
 )
+from app.services.experiment_store import (
+    experiment_dashboard_payload,
+    load_actions,
+    load_comparison,
+    load_consolidated_scenarios,
+    load_stream_frames,
+    results_root,
+)
 from app.services.runtime import hub
 
 router = APIRouter(prefix="/api/v1")
@@ -214,20 +222,65 @@ def building_status(building_id: str, db: DbSession, user: CurrentUser) -> dict[
         .count()
     )
     state = hub.latest_state or {}
-    energy_saved_pct = 0.0
-    if hub.baseline_energy_kwh > 0:
-        energy_saved_pct = (
-            (hub.baseline_energy_kwh - hub.twin_energy_kwh) / hub.baseline_energy_kwh * 100
+    cfg = get_settings()
+    data_mode = (cfg.data_mode or "energyplus").strip().lower()
+    if cfg.hackathon_mode and data_mode not in {"energyplus", "mock"}:
+        data_mode = "energyplus"
+
+    experiment = experiment_dashboard_payload(cfg.experiment_scenario)
+    if data_mode == "energyplus" and experiment.get("available"):
+        reductions = experiment["reductions"]
+        agent = experiment["agent"]
+        baseline = experiment["baseline"]
+        energy_saved_pct = reductions.get("total_energy_pct") or 0.0
+        peak_reduction = reductions.get("peak_power_pct") or 0.0
+        carbon_avoided = round(
+            float(baseline["carbon_estimate_kg"]) - float(agent["carbon_estimate_kg"]), 2
         )
+        # Comfort compliance from measured violation hours over proxy occupied hours (~28)
+        occ_hours = 28.0
+        comfort_pct = round(
+            100.0
+            * max(0.0, occ_hours - float(agent["occupied_comfort_violation_hours"]))
+            / occ_hours,
+            1,
+        )
+        return {
+            "building": BuildingOut.model_validate(building).model_dump(),
+            "mode": building.current_mode,
+            "confidence": building.autonomy_confidence_json,
+            "live_total_load_kw": agent["peak_power_kw"],
+            "energy_saved_today_pct": round(float(energy_saved_pct), 2),
+            "cost_saved_today": None,
+            "carbon_avoided_today_kg": carbon_avoided,
+            "peak_demand_reduction_pct": round(float(peak_reduction), 2),
+            "comfort_compliance_pct": comfort_pct,
+            "healthy_sensors_pct": 100.0,
+            "active_alerts": open_alerts,
+            "pending_decisions": pending,
+            "state": state,
+            "service_health": hub.service_health,
+            "kpi_history": hub.kpi_history[-96:],
+            "simulated": False,
+            "data_mode": "energyplus",
+            "data_label": "energyplus_experiment_results",
+            "data_source_visible": "EnergyPlus experiment results (results/*)",
+            "synthetic_multiplier_applied": False,
+            "experiment": experiment,
+            "simulator_health": hub.simulator.health(),
+            "active_scenario": hub.active_scenario or cfg.experiment_scenario,
+        }
+
+    # Mock mode — no synthetic ×1.12 savings
     return {
         "building": BuildingOut.model_validate(building).model_dump(),
         "mode": building.current_mode,
         "confidence": building.autonomy_confidence_json,
         "live_total_load_kw": state.get("total_building_power_kw"),
-        "energy_saved_today_pct": round(energy_saved_pct, 2),
-        "cost_saved_today": round(hub.cost_saved, 2),
-        "carbon_avoided_today_kg": round(hub.carbon_avoided, 2),
-        "peak_demand_reduction_pct": round(hub.peak_reduction_pct, 2),
+        "energy_saved_today_pct": 0.0,
+        "cost_saved_today": 0.0,
+        "carbon_avoided_today_kg": 0.0,
+        "peak_demand_reduction_pct": 0.0,
         "comfort_compliance_pct": hub.comfort_compliance,
         "healthy_sensors_pct": round(
             100
@@ -240,14 +293,18 @@ def building_status(building_id: str, db: DbSession, user: CurrentUser) -> dict[
         "state": state,
         "service_health": hub.service_health,
         "kpi_history": hub.kpi_history[-96:],
-        "simulated": bool(state.get("simulated", True)),
-        "data_label": (
-            "mock_twin"
-            if state.get("simulated", True)
-            else "energyplus_or_measured"
-        ),
+        "simulated": True,
+        "data_mode": "mock",
+        "data_label": "mock_twin",
+        "data_source_visible": "Mock digital twin (no EnergyPlus meters)",
+        "synthetic_multiplier_applied": False,
+        "experiment": experiment if experiment.get("available") else None,
         "simulator_health": hub.simulator.health(),
         "active_scenario": hub.active_scenario,
+        "note": (
+            "Mock mode does not invent savings. Set DATA_MODE=energyplus for "
+            "measured baseline-vs-agent KPIs."
+        ),
     }
 
 
@@ -1056,27 +1113,202 @@ def alert_notes(alert_id: str, payload: AlertNoteRequest, db: DbSession, user: C
 
 @router.get("/buildings/{building_id}/analytics/summary")
 def analytics_summary(building_id: str, user: CurrentUser) -> dict[str, Any]:
-    energy_saved_pct = 0.0
-    if hub.baseline_energy_kwh > 0:
-        energy_saved_pct = (
-            (hub.baseline_energy_kwh - hub.twin_energy_kwh) / hub.baseline_energy_kwh * 100
-        )
+    cfg = get_settings()
+    data_mode = (cfg.data_mode or "energyplus").strip().lower()
+    experiment = experiment_dashboard_payload(cfg.experiment_scenario)
+    if data_mode == "energyplus" and experiment.get("available"):
+        return {
+            "building_id": building_id,
+            "data_mode": "energyplus",
+            "energy_usage_kwh": experiment["agent"]["total_energy_kwh"],
+            "baseline_energy_kwh": experiment["baseline"]["total_energy_kwh"],
+            "estimated_savings_pct": experiment["reductions"]["total_energy_pct"],
+            "hvac_energy_kwh": experiment["agent"]["hvac_energy_kwh"],
+            "baseline_hvac_energy_kwh": experiment["baseline"]["hvac_energy_kwh"],
+            "hvac_savings_pct": experiment["reductions"]["hvac_energy_pct"],
+            "cost_saved": None,
+            "carbon_avoided_kg": round(
+                experiment["baseline"]["carbon_estimate_kg"]
+                - experiment["agent"]["carbon_estimate_kg"],
+                2,
+            ),
+            "peak_demand_reduction_pct": experiment["reductions"]["peak_power_pct"],
+            "comfort_compliance_pct": None,
+            "occupied_comfort_violation_hours": {
+                "baseline": experiment["baseline"]["occupied_comfort_violation_hours"],
+                "agent": experiment["agent"]["occupied_comfort_violation_hours"],
+            },
+            "action_counts": experiment["action_counts"],
+            "carbon_accounting": experiment["carbon_accounting"],
+            "label": "energyplus_experiment_results",
+            "simulated": False,
+            "synthetic_multiplier_applied": False,
+            "experiment": experiment,
+        }
     return {
         "building_id": building_id,
+        "data_mode": "mock",
         "energy_usage_kwh": round(hub.twin_energy_kwh, 2),
         "baseline_energy_kwh": round(hub.baseline_energy_kwh, 2),
-        "estimated_savings_pct": round(energy_saved_pct, 2),
-        "cost_saved": round(hub.cost_saved, 2),
-        "carbon_avoided_kg": round(hub.carbon_avoided, 2),
-        "peak_demand_reduction_pct": round(hub.peak_reduction_pct, 2),
+        "estimated_savings_pct": 0.0,
+        "cost_saved": 0.0,
+        "carbon_avoided_kg": 0.0,
+        "peak_demand_reduction_pct": 0.0,
         "comfort_compliance_pct": hub.comfort_compliance,
-        "label": "mock_twin_demo_kpis"
-        if (hub.latest_state or {}).get("simulated", True)
-        else "energyplus_live_state",
-        "simulated": bool((hub.latest_state or {}).get("simulated", True)),
+        "label": "mock_twin_no_invented_savings",
+        "simulated": True,
+        "synthetic_multiplier_applied": False,
         "evidence_note": (
-            "For measured EnergyPlus baseline-vs-agent results see "
-            "results/comparison/comparison.json from ./scripts/compare_results.sh"
+            "Mock mode reports live twin integrals only — no synthetic savings. "
+            "Set DATA_MODE=energyplus for measured baseline-vs-agent results."
+        ),
+    }
+
+
+@router.get("/experiments/comparison")
+def experiments_comparison(
+    user: CurrentUser,
+    scenario: str = Query(default="default"),
+) -> dict[str, Any]:
+    payload = experiment_dashboard_payload(scenario)
+    if not payload.get("available"):
+        raise HTTPException(
+            404,
+            f"Experiment results unavailable under {results_root()} "
+            f"(missing: {payload.get('missing_artifacts')})",
+        )
+    return payload
+
+
+@router.get("/experiments/stream")
+def experiments_stream(
+    user: CurrentUser,
+    scenario: str = Query(default="default"),
+    limit: int = Query(default=500, ge=1, le=5000),
+) -> dict[str, Any]:
+    frames = load_stream_frames(scenario)[:limit]
+    return {
+        "scenario": scenario,
+        "frame_count": len(frames),
+        "frames": frames,
+        "data_mode": "energyplus",
+        "note": "Accelerated demo stream from results/*/stream.json",
+    }
+
+
+@router.get("/experiments/actions")
+def experiments_actions(
+    user: CurrentUser,
+    scenario: str = Query(default="default"),
+) -> dict[str, Any]:
+    actions = load_actions(scenario)
+    return {"scenario": scenario, "count": len(actions), "actions": actions}
+
+
+@router.get("/experiments/scenarios")
+def experiments_scenarios(user: CurrentUser) -> dict[str, Any]:
+    consolidated = load_consolidated_scenarios()
+    return {
+        "consolidated": consolidated,
+        "default": experiment_dashboard_payload("default"),
+    }
+
+
+@router.post("/experiments/safety-demo")
+def experiments_safety_demo(user: CurrentUser) -> dict[str, Any]:
+    """Deterministic unsafe-proposal demonstration (does not alter efficiency results)."""
+    from twinpilot_simulator.ep_experiment import SafetyLimits, validate_setpoint_action
+
+    unsafe = 35.0
+    current = 23.9
+    ok, reasons, disposition = validate_setpoint_action(
+        proposed=unsafe,
+        current=current,
+        heating_setpoint=22.2,
+        limits=SafetyLimits(),
+        confidence=0.99,
+        sensors_healthy=True,
+        data_age_seconds=0.0,
+        manual_override=False,
+        llm_timed_out=False,
+        mcp_failed=False,
+    )
+    result = {
+        "demo": "unsafe_setpoint_rejection",
+        "unsafe_proposal_c": unsafe,
+        "current_safe_setpoint_c": current,
+        "approved": ok,
+        "disposition": disposition,
+        "rejection_reasons": reasons,
+        "fallback_action": f"retain_safe_setpoint={current}",
+        "continued_operation": True,
+        "contaminates_efficiency_experiment": False,
+        "log_line": (
+            f"UNSAFE_PROPOSAL rejected proposed={unsafe} retained={current} "
+            f"reasons={reasons} disposition={disposition}"
+        ),
+    }
+    # Also exercise SafetyShield model used by API apply path
+    shield_result = shield.validate(
+        ProposedAction(
+            action_type="cooling_setpoint",
+            current_value=current,
+            proposed_value=unsafe,
+            duration_minutes=60,
+            paired_heating_setpoint=22.2,
+        ),
+        ValidationContext(
+            mode=OperatingMode.AUTONOMOUS,
+            confidence=0.99,
+        ),
+    )
+    result["safety_shield_valid"] = shield_result.valid
+    result["safety_shield_blocking"] = shield_result.blocking_reasons
+    return result
+
+
+@router.post("/experiments/llm-fallback-demo")
+def experiments_llm_fallback_demo(user: CurrentUser) -> dict[str, Any]:
+    """Show LLM-unavailable path activating deterministic fallback (no actuation bypass)."""
+    from twinpilot_simulator.ep_experiment import (
+        SafetyLimits,
+        propose_agent_cooling_setpoint,
+        validate_setpoint_action,
+    )
+
+    limits = SafetyLimits()
+    proposed, reason, confidence = propose_agent_cooling_setpoint(
+        outdoor_c=30.0,
+        zone_temps={"SPACE1-1": 24.0, "SPACE2-1": 24.1},
+        occupancy={"SPACE1-1": 2.0, "SPACE2-1": 1.0},
+        current_cooling_setpoint=23.9,
+        limits=limits,
+        hour=10,
+    )
+    ok, reasons, disposition = validate_setpoint_action(
+        proposed=proposed,
+        current=23.9,
+        heating_setpoint=22.2,
+        limits=limits,
+        confidence=confidence,
+        sensors_healthy=True,
+        data_age_seconds=0.0,
+        manual_override=False,
+        llm_timed_out=True,
+        mcp_failed=False,
+    )
+    return {
+        "demo": "llm_unavailable_deterministic_fallback",
+        "llm_status": "unavailable_timeout",
+        "deterministic_proposal_c": proposed,
+        "proposal_reason": reason,
+        "safety_disposition": disposition,
+        "blocking_reasons": reasons,
+        "approved_for_actuation": ok,
+        "fallback_action": "hold_last_safe_setpoint=23.9",
+        "log_line": (
+            f"LLM_TIMEOUT -> deterministic proposal={proposed} "
+            f"disposition={disposition} reasons={reasons}"
         ),
     }
 

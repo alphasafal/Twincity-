@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.1",
+  "timestamp_utc": "2026-07-25T10:45:37.458001+00:00",
+  "scenario": "hot_peak",
+  "inputs_identical": true,
+  "baseline_status": "completed",
+  "agent_status": "completed",
+  "total_energy_kwh": {
+    "baseline": 432.904,
+    "agent": 427.389,
+    "absolute_delta_agent_minus_baseline": -5.515,
+    "percent_reduction": 1.274,
+    "percent_delta": -1.274
+  },
+  "hvac_energy_kwh": {
+    "baseline": 14.1741,
+    "agent": 13.4549,
+    "absolute_delta_agent_minus_baseline": -0.7192,
+    "percent_reduction": 5.074,
+    "percent_delta": -5.074
+  },
+  "peak_power_kw": {
+    "baseline": 19.8272,
+    "agent": 19.6127,
+    "absolute_delta_agent_minus_baseline": -0.2145,
+    "percent_reduction": 1.0818,
+    "percent_delta": -1.0818
+  },
+  "carbon_estimate_kg": {
+    "baseline": 180.521,
+    "agent": 178.2212,
+    "absolute_delta_agent_minus_baseline": -2.2998,
+    "percent_reduction": 1.274,
+    "percent_delta": -1.274
+  },
+  "occupied_comfort_violation_hours": {
+    "baseline": 0.0,
+    "agent": 0.0,
+    "absolute_delta_agent_minus_baseline": 0.0,
+    "percent_reduction": null,
+    "percent_delta": null
+  },
+  "occupied_comfort_degree_hours": {
+    "baseline": 0.0,
+    "agent": 0.0,
+    "absolute_delta_agent_minus_baseline": 0.0,
+    "percent_reduction": null,
+    "percent_delta": null
+  },
+  "agent_action_counts": {
+    "approved": 48,
+    "rejected": 0,
+    "fallback": 0,
+    "total_decisions": 48
+  },
+  "carbon_accounting": {
+    "label": "estimate",
+    "formula": "total_energy_kwh * emission_factor_kg_per_kwh",
+    "emission_factor_kg_per_kwh": 0.417,
+    "units": "kg CO2e (estimate)"
+  },
+  "notes": [
+    "percent_reduction = (baseline - agent) / baseline * 100 (positive means agent used less).",
+    "Carbon values are estimates using a documented kg/kWh factor.",
+    "Only controller differs: baseline has no setpoint overrides; agent uses SafetyShield-gated overrides.",
+    "Synthetic multipliers (e.g. \u00d71.12) are not used."
+  ],
+  "description": "Hotter mid-summer peak window"
+}
