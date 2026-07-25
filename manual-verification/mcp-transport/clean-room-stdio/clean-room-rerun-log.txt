@@ -1,0 +1,1176 @@
+=== RERUN_IN_CLONE 2026-07-25T11:26:31Z cwd=/tmp/ecolooop-stdio-cleanroom-20260725T112256Z ===
+==> TwinPilot / Eco-Loop setup
+Created .env from .env.example
+==> TwinPilot setup
+Creating Python virtualenv at .venv
+Requirement already satisfied: pip in ./.venv/lib/python3.12/site-packages (24.0)
+Collecting pip
+  Using cached pip-26.1.2-py3-none-any.whl.metadata (4.6 kB)
+Using cached pip-26.1.2-py3-none-any.whl (1.8 MB)
+Installing collected packages: pip
+  Attempting uninstall: pip
+    Found existing installation: pip 24.0
+    Uninstalling pip-24.0:
+      Successfully uninstalled pip-24.0
+Successfully installed pip-26.1.2
+Installing Python packages (optimizer, simulator, agent, api, mcp-server)
+Obtaining file:///tmp/ecolooop-stdio-cleanroom-20260725T112256Z/services/optimizer
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Collecting pydantic>=2.10 (from twinpilot-optimizer==0.1.0)
+  Using cached pydantic-2.13.4-py3-none-any.whl.metadata (109 kB)
+Collecting numpy>=2.0 (from twinpilot-optimizer==0.1.0)
+  Using cached numpy-2.5.1-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (6.6 kB)
+Collecting annotated-types>=0.6.0 (from pydantic>=2.10->twinpilot-optimizer==0.1.0)
+  Using cached annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+Collecting pydantic-core==2.46.4 (from pydantic>=2.10->twinpilot-optimizer==0.1.0)
+  Using cached pydantic_core-2.46.4-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.6 kB)
+Collecting typing-extensions>=4.14.1 (from pydantic>=2.10->twinpilot-optimizer==0.1.0)
+  Using cached typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting typing-inspection>=0.4.2 (from pydantic>=2.10->twinpilot-optimizer==0.1.0)
+  Using cached typing_inspection-0.4.2-py3-none-any.whl.metadata (2.6 kB)
+Using cached numpy-2.5.1-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.7 MB)
+Using cached pydantic-2.13.4-py3-none-any.whl (472 kB)
+Using cached pydantic_core-2.46.4-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+Using cached annotated_types-0.8.0-py3-none-any.whl (13 kB)
+Using cached typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+Using cached typing_inspection-0.4.2-py3-none-any.whl (14 kB)
+Building wheels for collected packages: twinpilot-optimizer
+  Building editable for twinpilot-optimizer (pyproject.toml): started
+  Building editable for twinpilot-optimizer (pyproject.toml): finished with status 'done'
+  Created wheel for twinpilot-optimizer: filename=twinpilot_optimizer-0.1.0-0.editable-py3-none-any.whl size=2985 sha256=0c961a8186cb6b1b65c7f645a24c2f17a6ecafcf4b7ab3ad15f4a1629ae58ff0
+  Stored in directory: /tmp/pip-ephem-wheel-cache-wqxsbjy9/wheels/dd/2d/9e/24496cf09b76f478e8a8303523ce8097af66dd306084c91f08
+Successfully built twinpilot-optimizer
+Installing collected packages: typing-extensions, numpy, annotated-types, typing-inspection, pydantic-core, pydantic, twinpilot-optimizer
+  Attempting uninstall: twinpilot-optimizer
+    Found existing installation: twinpilot-optimizer 0.1.0
+    Not uninstalling twinpilot-optimizer at /workspace/services/optimizer, outside environment /tmp/ecolooop-stdio-cleanroom-20260725T112256Z/.venv
+    Can't uninstall 'twinpilot-optimizer'. No files were found to uninstall.
+
+
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+twinpilot-mcp 0.1.0 requires httpx>=0.28, which is not installed.
+twinpilot-mcp 0.1.0 requires mcp<2,>=1.6, which is not installed.
+Successfully installed annotated-types-0.8.0 numpy-2.5.1 pydantic-2.13.4 pydantic-core-2.46.4 twinpilot-optimizer-0.1.0 typing-extensions-4.16.0 typing-inspection-0.4.2
+Obtaining file:///tmp/ecolooop-stdio-cleanroom-20260725T112256Z/services/simulator
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Requirement already satisfied: pydantic>=2.10 in ./.venv/lib/python3.12/site-packages (from twinpilot-simulator==0.1.0) (2.13.4)
+Requirement already satisfied: numpy>=2.0 in ./.venv/lib/python3.12/site-packages (from twinpilot-simulator==0.1.0) (2.5.1)
+Requirement already satisfied: annotated-types>=0.6.0 in ./.venv/lib/python3.12/site-packages (from pydantic>=2.10->twinpilot-simulator==0.1.0) (0.8.0)
+Requirement already satisfied: pydantic-core==2.46.4 in ./.venv/lib/python3.12/site-packages (from pydantic>=2.10->twinpilot-simulator==0.1.0) (2.46.4)
+Requirement already satisfied: typing-extensions>=4.14.1 in ./.venv/lib/python3.12/site-packages (from pydantic>=2.10->twinpilot-simulator==0.1.0) (4.16.0)
+Requirement already satisfied: typing-inspection>=0.4.2 in ./.venv/lib/python3.12/site-packages (from pydantic>=2.10->twinpilot-simulator==0.1.0) (0.4.2)
+Building wheels for collected packages: twinpilot-simulator
+  Building editable for twinpilot-simulator (pyproject.toml): started
+  Building editable for twinpilot-simulator (pyproject.toml): finished with status 'done'
+  Created wheel for twinpilot-simulator: filename=twinpilot_simulator-0.1.0-0.editable-py3-none-any.whl size=2986 sha256=d3374a717412d07feedb8e52bffd0cd853a69f080f4154ab5d180af8a249d4d9
+  Stored in directory: /tmp/pip-ephem-wheel-cache-6pafmt21/wheels/22/bd/f6/801245714cdc3663b2835541941926dee275a6f3dad299392f
+Successfully built twinpilot-simulator
+Installing collected packages: twinpilot-simulator
+  Attempting uninstall: twinpilot-simulator
+    Found existing installation: twinpilot-simulator 0.1.0
+    Not uninstalling twinpilot-simulator at /workspace/services/simulator, outside environment /tmp/ecolooop-stdio-cleanroom-20260725T112256Z/.venv
+    Can't uninstall 'twinpilot-simulator'. No files were found to uninstall.
+Successfully installed twinpilot-simulator-0.1.0
+Obtaining file:///tmp/ecolooop-stdio-cleanroom-20260725T112256Z/services/agent
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Requirement already satisfied: pydantic>=2.10 in ./.venv/lib/python3.12/site-packages (from twinpilot-agent==0.1.0) (2.13.4)
+Collecting httpx>=0.28 (from twinpilot-agent==0.1.0)
+  Using cached httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+Collecting anyio (from httpx>=0.28->twinpilot-agent==0.1.0)
+  Using cached anyio-4.14.2-py3-none-any.whl.metadata (4.6 kB)
+Collecting certifi (from httpx>=0.28->twinpilot-agent==0.1.0)
+  Using cached certifi-2026.7.22-py3-none-any.whl.metadata (2.5 kB)
+Collecting httpcore==1.* (from httpx>=0.28->twinpilot-agent==0.1.0)
+  Using cached httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+Collecting idna (from httpx>=0.28->twinpilot-agent==0.1.0)
+  Using cached idna-3.18-py3-none-any.whl.metadata (6.1 kB)
+Collecting h11>=0.16 (from httpcore==1.*->httpx>=0.28->twinpilot-agent==0.1.0)
+  Using cached h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+Requirement already satisfied: annotated-types>=0.6.0 in ./.venv/lib/python3.12/site-packages (from pydantic>=2.10->twinpilot-agent==0.1.0) (0.8.0)
+Requirement already satisfied: pydantic-core==2.46.4 in ./.venv/lib/python3.12/site-packages (from pydantic>=2.10->twinpilot-agent==0.1.0) (2.46.4)
+Requirement already satisfied: typing-extensions>=4.14.1 in ./.venv/lib/python3.12/site-packages (from pydantic>=2.10->twinpilot-agent==0.1.0) (4.16.0)
+Requirement already satisfied: typing-inspection>=0.4.2 in ./.venv/lib/python3.12/site-packages (from pydantic>=2.10->twinpilot-agent==0.1.0) (0.4.2)
+Using cached httpx-0.28.1-py3-none-any.whl (73 kB)
+Using cached httpcore-1.0.9-py3-none-any.whl (78 kB)
+Using cached h11-0.16.0-py3-none-any.whl (37 kB)
+Using cached anyio-4.14.2-py3-none-any.whl (125 kB)
+Using cached idna-3.18-py3-none-any.whl (65 kB)
+Using cached certifi-2026.7.22-py3-none-any.whl (136 kB)
+Building wheels for collected packages: twinpilot-agent
+  Building editable for twinpilot-agent (pyproject.toml): started
+  Building editable for twinpilot-agent (pyproject.toml): finished with status 'done'
+  Created wheel for twinpilot-agent: filename=twinpilot_agent-0.1.0-0.editable-py3-none-any.whl size=2870 sha256=aab8d8f88b794d74960a5bfb4c1e5e96eb3698e443383f0d01f9bb545c227d01
+  Stored in directory: /tmp/pip-ephem-wheel-cache-rup2yb55/wheels/88/35/d1/bee5e299bdeab0af33f43edab7e2c967429ad605cf18115ae5
+Successfully built twinpilot-agent
+Installing collected packages: idna, h11, certifi, httpcore, anyio, httpx, twinpilot-agent
+
+
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+twinpilot-mcp 0.1.0 requires mcp<2,>=1.6, which is not installed.
+Successfully installed anyio-4.14.2 certifi-2026.7.22 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 idna-3.18 twinpilot-agent-0.1.0
+Obtaining file:///tmp/ecolooop-stdio-cleanroom-20260725T112256Z/services/api
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Collecting fastapi>=0.115 (from twinpilot-api==0.1.0)
+  Using cached fastapi-0.140.0-py3-none-any.whl.metadata (27 kB)
+Collecting uvicorn>=0.34 (from uvicorn[standard]>=0.34->twinpilot-api==0.1.0)
+  Using cached uvicorn-0.51.0-py3-none-any.whl.metadata (6.6 kB)
+Collecting sqlalchemy>=2.0 (from twinpilot-api==0.1.0)
+  Using cached sqlalchemy-2.0.51-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (9.5 kB)
+Collecting alembic>=1.14 (from twinpilot-api==0.1.0)
+  Using cached alembic-1.18.5-py3-none-any.whl.metadata (7.2 kB)
+Requirement already satisfied: pydantic>=2.10 in ./.venv/lib/python3.12/site-packages (from twinpilot-api==0.1.0) (2.13.4)
+Collecting pydantic-settings>=2.7 (from twinpilot-api==0.1.0)
+  Using cached pydantic_settings-2.14.2-py3-none-any.whl.metadata (3.4 kB)
+Collecting python-jose>=3.3 (from python-jose[cryptography]>=3.3->twinpilot-api==0.1.0)
+  Using cached python_jose-3.5.0-py2.py3-none-any.whl.metadata (5.5 kB)
+Collecting passlib>=1.7 (from passlib[bcrypt]>=1.7->twinpilot-api==0.1.0)
+  Using cached passlib-1.7.4-py2.py3-none-any.whl.metadata (1.7 kB)
+Collecting bcrypt<4.1,>=4.0 (from twinpilot-api==0.1.0)
+  Using cached bcrypt-4.0.1-cp36-abi3-manylinux_2_28_x86_64.whl.metadata (9.0 kB)
+Collecting python-multipart>=0.0.20 (from twinpilot-api==0.1.0)
+  Using cached python_multipart-0.0.32-py3-none-any.whl.metadata (2.1 kB)
+Collecting pandas>=2.2 (from twinpilot-api==0.1.0)
+  Using cached pandas-3.0.5-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (79 kB)
+Requirement already satisfied: numpy>=2.0 in ./.venv/lib/python3.12/site-packages (from twinpilot-api==0.1.0) (2.5.1)
+Collecting scikit-learn>=1.5 (from twinpilot-api==0.1.0)
+  Using cached scikit_learn-1.9.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (11 kB)
+Requirement already satisfied: httpx>=0.28 in ./.venv/lib/python3.12/site-packages (from twinpilot-api==0.1.0) (0.28.1)
+Collecting email-validator>=2.2 (from twinpilot-api==0.1.0)
+  Using cached email_validator-2.3.0-py3-none-any.whl.metadata (26 kB)
+Collecting Mako (from alembic>=1.14->twinpilot-api==0.1.0)
+  Using cached mako-1.3.12-py3-none-any.whl.metadata (2.9 kB)
+Requirement already satisfied: typing-extensions>=4.12 in ./.venv/lib/python3.12/site-packages (from alembic>=1.14->twinpilot-api==0.1.0) (4.16.0)
+Collecting dnspython>=2.0.0 (from email-validator>=2.2->twinpilot-api==0.1.0)
+  Using cached dnspython-2.8.0-py3-none-any.whl.metadata (5.7 kB)
+Requirement already satisfied: idna>=2.0.0 in ./.venv/lib/python3.12/site-packages (from email-validator>=2.2->twinpilot-api==0.1.0) (3.18)
+Collecting starlette>=0.46.0 (from fastapi>=0.115->twinpilot-api==0.1.0)
+  Using cached starlette-1.3.1-py3-none-any.whl.metadata (6.4 kB)
+Requirement already satisfied: typing-inspection>=0.4.2 in ./.venv/lib/python3.12/site-packages (from fastapi>=0.115->twinpilot-api==0.1.0) (0.4.2)
+Collecting annotated-doc>=0.0.2 (from fastapi>=0.115->twinpilot-api==0.1.0)
+  Using cached annotated_doc-0.0.4-py3-none-any.whl.metadata (6.6 kB)
+Requirement already satisfied: anyio in ./.venv/lib/python3.12/site-packages (from httpx>=0.28->twinpilot-api==0.1.0) (4.14.2)
+Requirement already satisfied: certifi in ./.venv/lib/python3.12/site-packages (from httpx>=0.28->twinpilot-api==0.1.0) (2026.7.22)
+Requirement already satisfied: httpcore==1.* in ./.venv/lib/python3.12/site-packages (from httpx>=0.28->twinpilot-api==0.1.0) (1.0.9)
+Requirement already satisfied: h11>=0.16 in ./.venv/lib/python3.12/site-packages (from httpcore==1.*->httpx>=0.28->twinpilot-api==0.1.0) (0.16.0)
+Collecting python-dateutil>=2.8.2 (from pandas>=2.2->twinpilot-api==0.1.0)
+  Using cached python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+Requirement already satisfied: annotated-types>=0.6.0 in ./.venv/lib/python3.12/site-packages (from pydantic>=2.10->twinpilot-api==0.1.0) (0.8.0)
+Requirement already satisfied: pydantic-core==2.46.4 in ./.venv/lib/python3.12/site-packages (from pydantic>=2.10->twinpilot-api==0.1.0) (2.46.4)
+Collecting python-dotenv>=0.21.0 (from pydantic-settings>=2.7->twinpilot-api==0.1.0)
+  Using cached python_dotenv-1.2.2-py3-none-any.whl.metadata (27 kB)
+Collecting six>=1.5 (from python-dateutil>=2.8.2->pandas>=2.2->twinpilot-api==0.1.0)
+  Using cached six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+Collecting ecdsa!=0.15 (from python-jose>=3.3->python-jose[cryptography]>=3.3->twinpilot-api==0.1.0)
+  Using cached ecdsa-0.19.2-py2.py3-none-any.whl.metadata (29 kB)
+Collecting rsa!=4.1.1,!=4.4,<5.0,>=4.0 (from python-jose>=3.3->python-jose[cryptography]>=3.3->twinpilot-api==0.1.0)
+  Using cached rsa-4.9.1-py3-none-any.whl.metadata (5.6 kB)
+Collecting pyasn1>=0.5.0 (from python-jose>=3.3->python-jose[cryptography]>=3.3->twinpilot-api==0.1.0)
+  Using cached pyasn1-0.6.4-py3-none-any.whl.metadata (8.4 kB)
+Collecting cryptography>=3.4.0 (from python-jose[cryptography]>=3.3->twinpilot-api==0.1.0)
+  Using cached cryptography-49.0.0-cp311-abi3-manylinux_2_34_x86_64.whl.metadata (4.3 kB)
+Collecting cffi>=2.0.0 (from cryptography>=3.4.0->python-jose[cryptography]>=3.3->twinpilot-api==0.1.0)
+  Using cached cffi-2.1.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.5 kB)
+Collecting pycparser (from cffi>=2.0.0->cryptography>=3.4.0->python-jose[cryptography]>=3.3->twinpilot-api==0.1.0)
+  Using cached pycparser-3.0-py3-none-any.whl.metadata (8.2 kB)
+Collecting scipy>=1.10.0 (from scikit-learn>=1.5->twinpilot-api==0.1.0)
+  Using cached scipy-1.18.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (62 kB)
+Collecting joblib>=1.4.0 (from scikit-learn>=1.5->twinpilot-api==0.1.0)
+  Using cached joblib-1.5.3-py3-none-any.whl.metadata (5.5 kB)
+Collecting narwhals>=2.0.1 (from scikit-learn>=1.5->twinpilot-api==0.1.0)
+  Using cached narwhals-2.24.0-py3-none-any.whl.metadata (15 kB)
+Collecting threadpoolctl>=3.5.0 (from scikit-learn>=1.5->twinpilot-api==0.1.0)
+  Using cached threadpoolctl-3.6.0-py3-none-any.whl.metadata (13 kB)
+Collecting greenlet>=1 (from sqlalchemy>=2.0->twinpilot-api==0.1.0)
+  Using cached greenlet-3.5.4-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (3.8 kB)
+Collecting click>=7.0 (from uvicorn>=0.34->uvicorn[standard]>=0.34->twinpilot-api==0.1.0)
+  Using cached click-8.4.2-py3-none-any.whl.metadata (2.6 kB)
+Collecting httptools>=0.8.0 (from uvicorn[standard]>=0.34->twinpilot-api==0.1.0)
+  Using cached httptools-0.8.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (3.5 kB)
+Collecting pyyaml>=5.1 (from uvicorn[standard]>=0.34->twinpilot-api==0.1.0)
+  Using cached pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+Collecting uvloop>=0.15.1 (from uvicorn[standard]>=0.34->twinpilot-api==0.1.0)
+  Using cached uvloop-0.22.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (4.9 kB)
+Collecting watchfiles>=0.20 (from uvicorn[standard]>=0.34->twinpilot-api==0.1.0)
+  Using cached watchfiles-1.2.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.9 kB)
+Collecting websockets>=13.0 (from uvicorn[standard]>=0.34->twinpilot-api==0.1.0)
+  Using cached websockets-16.1.1-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (6.8 kB)
+Collecting MarkupSafe>=0.9.2 (from Mako->alembic>=1.14->twinpilot-api==0.1.0)
+  Using cached markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+Using cached bcrypt-4.0.1-cp36-abi3-manylinux_2_28_x86_64.whl (593 kB)
+Using cached alembic-1.18.5-py3-none-any.whl (264 kB)
+Using cached email_validator-2.3.0-py3-none-any.whl (35 kB)
+Using cached dnspython-2.8.0-py3-none-any.whl (331 kB)
+Using cached fastapi-0.140.0-py3-none-any.whl (130 kB)
+Using cached annotated_doc-0.0.4-py3-none-any.whl (5.3 kB)
+Using cached pandas-3.0.5-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (11.0 MB)
+Using cached passlib-1.7.4-py2.py3-none-any.whl (525 kB)
+Using cached pydantic_settings-2.14.2-py3-none-any.whl (61 kB)
+Using cached python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+Using cached python_dotenv-1.2.2-py3-none-any.whl (22 kB)
+Using cached python_jose-3.5.0-py2.py3-none-any.whl (34 kB)
+Using cached rsa-4.9.1-py3-none-any.whl (34 kB)
+Using cached ecdsa-0.19.2-py2.py3-none-any.whl (150 kB)
+Using cached pyasn1-0.6.4-py3-none-any.whl (84 kB)
+Using cached cryptography-49.0.0-cp311-abi3-manylinux_2_34_x86_64.whl (4.7 MB)
+Using cached cffi-2.1.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (221 kB)
+Using cached python_multipart-0.0.32-py3-none-any.whl (30 kB)
+Using cached scikit_learn-1.9.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (9.1 MB)
+Using cached joblib-1.5.3-py3-none-any.whl (309 kB)
+Using cached narwhals-2.24.0-py3-none-any.whl (461 kB)
+Using cached scipy-1.18.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (35.3 MB)
+Using cached six-1.17.0-py2.py3-none-any.whl (11 kB)
+Using cached sqlalchemy-2.0.51-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (3.4 MB)
+Using cached greenlet-3.5.4-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (621 kB)
+Using cached starlette-1.3.1-py3-none-any.whl (73 kB)
+Using cached threadpoolctl-3.6.0-py3-none-any.whl (18 kB)
+Using cached uvicorn-0.51.0-py3-none-any.whl (73 kB)
+Using cached click-8.4.2-py3-none-any.whl (119 kB)
+Using cached httptools-0.8.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (523 kB)
+Using cached pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)
+Using cached uvloop-0.22.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (4.4 MB)
+Using cached watchfiles-1.2.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (456 kB)
+Using cached websockets-16.1.1-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (187 kB)
+Using cached mako-1.3.12-py3-none-any.whl (78 kB)
+Using cached markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+Using cached pycparser-3.0-py3-none-any.whl (48 kB)
+Building wheels for collected packages: twinpilot-api
+  Building editable for twinpilot-api (pyproject.toml): started
+  Building editable for twinpilot-api (pyproject.toml): finished with status 'done'
+  Created wheel for twinpilot-api: filename=twinpilot_api-0.1.0-0.editable-py3-none-any.whl size=3038 sha256=354365c073137b3b956689b774b7b3bf322bf767ee7237d1277e17e77d3f16a3
+  Stored in directory: /tmp/pip-ephem-wheel-cache-z9zzb5vz/wheels/08/21/6f/55455696040f63bdd11cc3e66c3e26daee5fb5a2441838ffc9
+Successfully built twinpilot-api
+Installing collected packages: passlib, websockets, uvloop, threadpoolctl, six, scipy, pyyaml, python-multipart, python-dotenv, pycparser, pyasn1, narwhals, MarkupSafe, joblib, httptools, greenlet, dnspython, click, bcrypt, annotated-doc, watchfiles, uvicorn, starlette, sqlalchemy, scikit-learn, rsa, python-dateutil, Mako, email-validator, ecdsa, cffi, python-jose, pydantic-settings, pandas, fastapi, cryptography, alembic, twinpilot-api
+
+
+Successfully installed Mako-1.3.12 MarkupSafe-3.0.3 alembic-1.18.5 annotated-doc-0.0.4 bcrypt-4.0.1 cffi-2.1.0 click-8.4.2 cryptography-49.0.0 dnspython-2.8.0 ecdsa-0.19.2 email-validator-2.3.0 fastapi-0.140.0 greenlet-3.5.4 httptools-0.8.0 joblib-1.5.3 narwhals-2.24.0 pandas-3.0.5 passlib-1.7.4 pyasn1-0.6.4 pycparser-3.0 pydantic-settings-2.14.2 python-dateutil-2.9.0.post0 python-dotenv-1.2.2 python-jose-3.5.0 python-multipart-0.0.32 pyyaml-6.0.3 rsa-4.9.1 scikit-learn-1.9.0 scipy-1.18.0 six-1.17.0 sqlalchemy-2.0.51 starlette-1.3.1 threadpoolctl-3.6.0 twinpilot-api-0.1.0 uvicorn-0.51.0 uvloop-0.22.1 watchfiles-1.2.0 websockets-16.1.1
+Obtaining file:///tmp/ecolooop-stdio-cleanroom-20260725T112256Z/services/api
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Requirement already satisfied: fastapi>=0.115 in ./.venv/lib/python3.12/site-packages (from twinpilot-api==0.1.0) (0.140.0)
+Requirement already satisfied: uvicorn>=0.34 in ./.venv/lib/python3.12/site-packages (from uvicorn[standard]>=0.34->twinpilot-api==0.1.0) (0.51.0)
+Requirement already satisfied: sqlalchemy>=2.0 in ./.venv/lib/python3.12/site-packages (from twinpilot-api==0.1.0) (2.0.51)
+Requirement already satisfied: alembic>=1.14 in ./.venv/lib/python3.12/site-packages (from twinpilot-api==0.1.0) (1.18.5)
+Requirement already satisfied: pydantic>=2.10 in ./.venv/lib/python3.12/site-packages (from twinpilot-api==0.1.0) (2.13.4)
+Requirement already satisfied: pydantic-settings>=2.7 in ./.venv/lib/python3.12/site-packages (from twinpilot-api==0.1.0) (2.14.2)
+Requirement already satisfied: python-jose>=3.3 in ./.venv/lib/python3.12/site-packages (from python-jose[cryptography]>=3.3->twinpilot-api==0.1.0) (3.5.0)
+Requirement already satisfied: passlib>=1.7 in ./.venv/lib/python3.12/site-packages (from passlib[bcrypt]>=1.7->twinpilot-api==0.1.0) (1.7.4)
+Requirement already satisfied: bcrypt<4.1,>=4.0 in ./.venv/lib/python3.12/site-packages (from twinpilot-api==0.1.0) (4.0.1)
+Requirement already satisfied: python-multipart>=0.0.20 in ./.venv/lib/python3.12/site-packages (from twinpilot-api==0.1.0) (0.0.32)
+Requirement already satisfied: pandas>=2.2 in ./.venv/lib/python3.12/site-packages (from twinpilot-api==0.1.0) (3.0.5)
+Requirement already satisfied: numpy>=2.0 in ./.venv/lib/python3.12/site-packages (from twinpilot-api==0.1.0) (2.5.1)
+Requirement already satisfied: scikit-learn>=1.5 in ./.venv/lib/python3.12/site-packages (from twinpilot-api==0.1.0) (1.9.0)
+Requirement already satisfied: httpx>=0.28 in ./.venv/lib/python3.12/site-packages (from twinpilot-api==0.1.0) (0.28.1)
+Requirement already satisfied: email-validator>=2.2 in ./.venv/lib/python3.12/site-packages (from twinpilot-api==0.1.0) (2.3.0)
+Collecting pytest>=8.0 (from twinpilot-api==0.1.0)
+  Using cached pytest-9.1.1-py3-none-any.whl.metadata (7.6 kB)
+Collecting pytest-asyncio>=0.25 (from twinpilot-api==0.1.0)
+  Using cached pytest_asyncio-1.4.0-py3-none-any.whl.metadata (4.1 kB)
+Collecting ruff>=0.9 (from twinpilot-api==0.1.0)
+  Using cached ruff-0.16.0-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (26 kB)
+Collecting mypy>=1.14 (from twinpilot-api==0.1.0)
+  Using cached mypy-2.3.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+Requirement already satisfied: Mako in ./.venv/lib/python3.12/site-packages (from alembic>=1.14->twinpilot-api==0.1.0) (1.3.12)
+Requirement already satisfied: typing-extensions>=4.12 in ./.venv/lib/python3.12/site-packages (from alembic>=1.14->twinpilot-api==0.1.0) (4.16.0)
+Requirement already satisfied: dnspython>=2.0.0 in ./.venv/lib/python3.12/site-packages (from email-validator>=2.2->twinpilot-api==0.1.0) (2.8.0)
+Requirement already satisfied: idna>=2.0.0 in ./.venv/lib/python3.12/site-packages (from email-validator>=2.2->twinpilot-api==0.1.0) (3.18)
+Requirement already satisfied: starlette>=0.46.0 in ./.venv/lib/python3.12/site-packages (from fastapi>=0.115->twinpilot-api==0.1.0) (1.3.1)
+Requirement already satisfied: typing-inspection>=0.4.2 in ./.venv/lib/python3.12/site-packages (from fastapi>=0.115->twinpilot-api==0.1.0) (0.4.2)
+Requirement already satisfied: annotated-doc>=0.0.2 in ./.venv/lib/python3.12/site-packages (from fastapi>=0.115->twinpilot-api==0.1.0) (0.0.4)
+Requirement already satisfied: anyio in ./.venv/lib/python3.12/site-packages (from httpx>=0.28->twinpilot-api==0.1.0) (4.14.2)
+Requirement already satisfied: certifi in ./.venv/lib/python3.12/site-packages (from httpx>=0.28->twinpilot-api==0.1.0) (2026.7.22)
+Requirement already satisfied: httpcore==1.* in ./.venv/lib/python3.12/site-packages (from httpx>=0.28->twinpilot-api==0.1.0) (1.0.9)
+Requirement already satisfied: h11>=0.16 in ./.venv/lib/python3.12/site-packages (from httpcore==1.*->httpx>=0.28->twinpilot-api==0.1.0) (0.16.0)
+Collecting mypy_extensions>=1.0.0 (from mypy>=1.14->twinpilot-api==0.1.0)
+  Using cached mypy_extensions-1.1.0-py3-none-any.whl.metadata (1.1 kB)
+Collecting pathspec>=1.0.0 (from mypy>=1.14->twinpilot-api==0.1.0)
+  Using cached pathspec-1.1.1-py3-none-any.whl.metadata (14 kB)
+Collecting librt>=0.13.0 (from mypy>=1.14->twinpilot-api==0.1.0)
+  Using cached librt-0.13.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (1.3 kB)
+Collecting ast-serialize<1.0.0,>=0.6.0 (from mypy>=1.14->twinpilot-api==0.1.0)
+  Using cached ast_serialize-0.6.0-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (1.3 kB)
+Requirement already satisfied: python-dateutil>=2.8.2 in ./.venv/lib/python3.12/site-packages (from pandas>=2.2->twinpilot-api==0.1.0) (2.9.0.post0)
+Requirement already satisfied: annotated-types>=0.6.0 in ./.venv/lib/python3.12/site-packages (from pydantic>=2.10->twinpilot-api==0.1.0) (0.8.0)
+Requirement already satisfied: pydantic-core==2.46.4 in ./.venv/lib/python3.12/site-packages (from pydantic>=2.10->twinpilot-api==0.1.0) (2.46.4)
+Requirement already satisfied: python-dotenv>=0.21.0 in ./.venv/lib/python3.12/site-packages (from pydantic-settings>=2.7->twinpilot-api==0.1.0) (1.2.2)
+Collecting iniconfig>=1.0.1 (from pytest>=8.0->twinpilot-api==0.1.0)
+  Using cached iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+Collecting packaging>=22 (from pytest>=8.0->twinpilot-api==0.1.0)
+  Using cached packaging-26.2-py3-none-any.whl.metadata (3.5 kB)
+Collecting pluggy<2,>=1.5 (from pytest>=8.0->twinpilot-api==0.1.0)
+  Using cached pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+Collecting pygments>=2.7.2 (from pytest>=8.0->twinpilot-api==0.1.0)
+  Using cached pygments-2.20.0-py3-none-any.whl.metadata (2.5 kB)
+Requirement already satisfied: six>=1.5 in ./.venv/lib/python3.12/site-packages (from python-dateutil>=2.8.2->pandas>=2.2->twinpilot-api==0.1.0) (1.17.0)
+Requirement already satisfied: ecdsa!=0.15 in ./.venv/lib/python3.12/site-packages (from python-jose>=3.3->python-jose[cryptography]>=3.3->twinpilot-api==0.1.0) (0.19.2)
+Requirement already satisfied: rsa!=4.1.1,!=4.4,<5.0,>=4.0 in ./.venv/lib/python3.12/site-packages (from python-jose>=3.3->python-jose[cryptography]>=3.3->twinpilot-api==0.1.0) (4.9.1)
+Requirement already satisfied: pyasn1>=0.5.0 in ./.venv/lib/python3.12/site-packages (from python-jose>=3.3->python-jose[cryptography]>=3.3->twinpilot-api==0.1.0) (0.6.4)
+Requirement already satisfied: cryptography>=3.4.0 in ./.venv/lib/python3.12/site-packages (from python-jose[cryptography]>=3.3->twinpilot-api==0.1.0) (49.0.0)
+Requirement already satisfied: cffi>=2.0.0 in ./.venv/lib/python3.12/site-packages (from cryptography>=3.4.0->python-jose[cryptography]>=3.3->twinpilot-api==0.1.0) (2.1.0)
+Requirement already satisfied: pycparser in ./.venv/lib/python3.12/site-packages (from cffi>=2.0.0->cryptography>=3.4.0->python-jose[cryptography]>=3.3->twinpilot-api==0.1.0) (3.0)
+Requirement already satisfied: scipy>=1.10.0 in ./.venv/lib/python3.12/site-packages (from scikit-learn>=1.5->twinpilot-api==0.1.0) (1.18.0)
+Requirement already satisfied: joblib>=1.4.0 in ./.venv/lib/python3.12/site-packages (from scikit-learn>=1.5->twinpilot-api==0.1.0) (1.5.3)
+Requirement already satisfied: narwhals>=2.0.1 in ./.venv/lib/python3.12/site-packages (from scikit-learn>=1.5->twinpilot-api==0.1.0) (2.24.0)
+Requirement already satisfied: threadpoolctl>=3.5.0 in ./.venv/lib/python3.12/site-packages (from scikit-learn>=1.5->twinpilot-api==0.1.0) (3.6.0)
+Requirement already satisfied: greenlet>=1 in ./.venv/lib/python3.12/site-packages (from sqlalchemy>=2.0->twinpilot-api==0.1.0) (3.5.4)
+Requirement already satisfied: click>=7.0 in ./.venv/lib/python3.12/site-packages (from uvicorn>=0.34->uvicorn[standard]>=0.34->twinpilot-api==0.1.0) (8.4.2)
+Requirement already satisfied: httptools>=0.8.0 in ./.venv/lib/python3.12/site-packages (from uvicorn[standard]>=0.34->twinpilot-api==0.1.0) (0.8.0)
+Requirement already satisfied: pyyaml>=5.1 in ./.venv/lib/python3.12/site-packages (from uvicorn[standard]>=0.34->twinpilot-api==0.1.0) (6.0.3)
+Requirement already satisfied: uvloop>=0.15.1 in ./.venv/lib/python3.12/site-packages (from uvicorn[standard]>=0.34->twinpilot-api==0.1.0) (0.22.1)
+Requirement already satisfied: watchfiles>=0.20 in ./.venv/lib/python3.12/site-packages (from uvicorn[standard]>=0.34->twinpilot-api==0.1.0) (1.2.0)
+Requirement already satisfied: websockets>=13.0 in ./.venv/lib/python3.12/site-packages (from uvicorn[standard]>=0.34->twinpilot-api==0.1.0) (16.1.1)
+Requirement already satisfied: MarkupSafe>=0.9.2 in ./.venv/lib/python3.12/site-packages (from Mako->alembic>=1.14->twinpilot-api==0.1.0) (3.0.3)
+Using cached mypy-2.3.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (15.3 MB)
+Using cached ast_serialize-0.6.0-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (1.3 MB)
+Using cached librt-0.13.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (531 kB)
+Using cached mypy_extensions-1.1.0-py3-none-any.whl (5.0 kB)
+Using cached pathspec-1.1.1-py3-none-any.whl (57 kB)
+Using cached pytest-9.1.1-py3-none-any.whl (386 kB)
+Using cached pluggy-1.6.0-py3-none-any.whl (20 kB)
+Using cached iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+Using cached packaging-26.2-py3-none-any.whl (100 kB)
+Using cached pygments-2.20.0-py3-none-any.whl (1.2 MB)
+Using cached pytest_asyncio-1.4.0-py3-none-any.whl (16 kB)
+Using cached ruff-0.16.0-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (11.4 MB)
+Building wheels for collected packages: twinpilot-api
+  Building editable for twinpilot-api (pyproject.toml): started
+  Building editable for twinpilot-api (pyproject.toml): finished with status 'done'
+  Created wheel for twinpilot-api: filename=twinpilot_api-0.1.0-0.editable-py3-none-any.whl size=3038 sha256=207bbd2bdfac69c270f86d0e3ae76217471798a1ee5bb2b4b4ff72d62ede2868
+  Stored in directory: /tmp/pip-ephem-wheel-cache-f3r7cu5g/wheels/08/21/6f/55455696040f63bdd11cc3e66c3e26daee5fb5a2441838ffc9
+Successfully built twinpilot-api
+Installing collected packages: ruff, pygments, pluggy, pathspec, packaging, mypy_extensions, librt, iniconfig, ast-serialize, pytest, mypy, pytest-asyncio, twinpilot-api
+  Attempting uninstall: twinpilot-api
+    Found existing installation: twinpilot-api 0.1.0
+    Uninstalling twinpilot-api-0.1.0:
+      Successfully uninstalled twinpilot-api-0.1.0
+
+
+Successfully installed ast-serialize-0.6.0 iniconfig-2.3.0 librt-0.13.0 mypy-2.3.0 mypy_extensions-1.1.0 packaging-26.2 pathspec-1.1.1 pluggy-1.6.0 pygments-2.20.0 pytest-9.1.1 pytest-asyncio-1.4.0 ruff-0.16.0 twinpilot-api-0.1.0
+Obtaining file:///tmp/ecolooop-stdio-cleanroom-20260725T112256Z/services/mcp-server
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Collecting mcp<2,>=1.6 (from twinpilot-mcp==0.1.0)
+  Using cached mcp-1.28.1-py3-none-any.whl.metadata (9.4 kB)
+Requirement already satisfied: httpx>=0.28 in ./.venv/lib/python3.12/site-packages (from twinpilot-mcp==0.1.0) (0.28.1)
+Requirement already satisfied: pydantic>=2.10 in ./.venv/lib/python3.12/site-packages (from twinpilot-mcp==0.1.0) (2.13.4)
+Requirement already satisfied: anyio>=4.5 in ./.venv/lib/python3.12/site-packages (from mcp<2,>=1.6->twinpilot-mcp==0.1.0) (4.14.2)
+Collecting httpx-sse>=0.4 (from mcp<2,>=1.6->twinpilot-mcp==0.1.0)
+  Using cached httpx_sse-0.4.3-py3-none-any.whl.metadata (9.7 kB)
+Collecting jsonschema>=4.20.0 (from mcp<2,>=1.6->twinpilot-mcp==0.1.0)
+  Using cached jsonschema-4.26.0-py3-none-any.whl.metadata (7.6 kB)
+Requirement already satisfied: pydantic-settings>=2.5.2 in ./.venv/lib/python3.12/site-packages (from mcp<2,>=1.6->twinpilot-mcp==0.1.0) (2.14.2)
+Collecting pyjwt>=2.10.1 (from pyjwt[crypto]>=2.10.1->mcp<2,>=1.6->twinpilot-mcp==0.1.0)
+  Using cached pyjwt-2.13.0-py3-none-any.whl.metadata (3.4 kB)
+Requirement already satisfied: python-multipart>=0.0.9 in ./.venv/lib/python3.12/site-packages (from mcp<2,>=1.6->twinpilot-mcp==0.1.0) (0.0.32)
+Collecting sse-starlette>=1.6.1 (from mcp<2,>=1.6->twinpilot-mcp==0.1.0)
+  Using cached sse_starlette-3.4.6-py3-none-any.whl.metadata (15 kB)
+Requirement already satisfied: starlette>=0.27 in ./.venv/lib/python3.12/site-packages (from mcp<2,>=1.6->twinpilot-mcp==0.1.0) (1.3.1)
+Requirement already satisfied: typing-extensions>=4.9.0 in ./.venv/lib/python3.12/site-packages (from mcp<2,>=1.6->twinpilot-mcp==0.1.0) (4.16.0)
+Requirement already satisfied: typing-inspection>=0.4.1 in ./.venv/lib/python3.12/site-packages (from mcp<2,>=1.6->twinpilot-mcp==0.1.0) (0.4.2)
+Requirement already satisfied: uvicorn>=0.31.1 in ./.venv/lib/python3.12/site-packages (from mcp<2,>=1.6->twinpilot-mcp==0.1.0) (0.51.0)
+Requirement already satisfied: certifi in ./.venv/lib/python3.12/site-packages (from httpx>=0.28->twinpilot-mcp==0.1.0) (2026.7.22)
+Requirement already satisfied: httpcore==1.* in ./.venv/lib/python3.12/site-packages (from httpx>=0.28->twinpilot-mcp==0.1.0) (1.0.9)
+Requirement already satisfied: idna in ./.venv/lib/python3.12/site-packages (from httpx>=0.28->twinpilot-mcp==0.1.0) (3.18)
+Requirement already satisfied: h11>=0.16 in ./.venv/lib/python3.12/site-packages (from httpcore==1.*->httpx>=0.28->twinpilot-mcp==0.1.0) (0.16.0)
+Requirement already satisfied: annotated-types>=0.6.0 in ./.venv/lib/python3.12/site-packages (from pydantic>=2.10->twinpilot-mcp==0.1.0) (0.8.0)
+Requirement already satisfied: pydantic-core==2.46.4 in ./.venv/lib/python3.12/site-packages (from pydantic>=2.10->twinpilot-mcp==0.1.0) (2.46.4)
+Collecting attrs>=22.2.0 (from jsonschema>=4.20.0->mcp<2,>=1.6->twinpilot-mcp==0.1.0)
+  Using cached attrs-26.1.0-py3-none-any.whl.metadata (8.8 kB)
+Collecting jsonschema-specifications>=2023.03.6 (from jsonschema>=4.20.0->mcp<2,>=1.6->twinpilot-mcp==0.1.0)
+  Using cached jsonschema_specifications-2025.9.1-py3-none-any.whl.metadata (2.9 kB)
+Collecting referencing>=0.28.4 (from jsonschema>=4.20.0->mcp<2,>=1.6->twinpilot-mcp==0.1.0)
+  Using cached referencing-0.37.0-py3-none-any.whl.metadata (2.8 kB)
+Collecting rpds-py>=0.25.0 (from jsonschema>=4.20.0->mcp<2,>=1.6->twinpilot-mcp==0.1.0)
+  Using cached rpds_py-2026.6.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.1 kB)
+Requirement already satisfied: python-dotenv>=0.21.0 in ./.venv/lib/python3.12/site-packages (from pydantic-settings>=2.5.2->mcp<2,>=1.6->twinpilot-mcp==0.1.0) (1.2.2)
+Requirement already satisfied: cryptography>=3.4.0 in ./.venv/lib/python3.12/site-packages (from pyjwt[crypto]>=2.10.1->mcp<2,>=1.6->twinpilot-mcp==0.1.0) (49.0.0)
+Requirement already satisfied: cffi>=2.0.0 in ./.venv/lib/python3.12/site-packages (from cryptography>=3.4.0->pyjwt[crypto]>=2.10.1->mcp<2,>=1.6->twinpilot-mcp==0.1.0) (2.1.0)
+Requirement already satisfied: pycparser in ./.venv/lib/python3.12/site-packages (from cffi>=2.0.0->cryptography>=3.4.0->pyjwt[crypto]>=2.10.1->mcp<2,>=1.6->twinpilot-mcp==0.1.0) (3.0)
+Requirement already satisfied: click>=7.0 in ./.venv/lib/python3.12/site-packages (from uvicorn>=0.31.1->mcp<2,>=1.6->twinpilot-mcp==0.1.0) (8.4.2)
+Using cached mcp-1.28.1-py3-none-any.whl (222 kB)
+Using cached httpx_sse-0.4.3-py3-none-any.whl (9.0 kB)
+Using cached jsonschema-4.26.0-py3-none-any.whl (90 kB)
+Using cached attrs-26.1.0-py3-none-any.whl (67 kB)
+Using cached jsonschema_specifications-2025.9.1-py3-none-any.whl (18 kB)
+Using cached pyjwt-2.13.0-py3-none-any.whl (31 kB)
+Using cached referencing-0.37.0-py3-none-any.whl (26 kB)
+Using cached rpds_py-2026.6.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (366 kB)
+Using cached sse_starlette-3.4.6-py3-none-any.whl (16 kB)
+Building wheels for collected packages: twinpilot-mcp
+  Building editable for twinpilot-mcp (pyproject.toml): started
+  Building editable for twinpilot-mcp (pyproject.toml): finished with status 'done'
+  Created wheel for twinpilot-mcp: filename=twinpilot_mcp-0.1.0-0.editable-py3-none-any.whl size=3193 sha256=cb3aa823c4ea24278000aef063243b221343509c41ff230ecda2ff4b77ca1425
+  Stored in directory: /tmp/pip-ephem-wheel-cache-mhk4keox/wheels/dd/99/4e/4f3e7a45f414eca84a17b0fa0062e0501cbdff6f708f4d4be2
+Successfully built twinpilot-mcp
+Installing collected packages: rpds-py, pyjwt, httpx-sse, attrs, referencing, sse-starlette, jsonschema-specifications, jsonschema, mcp, twinpilot-mcp
+  Attempting uninstall: twinpilot-mcp
+    Found existing installation: twinpilot-mcp 0.1.0
+    Not uninstalling twinpilot-mcp at /workspace/services/mcp-server, outside environment /tmp/ecolooop-stdio-cleanroom-20260725T112256Z/.venv
+    Can't uninstall 'twinpilot-mcp'. No files were found to uninstall.
+
+
+Successfully installed attrs-26.1.0 httpx-sse-0.4.3 jsonschema-4.26.0 jsonschema-specifications-2025.9.1 mcp-1.28.1 pyjwt-2.13.0 referencing-0.37.0 rpds-py-2026.6.3 sse-starlette-3.4.6 twinpilot-mcp-0.1.0
+Wrote apps/web/.env.local
+Installing JS workspace deps (pnpm)
+Scope: all 8 workspace projects
+Lockfile is up to date, resolution step is skipped
+Progress: resolved 1, reused 0, downloaded 0, added 0
+Packages: +1131
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Progress: resolved 1131, reused 1125, downloaded 0, added 808
+Progress: resolved 1131, reused 1125, downloaded 0, added 1131, done
+
+devDependencies:
++ prettier 3.9.6
++ turbo 2.10.6
++ typescript 5.9.3
+
+╭ Warning ─────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│   Ignored build scripts: sharp@0.34.5, unrs-resolver@1.12.2.                 │
+│   Run "pnpm approve-builds" to pick which dependencies should be allowed     │
+│   to run scripts.                                                            │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+Done in 1.9s using pnpm v10.33.3
+
+Setup complete.
+  Demo:  make demo
+  API:   make api
+  Web:   make web
+  Tests: make test
+==> EnergyPlus (optional for mock demo; required for real closed-loop experiments)
+Downloading https://github.com/NREL/EnergyPlus/releases/download/v24.1.0/EnergyPlus-24.1.0-9d7789a3ac-Linux-Ubuntu22.04-x86_64.tar.gz
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+ 61  177M   61  108M    0     0   207M      0 --:--:-- --:--:-- --:--:--  207M100  177M  100  177M    0     0   249M      0 --:--:-- --:--:-- --:--:--  368M
+Extracting to /tmp/ecolooop-stdio-cleanroom-20260725T112256Z/third_party/EnergyPlus
+Installed EnergyPlus:
+EnergyPlus, Version 24.1.0-9d7789a3ac
+
+Set:
+  export ENERGYPLUS_HOME=/tmp/ecolooop-stdio-cleanroom-20260725T112256Z/third_party/EnergyPlus
+  export ENERGYPLUS_MODEL_PATH=/tmp/ecolooop-stdio-cleanroom-20260725T112256Z/building-models/sample-office/office_5zone.idf
+  export ENERGYPLUS_WEATHER_PATH=/tmp/ecolooop-stdio-cleanroom-20260725T112256Z/building-models/weather/chicago.epw
+
+Setup complete.
+  Mock demo:     ./scripts/run_demo.sh
+  Real E+ loop:  ./scripts/run_baseline.sh && ./scripts/run_agent.sh && ./scripts/compare_results.sh
+== Eco-Loop prerequisite check ==
+root=/tmp/ecolooop-stdio-cleanroom-20260725T112256Z
+time=2026-07-25T11:27:05Z
+PASS  OS compatible (Linux)
+PASS  CPU architecture (x86_64)
+PASS  Python >=3.11 (3.12.3)
+PASS  Node.js >=20 (v22.14.0)
+PASS  pnpm available (10.33.3)
+PASS  EnergyPlus executable (/workspace/third_party/EnergyPlus/energyplus)
+PASS  EnergyPlus version (EnergyPlus, Version 24.1.0-9d7789a3ac)
+PASS  IDF present (/workspace/building-models/sample-office/office_5zone.idf)
+PASS  EPW present (/workspace/building-models/weather/chicago.epw)
+PASS  results/ is writable
+WARN  port 8000 is already in use
+PASS  port 3000 appears free (or lsof unavailable to confirm)
+WARN  port 11434 is already in use
+PASS  .env exists (values not printed)
+PASS  .env.example defines DATA_MODE
+PASS  Ollama executable (ollama version is 0.32.3)
+PASS  Ollama server healthy (http://127.0.0.1:11434)
+PASS  Required model present (llama3.2:1b)
+PASS  MCP SDK + twinpilot_mcp importable
+
+RESULT: PASS
+PREREQ2:0
+JSON_BEFORE=0
+==> Baseline EnergyPlus experiment
+    IDF: /workspace/building-models/sample-office/office_5zone.idf
+    EPW: /workspace/building-models/weather/chicago.epw
+    OUT: /tmp/ecolooop-stdio-cleanroom-20260725T112256Z/results/baseline
+EnergyPlus Starting
+EnergyPlus, Version 24.1.0-9d7789a3ac, YMD=2026.07.25 11:27
+Initializing Response Factors
+Calculating CTFs for "ROOF-1"
+Calculating CTFs for "WALL-1"
+Calculating CTFs for "FLOOR-SLAB-1"
+Calculating CTFs for "INT-WALL-1"
+Initializing Window Optical Properties
+Initializing Solar Calculations
+Allocate Solar Module Arrays
+Initializing Zone and Enclosure Report Variables
+Initializing Surface (Shading) Report Variables
+Computing Interior Solar Absorption Factors
+Determining Shadowing Combinations
+Computing Window Shade Absorption Factors
+Proceeding with Initializing Solar Calculations
+Initializing Surfaces
+Initializing Outdoor environment for Surfaces
+Setting up Surface Reporting Variables
+Initializing Temperature and Flux Histories
+Initializing Window Shading
+Computing Interior Absorption Factors
+Computing Interior Diffuse Solar Absorption Factors
+Initializing Solar Heat Gains
+Initializing Internal Heat Gains
+Initializing Interior Solar Distribution
+Initializing Interior Convection Coefficients
+Gathering Information for Predefined Reporting
+Completed Initializing Surface Heat Balance
+Calculate Outside Surface Heat Balance
+Calculate Inside Surface Heat Balance
+Calculate Air Heat Balance
+Initializing HVAC
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Performing Zone Sizing Simulation for Load Component Report
+...for Sizing Period: #1 CHICAGO_IL_USA ANNUAL HEATING 99% DESIGN CONDITIONS DB
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Performing Zone Sizing Simulation for Load Component Report
+...for Sizing Period: #2 CHICAGO_IL_USA ANNUAL COOLING 1% DESIGN CONDITIONS DB/MCWB
+Re-zeroing zone sizing arrays
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Performing Zone Sizing Simulation
+...for Sizing Period: #1 CHICAGO_IL_USA ANNUAL HEATING 99% DESIGN CONDITIONS DB
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Performing Zone Sizing Simulation
+...for Sizing Period: #2 CHICAGO_IL_USA ANNUAL COOLING 1% DESIGN CONDITIONS DB/MCWB
+Calculating System sizing
+...for Sizing Period: #1 CHICAGO_IL_USA ANNUAL HEATING 99% DESIGN CONDITIONS DB
+Calculating System sizing
+...for Sizing Period: #2 CHICAGO_IL_USA ANNUAL COOLING 1% DESIGN CONDITIONS DB/MCWB
+Adjusting Air System Sizing
+Adjusting Standard 62.1 Ventilation Sizing
+Initializing Simulation
+Reporting Surfaces
+Beginning Primary Simulation
+Initializing New Environment Parameters
+Warming up {1}
+Warming up {2}
+Warming up {3}
+Warming up {4}
+Warming up {5}
+Warming up {6}
+Starting Simulation at 07/15/2014 for DEMOPERIOD
+Writing tabular output file results using HTML format.
+Writing final SQL reports
+EnergyPlus Run Time=00hr 00min  0.29sec
+EnergyPlus Completed Successfully.
+{
+  "simulation_status": "completed",
+  "total_energy_kwh": 421.5057,
+  "hvac_energy_kwh": 13.8459,
+  "peak_power_kw": 19.9325,
+  "carbon_estimate_kg": 175.7679,
+  "occupied_comfort_violation_hours": 0.0
+}
+Wrote /tmp/ecolooop-stdio-cleanroom-20260725T112256Z/results/baseline/summary.json
+BASELINE2:0
+==> Agent EnergyPlus experiment (deterministic agent + safety gate)
+    IDF: /workspace/building-models/sample-office/office_5zone.idf
+    EPW: /workspace/building-models/weather/chicago.epw
+    OUT: /tmp/ecolooop-stdio-cleanroom-20260725T112256Z/results/agent
+EnergyPlus Starting
+EnergyPlus, Version 24.1.0-9d7789a3ac, YMD=2026.07.25 11:27
+Initializing Response Factors
+Calculating CTFs for "ROOF-1"
+Calculating CTFs for "WALL-1"
+Calculating CTFs for "FLOOR-SLAB-1"
+Calculating CTFs for "INT-WALL-1"
+Initializing Window Optical Properties
+Initializing Solar Calculations
+Allocate Solar Module Arrays
+Initializing Zone and Enclosure Report Variables
+Initializing Surface (Shading) Report Variables
+Computing Interior Solar Absorption Factors
+Determining Shadowing Combinations
+Computing Window Shade Absorption Factors
+Proceeding with Initializing Solar Calculations
+Initializing Surfaces
+Initializing Outdoor environment for Surfaces
+Setting up Surface Reporting Variables
+Initializing Temperature and Flux Histories
+Initializing Window Shading
+Computing Interior Absorption Factors
+Computing Interior Diffuse Solar Absorption Factors
+Initializing Solar Heat Gains
+Initializing Internal Heat Gains
+Initializing Interior Solar Distribution
+Initializing Interior Convection Coefficients
+Gathering Information for Predefined Reporting
+Completed Initializing Surface Heat Balance
+Calculate Outside Surface Heat Balance
+Calculate Inside Surface Heat Balance
+Calculate Air Heat Balance
+Initializing HVAC
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Performing Zone Sizing Simulation for Load Component Report
+...for Sizing Period: #1 CHICAGO_IL_USA ANNUAL HEATING 99% DESIGN CONDITIONS DB
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Performing Zone Sizing Simulation for Load Component Report
+...for Sizing Period: #2 CHICAGO_IL_USA ANNUAL COOLING 1% DESIGN CONDITIONS DB/MCWB
+Re-zeroing zone sizing arrays
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Performing Zone Sizing Simulation
+...for Sizing Period: #1 CHICAGO_IL_USA ANNUAL HEATING 99% DESIGN CONDITIONS DB
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Performing Zone Sizing Simulation
+...for Sizing Period: #2 CHICAGO_IL_USA ANNUAL COOLING 1% DESIGN CONDITIONS DB/MCWB
+Calculating System sizing
+...for Sizing Period: #1 CHICAGO_IL_USA ANNUAL HEATING 99% DESIGN CONDITIONS DB
+Calculating System sizing
+...for Sizing Period: #2 CHICAGO_IL_USA ANNUAL COOLING 1% DESIGN CONDITIONS DB/MCWB
+Adjusting Air System Sizing
+Adjusting Standard 62.1 Ventilation Sizing
+Initializing Simulation
+Reporting Surfaces
+Beginning Primary Simulation
+Initializing New Environment Parameters
+Warming up {1}
+Warming up {2}
+Warming up {3}
+Warming up {4}
+Warming up {5}
+Warming up {6}
+Starting Simulation at 07/15/2014 for DEMOPERIOD
+Writing tabular output file results using HTML format.
+Writing final SQL reports
+EnergyPlus Run Time=00hr 00min  0.26sec
+EnergyPlus Completed Successfully.
+{
+  "simulation_status": "completed",
+  "total_energy_kwh": 415.9999,
+  "hvac_energy_kwh": 13.157,
+  "peak_power_kw": 19.64,
+  "carbon_estimate_kg": 173.472,
+  "occupied_comfort_violation_hours": 0.0,
+  "action_counts": {
+    "approved": 48,
+    "rejected": 0,
+    "fallback": 0,
+    "total_decisions": 48
+  }
+}
+Wrote /tmp/ecolooop-stdio-cleanroom-20260725T112256Z/results/agent/summary.json
+AGENT2:0
+./scripts/compare_results.sh: line 29: {cmp[timestamp_utc]}: command not found
+./scripts/compare_results.sh: command substitution: line 29: syntax error near unexpected token `cmp.get'
+./scripts/compare_results.sh: command substitution: line 29: `json\n{json.dumps(cmp.get('agent_action_counts'), indent=2)}\n'
+{
+  "schema_version": "1.1",
+  "timestamp_utc": "2026-07-25T11:27:08.057312+00:00",
+  "scenario": "default",
+  "inputs_identical": true,
+  "baseline_status": "completed",
+  "agent_status": "completed",
+  "total_energy_kwh": {
+    "baseline": 421.5057,
+    "agent": 415.9999,
+    "absolute_delta_agent_minus_baseline": -5.5058,
+    "percent_reduction": 1.3062,
+    "percent_delta": -1.3062
+  },
+  "hvac_energy_kwh": {
+    "baseline": 13.8459,
+    "agent": 13.157,
+    "absolute_delta_agent_minus_baseline": -0.6889,
+    "percent_reduction": 4.9755,
+    "percent_delta": -4.9755
+  },
+  "peak_power_kw": {
+    "baseline": 19.9325,
+    "agent": 19.64,
+    "absolute_delta_agent_minus_baseline": -0.2925,
+    "percent_reduction": 1.4675,
+    "percent_delta": -1.4675
+  },
+  "carbon_estimate_kg": {
+    "baseline": 175.7679,
+    "agent": 173.472,
+    "absolute_delta_agent_minus_baseline": -2.2959,
+    "percent_reduction": 1.3062,
+    "percent_delta": -1.3062
+  },
+  "occupied_comfort_violation_hours": {
+    "baseline": 0.0,
+    "agent": 0.0,
+    "absolute_delta_agent_minus_baseline": 0.0,
+    "percent_reduction": null,
+    "percent_delta": null
+  },
+  "occupied_comfort_degree_hours": {
+    "baseline": 0.0,
+    "agent": 0.0,
+    "absolute_delta_agent_minus_baseline": 0.0,
+    "percent_reduction": null,
+    "percent_delta": null
+  },
+  "agent_action_counts": {
+    "approved": 48,
+    "rejected": 0,
+    "fallback": 0,
+    "total_decisions": 48
+  },
+  "carbon_accounting": {
+    "label": "estimate",
+    "formula": "total_energy_kwh * emission_factor_kg_per_kwh",
+    "emission_factor_kg_per_kwh": 0.417,
+    "units": "kg CO2e (estimate)"
+  },
+  "notes": [
+    "percent_reduction = (baseline - agent) / baseline * 100 (positive means agent used less).",
+    "Carbon values are estimates using a documented kg/kWh factor.",
+    "Only controller differs: baseline has no setpoint overrides; agent uses SafetyShield-gated overrides.",
+    "Synthetic multipliers (e.g. \u00d71.12) are not used."
+  ]
+}
+Wrote /tmp/ecolooop-stdio-cleanroom-20260725T112256Z/results/comparison/comparison.json
+Wrote /tmp/ecolooop-stdio-cleanroom-20260725T112256Z/results/comparison/comparison.md
+COMPARE2:0
+JSON_AFTER_DET=2
+[start] {"out": "/tmp/ecolooop-stdio-cleanroom-20260725T112256Z/results/llm_mcp", "mcp_trace": "/tmp/ecolooop-stdio-cleanroom-20260725T112256Z/manual-verification/mcp-transport/mcp-runtime-trace.jsonl"}
+[mcp_session_ready] {"transport": "stdio", "client_pid": 51319, "server_pid": 51324, "pids_differ": true, "tools": ["get_building_observation", "propose_or_prepare_control_context", "validate_control_action", "get_controller_constraints", "record_control_decis
+EnergyPlus Starting
+EnergyPlus, Version 24.1.0-9d7789a3ac, YMD=2026.07.25 11:27
+Initializing Response Factors
+Calculating CTFs for "ROOF-1"
+Calculating CTFs for "WALL-1"
+Calculating CTFs for "FLOOR-SLAB-1"
+Calculating CTFs for "INT-WALL-1"
+Initializing Window Optical Properties
+Initializing Solar Calculations
+Allocate Solar Module Arrays
+Initializing Zone and Enclosure Report Variables
+Initializing Surface (Shading) Report Variables
+Computing Interior Solar Absorption Factors
+Determining Shadowing Combinations
+Computing Window Shade Absorption Factors
+Proceeding with Initializing Solar Calculations
+Initializing Surfaces
+Initializing Outdoor environment for Surfaces
+Setting up Surface Reporting Variables
+Initializing Temperature and Flux Histories
+Initializing Window Shading
+Computing Interior Absorption Factors
+Computing Interior Diffuse Solar Absorption Factors
+Initializing Solar Heat Gains
+Initializing Internal Heat Gains
+Initializing Interior Solar Distribution
+Initializing Interior Convection Coefficients
+Gathering Information for Predefined Reporting
+Completed Initializing Surface Heat Balance
+Calculate Outside Surface Heat Balance
+Calculate Inside Surface Heat Balance
+Calculate Air Heat Balance
+Initializing HVAC
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Performing Zone Sizing Simulation for Load Component Report
+...for Sizing Period: #1 CHICAGO_IL_USA ANNUAL HEATING 99% DESIGN CONDITIONS DB
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Performing Zone Sizing Simulation for Load Component Report
+...for Sizing Period: #2 CHICAGO_IL_USA ANNUAL COOLING 1% DESIGN CONDITIONS DB/MCWB
+Re-zeroing zone sizing arrays
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Performing Zone Sizing Simulation
+...for Sizing Period: #1 CHICAGO_IL_USA ANNUAL HEATING 99% DESIGN CONDITIONS DB
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Performing Zone Sizing Simulation
+...for Sizing Period: #2 CHICAGO_IL_USA ANNUAL COOLING 1% DESIGN CONDITIONS DB/MCWB
+Calculating System sizing
+...for Sizing Period: #1 CHICAGO_IL_USA ANNUAL HEATING 99% DESIGN CONDITIONS DB
+Calculating System sizing
+...for Sizing Period: #2 CHICAGO_IL_USA ANNUAL COOLING 1% DESIGN CONDITIONS DB/MCWB
+Adjusting Air System Sizing
+Adjusting Standard 62.1 Ventilation Sizing
+Initializing Simulation
+Reporting Surfaces
+Beginning Primary Simulation
+Initializing New Environment Parameters
+Warming up {1}
+Warming up {2}
+Warming up {3}
+Warming up {4}
+Warming up {5}
+Warming up {6}
+Starting Simulation at 07/15/2014 for DEMOPERIOD
+Writing tabular output file results using HTML format.
+Writing final SQL reports
+EnergyPlus Run Time=00hr 00min  0.28sec
+EnergyPlus Completed Successfully.
+[baseline_complete] {"total_energy_kwh": 421.5057}
+EnergyPlus Starting
+EnergyPlus, Version 24.1.0-9d7789a3ac, YMD=2026.07.25 11:27
+Initializing Response Factors
+Calculating CTFs for "ROOF-1"
+Calculating CTFs for "WALL-1"
+Calculating CTFs for "FLOOR-SLAB-1"
+Calculating CTFs for "INT-WALL-1"
+Initializing Window Optical Properties
+Initializing Solar Calculations
+Allocate Solar Module Arrays
+Initializing Zone and Enclosure Report Variables
+Initializing Surface (Shading) Report Variables
+Computing Interior Solar Absorption Factors
+Determining Shadowing Combinations
+Computing Window Shade Absorption Factors
+Proceeding with Initializing Solar Calculations
+Initializing Surfaces
+Initializing Outdoor environment for Surfaces
+Setting up Surface Reporting Variables
+Initializing Temperature and Flux Histories
+Initializing Window Shading
+Computing Interior Absorption Factors
+Computing Interior Diffuse Solar Absorption Factors
+Initializing Solar Heat Gains
+Initializing Internal Heat Gains
+Initializing Interior Solar Distribution
+Initializing Interior Convection Coefficients
+Gathering Information for Predefined Reporting
+Completed Initializing Surface Heat Balance
+Calculate Outside Surface Heat Balance
+Calculate Inside Surface Heat Balance
+Calculate Air Heat Balance
+Initializing HVAC
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Performing Zone Sizing Simulation for Load Component Report
+...for Sizing Period: #1 CHICAGO_IL_USA ANNUAL HEATING 99% DESIGN CONDITIONS DB
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Performing Zone Sizing Simulation for Load Component Report
+...for Sizing Period: #2 CHICAGO_IL_USA ANNUAL COOLING 1% DESIGN CONDITIONS DB/MCWB
+Re-zeroing zone sizing arrays
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Performing Zone Sizing Simulation
+...for Sizing Period: #1 CHICAGO_IL_USA ANNUAL HEATING 99% DESIGN CONDITIONS DB
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Performing Zone Sizing Simulation
+...for Sizing Period: #2 CHICAGO_IL_USA ANNUAL COOLING 1% DESIGN CONDITIONS DB/MCWB
+Calculating System sizing
+...for Sizing Period: #1 CHICAGO_IL_USA ANNUAL HEATING 99% DESIGN CONDITIONS DB
+Calculating System sizing
+...for Sizing Period: #2 CHICAGO_IL_USA ANNUAL COOLING 1% DESIGN CONDITIONS DB/MCWB
+Adjusting Air System Sizing
+Adjusting Standard 62.1 Ventilation Sizing
+Initializing Simulation
+Reporting Surfaces
+Beginning Primary Simulation
+Initializing New Environment Parameters
+Warming up {1}
+Warming up {2}
+Warming up {3}
+Warming up {4}
+Warming up {5}
+Warming up {6}
+Starting Simulation at 07/15/2014 for DEMOPERIOD
+[energyplus_observation] {"hour": 0, "outdoor_c": 24.200000000000003, "zones": {"SPACE1-1": 22.150266267564337, "SPACE2-1": 22.100503262920537, "SPACE3-1": 22.115963687467442, "SPACE4-1": 22.114470505120114, "SPACE5-1": 21.79295997206227}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["a9c3bdcc-9644-4ded-bf5e-7221562e
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 24, "reason": "Building is within comfort zone", "confidence": 90}}
+[energyplus_observation] {"hour": 1, "outdoor_c": 20.0, "zones": {"SPACE1-1": 21.704503702790802, "SPACE2-1": 21.74194911882665, "SPACE3-1": 21.689553755450895, "SPACE4-1": 21.750001199275104, "SPACE5-1": 21.66172212905071}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["99b0f62f-2860-443d-9fa4-25bb2ee9
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 25.0, "reason": "Temperature increase exceeds comfort zone", "confidence": 0.6}}
+[energyplus_observation] {"hour": 2, "outdoor_c": 19.85, "zones": {"SPACE1-1": 21.447569857071795, "SPACE2-1": 21.49461898538564, "SPACE3-1": 21.43557757904212, "SPACE4-1": 21.49914145003487, "SPACE5-1": 21.52389333733471}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["90f7d73b-3d13-4c06-9ac4-fd82fe06
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 23, "reason": "Occupancy increase above 90%", "confidence": 0.8}}
+[energyplus_observation] {"hour": 3, "outdoor_c": 19.275, "zones": {"SPACE1-1": 21.20995037348608, "SPACE2-1": 21.252979055728765, "SPACE3-1": 21.18876892194707, "SPACE4-1": 21.255587715005483, "SPACE5-1": 21.39320427936841}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["88415412-8801-45a5-ae02-69add3f8
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 22, "reason": "Reason for proposed cooling setpoint is based on optimal comfort range for occupants at temperature 23C", "confidence": 0.
+[energyplus_observation] {"hour": 4, "outdoor_c": 18.9, "zones": {"SPACE1-1": 21.013311887003095, "SPACE2-1": 21.050330005181706, "SPACE3-1": 20.98499707016444, "SPACE4-1": 21.051822796433427, "SPACE5-1": 21.272501913648952}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["8d7c1391-5da8-4bc3-84f6-06a08603
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 24, "reason": "EnergyPlus data not indicative of occupant comfort", "confidence": 0}}
+[energyplus_observation] {"hour": 5, "outdoor_c": 19.325, "zones": {"SPACE1-1": 20.984606725466584, "SPACE2-1": 21.51054724505414, "SPACE3-1": 21.711595413529725, "SPACE4-1": 21.04833758756656, "SPACE5-1": 21.186441868520717}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["1cd570de-1923-4d24-a913-caad419b
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 22.5, "reason": "High energy demand and occupancy", "confidence": 70}}
+[energyplus_observation] {"hour": 6, "outdoor_c": 21.0, "zones": {"SPACE1-1": 22.20048159906944, "SPACE2-1": 22.20044199883681, "SPACE3-1": 22.494015201385285, "SPACE4-1": 22.200440812576193, "SPACE5-1": 22.201027486251036}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["fb9c2125-841f-48aa-af53-62e5d724
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 23.0, "reason": "Staying within thermal comfort for building occupants.", "confidence": 0.9}}
+[energyplus_observation] {"hour": 7, "outdoor_c": 22.75, "zones": {"SPACE1-1": 22.201097897576446, "SPACE2-1": 22.29884201703678, "SPACE3-1": 22.824485072052134, "SPACE4-1": 22.199409096144418, "SPACE5-1": 22.200989067904224}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["e93369cb-6149-4727-b5f9-1467817d
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 24.0, "reason": "Comfort temperature", "confidence": 90}}
+[energyplus_observation] {"hour": 8, "outdoor_c": 24.699999999999996, "zones": {"SPACE1-1": 22.92279180008128, "SPACE2-1": 23.601890004693796, "SPACE3-1": 23.99402454920535, "SPACE4-1": 22.227788913994758, "SPACE5-1": 22.9001083648317}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["b1a765bd-87d9-4574-a905-b60967bc
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 25.0, "reason": "Occupancy has increased significantly", "confidence": 0.8}}
+[energyplus_observation] {"hour": 9, "outdoor_c": 26.150000000000002, "zones": {"SPACE1-1": 24.612360228670454, "SPACE2-1": 24.99813753343405, "SPACE3-1": 24.99868729246333, "SPACE4-1": 23.495338860916736, "SPACE5-1": 24.408675977399515}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["422032c3-2894-4f72-b9b5-6dc7e56c
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 22, "reason": "Comfort temperature", "confidence": 0.6}}
+[energyplus_observation] {"hour": 10, "outdoor_c": 28.075000000000003, "zones": {"SPACE1-1": 24.99843526243408, "SPACE2-1": 24.998505634943516, "SPACE3-1": 24.998487149266314, "SPACE4-1": 24.453238289878566, "SPACE5-1": 24.99875649211922}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["9f5ba127-07f5-4f04-907b-a6a46b90
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 24, "reason": "Energy savings due to reduced cooling load during high occupancy periods", "confidence": 95}}
+[energyplus_observation] {"hour": 11, "outdoor_c": 29.324999999999996, "zones": {"SPACE1-1": 23.997848839579312, "SPACE2-1": 23.99867176940767, "SPACE3-1": 23.998106477024393, "SPACE4-1": 23.998167752461203, "SPACE5-1": 23.997329563700372}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["3fd1b178-59e0-43ff-8d17-705f5451
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 24, "reason": "Temperature and humidity levels in the building are within acceptable ranges for comfortable occupant comfort.", "confiden
+[energyplus_observation] {"hour": 12, "outdoor_c": 30.875000000000004, "zones": {"SPACE1-1": 23.998699819149977, "SPACE2-1": 23.998942756403608, "SPACE3-1": 23.998735251086355, "SPACE4-1": 23.998759601964935, "SPACE5-1": 23.99846206565086}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["36268da6-56b4-487b-9b71-df59ee77
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 24.0, "reason": "Reason not found", "confidence": 0}}
+[energyplus_observation] {"hour": 13, "outdoor_c": 31.7, "zones": {"SPACE1-1": 23.99903987949083, "SPACE2-1": 23.999165388866267, "SPACE3-1": 23.999055295952434, "SPACE4-1": 23.999053205227046, "SPACE5-1": 23.998625344823434}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["932ec9d8-da11-45ab-8a59-c1a758ed
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 24.0, "reason": "Occupancy and ambient temperature", "confidence": 0.8}}
+[energyplus_observation] {"hour": 14, "outdoor_c": 31.7, "zones": {"SPACE1-1": 23.998572395316316, "SPACE2-1": 23.99864390528657, "SPACE3-1": 23.998575751332574, "SPACE4-1": 23.998489830577515, "SPACE5-1": 23.998321174697377}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["1907443c-ee82-43d0-81da-8ebfdc2e
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 25.0, "reason": "Maintaining a comfort range within 22-28C without degrading system performance.", "confidence": 0.85}}
+[energyplus_observation] {"hour": 15, "outdoor_c": 31.825, "zones": {"SPACE1-1": 24.99828366575551, "SPACE2-1": 24.99834934266141, "SPACE3-1": 24.99830758436484, "SPACE4-1": 24.99803773193069, "SPACE5-1": 24.998312175003363}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["faed7844-eb1f-4a90-9d3b-450f1d10
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 23.5, "reason": "Increased comfort for occupants while minimizing energy consumption", "confidence": 0.6}}
+[energyplus_observation] {"hour": 16, "outdoor_c": 32.2, "zones": {"SPACE1-1": 24.99824066445753, "SPACE2-1": 24.998290980031943, "SPACE3-1": 24.998233574016222, "SPACE4-1": 24.998251541763125, "SPACE5-1": 24.99809449879757}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["fade2caa-a261-49fa-96a3-581140f0
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 25.0, "reason": "Due to comfort of occupants and minimizing energy consumption.", "confidence": 0.8}}
+[energyplus_observation] {"hour": 17, "outdoor_c": 31.5, "zones": {"SPACE1-1": 24.99826095757318, "SPACE2-1": 24.83987435653007, "SPACE3-1": 24.998221749745294, "SPACE4-1": 24.998380324229935, "SPACE5-1": 24.997868835267784}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["153ebbcd-baba-4129-b638-5784deef
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 25, "reason": "The building's comfort temperature is currently within a comfortable range (< 28\u00b0C).", "confidence": 0.8}}
+[energyplus_observation] {"hour": 18, "outdoor_c": 29.275, "zones": {"SPACE1-1": 24.753833433985793, "SPACE2-1": 23.846598590350265, "SPACE3-1": 24.85654815264433, "SPACE4-1": 24.013712084641075, "SPACE5-1": 24.696004992480475}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["d469b520-a073-4d3e-bd7b-8c647a9f
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 25.0, "reason": "to maintain comfort and prevent overheating", "confidence": 0.8}}
+[energyplus_observation] {"hour": 19, "outdoor_c": 27.224999999999998, "zones": {"SPACE1-1": 23.654448181820616, "SPACE2-1": 22.560157292579785, "SPACE3-1": 23.79639515107956, "SPACE4-1": 22.565402579407383, "SPACE5-1": 23.63809422969682}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["e4e16ea2-053b-4d3b-944e-6c29dc89
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 24, "reason": "Energy usage is high and temperatures are above comfort range.", "confidence": 70}}
+[energyplus_observation] {"hour": 20, "outdoor_c": 22.349999999999998, "zones": {"SPACE1-1": 22.93420227723388, "SPACE2-1": 22.758144855924066, "SPACE3-1": 23.01164591394916, "SPACE4-1": 22.822797308842787, "SPACE5-1": 22.868021492664766}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["f4c453db-b88a-427f-8d17-ac44c28f
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 25, "reason": "Increasing cooling setpoint to reduce temperature difference between indoor and outdoor air", "confidence": 70}}
+[energyplus_observation] {"hour": 21, "outdoor_c": 23.075000000000003, "zones": {"SPACE1-1": 22.922320616802693, "SPACE2-1": 22.855976858304825, "SPACE3-1": 22.957465482327603, "SPACE4-1": 22.922411606612613, "SPACE5-1": 22.819308479980723}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["19589d16-8865-4126-b61f-9f9b78b8
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 24, "reason": "Temperature has been dropping below comfort level for several zones", "confidence": 0.9}}
+[energyplus_observation] {"hour": 22, "outdoor_c": 24.324999999999996, "zones": {"SPACE1-1": 22.52540659566683, "SPACE2-1": 22.493634147175985, "SPACE3-1": 22.51930313613195, "SPACE4-1": 22.536777342017235, "SPACE5-1": 22.323692342004616}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["f9e707f4-cdef-4c98-b3c4-4fba5491
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 24, "reason": "to stay within acceptable temperature range", "confidence": 0.8}}
+[energyplus_observation] {"hour": 23, "outdoor_c": 25.6, "zones": {"SPACE1-1": 22.376485126291055, "SPACE2-1": 22.319340786557802, "SPACE3-1": 22.343098233621046, "SPACE4-1": 22.34520526386241, "SPACE5-1": 22.051785532698688}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["4c19af9f-4ebc-4cdf-9905-60ea29ff
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 23.5, "reason": "Occupancy rate is high (>90%)", "confidence": 60.0}}
+[energyplus_observation] {"hour": 0, "outdoor_c": 24.900000000000002, "zones": {"SPACE1-1": 22.23402456787924, "SPACE2-1": 22.179740319269094, "SPACE3-1": 22.199228163598683, "SPACE4-1": 22.194822877268617, "SPACE5-1": 21.865657095044398}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["b0d41578-8b9e-4b87-b880-83fb6773
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 25, "reason": "Temperature is below comfort threshold", "confidence": 70}}
+[energyplus_observation] {"hour": 1, "outdoor_c": 22.650000000000002, "zones": {"SPACE1-1": 21.931450924944812, "SPACE2-1": 21.915105252185104, "SPACE3-1": 21.89144726080683, "SPACE4-1": 21.92379728148837, "SPACE5-1": 21.725777626439687}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["45e53457-de5c-4b2e-804f-7f773937
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 25.0, "reason": "Temperature is already within comfort range.", "confidence": 0.8}}
+[energyplus_observation] {"hour": 2, "outdoor_c": 22.625, "zones": {"SPACE1-1": 21.716776585365743, "SPACE2-1": 21.7025715366573, "SPACE3-1": 21.665391935582637, "SPACE4-1": 21.707560106854512, "SPACE5-1": 21.597375202569197}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["fc961cac-ce80-443e-a47b-e9fd2a88
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 25.0, "reason": "Climate control system is operating within a safe temperature range without triggering additional cooling,"}}
+[energyplus_observation] {"hour": 3, "outdoor_c": 23.9, "zones": {"SPACE1-1": 21.681054967613026, "SPACE2-1": 21.63353268950083, "SPACE3-1": 21.6217246103786, "SPACE4-1": 21.63638660248216, "SPACE5-1": 21.487460908756717}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["ede647c1-f87e-4447-ab4d-cd6986ec
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 25, "reason": "State within target range", "confidence": 0.8}}
+[energyplus_observation] {"hour": 4, "outdoor_c": 23.9, "zones": {"SPACE1-1": 21.629647337944455, "SPACE2-1": 21.571067595735833, "SPACE3-1": 21.567642435827818, "SPACE4-1": 21.572700332936257, "SPACE5-1": 21.40786352848646}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["c51e6a1b-4cfe-4197-8d8a-8eb14591
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 25.0, "reason": "Maximum allowed temperature", "confidence": 9.00000000602282}}
+[energyplus_observation] {"hour": 5, "outdoor_c": 24.324999999999996, "zones": {"SPACE1-1": 21.70318237231572, "SPACE2-1": 22.31137440274482, "SPACE3-1": 22.663535658425502, "SPACE4-1": 21.676127336646438, "SPACE5-1": 21.377482085172918}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["f9cc4439-8e3f-4eb5-87ff-4e9c8ce5
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 25.0, "reason": "to stay within comfort range of occupants", "confidence": 0.7}}
+[energyplus_observation] {"hour": 6, "outdoor_c": 25.875000000000004, "zones": {"SPACE1-1": 22.19990840361186, "SPACE2-1": 22.491636211191356, "SPACE3-1": 23.568420763317985, "SPACE4-1": 22.199441070157498, "SPACE5-1": 22.201130556622484}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["00da0857-97bc-4132-baa6-f8fca85e
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 25, "reason": "Occupancy and temperature are within acceptable ranges", "confidence": 0.9}}
+[energyplus_observation] {"hour": 7, "outdoor_c": 27.099999999999998, "zones": {"SPACE1-1": 22.19993074489019, "SPACE2-1": 23.645101549746162, "SPACE3-1": 24.249048607905664, "SPACE4-1": 22.20081720694142, "SPACE5-1": 22.2010393889656}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["77eb1748-4bc4-40c0-8334-a7b2a19e
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 25.0, "reason": "Staying within a recommended comfort zone", "confidence": 0.8}}
+[energyplus_observation] {"hour": 8, "outdoor_c": 28.725, "zones": {"SPACE1-1": 23.33114570000538, "SPACE2-1": 24.99956669365608, "SPACE3-1": 24.999672882256625, "SPACE4-1": 22.46267842012275, "SPACE5-1": 23.087710703115334}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["ee709c60-8a7f-4935-9e36-170beaa2
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 23.0, "reason": "Temperature increase exceeds comfort zone", "confidence": 0.8}}
+[energyplus_observation] {"hour": 9, "outdoor_c": 30.275, "zones": {"SPACE1-1": 24.989620377122407, "SPACE2-1": 24.99862185218289, "SPACE3-1": 24.99851967166746, "SPACE4-1": 23.711517293589964, "SPACE5-1": 24.712409329195808}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["54cc2a7b-2320-4480-8fdd-a34aa3f9
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 25.0, "reason": "The proposed cooling setpoint of 25C is within the acceptable range and aligns with comfort levels.", "confidence": 0.8}
+[energyplus_observation] {"hour": 10, "outdoor_c": 31.250000000000004, "zones": {"SPACE1-1": 24.997609124975142, "SPACE2-1": 24.99833357846705, "SPACE3-1": 24.997894955343757, "SPACE4-1": 24.50470828506869, "SPACE5-1": 24.99805528341461}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["84001b2b-0cb7-4442-ba22-04cc7656
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 22.5, "reason": "To maintain comfort for 20% more occupants than present", "confidence": 90.0}}
+[energyplus_observation] {"hour": 11, "outdoor_c": 31.825, "zones": {"SPACE1-1": 24.997828348155704, "SPACE2-1": 24.99853882685146, "SPACE3-1": 24.99799730249473, "SPACE4-1": 24.88336542058708, "SPACE5-1": 24.997547501928658}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["8400cc72-4d6c-414c-ae20-3aab912f
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 25.0, "reason": "Reason not provided", "confidence": 70}}
+[energyplus_observation] {"hour": 12, "outdoor_c": 32.35, "zones": {"SPACE1-1": 24.9984191157409, "SPACE2-1": 24.998704502962713, "SPACE3-1": 24.998480583257965, "SPACE4-1": 24.90290003804802, "SPACE5-1": 24.99826406891872}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["cf779efe-6be2-4ac4-9dee-39e94a46
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 22.5, "reason": "Maintaining a comfortable temperature within the building's comfort range while respecting indoor climate control goals 
+[energyplus_observation] {"hour": 13, "outdoor_c": 32.925, "zones": {"SPACE1-1": 24.9987736716252, "SPACE2-1": 24.999003683597554, "SPACE3-1": 24.99880078899858, "SPACE4-1": 24.98764341230019, "SPACE5-1": 24.998208513089423}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["cba29fd9-75f0-4904-a9f3-2413c41b
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 24, "reason": "Occupancy and temperature have reached stable levels", "confidence": 0.8}}
+[energyplus_observation] {"hour": 14, "outdoor_c": 33.3, "zones": {"SPACE1-1": 23.998611928866783, "SPACE2-1": 23.998678726401824, "SPACE3-1": 24.015775419080576, "SPACE4-1": 23.998482890343272, "SPACE5-1": 23.997913918801366}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["3e5bab7c-21c4-4ea8-8d9e-34ee440f
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 25, "reason": "To achieve optimal comfort for occupants within a comfortable temperature range", "confidence": 0.8}}
+[energyplus_observation] {"hour": 15, "outdoor_c": 33.175, "zones": {"SPACE1-1": 24.998286125644576, "SPACE2-1": 24.998375992261085, "SPACE3-1": 24.99832608512485, "SPACE4-1": 24.99803389808217, "SPACE5-1": 24.998211831343045}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["cc7bb74e-bf5a-4834-b3de-9051a057
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 22.0, "reason": "Reason: The building is experiencing high occupancy levels (>20%), which may lead to excessive cooling.", "confidence": 
+[energyplus_observation] {"hour": 16, "outdoor_c": 32.8, "zones": {"SPACE1-1": 24.99814941617429, "SPACE2-1": 24.998266365973823, "SPACE3-1": 24.998206289526003, "SPACE4-1": 24.99832107907254, "SPACE5-1": 24.99804214304849}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["4bb7ad69-242f-44f5-a640-41c1b4a3
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 25, "reason": "to bring indoor temperature within comfort range", "confidence": 0.5}}
+[energyplus_observation] {"hour": 17, "outdoor_c": 32.525, "zones": {"SPACE1-1": 24.998091704480935, "SPACE2-1": 24.960325775498315, "SPACE3-1": 24.998100348330112, "SPACE4-1": 24.99835537628786, "SPACE5-1": 24.997779013970796}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["11f69b85-be65-4f66-bfa2-c57466c3
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 25.0, "reason": "Temperature increase exceeds comfort zone", "confidence": 80.0}}
+[energyplus_observation] {"hour": 18, "outdoor_c": 31.424999999999997, "zones": {"SPACE1-1": 24.99919012153927, "SPACE2-1": 24.114736024789494, "SPACE3-1": 24.999205681340374, "SPACE4-1": 24.999177574513, "SPACE5-1": 24.793105043740713}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["d5d06ae4-bf78-472a-9b9c-e358504d
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 25.0, "reason": "Reason for proposed cooling setpoint is to stay within 22-28C range as per comfort standards", "confidence": 0.8}}
+[energyplus_observation] {"hour": 19, "outdoor_c": 30.450000000000003, "zones": {"SPACE1-1": 24.22723240838268, "SPACE2-1": 22.87706522253165, "SPACE3-1": 24.17156237483413, "SPACE4-1": 24.48280200519814, "SPACE5-1": 23.853423605161435}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["fa73a653-8167-4709-9932-75029bcb
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 24.5, "reason": "Heatwave", "confidence": 95}}
+[energyplus_observation] {"hour": 20, "outdoor_c": 29.725, "zones": {"SPACE1-1": 23.923944885024106, "SPACE2-1": 23.273638500175917, "SPACE3-1": 23.830263515302082, "SPACE4-1": 24.05158553980688, "SPACE5-1": 23.172588502011436}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["ddb65f10-5d21-4997-8e81-a8f796f0
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 24.5, "reason": "Higher than recommended comfort occupied temperature", "confidence": 0.8}}
+[energyplus_observation] {"hour": 21, "outdoor_c": 28.624999999999996, "zones": {"SPACE1-1": 23.894901977086878, "SPACE2-1": 23.56311373146084, "SPACE3-1": 23.798897728248065, "SPACE4-1": 24.307766293471925, "SPACE5-1": 23.14116665047888}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["48a793ff-94db-4d49-8a38-668ffa68
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 24, "reason": "Comfort zone not reached", "confidence": 80}}
+[energyplus_observation] {"hour": 22, "outdoor_c": 27.650000000000002, "zones": {"SPACE1-1": 23.40897515450699, "SPACE2-1": 23.23432929832475, "SPACE3-1": 23.329141681483595, "SPACE4-1": 23.68267131244392, "SPACE5-1": 22.684492983569573}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["d4dbf53e-3942-4bd9-80f6-62893f81
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 25.0, "reason": "Maintaining thermal comfort within a narrow range to minimize heat loss and energy consumption.", "confidence": 90.0}}
+[energyplus_observation] {"hour": 23, "outdoor_c": 26.924999999999997, "zones": {"SPACE1-1": 23.065027240576352, "SPACE2-1": 22.953364099121423, "SPACE3-1": 22.994535371531494, "SPACE4-1": 23.213452350081393, "SPACE5-1": 22.420311419396146}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 51319, "server_pid": 51324, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["6acd7f7f-bd60-47dc-8bbc-5ed0e3f1
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 23, "reason": "Based on historical cooling load data and zone occupancy, adjusting the proposed setpoint to 22-28C aims to balance comfor
+Writing tabular output file results using HTML format.
+Writing final SQL reports
+EnergyPlus Run Time=00hr 03min 10.48sec
+EnergyPlus Completed Successfully.
+[agent_complete] {"total_energy_kwh": 407.4354, "action_counts": {"approved": 30, "rejected": 18, "fallback": 0, "total_decisions": 48}, "comfort_violation_hours": 0.0}
+[safety_shield_rejects_unsafe] {"proposed": 35.0, "approved": false, "disposition": "rejected", "reasons": ["cooling_setpoint_out_of_range", "max_setpoint_change_exceeded"]}
+{
+  "path": "EnergyPlus \u2192 MCP client \u2192 stdio \u2192 separate MCP server process \u2192 MCP tools \u2192 Ollama structured proposal \u2192 SafetyShield \u2192 EnergyPlus actuator",
+  "mcp_transport": "stdio",
+  "mcp_client_pid": 51319,
+  "mcp_server_pid": 51324,
+  "mcp_pids_differ": true,
+  "baseline": {
+    "total_energy_kwh": 421.5057,
+    "status": "completed"
+  },
+  "agent": {
+    "total_energy_kwh": 407.4354,
+    "status": "completed",
+    "action_counts": {
+      "approved": 30,
+      "rejected": 18,
+      "fallback": 0,
+      "total_decisions": 48
+    },
+    "controller": "llm_mcp+safety_shield"
+  },
+  "llm_bypass_possible": false,
+  "stage_log": "/tmp/ecolooop-stdio-cleanroom-20260725T112256Z/results/llm_mcp/stage_log.jsonl",
+  "mcp_trace": "/tmp/ecolooop-stdio-cleanroom-20260725T112256Z/manual-verification/mcp-transport/mcp-runtime-trace.jsonl",
+  "notes": [
+    "Authoritative MCP path uses a separate stdio server process.",
+    "Direct in-process MCP handler invocation is not used on this path.",
+    "If Ollama or MCP fails, deterministic_fallback is used and logged.",
+    "Unsafe 35C proposal is rejected by SafetyShield."
+  ]
+}
+LLM2:0
+Wrote evidence pack to /tmp/ecolooop-stdio-cleanroom-20260725T112256Z/submission-evidence
+ - agent-action-log.csv 2656
+ - agent-results.csv 227
+ - architecture.png 14986
+ - baseline-results.csv 173
+ - comparison.json 1998
+ - energyplus-runtime-log.txt 1043
+ - experiment-methodology.md 1130
+ - fallback-log.txt 213
+ - safety-rejection-log.txt 295
+EVIDENCE2:0
+JSON_FINAL=18
+RERUN_END 2026-07-25T11:30:20Z

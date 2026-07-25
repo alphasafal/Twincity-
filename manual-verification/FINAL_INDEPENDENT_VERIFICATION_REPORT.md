@@ -166,3 +166,30 @@ Fixes applied — see `16-final-evidence/fixes-applied.md`.
 - Fallback action_counts: **FIXED** (48 fallback when Ollama down)
 
 **Post-fix independent readiness score: 87/100** (pre-fix 83/100).
+
+
+---
+
+# Remediation addendum — stdio MCP (`95a58e754e6a17ba987fa65d09401bd97f69ca43`)
+
+Date: `2026-07-25T11:30:38.737937+00:00`
+
+## Status
+
+**PASS** after MCP transport remediation. Independent score **95/100**.
+
+## What changed
+
+1. Authoritative LLM path now uses **separate stdio MCP server** (`TWINPILOT_MCP_MODE=energyplus_experiment`).
+2. Generated `results/` / `submission-evidence/` outputs **removed from Git** (gitkeeps only).
+3. `./scripts/check_prerequisites.sh` verifies Ollama + model.
+4. Dashboard honest no-data for `DATA_MODE=energyplus` without results.
+5. README/architecture wording corrected.
+
+## Clean-room
+
+VERIFIED — clone at `95a58e754e6a17ba987fa65d09401bd97f69ca43` had zero result JSON; full README workflow succeeded with stdio MCP PIDs differing (`51319` ≠ `51324`).
+
+## Historical note
+
+Phase 9 original FAILED (simulated MCP) and later PARTIALLY VERIFIED (in-process handler) findings remain in earlier sections / `preserved-09-llm-mcp-original/` for audit continuity.
