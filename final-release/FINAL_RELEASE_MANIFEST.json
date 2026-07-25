@@ -1,6 +1,6 @@
 {
   "project": "Eco-Loop Building Agents",
-  "final_release_commit": "f0f94d84d08969784cf2373ddbb3cca6e3fa909b",
+  "final_release_commit": "0d1d30a7ce010b7e791ea3e7e1a8ba399a8c9f77",
   "branch": "cursor/ecolooop-energyplus-audit-b6b3",
   "generated_at": "2026-07-25T12:02:42.369629+00:00",
   "overall_status": "PASS",
@@ -119,5 +119,7 @@
       "note": "Pack complete; owner tag/push remaining (-1)"
     }
   },
-  "evidence_pack_commit": "29e88cbd829a333b4661ea8d6c448b1a02a46325"
+  "evidence_pack_commit": "29e88cbd829a333b4661ea8d6c448b1a02a46325",
+  "tag_target": "0d1d30a7ce010b7e791ea3e7e1a8ba399a8c9f77",
+  "go_no_go": "GO"
 }
