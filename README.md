@@ -15,34 +15,27 @@ Buildings waste energy when HVAC setpoints ignore occupancy, weather, and comfor
 TwinPilot / Eco-Loop separates **proposal** from **actuation**:
 
 1. Observe building state (EnergyPlus Runtime API, or an explicit mock twin)
-2. Optionally package observations through a **separate local MCP server over stdio**
-3. Agent (deterministic or Ollama) proposes a cooling-setpoint adjustment
+2. Package observations through a **separate local MCP server over stdio**
+3. Ollama (Path C) selects an energy-conservation strategy; deterministic optimiser computes setpoints (Path A is the authoritative savings path)
 4. Deterministic Safety Shield validates range, rate, deadband, sensors, and infrastructure health
-5. Only approved actions are written to the EnergyPlus `Clg-SetP-Sch` schedule actuator (or mock apply)
-6. Baseline vs agent experiments quantify energy, peak, comfort, and carbon *estimates*
+5. Only approved actions are written to the EnergyPlus `Clg-SetP-Sch` schedule actuator
+6. Expected vs actual outcomes feed self-correction; baseline vs agent experiments quantify energy, peak, comfort, and carbon *estimates*
+
+**Innovation:** Eco-Loop combines a tool-using supervisory agent with deterministic numerical optimisation and a safety-enforced EnergyPlus actuator loop. The AI can reason and adapt, but it cannot bypass operational constraints.
 
 ## Architecture
 
 ```text
-Web / Mobile ──► FastAPI RuntimeHub ──► Mock twin (only when DATA_MODE=mock)
-                         │
-                         ├── Optimizer + SafetyShield
-                         └── Agent (deterministic | Ollama)
+Path A (authoritative savings):
+  EnergyPlus → deterministic optimiser → SafetyShield → Clg-SetP-Sch
 
-Measured EnergyPlus path:
-  scripts/run_baseline.sh | run_agent.sh
-    → ep_experiment (pyenergyplus Runtime API)
-    → results/{baseline,agent,comparison}/   (generated locally; not committed)
+Path B (LLM setpoint demo):
+  EnergyPlus → MCP stdio (separate process) → Ollama setpoint → SafetyShield → actuator
 
-LLM + MCP path (optional):
-  EnergyPlus observation
-    → MCP client (this process)
-    → stdio transport
-    → separate MCP server process (`python -m twinpilot_mcp`)
-    → MCP tools (get_building_observation, …)
-    → Ollama structured proposal (local)
-    → SafetyShield (authoritative gate)
-    → EnergyPlus actuator
+Path C (hybrid supervisory — LLM materially in the loop):
+  EnergyPlus → MCP stdio → Ollama strategy/ECM
+            → deterministic optimiser → SafetyShield → Clg-SetP-Sch
+            → next state → expected vs actual → correct strategy
 ```
 
 **Layering (do not conflate):**
@@ -50,7 +43,8 @@ LLM + MCP path (optional):
 | Layer | Role |
 |-------|------|
 | MCP stdio transport | Moves observations/context between client and a **separate** MCP server process |
-| Ollama | Local LLM reasoning only — never writes actuators |
+| Ollama | Supervisory strategy / structured proposals — never writes actuators |
+| Deterministic optimiser | Fast numeric setpoints from strategy + state |
 | SafetyShield | Deterministic accept/reject/fallback before actuation |
 | EnergyPlus Runtime API | Observations + `Clg-SetP-Sch` actuator writes |
 
@@ -137,12 +131,26 @@ DATA_MODE=mock ./scripts/run_demo.sh
 | Operator | `operator@twinpilot.demo` | `TwinPilot-Operator-Demo!` |
 | Viewer | `viewer@twinpilot.demo` | `TwinPilot-Viewer-Demo!` |
 
-### C) LLM + stdio MCP experiment (optional)
+### C) LLM + stdio MCP experiment (Path B)
 
 ```bash
 ./scripts/run_llm_mcp_experiment.sh
-# Spawns a separate MCP server over stdio; logs under results/llm_mcp/ and
-# manual-verification/mcp-transport/mcp-runtime-trace.jsonl when present.
+# Spawns a separate MCP server over stdio; logs under results/llm_mcp/
+```
+
+### D) Hybrid supervisory loop (Path C — LLM selects strategy)
+
+```bash
+./scripts/run_hybrid_supervisory_experiment.sh
+# Ollama selects ECM/strategy via MCP tools; optimiser computes setpoints;
+# SafetyShield gates Clg-SetP-Sch; self-correction logged in results/hybrid/
+```
+
+### E) Multi-scenario fair comparisons
+
+```bash
+./scripts/run_scenarios.sh
+# → results/scenarios/consolidated_comparison.json
 ```
 
 ## Baseline methodology

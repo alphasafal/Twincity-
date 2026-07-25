@@ -2,49 +2,60 @@
 
 This prototype controls an **EnergyPlus digital building**, not a physical BMS.
 
-## Two loops
+## Three measured paths (honest layering)
 
-### A) Interactive mock closed loop (explicit `DATA_MODE=mock` only)
+### Path A — Authoritative savings (deterministic optimiser)
+
+```text
+scripts/run_baseline.sh | run_agent.sh
+  → twinpilot_simulator.ep_experiment
+  → EnergyPlus 24.x Runtime API (pyenergyplus)
+  → observations → deterministic optimiser → SafetyShield → Clg-SetP-Sch
+  → results/*/summary.json → compare_results.sh
+```
+
+Identical IDF, EPW, occupancy schedule, and run period. **Only the controller differs.**
+
+**Authoritative comfort-zero claim:** HVAC **4.98%**, total **1.31%**, peak **1.47%**, comfort **0 h**.
+
+### Path B — LLM setpoint proposal via separate MCP stdio
+
+```text
+EnergyPlus observation
+  → MCP client → stdio → separate MCP server
+  → Ollama structured setpoint proposal
+  → SafetyShield → Clg-SetP-Sch → next state
+```
+
+Proves process isolation, tools/call, Ollama JSON, and fallback. Does **not** replace Path A as the primary savings claim.
+
+### Path C — Hybrid supervisory loop (winning defence)
+
+```text
+EnergyPlus observations
+  → MCP client → stdio → separate MCP server
+  → Ollama selects energy-conservation strategy (ECM)
+  → deterministic optimiser computes numeric setpoints
+  → SafetyShield validates
+  → Clg-SetP-Sch actuator
+  → next EnergyPlus state
+  → expected vs actual outcome → strategy correction
+```
+
+Run: `./scripts/run_hybrid_supervisory_experiment.sh` → `results/hybrid/`.
+
+The LLM provides supervisory intelligence and tool-based strategy selection. Deterministic optimisation handles fast numerical control. SafetyShield retains final authority.
+
+Do **not** describe in-process handler calls as remote MCP. Paths B/C use a **separate OS process** over stdio.
+
+### Interactive mock (explicit `DATA_MODE=mock` only)
 
 ```text
 Web/Mobile → FastAPI RuntimeHub → MockBuildingSimulator
              → Optimizer / SafetyShield → apply → DB/WS dashboard
 ```
 
-Mock mode must be selected explicitly (`DATA_MODE=mock`). It does not invent EnergyPlus savings.
-
-### B) Measured EnergyPlus closed loop (evaluation evidence)
-
-```text
-scripts/run_baseline.sh | run_agent.sh
-  → twinpilot_simulator.ep_experiment
-  → EnergyPlus 24.x Runtime API (pyenergyplus)
-  → observations → agent proposal → safety gate → Clg-SetP-Sch actuator
-  → results/*/summary.json → compare_results.sh
-```
-
-Identical IDF, EPW, occupancy schedule, and run period. **Only the controller differs.**
-
-`results/*` artifacts are **generated locally and not committed**.
-
-When `DATA_MODE=energyplus` and results are missing, the dashboard shows an honest no-data state (it does not fall back to mock KPIs).
-
-### C) Optional LLM + separate local MCP server (stdio)
-
-```text
-EnergyPlus observation
-  → MCP client (experiment process)
-  → stdio transport
-  → separate MCP server process (`python -m twinpilot_mcp`, TWINPILOT_MCP_MODE=energyplus_experiment)
-  → MCP tools (get_building_observation, propose_or_prepare_control_context,
-               validate_control_action, get_controller_constraints, record_control_decision)
-  → Ollama structured proposal (local prerequisite)
-  → SafetyShield (authoritative actuation gate in ep_experiment)
-  → EnergyPlus actuator
-  → next simulation state
-```
-
-Do **not** describe in-process handler calls as remote MCP. The authoritative experiment path uses a **separate OS process** over stdio.
+`results/*` artifacts are **generated locally and not committed**. When `DATA_MODE=energyplus` and results are missing, the dashboard shows an honest no-data state.
 
 ## Safety boundary
 

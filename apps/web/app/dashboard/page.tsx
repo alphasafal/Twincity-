@@ -29,6 +29,10 @@ import { formatNumber, formatPct } from "@/lib/utils";
 
 type ExperimentBlock = {
   available?: boolean;
+  generated_at_utc?: string;
+  baseline_generated_at_utc?: string;
+  agent_generated_at_utc?: string;
+  rerun_note?: string;
   baseline?: {
     total_energy_kwh?: number;
     hvac_energy_kwh?: number;
@@ -108,8 +112,17 @@ export default function DashboardPage() {
 
       <DataModeBanner
         dataMode={data?.data_mode}
-        dataSourceVisible={data?.data_source_visible}
+        dataSourceVisible={
+          data?.data_source_visible ||
+          (isEnergyPlus ? "Data source: EnergyPlus experiment results" : undefined)
+        }
         syntheticMultiplierApplied={data?.synthetic_multiplier_applied}
+        lastGeneratedAt={
+          experiment?.generated_at_utc ||
+          experiment?.agent_generated_at_utc ||
+          experiment?.baseline_generated_at_utc
+        }
+        variant="experiment"
       />
 
       <ModeBanner mode={data?.mode} />

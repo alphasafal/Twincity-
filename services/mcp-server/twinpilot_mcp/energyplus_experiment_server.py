@@ -208,6 +208,80 @@ def build_energyplus_experiment_fastmcp():
         logger.info("tool=record_control_decision n=%s server_pid=%s", len(_DECISIONS), os.getpid())
         return json.dumps({"ok": True, "recorded": len(_DECISIONS), **_pid_payload()})
 
+    @mcp.tool()
+    def select_energy_conservation_measure(strategy_json: str) -> str:
+        """Record/validate a supervisory energy-conservation strategy (no actuation)."""
+        if not isinstance(strategy_json, str) or not strategy_json.strip():
+            raise ValueError("strategy_json must be a non-empty JSON string")
+        data = json.loads(strategy_json)
+        if not isinstance(data, dict):
+            raise ValueError("strategy_json must decode to an object")
+        allowed = {
+            "COMFORT_FIRST",
+            "ECO_MODE",
+            "UNOCCUPIED_SETBACK",
+            "PRE_COOL",
+            "PEAK_DEMAND_LIMIT",
+            "RECOVERY",
+            "HOLD_CURRENT_POLICY",
+        }
+        strategy = str(data.get("strategy", "HOLD_CURRENT_POLICY")).upper()
+        if strategy not in allowed:
+            strategy = "HOLD_CURRENT_POLICY"
+        out = {
+            **_pid_payload(),
+            "tool": "select_energy_conservation_measure",
+            "strategy": strategy,
+            "target_cooling_range_c": data.get("target_cooling_range_c"),
+            "control_horizon_minutes": data.get("control_horizon_minutes"),
+            "confidence": data.get("confidence"),
+            "reason": data.get("reason"),
+            "expected_hvac_effect_pct": data.get("expected_hvac_effect_pct"),
+            "note": "Supervisory selection only; deterministic optimiser + SafetyShield compute/apply setpoints.",
+        }
+        logger.info(
+            "tool=select_energy_conservation_measure strategy=%s server_pid=%s",
+            strategy,
+            os.getpid(),
+        )
+        return json.dumps(out)
+
+    @mcp.tool()
+    def get_recent_energy_history(history_json: str = "{}") -> str:
+        """Echo recent energy/history context supplied by the EnergyPlus client."""
+        try:
+            hist = json.loads(history_json) if history_json else {}
+        except json.JSONDecodeError as exc:
+            raise ValueError(f"history_json invalid: {exc}") from exc
+        if not isinstance(hist, dict):
+            hist = {"raw": hist}
+        out = {
+            **_pid_payload(),
+            "tool": "get_recent_energy_history",
+            "history": hist,
+            "source": "client_supplied_energyplus_context",
+        }
+        logger.info("tool=get_recent_energy_history server_pid=%s", os.getpid())
+        return json.dumps(out)
+
+    @mcp.tool()
+    def get_previous_action_outcome(outcome_json: str = "{}") -> str:
+        """Return previous expected-vs-actual outcome for self-correction."""
+        try:
+            outcome = json.loads(outcome_json) if outcome_json else {}
+        except json.JSONDecodeError as exc:
+            raise ValueError(f"outcome_json invalid: {exc}") from exc
+        if not isinstance(outcome, dict):
+            outcome = {"raw": outcome}
+        out = {
+            **_pid_payload(),
+            "tool": "get_previous_action_outcome",
+            "outcome": outcome,
+            "source": "client_supplied_self_correction",
+        }
+        logger.info("tool=get_previous_action_outcome server_pid=%s", os.getpid())
+        return json.dumps(out)
+
     return mcp
 
 
