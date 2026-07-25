@@ -1,5 +1,5 @@
 {
-  "tested_commit": "5c563bb3cbabf5b675c9204afdcf8010b14bbd5d",
+  "tested_commit": "95a58e754e6a17ba987fa65d09401bd97f69ca43",
   "pre_remediation_commit": "b63311c3f929a8d9a85dfbf8ed5845231c486b6b",
   "tested_at": "2026-07-25T11:30:38.737937+00:00",
   "overall_status": "PASS",
@@ -142,5 +142,8 @@
   ],
   "tested_commit_note": "Tip commit updated in follow-up commit after guide refresh",
   "manual_guide": "manual-verification/MANUAL_VERIFICATION_GUIDE.md",
-  "remediation_report": "manual-verification/MCP_TRANSPORT_REMEDIATION_REPORT.md"
+  "remediation_report": "manual-verification/MCP_TRANSPORT_REMEDIATION_REPORT.md",
+  "clean_room_evidence_commit": "1b6a04557185e4dea0389f4f5961e4538a729bc1",
+  "branch_tip_at_write": "fe219aca70729bbf689e00528804a392d8f7de53",
+  "note": "tested_commit is the stdio MCP remediation implementation commit; later commits are docs/guide polish."
 }
