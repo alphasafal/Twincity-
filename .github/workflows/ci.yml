@@ -32,6 +32,7 @@ jobs:
           pip install -e services/agent
           pip install -r services/api/requirements.txt
           pip install -e services/api
+          pip install -e services/mcp-server
           pip install pytest pytest-asyncio ruff
 
       - name: Ruff
