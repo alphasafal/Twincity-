@@ -1,7 +1,8 @@
 # Manual Verification Guide (for the project owner)
 
-Audited tip commit: run `git rev-parse HEAD` (remediation series includes `9085cbc` / `1b6a045` / `95a58e7`).  
-Score after stdio MCP remediation: **95/100 PASS** — see `verification-summary.json`.
+Historical remediation commits include `9085cbc` / `1b6a045` / `95a58e7` / `133b053` (not automatically the sealed hackathon release).
+For the sealed release commit and refreshed score, see `final-release/FINAL_RELEASE_MANIFEST.json` and `final-release/FINAL_RELEASE_REPORT.md`.
+Prior post-remediation score **95/100** remains historical evidence in `verification-summary.json`.
 
 For each item: run the command, check the file/field, tick the box.
 

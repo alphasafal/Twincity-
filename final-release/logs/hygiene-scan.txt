@@ -1,0 +1,81 @@
+=== git ls-files results submission-evidence ===
+results/.gitkeep
+results/agent/.gitkeep
+results/baseline/.gitkeep
+results/comparison/.gitkeep
+results/llm_mcp/.gitkeep
+submission-evidence/.gitkeep
+
+=== tracked files that look generated ===
+manual-verification/mcp-transport/fail_killed/mcp-server-37948.pid
+manual-verification/mcp-transport/fail_killed/mcp-server-38062.pid
+manual-verification/mcp-transport/fail_killed/mcp-server-38163.pid
+manual-verification/mcp-transport/fail_restart/mcp-server-38062.pid
+manual-verification/mcp-transport/fail_restart/mcp-server-38163.pid
+manual-verification/mcp-transport/fail_timeout/mcp-server-37948.pid
+manual-verification/mcp-transport/fail_timeout/mcp-server-38062.pid
+manual-verification/mcp-transport/fail_timeout/mcp-server-38163.pid
+manual-verification/mcp-transport/fail_tools/mcp-server-38163.pid
+manual-verification/mcp-transport/fail_unknown/mcp-server-38062.pid
+manual-verification/mcp-transport/mcp-server-37850.pid
+manual-verification/mcp-transport/mcp-server-38195.pid
+results/.gitkeep
+results/agent/.gitkeep
+results/baseline/.gitkeep
+results/comparison/.gitkeep
+results/llm_mcp/.gitkeep
+submission-evidence/.gitkeep
+
+=== secret-like patterns in tracked files (names/content sample) ===
+
+=== absolute path scan in tracked config ===
+docs/audit/closed-loop-code-trace.md:5:**Optional LLM path:** `./scripts/run_llm_mcp_experiment.sh` → `/workspace/scripts/llm_mcp_loop.py`
+docs/audit/closed-loop-code-trace.md:165:`Settings.data_mode` (`/workspace/services/api/app/core/config.py`) gates energyplus vs mock in `building_status` / `analytics_summary`.
+manual-verification/00-environment/environment-summary.md:11:| Python | 3.12.3 (`/workspace/.venv/bin/python3`) |
+manual-verification/00-environment/environment-summary.md:16:| EnergyPlus path | `/workspace/third_party/EnergyPlus/energyplus` |
+manual-verification/03-baseline/baseline-verification.md:27:- IDF: `/workspace/building-models/sample-office/office_5zone.idf`
+manual-verification/03-baseline/baseline-verification.md:28:- EPW: `/workspace/building-models/weather/chicago.epw`
+manual-verification/04-agent/fresh-run/summary.json:8:    "idf": "/workspace/building-models/sample-office/office_5zone.idf",
+manual-verification/04-agent/fresh-run/summary.json:9:    "epw": "/workspace/building-models/weather/chicago.epw",
+manual-verification/04-agent/fresh-run/summary.json:14:    "home": "/workspace/third_party/EnergyPlus",
+manual-verification/04-agent/fresh-run/summary.json:17:    "run_directory": "/workspace/results/agent/energyplus_run",
+manual-verification/04-agent/fresh-run/summary.json:1150:  "raw_csv": "/workspace/results/agent/energyplus_run/eplusout.csv",
+docs/audit/repository-map.md:13:| 1 | EnergyPlus process startup | `/workspace/services/simulator/twinpilot_simulator/ep_experiment.py` | `run_experiment` → `api.runtime.run_energyplus` | Imports `pyenergyplus`, creates state, launches EnergyPlus with IDF/EPW/`-d` run dir. | **real** |
+docs/audit/repository-map.md:14:| 2 | Runtime API callbacks | `/workspace/services/simulator/twinpilot_simulator/ep_experiment.py` | `on_timestep` (nested in `run_experiment`); registered via `api.runtime.callback_end_zone_timestep_after_zone_reporting` | End-of-zone-timestep callback: observe → propose → validate → actuate. | **real** |
+docs/audit/repository-map.md:15:| 3 | Variable-handle acquisition | `/workspace/services/simulator/twinpilot_simulator/ep_experiment.py` | `_ensure_handles` → `api.exchange.get_variable_handle` | Resolves outdoor drybulb, per-zone `Zone Air Temperature`, occupancy handles once API data ready. | **real** |
+docs/audit/repository-map.md:16:| 4 | Actuator-handle acquisition | `/workspace/services/simulator/twinpilot_simulator/ep_experiment.py` | `_ensure_handles` → `api.exchange.get_actuator_handle` | Resolves `Schedule:Compact` / `Schedule Value` / `Clg-SetP-Sch` (+ heating schedule). | **real** |
+docs/audit/repository-map.md:17:| 5 | Zone-temperature observation | `/workspace/services/simulator/twinpilot_simulator/ep_experiment.py` | `on_timestep` → `api.exchange.get_variable_value` (`temp_{zone}`) | Reads live zone air temps for SPACE1–5 each timestep. | **real** |
+docs/audit/repository-map.md:18:| 6 | Occupancy observation | `/workspace/services/simulator/twinpilot_simulator/ep_experiment.py` | `on_timestep` → `get_variable_value` (`occ_{zone}`) | Reads `Zone People Occupant Count`, fallback `People Occupant Count` / `PEOPLE_KEYS`. | **real** |
+docs/audit/repository-map.md:19:| 7 | Outdoor-weather observation | `/workspace/services/simulator/twinpilot_simulator/ep_experiment.py` | `on_timestep` → `get_variable_value` (`handles["outdoor"]`) | Reads `Site Outdoor Air Drybulb Temperature` / `Environment` from EPW-driven sim. | **real** |
+docs/audit/repository-map.md:20:| 8 | Energy and power observation | `/workspace/services/simulator/twinpilot_simulator/ep_experiment.py` | `_parse_results_from_csv`, `_sum_meter_column` | Post-run sums `eplusout.csv` meters (Facility/HVAC/Cooling/… J→kWh); peak from hourly Facility. | **real** |
+docs/audit/repository-map.md:21:| 9 | Baseline controller | `/workspace/services/simulator/twinpilot_simulator/ep_experiment.py` | `run_experiment` with `ExperimentConfig.mode="baseline"` | Leaves thermostat schedules untouched; records stream frames only. | **real** |
+docs/audit/repository-map.md:22:| 10 | Deterministic agent/controller | `/workspace/services/simulator/twinpilot_simulator/ep_experiment.py` | `propose_agent_cooling_setpoint` | Comfort-first cooling-setpoint policy from outdoor/temps/occupancy/hour (no actuation). | **real** |
+docs/audit/repository-map.md:23:| 11 | MCP server | `/workspace/services/mcp-server/twinpilot_mcp/server.py` | `main`, `build_fastmcp`, `run_with_fastmcp`, `run_with_low_level_sdk` | stdio MCP entry; FastMCP preferred, JSON-RPC fallback. | **real** |
+docs/audit/repository-map.md:24:| 12 | MCP resources and tools | `/workspace/services/mcp-server/twinpilot_mcp/catalog.py`, `handlers.py`, `client.py` | `RESOURCES`/`TOOLS`; `read_resource`, `call_tool`; `TwinPilotClient` | Catalog + dispatch to TwinPilot REST; forecasts partly client-synthesized. | **real** (forecasts **mocked**) |
+docs/audit/repository-map.md:25:| 13 | Ollama client | `/workspace/services/agent/twinpilot_agent/providers.py`; `/workspace/scripts/llm_mcp_loop.py` | `OllamaAgentProvider._ollama`; `call_ollama_structured` | HTTP POST `/api/generate` to Ollama; used when provider/`llm_mcp` path enabled. | **optional** |
+docs/audit/repository-map.md:26:| 14 | LLM prompt construction | `/workspace/services/agent/twinpilot_agent/providers.py`; `/workspace/scripts/llm_mcp_loop.py` | `OllamaAgentProvider._prompt`; `call_ollama_structured` prompt string | Builds supervisor / HVAC-setpoint JSON-only prompts with context. | **real** |
+docs/audit/repository-map.md:27:| 15 | LLM response parsing | `/workspace/services/agent/twinpilot_agent/providers.py`; `/workspace/scripts/llm_mcp_loop.py` | `OllamaAgentProvider._parse`; `call_ollama_structured` `json.loads` | Parses JSON (regex extract + repair retry); clamps confidence. | **real** |
+docs/audit/repository-map.md:28:| 16 | Structured action schema | `/workspace/services/agent/twinpilot_agent/providers.py`; `/workspace/scripts/llm_mcp_loop.py` | `AgentPlanOutput`, `ExpectedImpact`; LLM keys `proposed_cooling_setpoint_c`/`reason`/`confidence` | Pydantic plan schema for API agent; experiment LLM uses setpoint JSON contract. | **real** |
+docs/audit/repository-map.md:29:| 17 | SafetyShield validation | `/workspace/services/optimizer/twinpilot_optimizer/safety.py`; `/workspace/services/simulator/twinpilot_simulator/ep_experiment.py` | `SafetyShield.validate`; `validate_setpoint_action` | API apply-path shield; E+ loop uses equivalent deterministic gate (range/rate/deadband/failures). | **real** |
+docs/audit/repository-map.md:30:| 18 | Cooling-setpoint actuator write | `/workspace/services/simulator/twinpilot_simulator/ep_experiment.py` | `on_timestep` → `api.exchange.set_actuator_value` (`handles["clg"]`) | Writes approved (or hold) value to `Clg-SetP-Sch` each control interval. | **real** |
+docs/audit/repository-map.md:31:| 19 | Fallback controller | `/workspace/services/simulator/twinpilot_simulator/ep_experiment.py`; `/workspace/services/agent/twinpilot_agent/providers.py`; `/workspace/scripts/llm_mcp_loop.py` | `validate_setpoint_action` disposition `fallback`; `DeterministicAgentProvider`; `make_proposal_fn` → `propose_agent_cooling_setpoint` | Hold last safe SP on infra failure; LLM→deterministic proposal fallback. | **real** |
+docs/audit/repository-map.md:32:| 20 | Action logging | `/workspace/services/simulator/twinpilot_simulator/ep_experiment.py` | `run_experiment` → `actions_log` → `actions.json` | Records proposal, disposition, blocking reasons, E+ acceptance per decision. | **real** |
+docs/audit/repository-map.md:33:| 21 | Comfort calculation | `/workspace/services/simulator/twinpilot_simulator/ep_experiment.py` | `_parse_results_from_csv` (`comfort_analysis`) | Occupied comfort hours/degree-hours vs band using office-hours 06–20 proxy. | **derived** |
+docs/audit/repository-map.md:34:| 22 | Energy aggregation | `/workspace/services/simulator/twinpilot_simulator/ep_experiment.py` | `_sum_meter_column`, `_parse_results_from_csv` | Aggregates Facility/HVAC/end-use meters to kWh. | **real** |
+docs/audit/repository-map.md:35:| 23 | Peak-power calculation | `/workspace/services/simulator/twinpilot_simulator/ep_experiment.py` | `_parse_results_from_csv` (`peak_kw`) | Max of hourly Facility J × `J_TO_KWH` (avg-kW proxy per hour). | **derived** |
+docs/audit/repository-map.md:36:| 24 | Percentage-reduction calculation | `/workspace/services/simulator/twinpilot_simulator/ep_experiment.py`; `/workspace/services/api/app/services/experiment_store.py` | `compare_summaries` → nested `delta`; `_pct_reduction` | `(baseline - agent) / baseline * 100` on measured totals. | **derived** |
+docs/audit/repository-map.md:37:| 25 | Carbon estimate | `/workspace/services/simulator/twinpilot_simulator/ep_experiment.py` | `_parse_results_from_csv` (`carbon_estimate_kg`); `DEFAULT_CARBON_KG_PER_KWH` | `total_energy_kwh * 0.417`; labeled estimate, not live grid. | **derived** |
+docs/audit/repository-map.md:38:| 26 | Backend experiment-data API | `/workspace/services/api/app/services/experiment_store.py`; `/workspace/services/api/app/api/v1/router.py` | `experiment_dashboard_payload`, `load_*`; `building_status`, `experiments_comparison`, `experiments_stream`, `experiments_actions`, `analytics_summary` | Serves `results/*` JSON when `DATA_MODE=energyplus`. | **real** |
+docs/audit/repository-map.md:39:| 27 | Dashboard API client | `/workspace/apps/web/lib/api.ts`; `/workspace/apps/web/lib/hooks.ts` | `apiFetch`, `api.getBuildingStatus`, `api.experimentStream`, …; `useLiveBuilding` | Authenticated fetch + polling/WS for dashboard status. | **real** |
+docs/audit/repository-map.md:40:| 28 | Dashboard data-source indicator | `/workspace/apps/web/components/DataModeBanner.tsx`; used in `/workspace/apps/web/app/dashboard/page.tsx` | `DataModeBanner`; `DashboardPage` | Shows `DATA_MODE=` and visible source; warns if synthetic multiplier. | **real** |
+docs/audit/repository-map.md:41:| 29 | Live-demo streaming logic | `/workspace/apps/web/app/live-demo/page.tsx`; `/workspace/services/api/app/api/v1/router.py` | `LiveDemoPage`; `experiments_stream` ← `load_stream_frames` | Accelerated playback of recorded `stream.json` frames (~3 min), not live E+. | **derived** |
+
+=== .env ignore ===
+.gitignore:14:.env	.env
+-rw-r--r-- 1 ubuntu ubuntu 3824 Jul 25 10:42 .env.example
+
+=== PID / cache ignore ===
+.gitignore:33:results/**	results/.mcp_server.pid
+.gitignore:12:.venv	.venv
+.gitignore:1:node_modules	node_modules
+.gitignore:33:results/**	results/baseline/eplusout.eso

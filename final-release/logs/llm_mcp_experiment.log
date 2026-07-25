@@ -1,0 +1,361 @@
+COMMAND: RESULTS_LLM_DIR=/workspace/results/llm_mcp TWINPILOT_MCP_TRACE=/workspace/final-release/evidence/mcp-runtime-trace.jsonl ./scripts/run_llm_mcp_experiment.sh
+START_UTC=2026-07-25T11:48:15Z
+PWD=/workspace
+CLIENT_SHELL_PID=65977
+[start] {"out": "/workspace/results/llm_mcp", "mcp_trace": "/workspace/final-release/evidence/mcp-runtime-trace.jsonl"}
+[mcp_session_ready] {"transport": "stdio", "client_pid": 65999, "server_pid": 66004, "pids_differ": true, "tools": ["get_building_observation", "propose_or_prepare_control_context", "validate_control_action", "get_controller_constraints", "record_control_decis
+EnergyPlus Starting
+EnergyPlus, Version 24.1.0-9d7789a3ac, YMD=2026.07.25 11:48
+Initializing Response Factors
+Calculating CTFs for "ROOF-1"
+Calculating CTFs for "WALL-1"
+Calculating CTFs for "FLOOR-SLAB-1"
+Calculating CTFs for "INT-WALL-1"
+Initializing Window Optical Properties
+Initializing Solar Calculations
+Allocate Solar Module Arrays
+Initializing Zone and Enclosure Report Variables
+Initializing Surface (Shading) Report Variables
+Computing Interior Solar Absorption Factors
+Determining Shadowing Combinations
+Computing Window Shade Absorption Factors
+Proceeding with Initializing Solar Calculations
+Initializing Surfaces
+Initializing Outdoor environment for Surfaces
+Setting up Surface Reporting Variables
+Initializing Temperature and Flux Histories
+Initializing Window Shading
+Computing Interior Absorption Factors
+Computing Interior Diffuse Solar Absorption Factors
+Initializing Solar Heat Gains
+Initializing Internal Heat Gains
+Initializing Interior Solar Distribution
+Initializing Interior Convection Coefficients
+Gathering Information for Predefined Reporting
+Completed Initializing Surface Heat Balance
+Calculate Outside Surface Heat Balance
+Calculate Inside Surface Heat Balance
+Calculate Air Heat Balance
+Initializing HVAC
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Performing Zone Sizing Simulation for Load Component Report
+...for Sizing Period: #1 CHICAGO_IL_USA ANNUAL HEATING 99% DESIGN CONDITIONS DB
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Performing Zone Sizing Simulation for Load Component Report
+...for Sizing Period: #2 CHICAGO_IL_USA ANNUAL COOLING 1% DESIGN CONDITIONS DB/MCWB
+Re-zeroing zone sizing arrays
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Performing Zone Sizing Simulation
+...for Sizing Period: #1 CHICAGO_IL_USA ANNUAL HEATING 99% DESIGN CONDITIONS DB
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Performing Zone Sizing Simulation
+...for Sizing Period: #2 CHICAGO_IL_USA ANNUAL COOLING 1% DESIGN CONDITIONS DB/MCWB
+Calculating System sizing
+...for Sizing Period: #1 CHICAGO_IL_USA ANNUAL HEATING 99% DESIGN CONDITIONS DB
+Calculating System sizing
+...for Sizing Period: #2 CHICAGO_IL_USA ANNUAL COOLING 1% DESIGN CONDITIONS DB/MCWB
+Adjusting Air System Sizing
+Adjusting Standard 62.1 Ventilation Sizing
+Initializing Simulation
+Reporting Surfaces
+Beginning Primary Simulation
+Initializing New Environment Parameters
+Warming up {1}
+Warming up {2}
+Warming up {3}
+Warming up {4}
+Warming up {5}
+Warming up {6}
+Starting Simulation at 07/15/2014 for DEMOPERIOD
+Writing tabular output file results using HTML format.
+Writing final SQL reports
+EnergyPlus Run Time=00hr 00min  0.28sec
+EnergyPlus Completed Successfully.
+[baseline_complete] {"total_energy_kwh": 421.5057}
+EnergyPlus Starting
+EnergyPlus, Version 24.1.0-9d7789a3ac, YMD=2026.07.25 11:48
+Initializing Response Factors
+Calculating CTFs for "ROOF-1"
+Calculating CTFs for "WALL-1"
+Calculating CTFs for "FLOOR-SLAB-1"
+Calculating CTFs for "INT-WALL-1"
+Initializing Window Optical Properties
+Initializing Solar Calculations
+Allocate Solar Module Arrays
+Initializing Zone and Enclosure Report Variables
+Initializing Surface (Shading) Report Variables
+Computing Interior Solar Absorption Factors
+Determining Shadowing Combinations
+Computing Window Shade Absorption Factors
+Proceeding with Initializing Solar Calculations
+Initializing Surfaces
+Initializing Outdoor environment for Surfaces
+Setting up Surface Reporting Variables
+Initializing Temperature and Flux Histories
+Initializing Window Shading
+Computing Interior Absorption Factors
+Computing Interior Diffuse Solar Absorption Factors
+Initializing Solar Heat Gains
+Initializing Internal Heat Gains
+Initializing Interior Solar Distribution
+Initializing Interior Convection Coefficients
+Gathering Information for Predefined Reporting
+Completed Initializing Surface Heat Balance
+Calculate Outside Surface Heat Balance
+Calculate Inside Surface Heat Balance
+Calculate Air Heat Balance
+Initializing HVAC
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Performing Zone Sizing Simulation for Load Component Report
+...for Sizing Period: #1 CHICAGO_IL_USA ANNUAL HEATING 99% DESIGN CONDITIONS DB
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Performing Zone Sizing Simulation for Load Component Report
+...for Sizing Period: #2 CHICAGO_IL_USA ANNUAL COOLING 1% DESIGN CONDITIONS DB/MCWB
+Re-zeroing zone sizing arrays
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Performing Zone Sizing Simulation
+...for Sizing Period: #1 CHICAGO_IL_USA ANNUAL HEATING 99% DESIGN CONDITIONS DB
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Performing Zone Sizing Simulation
+...for Sizing Period: #2 CHICAGO_IL_USA ANNUAL COOLING 1% DESIGN CONDITIONS DB/MCWB
+Calculating System sizing
+...for Sizing Period: #1 CHICAGO_IL_USA ANNUAL HEATING 99% DESIGN CONDITIONS DB
+Calculating System sizing
+...for Sizing Period: #2 CHICAGO_IL_USA ANNUAL COOLING 1% DESIGN CONDITIONS DB/MCWB
+Adjusting Air System Sizing
+Adjusting Standard 62.1 Ventilation Sizing
+Initializing Simulation
+Reporting Surfaces
+Beginning Primary Simulation
+Initializing New Environment Parameters
+Warming up {1}
+Warming up {2}
+Warming up {3}
+Warming up {4}
+Warming up {5}
+Warming up {6}
+Starting Simulation at 07/15/2014 for DEMOPERIOD
+[energyplus_observation] {"hour": 0, "outdoor_c": 24.200000000000003, "zones": {"SPACE1-1": 22.150266267564337, "SPACE2-1": 22.100503262920537, "SPACE3-1": 22.115963687467442, "SPACE4-1": 22.114470505120114, "SPACE5-1": 21.79295997206227}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["90a5c43a-4f7f-4c79-9a39-2acf1f4d
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 22, "reason": "Maintaining comfort within a reasonable range to minimize energy consumption.", "confidence": 0.9}}
+[energyplus_observation] {"hour": 1, "outdoor_c": 20.0, "zones": {"SPACE1-1": 21.704503702790802, "SPACE2-1": 21.74194911882665, "SPACE3-1": 21.689553755450895, "SPACE4-1": 21.750001199275104, "SPACE5-1": 21.66172212905071}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["25d1cd32-1ffd-457e-b4e8-9757af3c
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 22.0, "reason": "Temperature reading is not within acceptable comfort range.", "confidence": 0.8}}
+[energyplus_observation] {"hour": 2, "outdoor_c": 19.85, "zones": {"SPACE1-1": 21.447569857071795, "SPACE2-1": 21.49461898538564, "SPACE3-1": 21.43557757904212, "SPACE4-1": 21.49914145003487, "SPACE5-1": 21.52389333733471}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["3121157a-f1c2-4d48-a76d-d5c1b158
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 25.0, "reason": "Temperature has been rising for several hours with occupancy around 90%,"}}
+[energyplus_observation] {"hour": 3, "outdoor_c": 19.275, "zones": {"SPACE1-1": 21.20995037348608, "SPACE2-1": 21.252979055728765, "SPACE3-1": 21.18876892194707, "SPACE4-1": 21.255587715005483, "SPACE5-1": 21.39320427936841}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["369c22fd-db0a-4251-908d-8e685201
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 22.0, "reason": "Temperature is within acceptable range and no safety shield", "confidence": 0.9}}
+[energyplus_observation] {"hour": 4, "outdoor_c": 18.9, "zones": {"SPACE1-1": 21.013311887003095, "SPACE2-1": 21.050330005181706, "SPACE3-1": 20.98499707016444, "SPACE4-1": 21.051822796433427, "SPACE5-1": 21.272501913648952}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["0c605767-0856-484c-99c4-3b87dee2
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 24.5, "reason": "Insufficient cooling with potential for discomfort", "confidence": 80.0}}
+[energyplus_observation] {"hour": 5, "outdoor_c": 19.325, "zones": {"SPACE1-1": 20.984606725466584, "SPACE2-1": 21.51054724505414, "SPACE3-1": 21.711595413529725, "SPACE4-1": 21.04833758756656, "SPACE5-1": 21.186441868520717}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["cedb9909-9ccb-4d7d-9d87-311de1c0
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 24.5, "reason": "to stay within the comfort range of the occupied zones", "confidence": 0.7}}
+[energyplus_observation] {"hour": 6, "outdoor_c": 21.0, "zones": {"SPACE1-1": 22.20048159906944, "SPACE2-1": 22.20044199883681, "SPACE3-1": 22.494015201385285, "SPACE4-1": 22.200440812576193, "SPACE5-1": 22.201027486251036}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["d179848f-db41-4ef6-8dac-55b0a5d3
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 24.5, "reason": "The proposed cooling setpoint is within the allowed range and does not exceed the comfort occupied zone.", "confidence":
+[energyplus_observation] {"hour": 7, "outdoor_c": 22.75, "zones": {"SPACE1-1": 22.201097897576446, "SPACE2-1": 22.29884201703678, "SPACE3-1": 22.824485072052134, "SPACE4-1": 22.199409096144418, "SPACE5-1": 22.200989067904224}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["6b2a05d6-2a12-4380-b1f2-c929c2d5
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 25.0, "reason": "Comfort zone is above recommended temperature", "confidence": 90.0}}
+[energyplus_observation] {"hour": 8, "outdoor_c": 24.699999999999996, "zones": {"SPACE1-1": 22.925999163961713, "SPACE2-1": 23.60713615762215, "SPACE3-1": 24.23767249426391, "SPACE4-1": 22.2341932484831, "SPACE5-1": 22.901789105408202}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["a42e4335-46d0-4dd9-9739-98b0cd53
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 24.0, "reason": "Reason: Maintain a comfortable temperature within the occupant's threshold.", "confidence": 80.0}}
+[energyplus_observation] {"hour": 9, "outdoor_c": 26.150000000000002, "zones": {"SPACE1-1": 23.9982486605848, "SPACE2-1": 23.998628789414845, "SPACE3-1": 23.99876557517085, "SPACE4-1": 23.48144742683831, "SPACE5-1": 23.998671849116235}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["b2d2a087-ccf5-4775-94ba-2bae22b0
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 24.0, "reason": "Climate control requirement within \u00b15\u00b0C of existing setpoint", "confidence": 90.0}}
+[energyplus_observation] {"hour": 10, "outdoor_c": 28.075000000000003, "zones": {"SPACE1-1": 23.997947769746446, "SPACE2-1": 23.998478398080675, "SPACE3-1": 23.99812956070456, "SPACE4-1": 23.997782351377072, "SPACE5-1": 23.997758735072185}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["e3f784eb-a071-47b1-8cfb-f64d0166
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 23.9, "reason": "Comfort and occupant health is maintained within a reasonable range.", "confidence": 0.8}}
+[energyplus_observation] {"hour": 11, "outdoor_c": 29.324999999999996, "zones": {"SPACE1-1": 23.89822609808475, "SPACE2-1": 23.898822212509955, "SPACE3-1": 23.89833218224869, "SPACE4-1": 23.89831090137461, "SPACE5-1": 23.89792510908824}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["6c400ff1-e026-4356-88bc-3ea64401
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 24.5, "reason": "Reduced cooling setpoint to stay within comfort range", "confidence": 0.8}}
+[energyplus_observation] {"hour": 12, "outdoor_c": 30.875000000000004, "zones": {"SPACE1-1": 24.49864396398319, "SPACE2-1": 24.498774828037757, "SPACE3-1": 24.49866682679046, "SPACE4-1": 24.498653390762158, "SPACE5-1": 24.49862067565136}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["1785ba9a-213d-4552-8675-3b4293f7
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 25, "reason": "Optimization for comfort and safety", "confidence": 0.8}}
+[energyplus_observation] {"hour": 13, "outdoor_c": 31.7, "zones": {"SPACE1-1": 24.998804155328123, "SPACE2-1": 24.998980310944116, "SPACE3-1": 24.998826512641877, "SPACE4-1": 24.976826229468987, "SPACE5-1": 24.998506936269493}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["34ae17f2-186e-4bb7-8ace-295ca877
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 24.5, "reason": "Maintaining occupants within comfort range while respecting temperature constraints and safety,"}}
+[energyplus_observation] {"hour": 14, "outdoor_c": 31.7, "zones": {"SPACE1-1": 24.49843947411638, "SPACE2-1": 24.498564305499045, "SPACE3-1": 24.49846072942716, "SPACE4-1": 24.498372295473594, "SPACE5-1": 24.498022985427134}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["6ee80696-1100-45c6-8042-7d9f0b33
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 25, "reason": "Insufficient cooling setpoint for comfort temperatures", "confidence": 6}}
+[energyplus_observation] {"hour": 15, "outdoor_c": 31.825, "zones": {"SPACE1-1": 24.4982079416269, "SPACE2-1": 24.498305051873, "SPACE3-1": 24.498233409239674, "SPACE4-1": 24.498082246057784, "SPACE5-1": 24.49794254265802}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["3a962c4e-915e-45c6-83c6-667d8728
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 22.5, "reason": "Occupancy change exceeds comfort threshold", "confidence": 0.7}}
+[energyplus_observation] {"hour": 16, "outdoor_c": 32.2, "zones": {"SPACE1-1": 24.498399458938945, "SPACE2-1": 24.49845009894595, "SPACE3-1": 24.498391620024044, "SPACE4-1": 24.498733997406443, "SPACE5-1": 24.498139380523906}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["20ec8ba4-9ca4-4858-9147-845f1019
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 23, "reason": "High occupancy", "confidence": 0.8}}
+[energyplus_observation] {"hour": 17, "outdoor_c": 31.5, "zones": {"SPACE1-1": 24.498397134236672, "SPACE2-1": 24.498418157943675, "SPACE3-1": 24.49836641883814, "SPACE4-1": 24.498509789908933, "SPACE5-1": 24.498002706701033}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["456b69bc-79b8-426f-b511-dba54a12
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 22.5, "reason": "Temperature increase is observed without cooling setpoint adjustment", "confidence": 0.8}}
+[energyplus_observation] {"hour": 18, "outdoor_c": 29.275, "zones": {"SPACE1-1": 24.484999996636475, "SPACE2-1": 23.725766763324803, "SPACE3-1": 24.49928967898558, "SPACE4-1": 23.845958084978225, "SPACE5-1": 24.393036943393913}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["3162430b-7e2e-4d14-9fa6-30410ffc
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 24, "reason": "High occupancy and ambient temperature", "confidence": 0.8}}
+[energyplus_observation] {"hour": 19, "outdoor_c": 27.224999999999998, "zones": {"SPACE1-1": 23.48022754741949, "SPACE2-1": 22.473026124445678, "SPACE3-1": 23.549696835000397, "SPACE4-1": 22.4560856188655, "SPACE5-1": 23.44982721066661}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["8e8b6921-d841-4075-a005-56a802db
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 24, "reason": "to stay within comfort range and avoid overheating", "confidence": 0.7}}
+[energyplus_observation] {"hour": 20, "outdoor_c": 22.349999999999998, "zones": {"SPACE1-1": 22.85319524141734, "SPACE2-1": 22.716861520892184, "SPACE3-1": 22.910472846037262, "SPACE4-1": 22.7769498907251, "SPACE5-1": 22.780541255644366}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["f83d3c23-1a23-4d0d-820e-b2851b45
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 24.0, "reason": "Temperature already within target", "confidence": 1}}
+[energyplus_observation] {"hour": 21, "outdoor_c": 23.075000000000003, "zones": {"SPACE1-1": 22.857203700160504, "SPACE2-1": 22.806861049918336, "SPACE3-1": 22.882730190479965, "SPACE4-1": 22.869597406783505, "SPACE5-1": 22.747461198220158}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["22f32ff0-4fa0-4630-9126-52123fc9
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 24, "reason": "Comfort temperature is too high", "confidence": 70}}
+[energyplus_observation] {"hour": 22, "outdoor_c": 24.324999999999996, "zones": {"SPACE1-1": 22.478823461501776, "SPACE2-1": 22.452872072834825, "SPACE3-1": 22.467693936815323, "SPACE4-1": 22.49383291155209, "SPACE5-1": 22.272964099880458}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["7b1103d1-ae83-4198-89a5-566f6b2c
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 22.5, "reason": "to maintain occupant comfort within 7\u00b0C range", "confidence": 0.8}}
+[energyplus_observation] {"hour": 23, "outdoor_c": 25.6, "zones": {"SPACE1-1": 22.342174872225367, "SPACE2-1": 22.286976010516906, "SPACE3-1": 22.305910203943668, "SPACE4-1": 22.311587795350498, "SPACE5-1": 22.014159863761233}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["9b7406fa-3209-4952-bfa2-bf0cf7e6
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 22.0, "reason": "to prevent overheating", "confidence": 90}}
+[energyplus_observation] {"hour": 0, "outdoor_c": 24.900000000000002, "zones": {"SPACE1-1": 22.208020764580006, "SPACE2-1": 22.15417963766692, "SPACE3-1": 22.17156670161643, "SPACE4-1": 22.168544301323923, "SPACE5-1": 21.837091867077053}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["a8814730-cbcd-4a24-8450-d7815a7c
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 24.0, "reason": "Climate zone temperature is above optimal", "confidence": 5}}
+[energyplus_observation] {"hour": 1, "outdoor_c": 22.650000000000002, "zones": {"SPACE1-1": 21.911404249676774, "SPACE2-1": 21.894881394503283, "SPACE3-1": 21.870412328597403, "SPACE4-1": 21.903162292657708, "SPACE5-1": 21.703739774574263}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["cb5443ba-19d2-4013-9bc1-81bacbb5
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 23, "reason": "No changes recommended as current setpoint is already within acceptable range and no temperature has been exceeded", "conf
+[energyplus_observation] {"hour": 2, "outdoor_c": 22.625, "zones": {"SPACE1-1": 21.701121281794897, "SPACE2-1": 21.686507783003247, "SPACE3-1": 21.649126950334274, "SPACE4-1": 21.691260849553373, "SPACE5-1": 21.58016280595882}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["e5488af5-053b-4c91-8f31-b3b7b981
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 25.0, "reason": "Temperature has increased significantly above the comfort zone", "confidence": 0.8}}
+[energyplus_observation] {"hour": 3, "outdoor_c": 23.9, "zones": {"SPACE1-1": 21.66874699133675, "SPACE2-1": 21.62074742464043, "SPACE3-1": 21.60902868887809, "SPACE4-1": 21.623466658650624, "SPACE5-1": 21.47388959054752}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["6662d866-26bd-4b06-bc97-b1494d37
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 25, "reason": "Temperature has dropped below 22C and there is no wind chill effect", "confidence": 95.0}}
+[energyplus_observation] {"hour": 4, "outdoor_c": 23.9, "zones": {"SPACE1-1": 21.6199854893045, "SPACE2-1": 21.560946576646913, "SPACE3-1": 21.557727050113645, "SPACE4-1": 21.562502395886547, "SPACE5-1": 21.397206011051953}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["dfb9c7b7-f53a-4474-ab12-54d40362
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 23.0, "reason": "Climate comfort zone deviation exceeds recommended limit", "confidence": 90.0}}
+[energyplus_observation] {"hour": 5, "outdoor_c": 24.324999999999996, "zones": {"SPACE1-1": 21.695577973580253, "SPACE2-1": 22.303380750439345, "SPACE3-1": 22.655727814809115, "SPACE4-1": 21.668079601995895, "SPACE5-1": 21.36905958096136}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["fed50bb0-eb4b-4171-8fce-460cc36e
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 25.0, "reason": "To stay within the comfort zone and avoid overheating", "confidence": 0.8}}
+[energyplus_observation] {"hour": 6, "outdoor_c": 25.875000000000004, "zones": {"SPACE1-1": 22.200869174197955, "SPACE2-1": 22.486264132843658, "SPACE3-1": 23.56299379721281, "SPACE4-1": 22.198818192507915, "SPACE5-1": 22.200956843986102}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["687cd266-715c-4c1a-be6a-d8e86ece
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 25.0, "reason": "Building temperature has reached a critical level", "confidence": 0.8}}
+[energyplus_observation] {"hour": 7, "outdoor_c": 27.099999999999998, "zones": {"SPACE1-1": 22.200040062853702, "SPACE2-1": 23.64195450812881, "SPACE3-1": 24.245396476177298, "SPACE4-1": 22.200995429490565, "SPACE5-1": 22.200481017406716}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["dab35a57-4daa-4eb2-bf57-1fea646e
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 24.5, "reason": "Temperature is below comfort level", "confidence": 0.7}}
+[energyplus_observation] {"hour": 8, "outdoor_c": 28.725, "zones": {"SPACE1-1": 23.3326476540025, "SPACE2-1": 24.49972076275325, "SPACE3-1": 24.499747343866332, "SPACE4-1": 22.466151681134402, "SPACE5-1": 23.089010684670267}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["f4a7397e-fa2d-4a9c-b361-5e3bc922
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 24, "reason": "Building is outside comfort zone", "confidence": 0.8}}
+[energyplus_observation] {"hour": 9, "outdoor_c": 30.275, "zones": {"SPACE1-1": 23.998747961745845, "SPACE2-1": 23.99877309767526, "SPACE3-1": 23.998684339330424, "SPACE4-1": 23.696055549594828, "SPACE5-1": 23.998953629178978}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["22f5f59c-c65c-429c-9b27-3c77963d
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 25.0, "reason": "Building temperature is above comfort threshold", "confidence": 0.8}}
+[energyplus_observation] {"hour": 10, "outdoor_c": 31.250000000000004, "zones": {"SPACE1-1": 24.997924499675936, "SPACE2-1": 24.998379628871973, "SPACE3-1": 24.99810049944497, "SPACE4-1": 24.48066001396225, "SPACE5-1": 24.998438906609262}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["dbb07d59-882f-40a8-9752-8841823b
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 23.0, "reason": "Higher cooling setpoint than recommended to stay within comfort zone", "confidence": 80.0}}
+[energyplus_observation] {"hour": 11, "outdoor_c": 31.825, "zones": {"SPACE1-1": 24.997850965596, "SPACE2-1": 24.9985410919404, "SPACE3-1": 24.99799862611671, "SPACE4-1": 24.867613892505855, "SPACE5-1": 24.997669429086443}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["db1a15e0-64a0-42a0-ae0b-e8f0eb91
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 25.0, "reason": "Insufficient temperature difference between cooling setpoint and outside air temperature", "confidence": 0.75}}
+[energyplus_observation] {"hour": 12, "outdoor_c": 32.35, "zones": {"SPACE1-1": 24.998418894864777, "SPACE2-1": 24.998700717546868, "SPACE3-1": 24.99847662263889, "SPACE4-1": 24.900272077381192, "SPACE5-1": 24.998294616429455}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["b363a358-ba54-4950-a1a5-f9e11b2c
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 24.0, "reason": "Occupancy has increased significantly from 8% to 20% over the past hour", "confidence": 90}}
+[energyplus_observation] {"hour": 13, "outdoor_c": 32.925, "zones": {"SPACE1-1": 23.998896611040415, "SPACE2-1": 23.999166726700366, "SPACE3-1": 23.998933016478865, "SPACE4-1": 23.998953780666255, "SPACE5-1": 23.998138071248828}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["7382e3e0-af3e-403b-a4f0-86159af6
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 24.0, "reason": "Temperature constraint", "confidence": 9}}
+[energyplus_observation] {"hour": 14, "outdoor_c": 33.3, "zones": {"SPACE1-1": 23.99856466936763, "SPACE2-1": 23.998649096481092, "SPACE3-1": 23.998571821428772, "SPACE4-1": 23.99846870205719, "SPACE5-1": 23.998249355680638}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["86053656-364e-4afb-96f8-095bf6d5
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 23, "reason": "Higher setpoint may not be effective for this building due to significant outdoor temperature variation.", "confidence": 0
+[energyplus_observation] {"hour": 15, "outdoor_c": 33.175, "zones": {"SPACE1-1": 23.998351748488727, "SPACE2-1": 23.998448447310672, "SPACE3-1": 23.998382257003584, "SPACE4-1": 23.998521811757932, "SPACE5-1": 23.99810743749532}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["341a01e8-4e88-44e5-a083-e156d4b7
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 24.0, "reason": "No heating is required to stay within temperature constraints", "confidence": 1}}
+[energyplus_observation] {"hour": 16, "outdoor_c": 32.8, "zones": {"SPACE1-1": 23.998457659257426, "SPACE2-1": 23.998543573651936, "SPACE3-1": 23.99848943914557, "SPACE4-1": 23.99866514347817, "SPACE5-1": 23.99824871899174}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["f4b567a6-bc26-435f-828b-45eb16e5
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 24.0, "reason": "Cooling setpoint within acceptable range", "confidence": 90}}
+[energyplus_observation] {"hour": 17, "outdoor_c": 32.525, "zones": {"SPACE1-1": 23.99841095228023, "SPACE2-1": 23.99846501487638, "SPACE3-1": 23.99840893910885, "SPACE4-1": 23.998674016291496, "SPACE5-1": 23.99809450447198}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["00f5eb13-448f-4541-94f7-aeb6cd19
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 24.0, "reason": "The proposed cooling setpoint is above the comfort occupied range (23-26C) for occupant comfort.", "confidence": 50.0}}
+[energyplus_observation] {"hour": 18, "outdoor_c": 31.424999999999997, "zones": {"SPACE1-1": 23.999010634352487, "SPACE2-1": 23.770286932735, "SPACE3-1": 23.999009893225846, "SPACE4-1": 23.999217147182353, "SPACE5-1": 23.999002819664593}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["b0556233-2773-439c-a328-25ed1e8a
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 24.0, "reason": "Temperature is too high and occupants are not comfortable", "confidence": 80.0}}
+[energyplus_observation] {"hour": 19, "outdoor_c": 30.450000000000003, "zones": {"SPACE1-1": 23.7295853547098, "SPACE2-1": 22.623644687755753, "SPACE3-1": 23.695433533471068, "SPACE4-1": 23.911958399489325, "SPACE5-1": 23.504451835006655}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["7f14691e-8b5d-4dbc-a612-15b0cc37
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 25, "reason": "To maintain thermal comfort for occupants within a reasonable range while minimizing heating effects and energy costs.", "
+[energyplus_observation] {"hour": 20, "outdoor_c": 29.725, "zones": {"SPACE1-1": 23.656204517382676, "SPACE2-1": 23.13211966104276, "SPACE3-1": 23.56398000361317, "SPACE4-1": 23.773801900694835, "SPACE5-1": 22.92075663792878}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["18bb2366-ae47-4244-9e0d-511bb851
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 22.0, "reason": "Staying within a comfort range of 22-28C and meeting occupant temperature demands.", "confidence": 0.8}}
+[energyplus_observation] {"hour": 21, "outdoor_c": 28.624999999999996, "zones": {"SPACE1-1": 23.704289197276974, "SPACE2-1": 23.409899329901894, "SPACE3-1": 23.607860831689383, "SPACE4-1": 24.080365718724487, "SPACE5-1": 22.949587393463275}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["1513b310-e1d2-4b37-ab17-f262f525
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 22.0, "reason": "Low occupancy and high temperature outside", "confidence": 90.0}}
+[energyplus_observation] {"hour": 22, "outdoor_c": 27.650000000000002, "zones": {"SPACE1-1": 23.26933218754857, "SPACE2-1": 23.10793176650361, "SPACE3-1": 23.188577468628782, "SPACE4-1": 23.517571857441173, "SPACE5-1": 22.539341099595177}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["3ab7c7c1-4e92-4c0b-a26c-434d33d0
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 23, "reason": "Climate comfort is exceeded within 1C of the proposed setpoint", "confidence": 0.8}}
+[energyplus_observation] {"hour": 23, "outdoor_c": 26.924999999999997, "zones": {"SPACE1-1": 22.95963364800201, "SPACE2-1": 22.85228554797698, "SPACE3-1": 22.88819992624448, "SPACE4-1": 23.09111932265322, "SPACE5-1": 22.308468830443772}}
+[mcp_stdio_tools] {"ok": true, "transport": "stdio", "client_pid": 65999, "server_pid": 66004, "tools_called": ["get_building_observation", "propose_or_prepare_control_context", "get_controller_constraints"], "request_ids": ["7b4810ba-32ec-4408-810c-c11853cc
+[llm_structured_proposal] {"ok": true, "provider": "ollama", "model": "llama3.2:1b", "proposal": {"proposed_cooling_setpoint_c": 23.0, "reason": "Occupancy increase without decrease in temperature", "confidence": 70.0}}
+Writing tabular output file results using HTML format.
+Writing final SQL reports
+EnergyPlus Run Time=00hr 03min  3.41sec
+EnergyPlus Completed Successfully.
+[agent_complete] {"total_energy_kwh": 414.2862, "action_counts": {"approved": 27, "rejected": 21, "fallback": 0, "total_decisions": 48}, "comfort_violation_hours": 0.0}
+[safety_shield_rejects_unsafe] {"proposed": 35.0, "approved": false, "disposition": "rejected", "reasons": ["cooling_setpoint_out_of_range", "max_setpoint_change_exceeded"]}
+{
+  "path": "EnergyPlus \u2192 MCP client \u2192 stdio \u2192 separate MCP server process \u2192 MCP tools \u2192 Ollama structured proposal \u2192 SafetyShield \u2192 EnergyPlus actuator",
+  "mcp_transport": "stdio",
+  "mcp_client_pid": 65999,
+  "mcp_server_pid": 66004,
+  "mcp_pids_differ": true,
+  "baseline": {
+    "total_energy_kwh": 421.5057,
+    "status": "completed"
+  },
+  "agent": {
+    "total_energy_kwh": 414.2862,
+    "status": "completed",
+    "action_counts": {
+      "approved": 27,
+      "rejected": 21,
+      "fallback": 0,
+      "total_decisions": 48
+    },
+    "controller": "llm_mcp+safety_shield"
+  },
+  "llm_bypass_possible": false,
+  "stage_log": "/workspace/results/llm_mcp/stage_log.jsonl",
+  "mcp_trace": "/workspace/final-release/evidence/mcp-runtime-trace.jsonl",
+  "notes": [
+    "Authoritative MCP path uses a separate stdio server process.",
+    "Direct in-process MCP handler invocation is not used on this path.",
+    "If Ollama or MCP fails, deterministic_fallback is used and logged.",
+    "Unsafe 35C proposal is rejected by SafetyShield."
+  ]
+}
+END_UTC=2026-07-25T11:51:20Z
+EXIT_CODE=0
+DURATION_SEC=185

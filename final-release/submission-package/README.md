@@ -205,25 +205,6 @@ PYTHONPATH=services/api:services/simulator:services/optimizer:services/mcp-serve
   python -m pytest services/simulator/tests services/optimizer/tests tests/integration -q
 ```
 
-## Final release pack
-
-Judge-ready freeze artifacts live under [`final-release/`](final-release/):
-
-- `FINAL_RELEASE_REPORT.md` — go/no-go + evidence index
-- `FINAL_CLAIMS.md` — authoritative comfort-zero claims only
-- `FINAL_OWNER_CHECKLIST.md` — non-expert runbook
-- `FINAL_DEMO_SCRIPT.md` — 3-minute talk track
-- `submission-package/` — concise evidence bundle
-
-Quick gates:
-
-```bash
-./scripts/final_smoke_test.sh
-./scripts/final_submission_check.sh
-# full (longer): ./scripts/final_acceptance.sh
-```
-
-
 ## Limitations
 
 See [docs/limitations.md](docs/limitations.md). Highlights:

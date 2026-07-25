@@ -1,0 +1,1 @@
+Place or link architecture diagram (docs/architecture.md ASCII / submission-evidence SVG).

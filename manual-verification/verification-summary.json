@@ -145,5 +145,9 @@
   "remediation_report": "manual-verification/MCP_TRANSPORT_REMEDIATION_REPORT.md",
   "clean_room_evidence_commit": "1b6a04557185e4dea0389f4f5961e4538a729bc1",
   "branch_tip_at_write": "fe219aca70729bbf689e00528804a392d8f7de53",
-  "note": "tested_commit is the stdio MCP remediation implementation commit; later commits are docs/guide polish."
+  "note": "tested_commit is the stdio MCP remediation implementation commit; later commits are docs/guide polish.",
+  "final_release_pointer": {
+    "see": "final-release/FINAL_RELEASE_MANIFEST.json",
+    "note": "Sealed hackathon release commit and recalculated internal score live under final-release/. Historical rows in this file are preserved."
+  }
 }
