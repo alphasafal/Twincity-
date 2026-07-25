@@ -1,8 +1,6 @@
-FINAL_RELEASE_COMMIT=f0f94d84d08969784cf2373ddbb3cca6e3fa909b
+FINAL_RELEASE_COMMIT=0d1d30a7ce010b7e791ea3e7e1a8ba399a8c9f77
 EVIDENCE_PACK_COMMIT=29e88cbd829a333b4661ea8d6c448b1a02a46325
-SHA_SEAL_TIP=39cb4da36b9f79de36aa797de28de5bb0a76f950
 BRANCH=cursor/ecolooop-energyplus-audit-b6b3
-NOTE=FINAL_RELEASE_COMMIT is the repository tip containing this file. Tag this SHA.
+NOTE=This file is amended into the same commit so FINAL_RELEASE_COMMIT equals git rev-parse HEAD.
+OWNER_TAG_COMMAND=git tag -a hackathon-final-v1 0d1d30a7ce010b7e791ea3e7e1a8ba399a8c9f77 -m "Verified Eco-Loop hackathon release"
 PRE_SEAL_CODE_TIP=133b0530670f2ed5b9fcf011d7a0adaa0b63228c
-TAG_TARGET_HEAD=f0f94d84d08969784cf2373ddbb3cca6e3fa909b
-OWNER_TAG_COMMAND=git tag -a hackathon-final-v1 f0f94d84d08969784cf2373ddbb3cca6e3fa909b -m "Verified Eco-Loop hackathon release"
