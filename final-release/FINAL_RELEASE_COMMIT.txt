@@ -1,4 +1,6 @@
-FINAL_RELEASE_COMMIT=29e88cbd829a333b4661ea8d6c448b1a02a46325
+FINAL_RELEASE_COMMIT=39cb4da36b9f79de36aa797de28de5bb0a76f950
+EVIDENCE_PACK_COMMIT=29e88cbd829a333b4661ea8d6c448b1a02a46325
 BRANCH=cursor/ecolooop-energyplus-audit-b6b3
-SEALED_AT=2026-07-25T12:02:03.976363+00:00
+SEALED_AT=2026-07-25T12:02:42.369629+00:00
+NOTE=Tag repository HEAD after the alignment commit lands; FINAL_RELEASE_COMMIT names the SHA-seal tip that first recorded the pack SHA consistently. Evidence bytes were introduced in EVIDENCE_PACK_COMMIT.
 PRE_SEAL_CODE_TIP=133b0530670f2ed5b9fcf011d7a0adaa0b63228c
