@@ -1,11 +1,11 @@
 # Final Release Report — Eco-Loop Building Agents
 
 ## 1. Executive summary
-Fresh verification from commit `39cb4da36b9f79de36aa797de28de5bb0a76f950` confirms a real EnergyPlus closed loop, stdio MCP process separation, local Ollama proposals, SafetyShield rejection/fallback, honest dashboard data modes, and Path A comfort-zero savings of **4.98% HVAC / 1.31% total / 1.47% peak**. Overall status: **PASS**. Internal engineering-readiness score: **99/100**.
+Fresh verification from commit `f0f94d84d08969784cf2373ddbb3cca6e3fa909b` confirms a real EnergyPlus closed loop, stdio MCP process separation, local Ollama proposals, SafetyShield rejection/fallback, honest dashboard data modes, and Path A comfort-zero savings of **4.98% HVAC / 1.31% total / 1.47% peak**. Overall status: **PASS**. Internal engineering-readiness score: **99/100**.
 
 ## 2. Exact release commit
 - Branch: `cursor/ecolooop-energyplus-audit-b6b3`
-- Commit: `39cb4da36b9f79de36aa797de28de5bb0a76f950`
+- Commit: `f0f94d84d08969784cf2373ddbb3cca6e3fa909b`
 - Note: If additional sealing commits land after this report, update the manifest to the sealed tip before tagging.
 
 ## 3. Environment

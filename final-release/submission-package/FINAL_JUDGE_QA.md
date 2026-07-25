@@ -1,6 +1,6 @@
 # Final Judge Q&A
 
-**Commit:** `39cb4da36b9f79de36aa797de28de5bb0a76f950` · **Generated:** 2026-07-25T12:01:39.455435+00:00
+**Commit:** `f0f94d84d08969784cf2373ddbb3cca6e3fa909b` · **Generated:** 2026-07-25T12:01:39.455435+00:00
 
 ## 1. Why use an LLM instead of only rules?
 **A:** Rules cover known heuristics; the LLM proposes context-aware setpoints. SafetyShield still decides. Path A is the authoritative savings proof.
