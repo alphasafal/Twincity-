@@ -1,0 +1,25 @@
+{"ts": "2026-07-25T15:28:19.522156+00:00", "stage": "energyplus_observation", "hour": 0, "outdoor_c": 24.200000000000003, "avg_temp": 22.054832739026942}
+{"ts": "2026-07-25T15:28:25.327720+00:00", "stage": "mcp_strategy_selected", "strategy": "HOLD_CURRENT_POLICY", "horizon_min": 60, "mcp_ok": true}
+{"ts": "2026-07-25T15:28:25.379683+00:00", "stage": "hybrid_decision", "strategy": "HOLD_CURRENT_POLICY", "proposed_setpoint_c": 24.9, "reason": "strategy:HOLD_CURRENT_POLICY:unoccupied_setback", "mcp_validate_ok": true, "expected_hvac_effect_pct": -2.0}
+{"ts": "2026-07-25T15:28:25.381349+00:00", "stage": "self_correction_outcome", "previous_strategy": "HOLD_CURRENT_POLICY", "expected_hvac_effect_pct": -2.0, "actual_zone_temp_delta_c": -0.345, "previous_setpoint_c": 24.9, "current_avg_zone_temp_c": 21.71, "comfort_proxy_safe": true, "recommendation": "retain_strategy"}
+{"ts": "2026-07-25T15:28:25.381386+00:00", "stage": "energyplus_observation", "hour": 1, "outdoor_c": 20.0, "avg_temp": 21.709545981078833}
+{"ts": "2026-07-25T15:28:31.514105+00:00", "stage": "mcp_strategy_selected", "strategy": "ECO_MODE", "horizon_min": 60, "mcp_ok": true}
+{"ts": "2026-07-25T15:28:31.520627+00:00", "stage": "hybrid_decision", "strategy": "ECO_MODE", "proposed_setpoint_c": 25.9, "reason": "strategy:ECO_MODE:eco_bias", "mcp_validate_ok": true, "expected_hvac_effect_pct": -2.0}
+{"ts": "2026-07-25T15:28:31.522317+00:00", "stage": "self_correction_outcome", "previous_strategy": "ECO_MODE", "expected_hvac_effect_pct": -2.0, "actual_zone_temp_delta_c": -0.229, "previous_setpoint_c": 25.9, "current_avg_zone_temp_c": 21.48, "comfort_proxy_safe": true, "recommendation": "retain_strategy"}
+{"ts": "2026-07-25T15:28:31.522349+00:00", "stage": "energyplus_observation", "hour": 2, "outdoor_c": 19.85, "avg_temp": 21.480160241773824}
+{"ts": "2026-07-25T15:28:37.160063+00:00", "stage": "mcp_strategy_selected", "strategy": "ECO_MODE", "horizon_min": 30, "mcp_ok": true}
+{"ts": "2026-07-25T15:28:37.166355+00:00", "stage": "hybrid_decision", "strategy": "ECO_MODE", "proposed_setpoint_c": 26.9, "reason": "strategy:ECO_MODE:eco_bias", "mcp_validate_ok": true, "expected_hvac_effect_pct": -3.1}
+{"ts": "2026-07-25T15:28:37.168565+00:00", "stage": "self_correction_outcome", "previous_strategy": "ECO_MODE", "expected_hvac_effect_pct": -3.1, "actual_zone_temp_delta_c": -0.22, "previous_setpoint_c": 26.9, "current_avg_zone_temp_c": 21.26, "comfort_proxy_safe": true, "recommendation": "retain_strategy"}
+{"ts": "2026-07-25T15:28:37.168600+00:00", "stage": "energyplus_observation", "hour": 3, "outdoor_c": 19.275, "avg_temp": 21.260098069107162}
+{"ts": "2026-07-25T15:28:43.498893+00:00", "stage": "mcp_strategy_selected", "strategy": "COMFORT_FIRST", "horizon_min": 30, "mcp_ok": true}
+{"ts": "2026-07-25T15:28:43.505756+00:00", "stage": "hybrid_decision", "strategy": "COMFORT_FIRST", "proposed_setpoint_c": 25.9, "reason": "strategy:COMFORT_FIRST:comfort_bias", "mcp_validate_ok": true, "expected_hvac_effect_pct": 2.7}
+{"ts": "2026-07-25T15:28:43.507148+00:00", "stage": "self_correction_outcome", "previous_strategy": "COMFORT_FIRST", "expected_hvac_effect_pct": 2.7, "actual_zone_temp_delta_c": -0.186, "previous_setpoint_c": 25.9, "current_avg_zone_temp_c": 21.075, "comfort_proxy_safe": true, "recommendation": "retain_strategy"}
+{"ts": "2026-07-25T15:28:43.507177+00:00", "stage": "energyplus_observation", "hour": 4, "outdoor_c": 18.9, "avg_temp": 21.074592734486323}
+{"ts": "2026-07-25T15:28:48.764830+00:00", "stage": "mcp_strategy_selected", "strategy": "ECO_MODE", "horizon_min": 120, "mcp_ok": true}
+{"ts": "2026-07-25T15:28:48.771989+00:00", "stage": "hybrid_decision", "strategy": "ECO_MODE", "proposed_setpoint_c": 26.9, "reason": "strategy:ECO_MODE:eco_bias", "mcp_validate_ok": true, "expected_hvac_effect_pct": -1.0}
+{"ts": "2026-07-25T15:28:48.774062+00:00", "stage": "self_correction_outcome", "previous_strategy": "ECO_MODE", "expected_hvac_effect_pct": -1.0, "actual_zone_temp_delta_c": 0.214, "previous_setpoint_c": 26.9, "current_avg_zone_temp_c": 21.288, "comfort_proxy_safe": true, "recommendation": "retain_strategy"}
+{"ts": "2026-07-25T15:28:48.774093+00:00", "stage": "energyplus_observation", "hour": 5, "outdoor_c": 19.325, "avg_temp": 21.288305768027545}
+{"ts": "2026-07-25T15:28:48.794608+00:00", "stage": "hybrid_decision", "strategy": "ECO_MODE", "proposed_setpoint_c": 27.9, "reason": "strategy:ECO_MODE:eco_bias", "mcp_validate_ok": true, "expected_hvac_effect_pct": -1.0}
+{"ts": "2026-07-25T15:28:48.796965+00:00", "stage": "self_correction_outcome", "previous_strategy": "ECO_MODE", "expected_hvac_effect_pct": -1.0, "actual_zone_temp_delta_c": 0.971, "previous_setpoint_c": 27.9, "current_avg_zone_temp_c": 22.259, "comfort_proxy_safe": true, "recommendation": "adjust_target"}
+{"ts": "2026-07-25T15:28:48.797030+00:00", "stage": "energyplus_observation", "hour": 6, "outdoor_c": 21.0, "avg_temp": 22.259281419623754}
+{"ts": "2026-07-25T15:28:54.515938+00:00", "stage": "mcp_strategy_selected", "strategy": "ECO_MODE", "horizon_min": 60, "mcp_ok": true}

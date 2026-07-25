@@ -148,6 +148,13 @@ def experiment_dashboard_payload(scenario: str = "default") -> dict[str, Any]:
     if comparison and comparison.get("agent_action_counts"):
         counts = comparison["agent_action_counts"]
 
+    # Prefer comparison timestamp, else newest of baseline/agent.
+    generated_at = (
+        (comparison or {}).get("timestamp_utc")
+        or (agent or {}).get("timestamp_utc")
+        or (baseline or {}).get("timestamp_utc")
+    )
+
     payload = {
         "available": available,
         "data_mode": "energyplus",
@@ -155,6 +162,13 @@ def experiment_dashboard_payload(scenario: str = "default") -> dict[str, Any]:
         "scenario": scenario,
         "simulated": False,
         "synthetic_multiplier_applied": False,
+        "generated_at_utc": generated_at,
+        "baseline_generated_at_utc": (baseline or {}).get("timestamp_utc"),
+        "agent_generated_at_utc": (agent or {}).get("timestamp_utc"),
+        "rerun_note": (
+            "Opening the dashboard does not rerun EnergyPlus; "
+            "it displays the latest generated experiment artifacts."
+        ),
         "baseline": {
             "total_energy_kwh": round(b_total, 2),
             "hvac_energy_kwh": round(b_hvac, 2),

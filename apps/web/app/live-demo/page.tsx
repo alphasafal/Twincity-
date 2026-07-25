@@ -54,8 +54,8 @@ export default function LiveDemoPage() {
   return (
     <div>
       <PageHeader
-        title="Live demo stream"
-        description="Accelerated EnergyPlus control intervals for a ~3-minute walkthrough."
+        title="Live demo stream (playback)"
+        description="Accelerated replay of a recorded EnergyPlus control stream — not a live physical building or live BMS."
         actions={
           <div className="flex gap-2">
             <button
@@ -77,8 +77,9 @@ export default function LiveDemoPage() {
       />
       <DataModeBanner
         dataMode="energyplus"
-        dataSourceVisible="results/agent/stream.json"
+        dataSourceVisible="Playback of results/agent/stream.json (recorded Path A agent run)"
         syntheticMultiplierApplied={false}
+        variant="playback"
       />
 
       {error ? (
