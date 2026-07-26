@@ -31,7 +31,7 @@ restart_session() {
 
 # API
 if ! curl -sf --max-time 5 http://127.0.0.1:8000/health >/dev/null 2>&1; then
-  restart_session "tp-api" "source '$ROOT/.venv/bin/activate' && cd '$ROOT/services/api' && uvicorn app.main:app --host 0.0.0.0 --port 8000"
+  restart_session "tp-api" "set -a; source '$ROOT/.env'; set +a; source '$ROOT/.venv/bin/activate' && cd '$ROOT/services/api' && uvicorn app.main:app --host 0.0.0.0 --port 8000"
 fi
 
 # Web — public API URL for browser calls through the tunnel hostname
