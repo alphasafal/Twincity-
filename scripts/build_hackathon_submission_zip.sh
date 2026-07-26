@@ -15,6 +15,12 @@ cp -f "$ROOT/final-release/PRESENTATION_CONTENT.md" "$OUT_DIR/Eco-Loop-Presentat
 if [[ -f "$ROOT/final-release/presentation/Eco-Loop-Presentation.pdf" ]]; then
   cp -f "$ROOT/final-release/presentation/Eco-Loop-Presentation.pdf" "$OUT_DIR/Eco-Loop-Presentation.pdf"
 fi
+# Official HirePro IDEA export (same bytes; keep original filename for judges)
+if [[ -f "$ROOT/final-release/presentation/Eco-Loop_Building_Agents.pdf" ]]; then
+  cp -f "$ROOT/final-release/presentation/Eco-Loop_Building_Agents.pdf" "$OUT_DIR/Eco-Loop_Building_Agents.pdf"
+elif [[ -f "$OUT_DIR/Eco-Loop-Presentation.pdf" ]]; then
+  cp -f "$OUT_DIR/Eco-Loop-Presentation.pdf" "$OUT_DIR/Eco-Loop_Building_Agents.pdf"
+fi
 cp -f "$ROOT/docs/architecture.md" "$OUT_DIR/Architecture-Document.md" 2>/dev/null || \
   cp -f "$ROOT/final-release/FINAL_RELEASE_REPORT.md" "$OUT_DIR/Architecture-Document.md"
 if [[ -f "$ROOT/final-release/presentation/Architecture-Document.pdf" ]]; then

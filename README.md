@@ -11,7 +11,7 @@
 | **Live demo website** | https://twinpilot.webyaar.in |
 | **GitHub (HirePro paste)** | https://github.com/alphasafal/Twincity-/tree/ecolooop-hackathon-final |
 | **Submission ZIP** | [`Eco-Loop-Hackathon-Submission.zip`](Eco-Loop-Hackathon-Submission.zip) |
-| **IDEA PPT (6 slides)** | [`final-release/IDEA_PPT_6_SLIDES.md`](final-release/IDEA_PPT_6_SLIDES.md) |
+| **IDEA PPT (6 slides)** | [`final-release/presentation/Eco-Loop_Building_Agents.pdf`](final-release/presentation/Eco-Loop_Building_Agents.pdf) |
 | **Code tour (engineers)** | [`docs/CODE_TOUR.md`](docs/CODE_TOUR.md) |
 
 **Dashboard login:** `manager@twinpilot.demo` / `TwinPilot-Manager-Demo!`
@@ -35,7 +35,7 @@ Submission pack: [`Eco-Loop-Hackathon-Submission.zip`](Eco-Loop-Hackathon-Submis
 | Savings dashboard / export | Web `/dashboard` (`DATA_MODE=energyplus`) · [`final-release/evidence/energyplus/comparison.json`](final-release/evidence/energyplus/comparison.json) |
 | Architecture document | [`docs/architecture.md`](docs/architecture.md) |
 | Demo video (≤3 min) | [`final-release/demo-video/Eco-Loop-Demo-Walkthrough.mp4`](final-release/demo-video/Eco-Loop-Demo-Walkthrough.mp4) |
-| IDEA presentation PDF | [`final-release/presentation/Eco-Loop-Presentation.pdf`](final-release/presentation/Eco-Loop-Presentation.pdf) |
+| IDEA presentation PDF | [`final-release/presentation/Eco-Loop_Building_Agents.pdf`](final-release/presentation/Eco-Loop_Building_Agents.pdf) |
 
 **Authoritative Path A results (comfort-zero):** HVAC **4.98%** · total energy **1.31%** · peak **1.47%** · comfort violations **0 h**.
 
