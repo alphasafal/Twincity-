@@ -10,11 +10,27 @@
 |-|-|
 | **Live demo website** | https://twinpilot.webyaar.in |
 | **GitHub (HirePro paste)** | https://github.com/alphasafal/Twincity-/tree/ecolooop-hackathon-final |
-| **Submission ZIP** | [`Eco-Loop-Hackathon-Submission.zip`](Eco-Loop-Hackathon-Submission.zip) |
+| **Submission PDFs (upload)** | [`Eco-Loop-Hackathon-PDFs.zip`](Eco-Loop-Hackathon-PDFs.zip) — PDF-only pack |
+| **Submission ZIP (optional)** | [`Eco-Loop-Hackathon-Submission.zip`](Eco-Loop-Hackathon-Submission.zip) |
 | **IDEA PPT (6 slides)** | [`final-release/presentation/Eco-Loop_Building_Agents.pdf`](final-release/presentation/Eco-Loop_Building_Agents.pdf) |
 | **Code tour (engineers)** | [`docs/CODE_TOUR.md`](docs/CODE_TOUR.md) |
 
 **Dashboard login:** `manager@twinpilot.demo` / `TwinPilot-Manager-Demo!`
+
+---
+
+## PoC demo video
+
+Closed-loop walkthrough (≤3 min): EnergyPlus → MCP → controller/LLM → SafetyShield → actuator → next state.
+
+<a id="poc-demo-video"></a>
+
+[![Eco-Loop demo walkthrough — click to play](final-release/demo-video/dashboard-live.png)](https://github.com/alphasafal/Twincity-/blob/ecolooop-hackathon-final/final-release/demo-video/Eco-Loop-Demo-Walkthrough.mp4)
+
+**Play video (MP4 on GitHub):**  
+https://github.com/alphasafal/Twincity-/blob/ecolooop-hackathon-final/final-release/demo-video/Eco-Loop-Demo-Walkthrough.mp4
+
+Local path: [`final-release/demo-video/Eco-Loop-Demo-Walkthrough.mp4`](final-release/demo-video/Eco-Loop-Demo-Walkthrough.mp4)
 
 ---
 
@@ -23,19 +39,20 @@
 Paste this repo URL on the portal:  
 `https://github.com/alphasafal/Twincity-/tree/ecolooop-hackathon-final`
 
-Submission pack: [`Eco-Loop-Hackathon-Submission.zip`](Eco-Loop-Hackathon-Submission.zip) (source + PDF + MP4 + evidence).
+**Portal upload (PDF only):** download [`Eco-Loop-Hackathon-PDFs.zip`](Eco-Loop-Hackathon-PDFs.zip) (~1.1MB), unzip, and upload the PDFs (or upload the ZIP if the portal accepts it).  
+Demo video is **not** inside that pack — watch it in this README / on GitHub (section above).
 
 | Deliverable | Where |
 |-------------|--------|
-| Source — EnergyPlus wrapper | [`services/simulator/twinpilot_simulator/ep_experiment.py`](services/simulator/twinpilot_simulator/ep_experiment.py) |
+| Source — EnergyPlus wrapper | [`services/simulator/twinpilot_simulator/ep_experiment.py`](services/simulator/twinpilot_simulator/ep_experiment.py) · PDF `05-Source-Code-Overview.pdf` |
 | Source — LLM orchestration | [`scripts/hybrid_supervisory_loop.py`](scripts/hybrid_supervisory_loop.py), [`services/agent`](services/agent) |
 | Source — MCP communication bus | [`services/mcp-server`](services/mcp-server) (stdio, separate process) |
-| Baseline `.idf` | [`building-models/sample-office/office_5zone.idf`](building-models/sample-office/office_5zone.idf) |
+| Baseline `.idf` | [`building-models/sample-office/office_5zone.idf`](building-models/sample-office/office_5zone.idf) · PDF `04-Building-Models.pdf` |
 | Runtime-modified model | [`final-release/evidence/building-models/`](final-release/evidence/building-models/) |
-| Savings dashboard / export | Web `/dashboard` (`DATA_MODE=energyplus`) · [`final-release/evidence/energyplus/comparison.json`](final-release/evidence/energyplus/comparison.json) |
-| Architecture document | [`docs/architecture.md`](docs/architecture.md) |
-| Demo video (≤3 min) | [`final-release/demo-video/Eco-Loop-Demo-Walkthrough.mp4`](final-release/demo-video/Eco-Loop-Demo-Walkthrough.mp4) |
-| IDEA presentation PDF | [`final-release/presentation/Eco-Loop_Building_Agents.pdf`](final-release/presentation/Eco-Loop_Building_Agents.pdf) |
+| Savings dashboard / export | https://twinpilot.webyaar.in · PDF `03-Quantitative-Savings-Results.pdf` |
+| Architecture document | [`docs/architecture.md`](docs/architecture.md) · PDF `02-Architecture-Document.pdf` |
+| Demo video (≤3 min) | [README video section](#poc-demo-video) · PDF `06-Demo-Video-Link.pdf` |
+| IDEA presentation PDF | [`final-release/presentation/Eco-Loop_Building_Agents.pdf`](final-release/presentation/Eco-Loop_Building_Agents.pdf) · PDF `01-…Building_Agents.pdf` |
 
 **Authoritative Path A results (comfort-zero):** HVAC **4.98%** · total energy **1.31%** · peak **1.47%** · comfort violations **0 h**.
 
