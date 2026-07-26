@@ -1,0 +1,40 @@
+{
+  "final_release_commit": "39cb4da36b9f79de36aa797de28de5bb0a76f950",
+  "overall_status": "PASS",
+  "internal_readiness_score": 99,
+  "authoritative_path": "deterministic Path A comfort-zero",
+  "results": {
+    "baseline_total_energy_kwh": 421.5057,
+    "agent_total_energy_kwh": 415.9999,
+    "total_energy_reduction_percent": 1.3062,
+    "baseline_hvac_energy_kwh": 13.8459,
+    "agent_hvac_energy_kwh": 13.157,
+    "hvac_energy_reduction_percent": 4.9755,
+    "baseline_peak_power_kw": 19.9325,
+    "agent_peak_power_kw": 19.64,
+    "peak_power_reduction_percent": 1.4675,
+    "baseline_comfort_violation_hours": 0.0,
+    "agent_comfort_violation_hours": 0.0,
+    "comfort_degree_hours": 0.0,
+    "approved_actions": 48,
+    "rejected_actions": 0,
+    "fallback_actions": 0
+  },
+  "verification": {
+    "energyplus_closed_loop": "PASS",
+    "actuator_write": "PASS",
+    "next_state": "PASS",
+    "mcp_separate_process": "PASS",
+    "mcp_initialize": "PASS",
+    "mcp_tools_list": "PASS",
+    "mcp_tools_call": "PASS",
+    "ollama_response": "PASS",
+    "safety_rejection": "PASS",
+    "fallback": "PASS",
+    "dashboard_real_data": "PASS",
+    "dashboard_no_data_state": "PASS",
+    "no_silent_mock_fallback": "PASS",
+    "clean_clone": "PASS",
+    "tests": "PASS"
+  }
+}

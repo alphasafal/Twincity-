@@ -1,0 +1,83 @@
+# TwinPilot Docker Compose
+#
+# Profiles:
+#   demo       — api + web (SQLite, no Redis required)
+#   full       — api + web + optional postgres
+#   energyplus — same as demo with EnergyPlus env wired (host mounts)
+#
+# Examples:
+#   docker compose --profile demo up --build
+#   docker compose --profile full up --build
+#   docker compose --profile energyplus up --build
+
+services:
+  api:
+    profiles: ["demo", "full", "energyplus"]
+    build:
+      context: .
+      dockerfile: infrastructure/docker/Dockerfile.api
+    ports:
+      - "8000:8000"
+    environment:
+      APP_ENV: ${APP_ENV:-development}
+      DEMO_MODE: ${DEMO_MODE:-true}
+      DATABASE_URL: ${DATABASE_URL:-sqlite:////data/twinpilot.db}
+      JWT_SECRET: ${JWT_SECRET:-twinpilot-dev-access-secret-change-me}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET:-twinpilot-dev-refresh-secret-change-me}
+      WEB_ORIGIN: ${WEB_ORIGIN:-http://localhost:3000}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000,http://127.0.0.1:3000}
+      AGENT_PROVIDER: ${AGENT_PROVIDER:-deterministic}
+      SIMULATOR_PROVIDER: ${SIMULATOR_PROVIDER:-mock}
+      CONTROL_LOOP_ENABLED: ${CONTROL_LOOP_ENABLED:-true}
+      CONTROL_INTERVAL_SECONDS: ${CONTROL_INTERVAL_SECONDS:-5}
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-llama3.2}
+      ENERGYPLUS_HOME: ${ENERGYPLUS_HOME:-}
+      ENERGYPLUS_MODEL_PATH: ${ENERGYPLUS_MODEL_PATH:-}
+      ENERGYPLUS_WEATHER_PATH: ${ENERGYPLUS_WEATHER_PATH:-}
+      TELEMETRY_INGEST_TOKEN: ${TELEMETRY_INGEST_TOKEN:-demo-telemetry-token}
+    volumes:
+      - twinpilot-data:/data
+      - ./building-models:/building-models:ro
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+
+  web:
+    profiles: ["demo", "full", "energyplus"]
+    build:
+      context: .
+      dockerfile: infrastructure/docker/Dockerfile.web
+      args:
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000}
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000}
+    depends_on:
+      api:
+        condition: service_healthy
+
+  # Optional Postgres for the "full" profile (API still defaults to SQLite unless DATABASE_URL is overridden)
+  postgres:
+    profiles: ["full"]
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: twinpilot
+      POSTGRES_PASSWORD: twinpilot
+      POSTGRES_DB: twinpilot
+    ports:
+      - "5432:5432"
+    volumes:
+      - twinpilot-pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U twinpilot"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  twinpilot-data:
+  twinpilot-pg:
