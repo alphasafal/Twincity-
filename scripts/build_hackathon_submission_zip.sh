@@ -12,14 +12,11 @@ mkdir -p "$OUT_DIR"/{building-models,results,evidence,docs}
 # Markdown + rendered deliverables
 cp -f "$ROOT/README.md" "$OUT_DIR/README.md"
 cp -f "$ROOT/final-release/PRESENTATION_CONTENT.md" "$OUT_DIR/Eco-Loop-Presentation.md"
-if [[ -f "$ROOT/final-release/presentation/Eco-Loop-Presentation.pdf" ]]; then
-  cp -f "$ROOT/final-release/presentation/Eco-Loop-Presentation.pdf" "$OUT_DIR/Eco-Loop-Presentation.pdf"
-fi
-# Official HirePro IDEA export (same bytes; keep original filename for judges)
+# Official IDEA PDF (single copy to keep ZIP small)
 if [[ -f "$ROOT/final-release/presentation/Eco-Loop_Building_Agents.pdf" ]]; then
   cp -f "$ROOT/final-release/presentation/Eco-Loop_Building_Agents.pdf" "$OUT_DIR/Eco-Loop_Building_Agents.pdf"
-elif [[ -f "$OUT_DIR/Eco-Loop-Presentation.pdf" ]]; then
-  cp -f "$OUT_DIR/Eco-Loop-Presentation.pdf" "$OUT_DIR/Eco-Loop_Building_Agents.pdf"
+elif [[ -f "$ROOT/final-release/presentation/Eco-Loop-Presentation.pdf" ]]; then
+  cp -f "$ROOT/final-release/presentation/Eco-Loop-Presentation.pdf" "$OUT_DIR/Eco-Loop_Building_Agents.pdf"
 fi
 cp -f "$ROOT/docs/architecture.md" "$OUT_DIR/Architecture-Document.md" 2>/dev/null || \
   cp -f "$ROOT/final-release/FINAL_RELEASE_REPORT.md" "$OUT_DIR/Architecture-Document.md"
@@ -70,10 +67,13 @@ See `Eco-Loop-Demo-Walkthrough.mp4` in this package.
 EOF
 fi
 
-# Building models (baseline + runtime-modified schedule artifacts)
+# Building models (baseline IDF + runtime-modified schedule artifacts)
+# Skip bulky .epw weather file in the upload ZIP — full weather lives on GitHub.
 cp -f "$ROOT/building-models/sample-office/office_5zone.idf" "$OUT_DIR/building-models/base-office.idf"
-cp -f "$ROOT/building-models/weather/chicago.epw" "$OUT_DIR/building-models/chicago.epw" 2>/dev/null || \
-  echo "EPW referenced at building-models/weather/chicago.epw in the repository" > "$OUT_DIR/building-models/EPW-NOTE.txt"
+cat > "$OUT_DIR/building-models/EPW-NOTE.txt" <<'EOF'
+Weather file (chicago.epw) is on GitHub at building-models/weather/chicago.epw
+to keep this upload ZIP small. Baseline IDF is included as base-office.idf.
+EOF
 if [[ -d "$ROOT/final-release/evidence/building-models" ]]; then
   mkdir -p "$OUT_DIR/building-models/runtime-modified"
   cp -f "$ROOT/final-release/evidence/building-models/"* "$OUT_DIR/building-models/runtime-modified/" 2>/dev/null || true
@@ -115,8 +115,9 @@ fi
 if [[ -f "$ROOT/results/hybrid/summary.json" ]]; then
   mkdir -p "$OUT_DIR/results/hybrid"
   cp -f "$ROOT/results/hybrid/summary.json" "$OUT_DIR/results/hybrid/summary.json"
-  cp -f "$ROOT/results/hybrid/self_correction.jsonl" "$OUT_DIR/results/hybrid/" 2>/dev/null || true
-  cp -f "$ROOT/results/hybrid/stage_log.jsonl" "$OUT_DIR/results/hybrid/" 2>/dev/null || true
+  if [[ -f "$ROOT/results/hybrid/self_correction.jsonl" ]]; then
+    head -n 40 "$ROOT/results/hybrid/self_correction.jsonl" > "$OUT_DIR/results/hybrid/self_correction.sample.jsonl"
+  fi
 fi
 # Sealed evidence fallback when live results/ are empty
 if [[ ! -f "$OUT_DIR/results/comparison.json" && -f "$ROOT/final-release/evidence/energyplus/comparison.json" ]]; then
@@ -134,21 +135,26 @@ fi
 if [[ ! -f "$OUT_DIR/results/hybrid/summary.json" && -f "$ROOT/final-release/evidence/hybrid/summary.json" ]]; then
   mkdir -p "$OUT_DIR/results/hybrid"
   cp -f "$ROOT/final-release/evidence/hybrid/summary.json" "$OUT_DIR/results/hybrid/"
-  cp -f "$ROOT/final-release/evidence/hybrid/self_correction.jsonl" "$OUT_DIR/results/hybrid/" 2>/dev/null || true
-  cp -f "$ROOT/final-release/evidence/hybrid/stage_log.jsonl" "$OUT_DIR/results/hybrid/" 2>/dev/null || true
+  if [[ -f "$ROOT/final-release/evidence/hybrid/self_correction.jsonl" ]]; then
+    head -n 40 "$ROOT/final-release/evidence/hybrid/self_correction.jsonl" > "$OUT_DIR/results/hybrid/self_correction.sample.jsonl"
+  fi
 fi
 
-# Evidence
+# Evidence (compact samples — full traces on GitHub)
 cp -f "$ROOT/final-release/evidence/final-actuator-trace.csv" "$OUT_DIR/evidence/actuator-trace.csv" 2>/dev/null || true
-cp -f "$ROOT/final-release/evidence/mcp-runtime-trace.jsonl" "$OUT_DIR/evidence/mcp-runtime-trace.jsonl" 2>/dev/null || true
+if [[ -f "$ROOT/final-release/evidence/mcp-runtime-trace.jsonl" ]]; then
+  head -n 80 "$ROOT/final-release/evidence/mcp-runtime-trace.jsonl" > "$OUT_DIR/evidence/mcp-runtime-trace.sample.jsonl"
+fi
 cp -f "$ROOT/final-release/evidence/safety-rejection.log" "$OUT_DIR/evidence/safety-rejection.txt" 2>/dev/null || true
 cp -f "$ROOT/final-release/evidence/ollama-fallback.log" "$OUT_DIR/evidence/fallback-proof.txt" 2>/dev/null || true
 if [[ -f "$ROOT/results/hybrid/mcp-runtime-trace.jsonl" ]]; then
-  cp -f "$ROOT/results/hybrid/mcp-runtime-trace.jsonl" "$OUT_DIR/evidence/hybrid-mcp-runtime-trace.jsonl"
+  head -n 80 "$ROOT/results/hybrid/mcp-runtime-trace.jsonl" > "$OUT_DIR/evidence/hybrid-mcp-runtime-trace.sample.jsonl"
+elif [[ -f "$ROOT/final-release/evidence/hybrid/mcp-runtime-trace.jsonl" ]]; then
+  head -n 80 "$ROOT/final-release/evidence/hybrid/mcp-runtime-trace.jsonl" > "$OUT_DIR/evidence/hybrid-mcp-runtime-trace.sample.jsonl"
 fi
 cp -f "$ROOT/final-release/FINAL_LIMITATIONS.md" "$OUT_DIR/docs/LIMITATIONS.md" 2>/dev/null || true
 
-# D1 — fully functional source (no secrets / install artifacts)
+# D1 — lean source (upload-size safe). Full monorepo is on GitHub.
 mkdir -p "$OUT_DIR/source"
 copy_tree() {
   local src="$1" dest="$2"
@@ -167,6 +173,11 @@ copy_tree() {
       --exclude 'dist' \
       --exclude 'coverage' \
       --exclude '*.egg-info' \
+      --exclude '*.db' \
+      --exclude '*.sqlite' \
+      --exclude '*.sqlite3' \
+      --exclude 'tests' \
+      --exclude '*.epw' \
       "$src/" "$dest/"
   fi
 }
@@ -175,45 +186,54 @@ copy_tree "$ROOT/services/simulator" "$OUT_DIR/source/services/simulator"
 copy_tree "$ROOT/services/agent" "$OUT_DIR/source/services/agent"
 copy_tree "$ROOT/services/mcp-server" "$OUT_DIR/source/services/mcp-server"
 copy_tree "$ROOT/services/optimizer" "$OUT_DIR/source/services/optimizer"
-copy_tree "$ROOT/services/api" "$OUT_DIR/source/services/api"
-copy_tree "$ROOT/scripts" "$OUT_DIR/source/scripts"
-copy_tree "$ROOT/packages" "$OUT_DIR/source/packages"
-copy_tree "$ROOT/apps/web" "$OUT_DIR/source/apps/web"
-copy_tree "$ROOT/building-models" "$OUT_DIR/source/building-models"
-copy_tree "$ROOT/docs" "$OUT_DIR/source/docs"
-
-# Lightweight repo pointers so judges can rebuild from the ZIP source tree
-for f in README.md Makefile package.json pnpm-workspace.yaml turbo.json AGENTS.md; do
-  [[ -f "$ROOT/$f" ]] && cp -f "$ROOT/$f" "$OUT_DIR/source/$f"
+mkdir -p "$OUT_DIR/source/scripts"
+for f in \
+  hybrid_supervisory_loop.py \
+  llm_mcp_loop.py \
+  run_hybrid_supervisory_experiment.sh \
+  run_llm_mcp_experiment.sh \
+  run_baseline.sh \
+  run_agent.sh \
+  compare_results.sh \
+  run_demo.sh \
+  setup_energyplus.sh \
+  check_prerequisites.sh
+do
+  [[ -f "$ROOT/scripts/$f" ]] && cp -f "$ROOT/scripts/$f" "$OUT_DIR/source/scripts/$f"
 done
+mkdir -p "$OUT_DIR/source/docs"
+[[ -f "$ROOT/docs/architecture.md" ]] && cp -f "$ROOT/docs/architecture.md" "$OUT_DIR/source/docs/architecture.md"
+[[ -f "$ROOT/docs/CODE_TOUR.md" ]] && cp -f "$ROOT/docs/CODE_TOUR.md" "$OUT_DIR/source/docs/CODE_TOUR.md"
+
 cat > "$OUT_DIR/source/SOURCE_README.md" <<'EOF'
-# Eco-Loop source (HirePro D1)
+# Eco-Loop source (HirePro D1) — compact upload pack
 
-This folder is the fully functional source snapshot for judges:
+This ZIP includes the closed-loop Python core. The full monorepo (web dashboard,
+API, weather EPW, full MCP traces) is on GitHub:
 
-| Piece | Path |
-|-------|------|
+https://github.com/alphasafal/Twincity-/tree/ecolooop-hackathon-final
+
+| Piece | Path in this ZIP |
+|-------|------------------|
 | EnergyPlus wrapper / closed loop | `services/simulator/twinpilot_simulator/ep_experiment.py` |
 | LLM orchestration (Path C) | `scripts/hybrid_supervisory_loop.py`, `services/agent/` |
 | MCP communication bus (stdio) | `services/mcp-server/` |
-| SafetyShield | `services/simulator/twinpilot_simulator/safety.py` (and API validation path) |
-| Savings dashboard UI | `apps/web/` |
-
-Prefer the GitHub branch for a full clone + `make demo`. Path A savings numbers live in `../results/comparison.json`.
+| SafetyShield | `services/optimizer/twinpilot_optimizer/safety.py` |
 EOF
 
-# Strip secrets if any slipped in
+# Hard strip bulky / secret artifacts
 find "$OUT_DIR" -name '.env' -delete
 find "$OUT_DIR" -name '.env.local' -delete
 find "$OUT_DIR" -name '*.pem' -delete
+find "$OUT_DIR" \( -name '*.db' -o -name '*.sqlite' -o -name '*.sqlite3' -o -name '*.epw' \) -delete
 find "$OUT_DIR" -type d -name 'node_modules' -prune -exec rm -rf {} + 2>/dev/null || true
 find "$OUT_DIR" -type d -name '.next' -prune -exec rm -rf {} + 2>/dev/null || true
 find "$OUT_DIR" -type d -name '__pycache__' -prune -exec rm -rf {} + 2>/dev/null || true
 
 (
   cd "$(dirname "$OUT_DIR")"
-  zip -r "$(basename "$ZIP_PATH")" "$(basename "$OUT_DIR")" \
-    -x '*/node_modules/*' '*/.venv/*' '*/__pycache__/*' '*/.next/*' '*.pyc' '*/.env' '*/.env.local'
+  zip -r -9 "$(basename "$ZIP_PATH")" "$(basename "$OUT_DIR")" \
+    -x '*/node_modules/*' '*/.venv/*' '*/__pycache__/*' '*/.next/*' '*.pyc' '*/.env' '*/.env.local' '*.db' '*.sqlite3' '*.epw'
 )
 
 echo "Wrote $ZIP_PATH"
