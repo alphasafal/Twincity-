@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Eco-Loop Live Closed-Loop Demo</title>
+  <style>
+    :root {
+      --bg: #070d0b; --panel: #0f1c18; --ink: #e7f5ef; --muted: #8eaaa0;
+      --ok: #34d399; --accent: #2dd4bf; --warn: #fbbf24; --bad: #fb7185;
+      --mono: "IBM Plex Mono", Menlo, Consolas, monospace;
+      --sans: "Avenir Next", "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 1280px; height: 720px; overflow: hidden; background: var(--bg); color: var(--ink); font-family: var(--sans); }
+    .wrap { padding: 28px 36px; height: 720px; display: flex; flex-direction: column; }
+    .top { display: flex; justify-content: space-between; align-items: baseline; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+    h1 { margin: 10px 0 6px; font-size: 30px; }
+    .sub { color: var(--muted); font-size: 15px; margin-bottom: 14px; }
+    .grid { display: grid; grid-template-columns: 1.25fr 0.95fr; gap: 14px; flex: 1; min-height: 0; }
+    .panel { background: var(--panel); border: 1px solid rgba(45,212,191,0.25); padding: 14px 16px; overflow: hidden; display: flex; flex-direction: column; }
+    .label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 8px; }
+    #term {
+      flex: 1; font-family: var(--mono); font-size: 13px; line-height: 1.4;
+      overflow: hidden; white-space: pre-wrap; color: #c7ebe0;
+    }
+    .line { margin: 0 0 4px; }
+    .line .t { color: #5f7f74; }
+    .line .ok { color: var(--ok); }
+    .line .bad { color: var(--bad); }
+    .line .warn { color: var(--warn); }
+    table { width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 12px; }
+    th, td { text-align: left; padding: 6px 4px; border-bottom: 1px solid rgba(142,170,160,0.2); }
+    th { color: var(--muted); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .metrics { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 10px; }
+    .m { border: 1px solid rgba(142,170,160,0.25); padding: 10px; background: rgba(0,0,0,0.25); }
+    .m b { display: block; font-size: 22px; color: var(--ok); margin-top: 4px; }
+    .m span { color: var(--muted); font-size: 12px; }
+    .badge { display: inline-block; margin-top: 8px; padding: 3px 8px; font-size: 11px; font-weight: 800; letter-spacing: 0.05em; }
+    .badge.ok { background: rgba(52,211,153,0.15); color: var(--ok); }
+    .badge.bad { background: rgba(251,113,133,0.15); color: var(--bad); }
+    .footer { margin-top: 10px; display: flex; justify-content: space-between; color: var(--muted); font-size: 13px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top"><div>Eco-Loop · Live closed-loop proof</div><div id="clock">0:00</div></div>
+    <h1>EnergyPlus → MCP → Ollama → SafetyShield → Clg-SetP-Sch</h1>
+    <div class="sub">Replaying verified Path C hybrid stages + Path A measured KPIs from the sealed experiment artifacts.</div>
+    <div class="grid">
+      <div class="panel">
+        <div class="label">Live loop feed (hybrid stage log)</div>
+        <div id="term"></div>
+      </div>
+      <div class="panel">
+        <div class="label">Actuator injection → next state</div>
+        <table>
+          <thead><tr><th>Time</th><th>Write</th><th>Setpoint</th><th>Next °C</th></tr></thead>
+          <tbody id="act"></tbody>
+        </table>
+        <div class="metrics">
+          <div class="m"><span>HVAC save</span><b>4.98%</b></div>
+          <div class="m"><span>Total kWh</span><b>1.31%</b></div>
+          <div class="m"><span>Peak</span><b>1.47%</b></div>
+          <div class="m"><span>Comfort</span><b>0 h</b></div>
+        </div>
+        <div><span class="badge ok" id="mcpbadge">MCP PIDs differ</span></div>
+        <div style="margin-top:8px"><span class="badge bad">35°C REJECTED</span> <span class="badge ok">FALLBACK SAFE</span></div>
+      </div>
+    </div>
+    <div class="footer">
+      <div id="caption">Starting closed-loop feed…</div>
+      <div>PoC demo ≤3 min · Path A savings · Path C agency</div>
+    </div>
+  </div>
+  <script>
+    const STAGES = [
+      {t:0, html:'<span class="t">[00:00]</span> <span class="ok">mcp_session_ready</span> transport=stdio client_pid=114421 server_pid=114442 pids_differ=<span class="ok">true</span>'},
+      {t:3, html:'<span class="t">[00:03]</span> tools/list → get_building_observation, select_energy_conservation_measure, validate_control_action, …'},
+      {t:8, html:'<span class="t">[00:08]</span> <span class="ok">energyplus_observation</span> hour=0 outdoor=24.2°C avg_zone=22.05°C'},
+      {t:14, html:'<span class="t">[00:14]</span> tools/call get_building_observation → MCP server'},
+      {t:20, html:'<span class="t">[00:20]</span> Ollama strategy proposal → HOLD_CURRENT_POLICY'},
+      {t:26, html:'<span class="t">[00:26]</span> tools/call select_energy_conservation_measure strategy=HOLD_CURRENT_POLICY'},
+      {t:32, html:'<span class="t">[00:32]</span> optimiser setpoint=24.9°C → SafetyShield <span class="ok">approved</span>'},
+      {t:38, html:'<span class="t">[00:38]</span> <span class="ok">Clg-SetP-Sch WRITE</span> executed=24.9°C → next_zone=21.71°C'},
+      {t:46, html:'<span class="t">[00:46]</span> self_correction retain_strategy ΔT=-0.345°C comfort_proxy_safe=true'},
+      {t:54, html:'<span class="t">[00:54]</span> <span class="ok">energyplus_observation</span> hour=1 outdoor=20.0°C avg_zone=21.71°C'},
+      {t:62, html:'<span class="t">[01:02]</span> Ollama → ECO_MODE → optimiser 25.9°C → <span class="ok">approved</span> → write'},
+      {t:72, html:'<span class="t">[01:12]</span> Ollama → ECO_MODE → 26.9°C → write → next_zone=21.26°C'},
+      {t:82, html:'<span class="t">[01:22]</span> Ollama → COMFORT_FIRST → 25.9°C → write'},
+      {t:95, html:'<span class="t">[01:35]</span> Path A comparison: HVAC 4.98% · total 1.31% · peak 1.47% · comfort 0h'},
+      {t:110, html:'<span class="t">[01:50]</span> <span class="bad">UNSAFE TEST</span> proposed=35.0°C → reasons=out_of_range, max_delta → <span class="bad">NO ACTUATOR WRITE</span>'},
+      {t:125, html:'<span class="t">[02:05]</span> <span class="warn">Ollama down</span> → deterministic_fallback ×48 · still SafetyShield-gated'},
+      {t:140, html:'<span class="t">[02:20]</span> Hybrid complete: 48 approved · mcp_pids_differ=true · self_correction.jsonl written'},
+      {t:155, html:'<span class="t">[02:35]</span> Dashboard DATA_MODE=energyplus · synthetic_multiplier_applied=false'},
+      {t:168, html:'<span class="t">[02:48]</span> <span class="ok">PASS</span> AI proposes. SafetyShield validates. EnergyPlus executes.'},
+    ];
+    const ACT = [
+      ['00:15','True','24.9°C','21.71°C'],
+      ['01:15','True','25.9°C','21.48°C'],
+      ['02:15','True','26.9°C','21.26°C'],
+      ['03:15','True','27.9°C','21.07°C'],
+      ['04:15','True','28.0°C','21.29°C'],
+      ['05:23','True','28.0°C','22.26°C'],
+    ];
+    document.getElementById('act').innerHTML = ACT.map(([a,b,c,d]) =>
+      `<tr><td>${a}</td><td class="ok" style="color:var(--ok);font-weight:700">${b}</td><td>${c}</td><td>${d}</td></tr>`
+    ).join('');
+
+    const term = document.getElementById('term');
+    const started = performance.now();
+    let shown = 0;
+    function fmt(s){ s=Math.floor(s); return `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`; }
+    function tick(){
+      const t = (performance.now()-started)/1000;
+      document.getElementById('clock').textContent = fmt(Math.min(t,180));
+      while (shown < STAGES.length && STAGES[shown].t <= t) {
+        const div = document.createElement('div');
+        div.className = 'line';
+        div.innerHTML = STAGES[shown].html;
+        term.appendChild(div);
+        term.scrollTop = term.scrollHeight;
+        shown++;
+      }
+      if (t < 30) document.getElementById('caption').textContent = 'MCP session + EnergyPlus observation → LLM strategy';
+      else if (t < 95) document.getElementById('caption').textContent = 'Control injection: Clg-SetP-Sch write + next EnergyPlus state';
+      else if (t < 140) document.getElementById('caption').textContent = 'Safety rejection + Ollama fallback still gated';
+      else document.getElementById('caption').textContent = 'Measured Path A KPIs · closed loop proven';
+      if (t < 180.5) requestAnimationFrame(tick);
+    }
+    tick();
+  </script>
+</body>
+</html>
