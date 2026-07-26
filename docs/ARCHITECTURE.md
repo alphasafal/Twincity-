@@ -97,7 +97,7 @@ The Safety Shield lives in `services/optimizer` and is imported by the API — *
 
 ```mermaid
 flowchart TB
-  Host[MCP host Claude/Cursor] -->|stdio| Server[twinpilot-mcp]
+  Host[MCP client / IDE] -->|stdio| Server[twinpilot-mcp]
   Server -->|resources read-only| API[TwinPilot REST]
   Server -->|tools narrow| API
   API --> Shield[Safety Shield]

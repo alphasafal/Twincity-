@@ -1,9 +1,12 @@
 # GitHub and live links
 
-- GitHub: https://github.com/alphasafal/Twincity-
-- Branch / PR: `cursor/ecolooop-energyplus-audit-b6b3` — https://github.com/alphasafal/Twincity-/pull/3
-- **Live demo (primary):** https://twinpilot.webyaar.in
+- **Live demo website:** https://twinpilot.webyaar.in
+- **GitHub (paste on HirePro):** https://github.com/alphasafal/Twincity-/tree/ecolooop-hackathon-final
+- **Pull request:** https://github.com/alphasafal/Twincity-/tree/ecolooop-hackathon-final
+- **IDEA PPT paste pack (6 slides):** `final-release/IDEA_PPT_6_SLIDES.md`
 - Apex marketing site (unchanged): https://webyaar.in
-- Temporary trycloudflare URLs are optional fallbacks only
 
 Login: `manager@twinpilot.demo` / `TwinPilot-Manager-Demo!`
+
+Authoritative metrics: Path A comfort-zero EnergyPlus experiment (HVAC 4.98% / total 1.31% / peak 1.47% / comfort 0 h).  
+Hybrid Path C proves LLM supervisory involvement via MCP + self-correction.

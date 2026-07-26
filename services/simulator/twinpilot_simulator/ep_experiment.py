@@ -1,11 +1,20 @@
-"""Real EnergyPlus baseline / agent closed-loop experiments.
+"""Real EnergyPlus baseline / agent closed-loop experiments (Path A core).
 
 This module drives EnergyPlus 24.x via the Runtime API (pyenergyplus).
+
+Engineer map
+------------
+- ``run_experiment`` — full co-sim loop (baseline or agent)
+- ``propose_agent_cooling_setpoint`` — deterministic Eco-Loop proposal (no actuation)
+- ``validate_setpoint_action`` — hard safety gate before any actuator write
+- Actuator used: Schedule:Compact ``Clg-SetP-Sch`` via ``set_actuator_value``
+
 Baseline runs leave thermostat schedules untouched.
 Agent runs propose cooling-setpoint overrides each control interval, then
 apply them only after deterministic SafetyShield validation.
 
 No mock building dynamics are used when this module succeeds.
+Authoritative savings numbers come from comparing baseline vs agent summaries.
 """
 
 from __future__ import annotations
@@ -52,6 +61,11 @@ class ExperimentPaths:
 
 @dataclass
 class SafetyLimits:
+    """Hard limits enforced by ``validate_setpoint_action`` (EnergyPlus loop).
+
+    These are intentionally independent of the LLM — the model cannot widen them.
+    """
+
     min_cooling_setpoint: float = 22.0
     max_cooling_setpoint: float = 28.0
     min_heating_setpoint: float = 16.0
@@ -70,6 +84,13 @@ class SafetyLimits:
 
 @dataclass
 class ExperimentConfig:
+    """Configuration for one EnergyPlus experiment run.
+
+    ``proposal_fn`` — optional external proposer (Path B/C). Signature must match
+    what ``run_experiment`` calls each control interval. If ``None``, Path A uses
+    ``propose_agent_cooling_setpoint``.
+    """
+
     paths: ExperimentPaths
     mode: Literal["baseline", "agent"]
     control_interval_minutes: int = 60
@@ -170,12 +191,17 @@ def propose_agent_cooling_setpoint(
     limits: SafetyLimits,
     hour: int | None = None,
 ) -> tuple[float, str, float]:
-    """Deterministic Eco-Loop agent proposal (no direct actuation).
+    """Deterministic Eco-Loop agent proposal (Path A). Does **not** actuate.
 
-    Comfort-first policy with warning threshold, pre-emptive recovery,
-    occupied-zone priority, rate limit, and morning pre-cooling.
+    Policy (comfort-first, then savings):
+    1. Reject impossible / missing sensors.
+    2. Morning pre-cool / pre-emptive recovery near comfort warning.
+    3. Mild occupied setback when cool enough (primary HVAC saver).
+    4. Unoccupied night setback toward higher cooling setpoint.
+    5. Agent-side rate-limit; SafetyShield re-checks before write.
 
-    Returns (proposed_setpoint, reason, confidence).
+    Returns:
+        ``(proposed_setpoint_c, reason_code, confidence)``
     """
     if not zone_temps:
         return current_cooling_setpoint, "missing_zone_temperature", 0.0
@@ -260,8 +286,14 @@ def validate_setpoint_action(
 ) -> tuple[bool, list[str], str]:
     """Deterministic safety gate used by the EnergyPlus agent loop.
 
-    Returns (approved, blocking_reasons, disposition).
-    disposition: approved | rejected | fallback
+    This is the hard gate before ``Clg-SetP-Sch`` writes. The LLM cannot bypass it.
+    Typical rejects: out of [22, 28]°C, change > 1°C/interval, deadband vs heating,
+    stale/unhealthy sensors, manual override. LLM/MCP timeouts force fallback
+    disposition rather than blind actuation.
+
+    Returns:
+        ``(approved, blocking_reasons, disposition)`` where disposition is one of
+        ``approved`` | ``rejected`` | ``fallback``.
     """
     blocking: list[str] = []
 
@@ -503,7 +535,18 @@ def _parse_results_from_csv(
 
 
 def run_experiment(config: ExperimentConfig) -> dict[str, Any]:
-    """Execute one EnergyPlus experiment (baseline or agent) and write summary JSON."""
+    """Execute one EnergyPlus experiment (baseline or agent) and write summary JSON.
+
+    Control loop (agent mode), each control interval after warmup:
+    1. Read outdoor temp, zone temps, occupancy from EnergyPlus variables.
+    2. Call ``proposal_fn`` or ``propose_agent_cooling_setpoint``.
+    3. ``validate_setpoint_action`` — reject/fallback → keep prior setpoint.
+    4. On approve: ``api.exchange.set_actuator_value`` on ``Clg-SetP-Sch``.
+    5. Log action + following timestep temperatures for closed-loop proof.
+
+    Baseline mode skips proposal/actuation and only collects meters/comfort.
+    Outputs land under ``config.paths.output_dir`` (summary.json, actions.json, …).
+    """
     paths = config.paths
     paths.output_dir.mkdir(parents=True, exist_ok=True)
     run_dir = paths.output_dir / "energyplus_run"

@@ -46,4 +46,23 @@ manual-verification/mcp-transport/mcp-server-*.pid
 # Unpacked submission staging (zip is the deliverable)
 Eco-Loop-Hackathon-Submission/
 
+# Ephemeral slide/video render intermediates (keep final PDF/MP4)
+final-release/demo-video/frames/
+final-release/demo-video/live-frames/
+final-release/demo-video/closed-loop-capture.html
+final-release/demo-video/live-closed-loop-capture.html
+final-release/demo-video/concat.txt
+final-release/demo-video/live-concat.txt
+final-release/demo-video/duration.txt
+screenshot.png
+
 .agents/
+
+# Local editor config (not part of the product)
+.cursor/
+
+
+# Cloudflare tunnel secrets (never commit)
+.cloudflared/
+**/.cloudflared/
+

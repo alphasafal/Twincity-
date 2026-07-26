@@ -1,1 +1,5 @@
-Owner: record backup demo video covering closed loop, results, safety, fallback.
+Populated: final-release/demo-video/Eco-Loop-Demo-Walkthrough.mp4
+Link file: final-release/Demo-Video-Link.md
+
+Covers closed loop, Path A results, SafetyShield 35°C rejection, and Ollama fallback.
+Optional owner upgrade: record a live screen capture of twinpilot.webyaar.in using the same talk track.

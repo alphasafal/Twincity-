@@ -1,6 +1,6 @@
 FINAL_RELEASE_COMMIT=0d1d30a7ce010b7e791ea3e7e1a8ba399a8c9f77
 EVIDENCE_PACK_COMMIT=29e88cbd829a333b4661ea8d6c448b1a02a46325
-BRANCH=cursor/ecolooop-energyplus-audit-b6b3
+BRANCH=ecolooop-hackathon-final
 NOTE=This file is amended into the same commit so FINAL_RELEASE_COMMIT equals git rev-parse HEAD.
 OWNER_TAG_COMMAND=git tag -a hackathon-final-v1 0d1d30a7ce010b7e791ea3e7e1a8ba399a8c9f77 -m "Verified Eco-Loop hackathon release"
 PRE_SEAL_CODE_TIP=133b0530670f2ed5b9fcf011d7a0adaa0b63228c

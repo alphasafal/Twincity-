@@ -2,7 +2,7 @@
 
 Generated: 2026-07-25T12:01:39.455435+00:00
 Release commit (candidate): `f0f94d84d08969784cf2373ddbb3cca6e3fa909b`
-Branch: `cursor/ecolooop-energyplus-audit-b6b3`
+Branch: `ecolooop-hackathon-final`
 
 ## Secret scan result
 - High-confidence secret patterns (`sk-`, `ghp_`, PEM private keys): **none found** in hygiene scan.

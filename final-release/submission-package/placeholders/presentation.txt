@@ -1,1 +1,5 @@
-Populate slides using final-release/PRESENTATION_CONTENT.md
+Populated: final-release/presentation/Eco-Loop-Presentation.pdf
+(source HTML: final-release/presentation/eco-loop-slides.html;
+ content: final-release/PRESENTATION_CONTENT.md)
+
+Owner still fills team names / problem-statement IDs on slide 1 from the official template.

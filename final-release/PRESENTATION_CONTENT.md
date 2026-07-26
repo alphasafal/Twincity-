@@ -1,5 +1,9 @@
 # Presentation Content (6 slides max, including title)
 
+**Rendered PDF:** `final-release/presentation/Eco-Loop-Presentation.pdf`  
+**Editable HTML:** `final-release/presentation/eco-loop-slides.html`  
+Regenerate: `./scripts/render_submission_assets.sh`
+
 **Tagline:** Safe autonomous building optimisation through EnergyPlus, MCP and deterministic AI control.
 
 ## Slide 1 — Title

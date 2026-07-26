@@ -1,7 +1,7 @@
 # Final Hackathon Readiness Report — Eco-Loop / TwinPilot
 
 **Date:** 2026-07-25 (final hardening pass)  
-**Branch:** `cursor/ecolooop-energyplus-audit-b6b3`
+**Branch:** `ecolooop-hackathon-final`
 
 ---
 

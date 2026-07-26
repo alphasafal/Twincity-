@@ -1,4 +1,12 @@
-"""Safety Shield — independent of UI and LLM agent code."""
+"""Safety Shield — independent of UI and LLM agent code.
+
+Used by the FastAPI / interactive mock path. The EnergyPlus experiment path uses
+a parallel gate in ``twinpilot_simulator.ep_experiment.validate_setpoint_action``
+with the same intent: **no LLM output reaches an actuator without deterministic checks**.
+
+Engineers: start at ``SafetyShield.validate`` — it returns a structured
+``SafetyResult`` (pass/fail, risk, blocking reasons, optional validation token).
+"""
 
 from __future__ import annotations
 
@@ -90,7 +98,13 @@ class ValidationContext(BaseModel):
 
 
 class SafetyShield:
-    """Validate every proposed action before execution."""
+    """Validate every proposed action before execution.
+
+    Check order (high level): finite value → range → rate-of-change → deadband →
+    sensor health / freshness → mode & permission → infrastructure failures
+    (LLM timeout, MCP failure, EnergyPlus failure) → comfort simulation flags.
+    Any blocking failure ⇒ ``valid=False``; callers must not actuate.
+    """
 
     def validate(
         self,
@@ -99,6 +113,14 @@ class SafetyShield:
         *,
         validation_token: str | None = None,
     ) -> SafetyResult:
+        """Run all safety checks and return an auditable ``SafetyResult``.
+
+        Args:
+            action: What the agent wants to do (e.g. cooling setpoint change).
+            context: Live building / session context the LLM cannot forge away
+                (sensor health, mode, timeouts, manual override, etc.).
+            validation_token: Optional prior token for approve/apply chains.
+        """
         checks: list[SafetyCheck] = []
         blocking: list[str] = []
         limits = context.limits
@@ -108,7 +130,7 @@ class SafetyShield:
             if not passed and block_msg:
                 blocking.append(block_msg)
 
-        # 1. Finite value
+        # 1. Finite value — reject NaN / Inf before any numeric comparisons
         value = action.proposed_value
         finite = value is None or (isinstance(value, (int, float)) and abs(value) != float("inf"))
         if value is not None:
@@ -123,7 +145,7 @@ class SafetyShield:
             None if finite else "Proposed value must be a finite number",
         )
 
-        # 2. Building limits / setpoint range
+        # 2. Building limits / setpoint range (configured ConstraintLimits)
         in_range = True
         if action.action_type in {"cooling_setpoint", "request_zone_setpoint"} and value is not None:
             in_range = limits.min_cooling_setpoint <= value <= limits.max_cooling_setpoint

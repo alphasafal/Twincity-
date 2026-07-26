@@ -54,7 +54,7 @@ python -m twinpilot_mcp --fallback
 
 The server prefers the official `mcp` FastMCP API, then the low-level `mcp.server.Server`, then a built-in stdio JSON-RPC fallback that still lists and dispatches the same catalog.
 
-## Claude Desktop / Cursor config example
+## MCP host config example
 
 ```json
 {

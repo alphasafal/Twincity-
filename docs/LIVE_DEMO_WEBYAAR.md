@@ -9,25 +9,20 @@ Stable public demo hostname for Eco-Loop / TwinPilot (does **not** replace `weby
 | Local origin | reverse proxy `127.0.0.1:8080` → Next `:3000` + API `:8000` |
 | Tunnel name | `twinpilot-live` |
 
-## One-time owner auth (required)
-
-This cloud VM cannot edit your Cloudflare DNS until you authorize it.
-
-1. Open the login URL printed by the agent (or run locally on the VM):
+## Start / keep running (judges)
 
 ```bash
-cloudflared tunnel login
+./scripts/start_live_demo.sh
+# optional: continuous watchdog (recommended while judging is open)
+tmux new-session -d -s tp-watchdog './scripts/run_live_demo_watchdog.sh'
 ```
 
-2. In the browser, select the Cloudflare account that owns **webyaar.in**.
-3. Authorize the zone.
-4. Tell the agent “login done”, or run:
+One-time Cloudflare auth on the host that serves the tunnel:
 
 ```bash
-./scripts/setup_webyaar_live_demo.sh
+cloudflared tunnel login   # select the account that owns webyaar.in
+./scripts/start_live_demo.sh
 ```
-
-That script creates the named tunnel, adds the CNAME for `twinpilot.webyaar.in`, updates `apps/web/.env.local`, and starts the tunnel.
 
 ## Manual DNS (if CLI route fails)
 
@@ -45,6 +40,7 @@ In Cloudflare Dashboard → **webyaar.in** → DNS → Add record:
 
 ## Notes
 
-- Temporary `*.trycloudflare.com` URLs expire; prefer `twinpilot.webyaar.in` as submission/live proof.
-- Keep the VM (API + web + proxy + tunnel) running during demos.
+- Temporary `*.trycloudflare.com` URLs expire; use `twinpilot.webyaar.in` as the submission/live proof.
+- Keep the host (API + web + proxy + tunnel + watchdog) running for the judging window.
 - Do not point `@` / `www` at this tunnel — leave WebYaar marketing on `webyaar.in`.
+- Tunnel credentials stay in `~/.cloudflared/` (never committed).

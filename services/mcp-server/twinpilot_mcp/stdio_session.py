@@ -1,7 +1,17 @@
 """Stdio MCP client session for the EnergyPlus LLM experiment path.
 
-Spawns `python -m twinpilot_mcp` as a child process and speaks MCP over stdio.
-Does **not** import or call `twinpilot_mcp.handlers.call_tool`.
+Spawns ``python -m twinpilot_mcp`` as a **child process** and speaks MCP over stdio.
+This is the proof that Eco-Loop uses a real MCP transport (separate PIDs), not an
+in-process fake.
+
+Does **not** import or call ``twinpilot_mcp.handlers.call_tool``.
+
+Engineer map
+------------
+- ``StdioMcpSession.start`` — launch server, wait for initialize + tools/list
+- ``list_tools`` / ``call_tool`` — JSON-RPC ops mirrored to the child
+- ``_trace`` — append-only protocol evidence (initialize, tools/call, …)
+- ``open_energyplus_mcp_session`` — convenience factory used by Path B/C scripts
 """
 
 from __future__ import annotations
@@ -46,7 +56,11 @@ class McpCallResult:
 
 @dataclass
 class StdioMcpSession:
-    """Long-lived stdio MCP client talking to a separate server process."""
+    """Long-lived stdio MCP client talking to a separate server process.
+
+    ``client_pid`` is this process; ``server_pid`` is the child. After ``start()``,
+    judges should see ``client_pid != server_pid`` in hybrid/llm_mcp summaries.
+    """
 
     trace_path: Path | None = None
     timeout_s: float = 15.0

@@ -72,8 +72,15 @@ def log_stage(stage: str, payload: dict[str, Any], path: Path = LOG) -> None:
 
 
 def call_ollama_strategy(context: dict[str, Any]) -> dict[str, Any] | None:
+    """Ask local Ollama for a supervisory ECM/strategy JSON (no actuation).
+
+    Returns a normalised strategy dict, or ``None`` on HTTP/parse failure so the
+    caller can fall back to ``HOLD_CURRENT_POLICY``. The model never receives
+    actuator handles — only building-state context.
+    """
     base = os.environ.get("OLLAMA_BASE_URL", "http://localhost:11434").rstrip("/")
     model = os.environ.get("OLLAMA_MODEL", "llama3.2:1b")
+    # Structured JSON prompt: strategy enum + soft targets; optimiser still owns numbers.
     prompt = {
         "model": model,
         "stream": False,
@@ -140,7 +147,12 @@ def setpoint_from_strategy(
     limits: SafetyLimits,
     hour: int,
 ) -> tuple[float, str, float]:
-    """Deterministic optimiser: map supervisory strategy → numeric setpoint."""
+    """Deterministic optimiser: map supervisory strategy → numeric setpoint.
+
+    Starts from the Path A deterministic proposal, then biases toward the LLM's
+    strategy (eco / comfort / setback / pre-cool / peak). Always rate-limits and
+    clamps to ``SafetyLimits`` before SafetyShield sees the value.
+    """
     det_sp, det_reason, det_conf = propose_agent_cooling_setpoint(
         outdoor_c=outdoor_c,
         zone_temps=zone_temps,
@@ -205,6 +217,17 @@ def setpoint_from_strategy(
 
 
 def make_hybrid_proposal_fn(mcp_session):
+    """Build the per-timestep proposal callback injected into ``run_experiment``.
+
+    Sequence each control hour:
+    1. Log EnergyPlus observation
+    2. MCP ``get_building_observation`` / strategy tools (stdio, separate PID)
+    3. Ollama strategy (or HOLD fallback)
+    4. ``setpoint_from_strategy`` → numeric setpoint
+    5. MCP advisory validate + authoritative ``validate_setpoint_action``
+    6. Return proposal to ``run_experiment`` (which performs the actuator write)
+    7. On next hour: log expected-vs-actual self-correction
+    """
     state: dict[str, Any] = {
         "last_strategy": None,
         "last_expected_pct": None,

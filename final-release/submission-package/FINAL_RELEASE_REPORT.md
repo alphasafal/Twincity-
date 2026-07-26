@@ -4,7 +4,7 @@
 Fresh verification from commit `0d1d30a7ce010b7e791ea3e7e1a8ba399a8c9f77` confirms a real EnergyPlus closed loop, stdio MCP process separation, local Ollama proposals, SafetyShield rejection/fallback, honest dashboard data modes, and Path A comfort-zero savings of **4.98% HVAC / 1.31% total / 1.47% peak**. Overall status: **PASS**. Internal engineering-readiness score: **99/100**.
 
 ## 2. Exact release commit
-- Branch: `cursor/ecolooop-energyplus-audit-b6b3`
+- Branch: `ecolooop-hackathon-final`
 - Commit: `0d1d30a7ce010b7e791ea3e7e1a8ba399a8c9f77`
 - Note: If additional sealing commits land after this report, update the manifest to the sealed tip before tagging.
 
@@ -114,6 +114,6 @@ git status
 git rev-parse HEAD
 git tag -a hackathon-final-v1 -m "Verified Eco-Loop hackathon release"
 # ONLY after explicit owner approval:
-git push -u origin cursor/ecolooop-energyplus-audit-b6b3
+git push -u origin ecolooop-hackathon-final
 git push origin hackathon-final-v1
 ```

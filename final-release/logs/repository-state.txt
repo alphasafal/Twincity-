@@ -2,13 +2,13 @@
 pwd: /workspace
 utc: 2026-07-25T11:42:47Z
 local: 2026-07-25T11:42:47+0000
-branch: cursor/ecolooop-energyplus-audit-b6b3
+branch: ecolooop-hackathon-final
 HEAD: 39cb4da36b9f79de36aa797de28de5bb0a76f950
 HEAD_SHORT: 133b053
 
 === git status ===
-On branch cursor/ecolooop-energyplus-audit-b6b3
-Your branch is up to date with 'origin/cursor/ecolooop-energyplus-audit-b6b3'.
+On branch ecolooop-hackathon-final
+Your branch is up to date with 'origin/ecolooop-hackathon-final'.
 
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)

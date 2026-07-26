@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Eco-Loop — IDEA Presentation</title>
+  <style>
+    :root {
+      --ink: #1a1a1a;
+      --muted: #444;
+      --line: #222;
+      --accent: #0b3d91;
+      --bg: #ffffff;
+      --font: "Calibri", "Segoe UI", Candara, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #333; font-family: var(--font); color: var(--ink); }
+    .deck { display: flex; flex-direction: column; gap: 16px; padding: 16px; align-items: center; }
+    .slide {
+      width: 1280px; height: 720px; background: var(--bg);
+      padding: 48px 64px; position: relative;
+      page-break-after: always; break-after: page;
+      border: 1px solid #111;
+    }
+    .hdr {
+      font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--accent); font-weight: 700; margin-bottom: 18px;
+      border-bottom: 2px solid var(--accent); padding-bottom: 8px;
+    }
+    h1 { font-size: 40px; margin: 0 0 18px; line-height: 1.15; }
+    h2 { font-size: 32px; margin: 0 0 20px; color: var(--accent); }
+    ul { margin: 0; padding-left: 1.2em; font-size: 22px; line-height: 1.45; }
+    li + li { margin-top: 8px; }
+    .meta { font-size: 20px; line-height: 1.55; margin-top: 12px; }
+    .meta b { color: var(--accent); }
+    table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 20px; }
+    th, td { border: 1px solid #999; padding: 10px 12px; text-align: left; }
+    th { background: #eef2f8; font-size: 14px; text-transform: uppercase; letter-spacing: 0.04em; }
+    td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    td.good { color: #0a7a3e; font-weight: 700; text-align: right; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .box { border: 1px solid #bbb; padding: 16px 18px; }
+    .box h3 { margin: 0 0 10px; font-size: 18px; color: var(--accent); }
+    .foot { position: absolute; left: 64px; right: 64px; bottom: 36px; font-size: 14px; color: var(--muted); }
+    pre {
+      background: #0f172a; color: #e2e8f0; padding: 16px 18px;
+      font-size: 15px; line-height: 1.45; font-family: Consolas, monospace;
+      white-space: pre-wrap; margin: 0 0 14px;
+    }
+    @media print {
+      body { background: white; }
+      .deck { padding: 0; gap: 0; }
+      .slide { border: none; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+  <div class="deck">
+    <!-- 1 TITLE -->
+    <section class="slide">
+      <div class="hdr">IDEA submission · Title page</div>
+      <h1>Eco-Loop Building Agents</h1>
+      <div class="meta">
+        <div><b>Problem Statement ID:</b> [paste from HirePro]</div>
+        <div><b>Theme:</b> Building energy / Physical AI</div>
+        <div><b>PS Category:</b> Software</div>
+        <div><b>Name (portal):</b> Safal Gupta</div>
+        <div><b>ID / Team ID:</b> [paste from HirePro]</div>
+        <div style="margin-top:18px"><b>Tagline:</b> Safe autonomous building optimisation through EnergyPlus, MCP and deterministic AI control.</div>
+      </div>
+      <div class="foot">Honeywell campus · Eco-Loop Building Agents</div>
+    </section>
+
+    <!-- 2 IDEA / SOLUTION -->
+    <section class="slide">
+      <div class="hdr">Proposed solution</div>
+      <h2>Closed-loop Physical AI for buildings</h2>
+      <div class="grid">
+        <div class="box">
+          <h3>Problem</h3>
+          <ul>
+            <li>Fixed HVAC schedules ignore occupancy &amp; weather</li>
+            <li>Buildings waste energy and peak demand</li>
+            <li>Uncontrolled LLM setpoints are unsafe</li>
+            <li>Dashboards observe — they do not act</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h3>Solution</h3>
+          <ul>
+            <li>EnergyPlus digital building sandbox</li>
+            <li>OSS LLM (Ollama) + MCP tool bus</li>
+            <li>SafetyShield gates every write</li>
+            <li>Forward inject setpoints → next state</li>
+          </ul>
+        </div>
+      </div>
+      <ul style="margin-top:22px">
+        <li><b>Flow:</b> Observe → Propose → Validate → Execute → Measure → Correct</li>
+      </ul>
+      <div class="foot">AI proposes. SafetyShield validates. EnergyPlus executes.</div>
+    </section>
+
+    <!-- 3 TECHNICAL -->
+    <section class="slide">
+      <div class="hdr">Technical approach</div>
+      <h2>EnergyPlus · MCP · Ollama · SafetyShield</h2>
+      <pre>EnergyPlus → observations → MCP client → stdio → MCP server
+  → Ollama strategy / ECM
+  → Deterministic optimiser → SafetyShield
+  → Clg-SetP-Sch actuator → next state → self-correction</pre>
+      <ul>
+        <li>Real Runtime API actuator writes (not dashboard-only)</li>
+        <li>Separate MCP process (`mcp_pids_differ: true`)</li>
+        <li>Local open-source LLM · safe deterministic fallback</li>
+        <li>Path A = savings proof · Path C = LLM/MCP agency</li>
+      </ul>
+    </section>
+
+    <!-- 4 SNAPS -->
+    <section class="slide">
+      <div class="hdr">Snaps of the solution / prototype</div>
+      <h2>Working closed loop</h2>
+      <div class="grid">
+        <div class="box">
+          <h3>Actuator → next state</h3>
+          <ul>
+            <li>48 Path A approved writes</li>
+            <li>`Clg-SetP-Sch` = True</li>
+            <li>Following zone temperatures returned</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h3>Safety &amp; agency</h3>
+          <ul>
+            <li>35°C proposal rejected</li>
+            <li>Ollama-down → fallback (still gated)</li>
+            <li>Path C self-correction logged</li>
+          </ul>
+        </div>
+      </div>
+      <ul style="margin-top:20px">
+        <li>Dashboard `DATA_MODE=energyplus` shows measured KPIs (no silent mock)</li>
+        <li>Live demo: twinpilot.webyaar.in</li>
+      </ul>
+    </section>
+
+    <!-- 5 RESULTS -->
+    <section class="slide">
+      <div class="hdr">Verified results</div>
+      <h2>Path A — comfort-zero savings</h2>
+      <table>
+        <thead>
+          <tr><th>Metric</th><th class="num">Baseline</th><th class="num">Eco-Loop</th><th class="num">Improvement</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>HVAC energy</td><td class="num">13.85 kWh</td><td class="num">13.16 kWh</td><td class="good">4.98%</td></tr>
+          <tr><td>Total energy</td><td class="num">421.51 kWh</td><td class="num">416.00 kWh</td><td class="good">1.31%</td></tr>
+          <tr><td>Peak power</td><td class="num">19.93 kW</td><td class="num">19.64 kW</td><td class="good">1.47%</td></tr>
+          <tr><td>Comfort violations</td><td class="num">0 h</td><td class="num">0 h</td><td class="num">—</td></tr>
+        </tbody>
+      </table>
+      <ul style="margin-top:18px">
+        <li>Same IDF · EPW · occupancy · period — controller is the only difference</li>
+        <li>Path C proves LLM strategy via MCP (agency); Path A is the % claim</li>
+      </ul>
+      <div class="foot">Energy savings without sacrificing occupied-zone comfort.</div>
+    </section>
+
+    <!-- 6 FEASIBILITY -->
+    <section class="slide">
+      <div class="hdr">Feasibility and viability</div>
+      <h2>Shipable PoC · honest limits</h2>
+      <div class="grid">
+        <div class="box">
+          <h3>Feasibility</h3>
+          <ul>
+            <li>Runs on local / cloud VM</li>
+            <li>Open-source local LLM</li>
+            <li>Reproducible scripts</li>
+            <li>Clean-clone verified</li>
+            <li>Safe degraded mode</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h3>Limits &amp; future</h3>
+          <ul>
+            <li>Digital building only (no physical BMS yet)</li>
+            <li>Scenario-specific savings</li>
+            <li>Future: BACnet/Modbus</li>
+            <li>Campus scale · tariffs · pilot</li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot">GitHub: github.com/alphasafal/Twincity- · Demo: twinpilot.webyaar.in</div>
+    </section>
+  </div>
+</body>
+</html>

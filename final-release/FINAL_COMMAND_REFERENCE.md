@@ -1,7 +1,7 @@
 # Final Command Reference
 
 **Commit:** `f0f94d84d08969784cf2373ddbb3cca6e3fa909b`
-**Branch:** `cursor/ecolooop-energyplus-audit-b6b3`
+**Branch:** `ecolooop-hackathon-final`
 
 ## Prerequisites / setup
 ```bash
@@ -58,6 +58,6 @@ git status
 git rev-parse HEAD
 git tag -a hackathon-final-v1 -m "Verified Eco-Loop hackathon release"
 # ONLY after owner approval:
-# git push -u origin cursor/ecolooop-energyplus-audit-b6b3
+# git push -u origin ecolooop-hackathon-final
 # git push origin hackathon-final-v1
 ```

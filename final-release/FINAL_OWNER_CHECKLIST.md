@@ -1,7 +1,7 @@
 # Final Owner Checklist
 
 **Commit:** `f0f94d84d08969784cf2373ddbb3cca6e3fa909b`  
-**Branch:** `cursor/ecolooop-energyplus-audit-b6b3`  
+**Branch:** `ecolooop-hackathon-final`  
 **Generated:** 2026-07-25T12:01:39.455435+00:00
 
 Use this as a non-expert runbook. Check boxes only after you personally observe success.
@@ -195,19 +195,21 @@ Use this as a non-expert runbook. Check boxes only after you personally observe 
 - **Failure looks like:** json/csv tracked
 - **Evidence to inspect:** `logs/hygiene-scan.txt`
 
-## [ ] Record backup demonstration video
-- **Command:** `(owner camera/screen recorder)`
+## [x] Record backup demonstration video
+- **Command:** `./scripts/render_submission_assets.sh` (or owner camera/screen recorder)
 - **Proves:** Offline demo backup
 - **Success looks like:** video covers loop+results+safety
 - **Failure looks like:** missing backup
-- **Evidence to inspect:** `submission-package/placeholders/demo-video.txt`
+- **Evidence to inspect:** `final-release/demo-video/Eco-Loop-Demo-Walkthrough.mp4`, `Demo-Video-Link.md`
+- **Status:** Agent-generated ≤3 min walkthrough committed; optional live capture of twinpilot.webyaar.in still recommended.
 
-## [ ] Review final presentation
-- **Command:** `open PRESENTATION_CONTENT.md`
+## [x] Review final presentation
+- **Command:** `open final-release/presentation/Eco-Loop-Presentation.pdf`
 - **Proves:** Talk track ready
 - **Success looks like:** 6 slides match Path A numbers
 - **Failure looks like:** stale 12.20% claim
-- **Evidence to inspect:** `PRESENTATION_CONTENT.md`
+- **Evidence to inspect:** `PRESENTATION_CONTENT.md`, `presentation/Eco-Loop-Presentation.pdf`
+- **Status:** PDF rendered from Path A numbers; owner must still fill team/IDs on slide 1.
 
 ## [ ] Create final release tag manually
 - **Command:** `git tag -a hackathon-final-v1 -m 'Verified Eco-Loop hackathon release'`
@@ -217,7 +219,7 @@ Use this as a non-expert runbook. Check boxes only after you personally observe 
 - **Evidence to inspect:** `FINAL_RELEASE_REPORT.md`
 
 ## [ ] Push only after owner approval
-- **Command:** `git push -u origin cursor/ecolooop-energyplus-audit-b6b3; git push origin hackathon-final-v1`
+- **Command:** `git push -u origin ecolooop-hackathon-final; git push origin hackathon-final-v1`
 - **Proves:** Remote publish
 - **Success looks like:** owner-approved push
 - **Failure looks like:** accidental push

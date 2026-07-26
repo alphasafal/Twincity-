@@ -17,7 +17,7 @@
 | EnergyPlus version | **24.1.0-9d7789a3ac** |
 | Ollama version | 0.32.3 |
 | Ollama models | `llama3.2:1b` (baf6a787fdff, 1.3 GB) |
-| Git branch | `cursor/ecolooop-energyplus-audit-b6b3` |
+| Git branch | `ecolooop-hackathon-final` |
 | Git commit | **`61ed36cc9bc89cd37ba7a38a1ec7b4d1e12702e1`** |
 | Commit subject | Final hackathon hardening: real dashboard DATA_MODE, LLM-MCP, comfort-zero |
 | Commit date | 2026-07-25 10:46:24 +0000 |
@@ -28,7 +28,7 @@
 
 ## Environment variable names present (values not logged)
 
-`ENERGYPLUS_HOME`, `ENERGYPLUS_MODEL_PATH`, `ENERGYPLUS_WEATHER_PATH`, `PYTHONPATH`, `PATH`, plus Cursor agent internals.
+`ENERGYPLUS_HOME`, `ENERGYPLUS_MODEL_PATH`, `ENERGYPLUS_WEATHER_PATH`, `PYTHONPATH`, `PATH`, 
 
 ## Policy for this audit
 

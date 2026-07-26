@@ -2,7 +2,16 @@
 
 Runs as a *separate process*. Tools accept EnergyPlus Runtime observations as
 JSON arguments (the co-simulation loop owns live state; this server does not
-call the TwinPilot HTTP API).
+call the TwinPilot HTTP API and **never writes actuators**).
+
+Tool catalog (Path B/C)
+-----------------------
+- ``get_building_observation`` — normalize zone/outdoor/setpoint payload
+- ``propose_or_prepare_control_context`` — context + prompt hint for LLM
+- ``select_energy_conservation_measure`` — supervisory ECM/strategy record
+- ``validate_control_action`` — advisory SafetyShield-equivalent check
+- ``get_controller_constraints`` / ``record_control_decision``
+- ``get_recent_energy_history`` / ``get_previous_action_outcome`` (self-correction)
 
 All diagnostic logging goes to stderr — stdout is reserved for MCP JSON-RPC.
 """

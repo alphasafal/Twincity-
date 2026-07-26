@@ -2,7 +2,55 @@
 
 **Verifiable autonomous building optimization** for an **EnergyPlus digital building** (not a physical BMS), with a measured closed-loop experiment path and an independent Safety Shield.
 
-> Observe → propose → SafetyShield validates → EnergyPlus actuator executes → results are auditable.
+> AI proposes → SafetyShield validates → EnergyPlus executes.
+
+## Links
+
+| | |
+|-|-|
+| **Live demo website** | https://twinpilot.webyaar.in |
+| **GitHub (HirePro paste)** | https://github.com/alphasafal/Twincity-/tree/ecolooop-hackathon-final |
+| **Submission ZIP** | [`Eco-Loop-Hackathon-Submission.zip`](Eco-Loop-Hackathon-Submission.zip) |
+| **IDEA PPT (6 slides)** | [`final-release/IDEA_PPT_6_SLIDES.md`](final-release/IDEA_PPT_6_SLIDES.md) |
+| **Code tour (engineers)** | [`docs/CODE_TOUR.md`](docs/CODE_TOUR.md) |
+
+**Dashboard login:** `manager@twinpilot.demo` / `TwinPilot-Manager-Demo!`
+
+---
+
+## Judge start here (HirePro / Honeywell Eco-Loop)
+
+Paste this repo URL on the portal:  
+`https://github.com/alphasafal/Twincity-/tree/ecolooop-hackathon-final`
+
+Submission pack: [`Eco-Loop-Hackathon-Submission.zip`](Eco-Loop-Hackathon-Submission.zip) (source + PDF + MP4 + evidence).
+
+| Deliverable | Where |
+|-------------|--------|
+| Source — EnergyPlus wrapper | [`services/simulator/twinpilot_simulator/ep_experiment.py`](services/simulator/twinpilot_simulator/ep_experiment.py) |
+| Source — LLM orchestration | [`scripts/hybrid_supervisory_loop.py`](scripts/hybrid_supervisory_loop.py), [`services/agent`](services/agent) |
+| Source — MCP communication bus | [`services/mcp-server`](services/mcp-server) (stdio, separate process) |
+| Baseline `.idf` | [`building-models/sample-office/office_5zone.idf`](building-models/sample-office/office_5zone.idf) |
+| Runtime-modified model | [`final-release/evidence/building-models/`](final-release/evidence/building-models/) |
+| Savings dashboard / export | Web `/dashboard` (`DATA_MODE=energyplus`) · [`final-release/evidence/energyplus/comparison.json`](final-release/evidence/energyplus/comparison.json) |
+| Architecture document | [`docs/architecture.md`](docs/architecture.md) |
+| Demo video (≤3 min) | [`final-release/demo-video/Eco-Loop-Demo-Walkthrough.mp4`](final-release/demo-video/Eco-Loop-Demo-Walkthrough.mp4) |
+| IDEA presentation PDF | [`final-release/presentation/Eco-Loop-Presentation.pdf`](final-release/presentation/Eco-Loop-Presentation.pdf) |
+
+**Authoritative Path A results (comfort-zero):** HVAC **4.98%** · total energy **1.31%** · peak **1.47%** · comfort violations **0 h**.
+
+```bash
+# Path A — measured savings (deterministic controller)
+./scripts/run_baseline.sh && ./scripts/run_agent.sh && ./scripts/compare_results.sh
+
+# Path C — LLM supervisory strategy via MCP + self-correction
+./scripts/run_hybrid_supervisory_experiment.sh
+
+# Dashboard (reads results/*; does not silently mock)
+DATA_MODE=energyplus ./scripts/run_demo.sh
+```
+
+Line for judges: **AI proposes. SafetyShield validates. EnergyPlus executes.**
 
 ---
 

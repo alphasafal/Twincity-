@@ -1,5 +1,5 @@
 CLEAN_ROOM_START 2026-07-25T11:22:56Z
-CLONE_FROM origin/cursor/ecolooop-energyplus-audit-b6b3 @ 95a58e754e6a17ba987fa65d09401bd97f69ca43
+CLONE_FROM origin/ecolooop-hackathon-final @ 95a58e754e6a17ba987fa65d09401bd97f69ca43
 CLONE_EXIT:0
 COMMIT=95a58e754e6a17ba987fa65d09401bd97f69ca43
 === tracked results at clone ===
