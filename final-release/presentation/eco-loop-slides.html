@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Eco-Loop Building Agents — Presentation</title>
+  <style>
+    :root {
+      --ink: #12201c;
+      --muted: #4a5d56;
+      --paper: #f3f6f4;
+      --panel: #ffffff;
+      --accent: #0f766e;
+      --accent-deep: #115e59;
+      --line: #d5e0db;
+      --warn: #b45309;
+      --ok: #047857;
+      --shadow: 0 18px 40px rgba(18, 32, 28, 0.08);
+      --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+      --font-body: "Avenir Next", "Segoe UI", Candara, Calibri, sans-serif;
+      --font-mono: "IBM Plex Mono", "SF Mono", Menlo, Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #0b1512;
+      color: var(--ink);
+      font-family: var(--font-body);
+    }
+
+    .deck {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding: 24px;
+      align-items: center;
+    }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      background:
+        radial-gradient(1200px 500px at 100% -10%, rgba(15, 118, 110, 0.16), transparent 55%),
+        radial-gradient(900px 420px at -10% 110%, rgba(180, 83, 9, 0.10), transparent 50%),
+        linear-gradient(160deg, #f7faf8 0%, #eef4f1 48%, #e7efe9 100%);
+      border: 1px solid rgba(255,255,255,0.4);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      padding: 56px 64px;
+      page-break-after: always;
+      break-after: page;
+    }
+
+    .slide::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(18, 32, 28, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(18, 32, 28, 0.035) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,0.55), transparent 70%);
+      pointer-events: none;
+    }
+
+    .brand {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 28px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent-deep);
+    }
+
+    .brand span { color: var(--muted); font-weight: 500; }
+
+    h1, h2, h3 {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      font-family: var(--font-display);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+    }
+
+    h1 { font-size: 72px; max-width: 14ch; }
+    h2 { font-size: 44px; margin-bottom: 22px; }
+    h3 { font-size: 22px; margin-bottom: 12px; color: var(--accent-deep); }
+
+    p, li {
+      position: relative;
+      z-index: 1;
+      font-size: 22px;
+      line-height: 1.35;
+      color: var(--ink);
+    }
+
+    .tagline {
+      margin-top: 28px;
+      max-width: 34ch;
+      font-size: 26px;
+      color: var(--muted);
+    }
+
+    .meta {
+      position: absolute;
+      left: 64px;
+      bottom: 48px;
+      z-index: 1;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .grid-2 {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-top: 8px;
+    }
+
+    .panel {
+      background: rgba(255,255,255,0.72);
+      border: 1px solid var(--line);
+      padding: 22px 24px;
+      backdrop-filter: blur(4px);
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 1.1em;
+    }
+
+    li + li { margin-top: 10px; }
+
+    .flow {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 18px 0 28px;
+    }
+
+    .chip {
+      background: var(--ink);
+      color: #f3f6f4;
+      padding: 10px 14px;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .chip.soft {
+      background: transparent;
+      color: var(--accent-deep);
+      border: 1px solid var(--accent);
+    }
+
+    .arch {
+      position: relative;
+      z-index: 1;
+      font-family: var(--font-mono);
+      font-size: 15px;
+      line-height: 1.55;
+      background: #12201c;
+      color: #d7ebe4;
+      padding: 22px 24px;
+      white-space: pre-wrap;
+      margin: 8px 0 20px;
+    }
+
+    .highlights {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.8);
+      padding: 8px 12px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    table {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      border-collapse: collapse;
+      background: rgba(255,255,255,0.75);
+      margin-top: 8px;
+    }
+
+    th, td {
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      padding: 12px 14px;
+      font-size: 18px;
+    }
+
+    th {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+    }
+
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    td.good { color: var(--ok); font-weight: 700; }
+
+    .keyline {
+      position: relative;
+      z-index: 1;
+      margin-top: 18px;
+      font-size: 22px;
+      color: var(--accent-deep);
+      font-weight: 700;
+    }
+
+    .footnote {
+      position: absolute;
+      left: 64px;
+      right: 64px;
+      bottom: 40px;
+      z-index: 1;
+      font-size: 15px;
+      color: var(--muted);
+    }
+
+    .proto-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .proto-card {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.78);
+      padding: 18px 20px;
+      min-height: 118px;
+    }
+
+    .proto-card strong {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .proto-card span {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.35;
+    }
+
+    .accent-bar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 8px;
+      background: linear-gradient(180deg, var(--accent), #b45309);
+    }
+
+    @media print {
+      body { background: white; }
+      .deck { padding: 0; gap: 0; }
+      .slide {
+        box-shadow: none;
+        border: none;
+        margin: 0;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="deck">
+    <!-- Slide 1 -->
+    <section class="slide" id="s1">
+      <div class="accent-bar"></div>
+      <div class="brand">Eco-Loop Building Agents <span>Hackathon submission</span></div>
+      <h1>Eco-Loop Building Agents</h1>
+      <p class="tagline">Safe autonomous building optimisation through EnergyPlus, MCP and deterministic AI control.</p>
+      <div class="meta">
+        Team / Problem Statement ID / Student IDs — fill from official template<br />
+        Theme: Energy · Software category: Autonomous building agents
+      </div>
+    </section>
+
+    <!-- Slide 2 -->
+    <section class="slide" id="s2">
+      <div class="accent-bar"></div>
+      <div class="brand">Eco-Loop Building Agents <span>02 / Problem &amp; solution</span></div>
+      <h2>Close the loop. Keep it safe.</h2>
+      <div class="grid-2">
+        <div class="panel">
+          <h3>Problem</h3>
+          <ul>
+            <li>Fixed HVAC schedules ignore occupancy and weather</li>
+            <li>Buildings waste energy and drive peak demand</li>
+            <li>Uncontrolled LLM setpoints can be unsafe</li>
+            <li>Most dashboards observe — they do not act</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Solution</h3>
+          <p>Eco-Loop observes, reasons, validates, acts and measures outcomes inside an EnergyPlus digital building.</p>
+          <div class="flow" style="margin-top:20px">
+            <div class="chip">Observe</div>
+            <div class="chip">Propose</div>
+            <div class="chip">Validate</div>
+            <div class="chip">Execute</div>
+            <div class="chip">Measure</div>
+            <div class="chip soft">Correct</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 3 -->
+    <section class="slide" id="s3">
+      <div class="accent-bar"></div>
+      <div class="brand">Eco-Loop Building Agents <span>03 / Architecture</span></div>
+      <h2>Technical architecture</h2>
+      <div class="arch">EnergyPlus → observations → MCP client → stdio → separate MCP server
+  → Ollama supervisory agent (strategy / ECM)
+  → Deterministic optimiser → SafetyShield → Clg-SetP-Sch
+  → Next EnergyPlus state → self-correction</div>
+      <div class="highlights">
+        <div class="pill">Real actuator write</div>
+        <div class="pill">Separate MCP process</div>
+        <div class="pill">Local open-source LLM</div>
+        <div class="pill">Safe fallback</div>
+        <div class="pill">Audit log</div>
+      </div>
+      <p class="footnote">
+        Path A: deterministic savings &nbsp;·&nbsp; Path B: LLM setpoint demo &nbsp;·&nbsp; Path C: hybrid supervisory (LLM selects strategy)
+      </p>
+    </section>
+
+    <!-- Slide 4 -->
+    <section class="slide" id="s4">
+      <div class="accent-bar"></div>
+      <div class="brand">Eco-Loop Building Agents <span>04 / Working prototype</span></div>
+      <h2>Working prototype</h2>
+      <div class="proto-grid">
+        <div class="proto-card">
+          <strong>48 Path A control actions</strong>
+          <span>Approved through SafetyShield with Clg-SetP-Sch writes and next-state temperatures.</span>
+        </div>
+        <div class="proto-card">
+          <strong>Real EnergyPlus results</strong>
+          <span>Dashboard DATA_MODE=energyplus reads measured experiment artifacts — no silent mock.</span>
+        </div>
+        <div class="proto-card">
+          <strong>35°C proposal rejected</strong>
+          <span>SafetyShield blocks out-of-range / excessive delta before any actuator write.</span>
+        </div>
+        <div class="proto-card">
+          <strong>Path C hybrid loop</strong>
+          <span>Ollama strategy → optimiser setpoints → SafetyShield → next EnergyPlus state + self-correction.</span>
+        </div>
+      </div>
+      <p class="footnote">Also proven: Ollama failure → deterministic fallback still gated by SafetyShield.</p>
+    </section>
+
+    <!-- Slide 5 -->
+    <section class="slide" id="s5">
+      <div class="accent-bar"></div>
+      <div class="brand">Eco-Loop Building Agents <span>05 / Verified results</span></div>
+      <h2>Verified results</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th class="num">Baseline</th>
+            <th class="num">Eco-Loop</th>
+            <th class="num">Improvement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>HVAC energy</td>
+            <td class="num">13.85 kWh</td>
+            <td class="num">13.16 kWh</td>
+            <td class="num good">4.98%</td>
+          </tr>
+          <tr>
+            <td>Total energy</td>
+            <td class="num">421.51 kWh</td>
+            <td class="num">416.00 kWh</td>
+            <td class="num good">1.31%</td>
+          </tr>
+          <tr>
+            <td>Peak power</td>
+            <td class="num">19.93 kW</td>
+            <td class="num">19.64 kW</td>
+            <td class="num good">1.47%</td>
+          </tr>
+          <tr>
+            <td>Comfort violations</td>
+            <td class="num">0 h</td>
+            <td class="num">0 h</td>
+            <td class="num">—</td>
+          </tr>
+          <tr>
+            <td>Comfort degree-hours</td>
+            <td class="num">0</td>
+            <td class="num">0</td>
+            <td class="num">—</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="keyline">Energy savings without sacrificing occupied-zone comfort.</p>
+      <p class="footnote">
+        Fairness: same IDF · same EPW · same occupancy · same period · controller is the intended difference.
+        Multi-scenario Path A: normal / hot peak / high occupancy — all comfort-zero, HVAC ~5%.
+      </p>
+    </section>
+
+    <!-- Slide 6 -->
+    <section class="slide" id="s6">
+      <div class="accent-bar"></div>
+      <div class="brand">Eco-Loop Building Agents <span>06 / Feasibility &amp; next</span></div>
+      <h2>Feasibility, limits, future</h2>
+      <div class="grid-2">
+        <div class="panel">
+          <h3>Feasibility</h3>
+          <ul>
+            <li>Runs on local / cloud VM</li>
+            <li>Open-source local LLM (Ollama)</li>
+            <li>Reproducible scripts + clean-clone verified</li>
+            <li>Safe degraded mode when LLM is down</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Limitations</h3>
+          <ul>
+            <li>EnergyPlus digital building only</li>
+            <li>No physical BMS connector yet</li>
+            <li>Savings are scenario-specific</li>
+          </ul>
+          <h3 style="margin-top:18px">Future</h3>
+          <ul>
+            <li>BACnet / Modbus · campus scale</li>
+            <li>Dynamic tariffs / carbon · physical pilot</li>
+          </ul>
+        </div>
+      </div>
+      <p class="footnote">
+        GitHub: github.com/alphasafal/Twincity- &nbsp;·&nbsp; Live demo: twinpilot.webyaar.in &nbsp;·&nbsp;
+        Line to remember: AI proposes. SafetyShield validates. EnergyPlus executes.
+      </p>
+    </section>
+  </div>
+</body>
+</html>

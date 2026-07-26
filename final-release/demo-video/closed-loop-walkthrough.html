@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Eco-Loop — Closed Loop Demo Walkthrough</title>
+  <style>
+    :root {
+      --bg0: #07110e;
+      --bg1: #10201b;
+      --ink: #e8f2ee;
+      --muted: #9bb5ab;
+      --accent: #2dd4bf;
+      --warn: #fbbf24;
+      --bad: #fb7185;
+      --ok: #34d399;
+      --panel: rgba(16, 32, 27, 0.92);
+      --font: "Avenir Next", "Segoe UI", Candara, sans-serif;
+      --mono: "IBM Plex Mono", "SF Mono", Menlo, Consolas, monospace;
+      --display: "Iowan Old Style", Palatino, Georgia, serif;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0; width: 1280px; height: 720px; overflow: hidden;
+      background: radial-gradient(900px 500px at 80% 0%, rgba(45,212,191,0.16), transparent 55%),
+                  radial-gradient(700px 420px at 0% 100%, rgba(251,191,36,0.10), transparent 50%),
+                  linear-gradient(160deg, var(--bg0), var(--bg1));
+      color: var(--ink);
+      font-family: var(--font);
+    }
+    .frame {
+      width: 1280px; height: 720px; padding: 36px 48px;
+      display: flex; flex-direction: column; position: relative;
+    }
+    .top {
+      display: flex; justify-content: space-between; align-items: baseline;
+      letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px;
+      color: var(--accent); font-weight: 700;
+    }
+    .top span { color: var(--muted); font-weight: 500; }
+    h1 {
+      margin: 18px 0 8px; font-family: var(--display); font-size: 42px;
+      letter-spacing: -0.02em; line-height: 1.05;
+    }
+    .sub { color: var(--muted); font-size: 18px; margin-bottom: 22px; max-width: 60ch; }
+    .stage {
+      flex: 1; display: none; min-height: 0;
+    }
+    .stage.active { display: flex; flex-direction: column; }
+    .pipeline {
+      display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px;
+    }
+    .step {
+      border: 1px solid rgba(155,181,171,0.35);
+      padding: 8px 12px; font-size: 13px; font-weight: 700;
+      color: var(--muted); letter-spacing: 0.02em;
+    }
+    .step.on {
+      background: var(--accent); color: #042f2e; border-color: var(--accent);
+    }
+    .step.done {
+      color: var(--ok); border-color: rgba(52,211,153,0.5);
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid rgba(155,181,171,0.22);
+      padding: 18px 20px;
+      flex: 1;
+      overflow: hidden;
+    }
+    .grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 16px; flex: 1; min-height: 0; }
+    pre, code, .mono {
+      font-family: var(--mono); font-size: 14px; line-height: 1.45;
+      white-space: pre-wrap; margin: 0; color: #d7ebe4;
+    }
+    .label {
+      font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--accent); font-weight: 700; margin-bottom: 10px;
+    }
+    .metric-row {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 14px;
+    }
+    .metric {
+      border: 1px solid rgba(155,181,171,0.25); padding: 14px;
+      background: rgba(7,17,14,0.55);
+    }
+    .metric b { display: block; font-size: 28px; margin: 6px 0 2px; color: var(--ok); }
+    .metric span { color: var(--muted); font-size: 13px; }
+    .badge {
+      display: inline-block; padding: 4px 10px; font-size: 12px; font-weight: 800;
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .badge.ok { background: rgba(52,211,153,0.18); color: var(--ok); }
+    .badge.bad { background: rgba(251,113,133,0.18); color: var(--bad); }
+    .badge.warn { background: rgba(251,191,36,0.18); color: var(--warn); }
+    .footer {
+      margin-top: 14px; color: var(--muted); font-size: 14px;
+      display: flex; justify-content: space-between;
+    }
+    .narration {
+      font-size: 20px; line-height: 1.35; color: var(--ink); margin-bottom: 14px;
+      max-width: 70ch;
+    }
+    table { width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 13px; }
+    th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid rgba(155,181,171,0.18); }
+    th { color: var(--muted); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; }
+    td.ok { color: var(--ok); font-weight: 700; }
+    .bigline {
+      margin-top: 24px; font-family: var(--display); font-size: 34px; color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <div class="top">
+      <div>Eco-Loop Building Agents</div>
+      <span id="clock">0:00</span>
+    </div>
+
+    <!-- 0:00 Problem -->
+    <section class="stage" data-start="0" data-end="22" id="st0">
+      <h1>Buildings waste energy when HVAC ignores reality.</h1>
+      <p class="narration">Fixed schedules miss occupancy and weather. Letting an LLM write setpoints directly is unsafe.</p>
+      <div class="pipeline">
+        <div class="step on">Problem</div>
+        <div class="step">Architecture</div>
+        <div class="step">Closed loop</div>
+        <div class="step">Results</div>
+        <div class="step">Safety</div>
+      </div>
+      <div class="panel">
+        <div class="label">Principle</div>
+        <div class="bigline">AI proposes. SafetyShield validates. EnergyPlus executes.</div>
+      </div>
+    </section>
+
+    <!-- Architecture -->
+    <section class="stage" data-start="22" data-end="48" id="st1">
+      <h1>Real stdio MCP + local Ollama + SafetyShield</h1>
+      <p class="narration">EnergyPlus is the digital building. Observations move through a separate MCP process. SafetyShield is the only gate before the actuator.</p>
+      <div class="pipeline">
+        <div class="step done">Problem</div>
+        <div class="step on">Architecture</div>
+        <div class="step">Closed loop</div>
+        <div class="step">Results</div>
+        <div class="step">Safety</div>
+      </div>
+      <div class="panel mono">EnergyPlus observation
+  → MCP client (PID A) ──stdio──► MCP server (PID B)
+  → Ollama strategy / ECM
+  → Deterministic optimiser
+  → SafetyShield
+  → Clg-SetP-Sch actuator
+  → Next EnergyPlus state
+  → Self-correction</div>
+    </section>
+
+    <!-- Closed loop evidence -->
+    <section class="stage" data-start="48" data-end="95" id="st2">
+      <h1>Closed loop: observe → decide → actuate → next state</h1>
+      <p class="narration">Path C hybrid excerpt: MCP strategy selection, optimiser setpoint, then EnergyPlus returns the following zone temperature.</p>
+      <div class="pipeline">
+        <div class="step done">Problem</div>
+        <div class="step done">Architecture</div>
+        <div class="step on">Closed loop</div>
+        <div class="step">Results</div>
+        <div class="step">Safety</div>
+      </div>
+      <div class="grid">
+        <div class="panel">
+          <div class="label">Hybrid five-step loop</div>
+          <pre id="loop-excerpt">loading…</pre>
+        </div>
+        <div class="panel">
+          <div class="label">Actuator → next state</div>
+          <table>
+            <thead>
+              <tr><th>Time</th><th>Write</th><th>Setpoint</th><th>Next °C</th></tr>
+            </thead>
+            <tbody id="actuator-rows"></tbody>
+          </table>
+          <div style="margin-top:12px"><span class="badge ok">Clg-SetP-Sch written</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Results -->
+    <section class="stage" data-start="95" data-end="130" id="st3">
+      <h1>Path A verified savings — comfort zero</h1>
+      <p class="narration">Identical IDF, EPW, occupancy and period. Only the controller differs.</p>
+      <div class="pipeline">
+        <div class="step done">Problem</div>
+        <div class="step done">Architecture</div>
+        <div class="step done">Closed loop</div>
+        <div class="step on">Results</div>
+        <div class="step">Safety</div>
+      </div>
+      <div class="metric-row">
+        <div class="metric"><span>HVAC energy</span><b>4.98%</b><span>13.85 → 13.16 kWh</span></div>
+        <div class="metric"><span>Total energy</span><b>1.31%</b><span>421.51 → 416.00 kWh</span></div>
+        <div class="metric"><span>Peak power</span><b>1.47%</b><span>19.93 → 19.64 kW</span></div>
+        <div class="metric"><span>Comfort</span><b>0 h</b><span>0 degree-hours</span></div>
+      </div>
+      <div class="panel" style="margin-top:16px">
+        <div class="label">MCP process proof</div>
+        <div class="mono" id="mcp-pids">client ≠ server · mcp_pids_differ: true</div>
+      </div>
+    </section>
+
+    <!-- Safety + fallback -->
+    <section class="stage" data-start="130" data-end="165" id="st4">
+      <h1>Unsafe 35°C rejected. LLM failure still safe.</h1>
+      <p class="narration">SafetyShield rejects out-of-range proposals. If Ollama is down, deterministic fallback continues — still through SafetyShield.</p>
+      <div class="pipeline">
+        <div class="step done">Problem</div>
+        <div class="step done">Architecture</div>
+        <div class="step done">Closed loop</div>
+        <div class="step done">Results</div>
+        <div class="step on">Safety</div>
+      </div>
+      <div class="grid">
+        <div class="panel">
+          <div class="label">Safety rejection</div>
+          <pre>proposed_cooling_setpoint_c = 35.0
+approved = False
+disposition = rejected
+reasons =
+  - cooling_setpoint_out_of_range
+  - max_setpoint_change_exceeded
+
+<span class="badge bad">NO ACTUATOR WRITE</span></pre>
+        </div>
+        <div class="panel">
+          <div class="label">Ollama unavailable fallback</div>
+          <pre>connection refused → deterministic_fallback
+fallback actions: 48
+still SafetyShield-gated
+
+<span class="badge warn">DEGRADED · SAFE</span></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Close -->
+    <section class="stage" data-start="165" data-end="180" id="st5">
+      <h1>Reproducible EnergyPlus prototype.</h1>
+      <p class="narration">Not a physical BMS. Verified closed loop with real actuator writes, separate MCP processes, and comfort-zero savings.</p>
+      <div class="panel">
+        <div class="bigline">AI proposes. SafetyShield validates. EnergyPlus executes.</div>
+        <div class="footer" style="margin-top:28px">
+          <div>github.com/alphasafal/Twincity-</div>
+          <div>twinpilot.webyaar.in</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">
+      <div id="caption">Starting…</div>
+      <div>Demo walkthrough · ≤3 min</div>
+    </div>
+  </div>
+
+  <script>
+    const LOOP = [
+      { stage: "energyplus_observation", hour: 0, outdoor_c: 24.2, avg_temp: 22.05 },
+      { stage: "mcp_strategy_selected", strategy: "HOLD_CURRENT_POLICY", mcp_ok: true },
+      { stage: "hybrid_decision", strategy: "HOLD_CURRENT_POLICY", proposed_setpoint_c: 24.9, mcp_validate_ok: true },
+      { stage: "self_correction_outcome", previous_strategy: "HOLD_CURRENT_POLICY", actual_zone_temp_delta_c: -0.345, recommendation: "retain_strategy" },
+      { stage: "energyplus_observation", hour: 1, outdoor_c: 20.0, avg_temp: 21.71 },
+    ];
+
+    const ACTUATOR = [
+      ["00:15", "True", "24.9°C", "21.71°C"],
+      ["01:15", "True", "25.9°C", "21.48°C"],
+      ["02:15", "True", "26.9°C", "21.26°C"],
+      ["03:15", "True", "27.9°C", "21.07°C"],
+      ["04:15", "True", "28.0°C", "21.29°C"],
+    ];
+
+    document.getElementById("loop-excerpt").textContent = LOOP.map((row) => JSON.stringify(row)).join("\n");
+    document.getElementById("actuator-rows").innerHTML = ACTUATOR.map(
+      ([t, w, s, n]) => `<tr><td>${t}</td><td class="ok">${w}</td><td>${s}</td><td>${n}</td></tr>`
+    ).join("");
+
+    const captions = {
+      st0: "Problem: wasteful HVAC + unsafe unconstrained LLMs",
+      st1: "Architecture: EnergyPlus → MCP → Ollama → Optimiser → SafetyShield",
+      st2: "Proof: strategy → setpoint → Clg-SetP-Sch → next zone temperature",
+      st3: "Results: 4.98% HVAC / 1.31% total / 0 comfort violations",
+      st4: "Safety: 35°C rejected · Ollama-down fallback remains gated",
+      st5: "Close: reproducible digital-building closed loop",
+    };
+
+    const stages = [...document.querySelectorAll(".stage")];
+    const started = performance.now();
+    const TOTAL = 180;
+
+    function fmt(sec) {
+      const s = Math.max(0, Math.floor(sec));
+      return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+    }
+
+    function tick() {
+      const t = (performance.now() - started) / 1000;
+      document.getElementById("clock").textContent = fmt(Math.min(t, TOTAL));
+      let active = stages[stages.length - 1];
+      for (const stage of stages) {
+        const start = Number(stage.dataset.start);
+        const end = Number(stage.dataset.end);
+        if (t >= start && t < end) {
+          active = stage;
+          break;
+        }
+      }
+      for (const stage of stages) stage.classList.toggle("active", stage === active);
+      document.getElementById("caption").textContent = captions[active.id] || "";
+      if (t < TOTAL + 0.5) requestAnimationFrame(tick);
+    }
+    tick();
+  </script>
+</body>
+</html>
